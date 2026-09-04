@@ -93,9 +93,12 @@ def main() -> None:
     ap.add_argument("--require-qualification", action="store_true",
                     help="treat the smoke check as a blocking gate (default: recorded only)")
     ap.add_argument("--keep-weights", action="store_true")
+    ap.add_argument("--key", default=None,
+                    help="which [[b15_model]] entry to run; default the first")
     args = ap.parse_args()
     project = args.project.resolve()
-    entry = modelcache.load_registry(project / "models.toml")["b15_model"][0]
+    entries = modelcache.load_registry(project / "models.toml")["b15_model"]
+    entry = next((e for e in entries if e["key"] == args.key), entries[0]) if args.key else entries[0]
     run_dir = project / RUN / entry["key"]
 
     seal = json.loads((project / DATA / "public/seal.json").read_text(encoding="utf-8"))

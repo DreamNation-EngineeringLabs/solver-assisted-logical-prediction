@@ -97,6 +97,160 @@ invalid. Undetermined recall in `full`: gemma-3-4b 89.1%, phi-4-mini 100%.
 
 ---
 
+## 3. Revision data (added 2026-09-04, in response to peer review)
+
+Peer review identified that three of Experiment 3's five arms were run but not
+reported, that the mechanism result rested on a single checkpoint, and that the
+"detects a broken chain" claim was not separable from default-fallback. All
+three were addressed with the data below. Two headline claims did not survive.
+
+### 3.1 Experiment 3, all five arms, all ten models
+
+Balanced accuracy (%), chance 33.3. `results/b16_analysis_v2_allarms.json`.
+
+| Model | B | none | irrelevant | conclusion_only | proof_prefix | full | Viable in |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Qwen2.5-0.5B | 0.5 | 35.4 | 34.9 | 41.1 | 43.2 | 63.5 | none |
+| OLMo-2-1B | 1.0 | 35.9 | 33.3 | 53.6 | 34.9 | 42.2 | none |
+| Llama-3.2-1B | 1.2 | 33.9 | 33.9 | 57.8 | 36.5 | 37.0 | none |
+| Qwen2.5-1.5B | 1.5 | 33.3 | 33.3 | 43.2 | 34.9 | 37.0 | none |
+| SmolLM2-1.7B | 1.7 | 33.3 | 33.3 | 45.3 | 39.6 | 69.3 | none |
+| Qwen2.5-3B | 3.0 | 41.1 | 39.1 | **96.4** | 74.0 | 90.6 | conclusion_only, proof_prefix, full |
+| Llama-3.2-3B | 3.2 | 45.8 | 43.2 | 67.2 | 55.2 | 80.7 | none |
+| Phi-4-mini | 3.8 | 44.8 | 39.6 | 68.2 | 71.9 | 90.6 | full |
+| Gemma-3-4B | 4.3 | 63.5 | 51.0 | **100.0** | 84.4 | 96.4 | conclusion_only, proof_prefix, full |
+| Qwen2.5-7B | 7.6 | 33.3 | 33.3 | **97.9** | 67.2 | 71.4 | conclusion_only |
+
+**Viability is a property of (model x arm), not of the model.** Qwen2.5-7B under
+`conclusion_only` reaches 97.9% with minimum per-class recall 0.938 and maximum
+label share 0.354 — it clears the corrected floor comfortably and is the
+second-best model in the sweep. Under `full` the same model is 71.4% with minimum
+per-class recall 0.141. Its contradicted-class recall falls from 0.938 to 0.141
+**when the proof state is supplied**.
+
+Viable under `full`: 3 of 10. Viable under `conclusion_only`: 3 of 10. Viable
+under at least one arm: 4 of 10.
+
+**Supplying proof state actively harms three models** — Gemma-3-4B, Qwen2.5-3B
+and Qwen2.5-7B — measured as the drop in minimum per-class recall from
+`conclusion_only` to `full`. Two of those three were the paper's "viable
+substrates".
+
+### 3.2 Ten-model replication of the 2x2
+
+Experiment 3's five arms are Experiment 1's answer-evidence x proof-state 2x2
+plus a baseline, on ten models, at no additional compute.
+
+| Quantity | Value |
+| --- | ---: |
+| Mean state main effect | +8.7pp |
+| Mean answer main effect | +21.6pp |
+| Mean interaction | -15.9pp |
+| `conclusion_only` > `proof_prefix` | 8 of 10 models |
+| `conclusion_only` >= `full` | 6 of 10 models |
+
+The mean state main effect of +8.7pp is well below Experiment 1's +22.4pp, so
+that value is not typical of the model set.
+
+### 3.3 Cross-model replication of the mechanism (b15 on three checkpoints)
+
+`results/b15_replication_v1.json`. Entailed subset, n = 96.
+
+| Checkpoint | irrelevant | broken_chain | truncate_1 | total | surface | validity | **share** |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Qwen2.5-3B 4-bit | 0 | 1 | 59 | +61.5pp | +1.0pp | +60.4pp | **98.3%** |
+| Qwen2.5-3B bf16 | 0 | 1 | 72 | +75.0pp | +1.0pp | +74.0pp | **98.6%** |
+| Gemma-3-4B | 2 | **58** | 96 | +97.9pp | **+58.3pp** | +39.6pp | **40.4%** |
+
+**The 98.3% validity share does not generalise.** Gemma-3-4B scores 58 of 96 on
+`broken_chain` — it exploits surface overlap heavily — and its share is 40.4%.
+Across three checkpoints the share ranges 40.4% to 98.6%.
+
+Quantisation is the smaller effect: bf16 versus 4-bit on the same model moves the
+magnitude (`truncate_1` 72 versus 59) but barely moves the share (98.6% versus
+98.3%).
+
+**The corruption result replicates without exception.** `misleading`, of 192:
+3 (4-bit), 6 (bf16), **0** (Gemma-3-4B), with d' of -4.36, -4.06 and -5.13. The
+strongest substrate in the sweep is the most completely misled.
+
+### 3.4 Does the model detect a broken chain? No (b17)
+
+`results/b17_analysis_v1.json`. b15's `broken_chain` items rescored with three
+candidates on the 4-bit checkpoint. Theories, certificates and queries are
+byte-identical to b15; only the instruction line and candidate set change.
+
+| Arm | Yes | No | Unknown | Unknown rate |
+| --- | ---: | ---: | ---: | ---: |
+| `irrelevant` (baseline) | 0 | 48 | 144 | 75.0% |
+| `broken_chain` | 1 | 110 | 81 | 42.2% |
+| `truncate_1` | 61 | 110 | 21 | 10.9% |
+
+A validity tracker should answer `Unknown` to `broken_chain`, whose displayed
+lines are certified undetermined. Instead the Unknown rate **falls** to 42.2%
+from a 75.0% baseline, -32.8pp — the opposite direction. And `No` is 110 of 192
+under **both** `broken_chain` and `truncate_1`; the arms differ only in `Yes`
+(1 versus 61).
+
+The model completes a final inference when it can and falls back when it cannot.
+**Detection is refuted, not merely unsupported.**
+
+### 3.5 Uncertainty on the validity share
+
+`results/b15_share_interval_v2.json`. Bootstrapping the whole ratio over paired
+item resamples, rather than the numerator alone: validity share 98.3%, **95% BCa
+[94.4, 100.0]**; surface component +1.0pp, 95% [+0.0, +3.1]pp.
+
+### 3.6 Holm-adjusted p-values
+
+Computed in the analysis files and to be printed wherever the paper prints a
+p-value. b15 secondary family: 1.04e-17 (`truncate_2` - `truncate_1`), 1
+(`truncate_3` - `truncate_2`), 1.36e-12 (`truncate_1` - `shuffled`). b14 edge
+family: 6.62e-24, 4.53e-19, 2.38e-07, 6.10e-05.
+
+### 3.7 The 2x2 interaction and its ceiling
+
+`b14_posthoc_2x2_reanalysis_v1.json` records an interaction of **-29.2pp**,
+larger in magnitude than either main effect and not previously reported. `full`
+at 191/192 = 99.5% leaves only **13.0pp** of headroom above `proof_prefix`, so
+both "other factor present" edges are compressed and the averaged main effects
+are deflated. The ratio 12.50/41.67 = 30% is therefore substantially a
+measurement of remaining headroom rather than of channel redundancy.
+
+### 3.8 Certifier: adversarial and differential tests
+
+`results/closure_adversarial_v1.json`. The ProofWriter agreement
+(23,240/23,240) is a weaker check than "independent" implies: those labels are
+themselves produced by forward chaining over the same fragment, so the agreement
+partly measures one chainer agreeing with another. It catches coding bugs; it
+does not probe the failure modes that matter and gives no coverage of the
+generated nonce theories.
+
+Nine adversarial cases now pass: cyclic rules saturate; a cycle that never
+reaches the query stays undetermined; a 40-step chain beyond the default round
+cap is still reached; derived negation; predicate absent; entity absent; a rule
+fires only for the satisfying entity; a theory deriving an atom and its negation
+is **rejected rather than labelled**; and exceeding the cap reports
+`saturated = False` rather than a wrong answer.
+
+Plus a **differential test on the generated panels** against an independently
+written reference implementation — exhaustive ground instantiation over the
+Herbrand base with a naive fixpoint, a deliberately different algorithm:
+**192/192 and 192/192** three-way agreement between certifier, reference and
+sealed authority.
+
+### 3.9 Prior report
+
+Experiment 1's per-arm counts (91/96/176/167/191) and its primary contrast
+(-0.047, p = 0.078) were reported in an earlier unpublished report by the same
+authors. This paper's 2x2 reading, the response-bias finding, and everything in
+Experiments 2 and 3 are new. That earlier report concluded the 3B checkpoint
+failed an open-world unknown gate; Experiment 3 finds the same model family
+viable on the three-class panel. The panels, the candidate set and the
+quantisation differ between the two, which plausibly accounts for it.
+
+---
+
 ---
 
 # Experiment b14 — five-arm certificate factorial, reanalysed as a 2x2

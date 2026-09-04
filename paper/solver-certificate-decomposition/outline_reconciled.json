@@ -23,6 +23,22 @@
       "data_source": "experimental_log.md",
       "objective": "A dumbbell chart, one row per model ordered by parameter count, connecting balanced accuracy with no solver material to balanced accuracy with full material. Rows coloured by the corrected viability verdict; chance line marked at 33.3. Shows the ~3B floor and the non-monotonic collapse of the 7.6B model.",
       "aspect_ratio": "5:4"
+    },
+    {
+      "figure_id": "validity_share_replication",
+      "title": "Surface and validity components across three checkpoints",
+      "plot_type": "plot",
+      "data_source": "experimental_log.md",
+      "objective": "A paired horizontal bar chart of the surface component against the validity component for each of three checkpoints, with the validity share printed per row. Shows the share falling from 98.3% and 98.6% to 40.4%.",
+      "aspect_ratio": "4:3"
+    },
+    {
+      "figure_id": "detection_response_distribution",
+      "title": "Three-candidate response distribution for the detection test",
+      "plot_type": "plot",
+      "data_source": "experimental_log.md",
+      "objective": "A grouped horizontal bar chart of Yes/No/Unknown counts for three arms, with a reference line at the irrelevant baseline. Shows the abstention rate falling under broken_chain.",
+      "aspect_ratio": "4:3"
     }
   ],
   "intro_related_work_plan": {

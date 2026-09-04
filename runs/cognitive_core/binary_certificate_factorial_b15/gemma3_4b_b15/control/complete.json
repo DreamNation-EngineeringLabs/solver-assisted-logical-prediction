@@ -1,0 +1,34 @@
+{
+  "arm_seconds": {
+    "broken_chain": 107.2,
+    "full": 113.0,
+    "irrelevant": 117.8,
+    "misleading": 123.1,
+    "none": 71.2,
+    "same_entity_irrelevant": 124.0,
+    "shuffled": 105.6,
+    "truncate_1": 109.1,
+    "truncate_2": 116.7,
+    "truncate_3": 89.6
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "same_entity_irrelevant",
+    "truncate_3",
+    "truncate_2",
+    "truncate_1",
+    "broken_chain",
+    "misleading",
+    "shuffled",
+    "full"
+  ],
+  "completion_id": "5328cfd9b5e950d0b4a0ebc2154d8dc54dbb63c31163dcf0141dc40bf7ba932c",
+  "key": "gemma3_4b_b15",
+  "n": 192,
+  "qualification_passed": true,
+  "revision": "665e04d28e93290c77b7832307606f7e87bb7616",
+  "total_seconds": 1256.8,
+  "version": "binary-certificate-factorial-b15",
+  "weights_sha256": "e6b98455ee3b552003a48ead66a7a547b7f37e6d52837fc51f32aeb347d9042c"
+}

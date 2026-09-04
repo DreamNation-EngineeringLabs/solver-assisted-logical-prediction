@@ -110,3 +110,24 @@ revision = "4f83f8f146fdf28b512a06562b671d7af4fab457"
 family = "qwen2.5"
 params_b = 3.0
 role = "b15 only; byte-identical to the b14 snapshot"
+
+# M2 replication: the SAME model at bf16, which isolates quantisation from model
+# identity — Experiments 1-2 ran 4-bit while the sweep ran bf16, so the mechanism
+# result and the substrate result described different artefacts.
+[[b15_model]]
+key = "qwen2p5_3b_bf16"
+repo = "mlx-community/Qwen2.5-3B-Instruct-bf16"
+revision = "bec1ad658e380044bbfe06d4a2268801d3379a11"
+family = "qwen2.5"
+params_b = 3.0
+role = "b15 replication; same model as the primary run at bf16 instead of 4-bit"
+
+# M2 replication: a different family entirely, and the strongest substrate in the
+# ten-model sweep — the mechanism claim should not rest on one checkpoint.
+[[b15_model]]
+key = "gemma3_4b_b15"
+repo = "mlx-community/gemma-3-4b-it-bf16"
+revision = "665e04d28e93290c77b7832307606f7e87bb7616"
+family = "gemma3"
+params_b = 4.3
+role = "b15 replication; different family, best substrate in the sweep"

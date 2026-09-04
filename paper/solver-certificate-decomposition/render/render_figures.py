@@ -140,7 +140,8 @@ def fig_b15_arms():
 
 # ---------------------------------------------------------------- figure 3
 def fig_b16_size():
-    r = json.loads((RES / "b16_analysis_v1.json").read_text())
+    """All five arms x ten models. Viability is a property of (model x arm)."""
+    r = json.loads((RES / "b16_analysis_v2_allarms.json").read_text())
     size = {"qwen2p5_0p5b": .5, "olmo2_1b": 1.0, "llama3p2_1b": 1.2, "qwen2p5_1p5b": 1.5,
             "smollm2_1p7b": 1.7, "qwen2p5_3b": 3.0, "llama3p2_3b": 3.2, "phi4_mini": 3.8,
             "gemma3_4b": 4.3, "qwen2p5_7b": 7.6}
@@ -148,34 +149,150 @@ def fig_b16_size():
              "qwen2p5_1p5b": "qwen2.5-1.5b", "smollm2_1p7b": "smollm2-1.7b",
              "qwen2p5_3b": "qwen2.5-3b", "llama3p2_3b": "llama3.2-3b", "phi4_mini": "phi-4-mini",
              "gemma3_4b": "gemma-3-4b", "qwen2p5_7b": "qwen2.5-7b"}
+    arms = r["arms"]
     ms = sorted(r["models"], key=lambda k: size[k])
-    fig, ax = plt.subplots(figsize=(5.4, 3.5))
-    for i, m in enumerate(ms):
-        v = r["models"][m]
-        lo = v["arms"]["none"]["balanced_accuracy"] * 100
-        hi = v["arms"]["full"]["balanced_accuracy"] * 100
-        col = GREEN if v["viable_substrate"] else (VERM if v["degenerate"] else GREY)
-        ax.plot([lo, hi], [i, i], color=col, lw=1.6, solid_capstyle="round", zorder=2)
-        ax.plot(lo, i, "o", ms=4.5, color="white", mec=col, mew=1.4, zorder=3)
-        ax.plot(hi, i, "o", ms=6, color=col, zorder=3)
-        ax.text(hi + 1.6, i, f"{hi:.1f}", va="center", fontsize=7.3, color=INK)
-    ax.axvline(100 / 3, color=RULE, lw=.9, linestyle=(0, (3, 2)), zorder=1)
-    ax.text(100 / 3 + .9, -.62, "chance 33.3", fontsize=7, color=MUTED)
-    ax.set_yticks(range(len(ms)))
-    ax.set_yticklabels([f"{short[m]}  {size[m]}B" for m in ms],
-                       family="DejaVu Sans Mono", fontsize=7.4)
-    ax.set_xlim(28, 108); ax.set_xlabel("balanced accuracy (%)   ○ no solver material  ● full")
-    ax.set_ylim(len(ms) - .4, -.9)
-    _clean(ax)
-    ax.set_title("Substrate viability by model size", loc="left", pad=8)
-    fig.text(.5, -.04,
-             "green = viable (min per-class recall ≥ 0.50)   ·   red = collapsed to one label   ·   grey = below floor",
-             ha="center", fontsize=7.4, color=MUTED)
+    chance = r["chance_balanced_accuracy"] * 100
+    y = list(range(len(arms)))
+
+    fig, axes = plt.subplots(2, 5, figsize=(7.3, 3.7), sharex=True, sharey=True,
+                             gridspec_kw={"wspace": .16, "hspace": .45})
+    for ax, m in zip(axes.ravel(), ms):
+        cell = r["models"][m]["arms"]
+        vals = [cell[a]["balanced_accuracy"] * 100 for a in arms]
+        cols = [GREEN if cell[a]["viable"] else (VERM if cell[a]["degenerate"] else GREY)
+                for a in arms]
+        ax.axvline(chance, color=MUTED, lw=.9, linestyle=(0, (3, 2)), zorder=0)
+        ax.barh(y, vals, color=cols, height=.68, zorder=2)
+        ax.axvline(chance, color="white", lw=.9, linestyle=(0, (3, 2)), zorder=3)
+        for i, v in enumerate(vals):
+            ax.text(v + 4, i, f"{v:.1f}", va="center", ha="left", fontsize=6.2, color=INK)
+        ax.set_title(f"{short[m]}  {size[m]}B", loc="left", pad=4, fontsize=7.0,
+                     family="DejaVu Sans Mono")
+        ax.set_xlim(0, 132); ax.set_xticks([0, 50, 100])
+        ax.set_ylim(len(arms) - .45, -.55)
+        _clean(ax)
+    axes[0][0].set_yticks(y)
+    axes[0][0].set_yticklabels(arms, family="DejaVu Sans Mono", fontsize=6.8)
+
+    hi = r["models"]["qwen2p5_7b"]["arms"]["conclusion_only"]
+    lo = r["models"]["qwen2p5_7b"]["arms"]["full"]
+    s = r["replication_summary"]
+    fig.text(.5, .012, f"balanced accuracy (%)   ·   dashed = chance {chance:.1f}",
+             ha="center", fontsize=7.6, color=MUTED)
+    fig.text(.5, -.048,
+             "green = viable arm (min per-class recall ≥ 0.50)   ·   "
+             "red = collapsed to one label   ·   grey = below floor",
+             ha="center", fontsize=7.2, color=MUTED)
+    fig.text(.5, -.105,
+             "Viability is a property of (model × arm), not of the model: qwen2.5-7b is viable\n"
+             f"under conclusion_only ({hi['balanced_accuracy']*100:.1f}%, min per-class recall "
+             f"{hi['min_per_class_recall']:.3f}) and not under full "
+             f"({lo['balanced_accuracy']*100:.1f}%, {lo['min_per_class_recall']:.3f}).  "
+             f"{s['viable_under_any_arm']} of {s['n_models']} models are viable under some arm.",
+             ha="center", va="top", fontsize=7.2, color=INK, linespacing=1.5)
     fig.savefig(OUT / "b16/figures/size_curve.png")
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- figure 4
+def fig_b15_replication():
+    """Does the 98.3% validity share survive a change of checkpoint? No."""
+    r = json.loads((RES / "b15_replication_v1.json").read_text())
+    order = ["qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15"]
+    short = {"qwen2p5_3b_4bit": "qwen2.5-3b 4bit", "qwen2p5_3b_bf16": "qwen2.5-3b bf16",
+             "gemma3_4b_b15": "gemma-3-4b bf16"}
+    val = [r[k]["validity"] * 100 for k in order]
+    sur = [r[k]["surface"] * 100 for k in order]
+    y = [0, 1, 2]
+    H, G = .32, .19
+    XMAX = 122
+
+    fig, ax = plt.subplots(figsize=(6.0, 2.8))
+    ax.barh([i - G for i in y], val, height=H, color=BLUE, zorder=2)
+    ax.barh([i + G for i in y], sur, height=H, color=VERM, zorder=2)
+    for i, (v, u) in enumerate(zip(val, sur)):
+        tag = ("  validity", "  surface") if i == 0 else ("", "")
+        ax.text(v + 1.6, i - G, f"{v:+.1f}pp{tag[0]}", va="center", fontsize=7.3, color=BLUE)
+        ax.text(u + 1.6, i + G, f"{u:+.1f}pp{tag[1]}", va="center", fontsize=7.3, color=VERM)
+    for i, k in zip(y, order):
+        ax.text(XMAX, i, f"validity share  {r[k]['share']*100:.1f}%", ha="right", va="center",
+                fontsize=7.6, color=INK)
+
+    ax.set_yticks(y)
+    ax.set_yticklabels([short[k] for k in order], family="DejaVu Sans Mono", fontsize=7.6)
+    ax.set_xlim(0, XMAX); ax.set_xticks([0, 20, 40, 60, 80])
+    ax.set_ylim(2.62, -.62)
+    ax.set_xlabel("component of the total state effect (pp, entailed items)")
+    ax.set_title("Does the decomposition replicate across checkpoints?", loc="left", pad=8)
+    _clean(ax)
+    ax.spines["bottom"].set_bounds(0, 80)
+
+    g, q = r["gemma3_4b_b15"], r["qwen2p5_3b_4bit"]
+    fig.text(.5, -.055,
+             f"The {q['share']*100:.1f}% share does not generalise: gemma-3-4b's surface "
+             f"component is {g['surface']*100:+.1f}pp\n"
+             f"against {q['surface']*100:+.1f}pp on both qwen checkpoints, and its validity "
+             f"share falls to {g['share']*100:.1f}%.",
+             ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
+    fig.savefig(OUT / "b15/figures/replication.png")
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------- figure 5
+def fig_b17_detection():
+    """Three-class response distribution: broken-chain detection is refuted."""
+    r = json.loads((RES / "b17_analysis_v1.json").read_text())
+    n = r["n"]
+    order = ["irrelevant", "broken_chain", "truncate_1"]
+    labels = [("Unknown", BLUE), ("No", VERM), ("Yes", GREEN)]
+    base = r["arms"]["irrelevant"]["Unknown"]
+    bc, t1 = r["arms"]["broken_chain"], r["arms"]["truncate_1"]
+    H, G = .22, .25
+
+    fig, ax = plt.subplots(figsize=(5.9, 3.0))
+    ax.axvline(base, color=BLUE, lw=.9, linestyle=(0, (3, 2)), zorder=1)
+    for j, (lab, col) in enumerate(labels):
+        offs = (j - 1) * G
+        vals = [r["arms"][a][lab] for a in order]
+        ax.barh([i + offs for i in range(len(order))], vals, height=H, color=col, zorder=2,
+                label=lab)
+        for i, v in enumerate(vals):
+            ax.text(v + 2.5, i + offs, f"{v}", va="center", fontsize=7.0, color=INK)
+
+    ax.text(base - 3, -.95, f"irrelevant baseline  {base/n*100:.1f}% Unknown",
+            ha="right", va="center", fontsize=7.2, color=BLUE)
+    # the abstention gap, drawn in the empty band between the first two groups
+    ax.annotate("", (bc["Unknown"], .56), (base, .56),
+                arrowprops=dict(arrowstyle="->", color=BLUE, lw=1.0, shrinkA=0, shrinkB=1))
+    ax.text(bc["Unknown"] - 5, .56,
+            f"{r['broken_chain_minus_irrelevant_unknown_rate']*100:+.1f}pp",
+            ha="right", va="center", fontsize=7.2, color=BLUE)
+
+    ax.set_yticks(range(len(order)))
+    ax.set_yticklabels(order, family="DejaVu Sans Mono", fontsize=7.6)
+    ax.set_xlim(0, n * 1.06); ax.set_xticks([0, 48, 96, 144, 192])
+    ax.set_ylim(2.55, -1.12)
+    ax.set_xlabel(f"responses (of {n})")
+    ax.set_title("Broken chains do not raise abstention", loc="left", pad=8)
+    _clean(ax)
+    ax.legend(frameon=False, fontsize=7.4, loc="lower right", ncol=3,
+              bbox_to_anchor=(1.01, -.03), handlelength=1.1, handletextpad=.5,
+              columnspacing=1.1)
+
+    fig.text(.5, -.055,
+             f"broken_chain abstains on {bc['Unknown']/n*100:.1f}% against a "
+             f"{base/n*100:.1f}% baseline — the opposite of what validity detection predicts.\n"
+             f"`No` is {bc['No']}/{n} under broken_chain and {t1['No']}/{n} under truncate_1; "
+             f"only `Yes` separates them ({bc['Yes']} vs {t1['Yes']}).",
+             ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
+    fig.savefig(OUT / "b17/figures/response_distribution.png")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
+    for d in ("b14", "b15", "b16", "b17"):
+        (OUT / d / "figures").mkdir(parents=True, exist_ok=True)
     fig_b14_factorial(); fig_b15_arms(); fig_b16_size()
+    fig_b15_replication(); fig_b17_detection()
     for f in sorted(OUT.glob("*/figures/*.png")):
         print(f"  {f.relative_to(OUT)}  {f.stat().st_size/1024:.0f} KB")

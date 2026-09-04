@@ -1,0 +1,17 @@
+{
+  "arms": [
+    "irrelevant",
+    "broken_chain",
+    "truncate_1"
+  ],
+  "candidates": [
+    "Yes",
+    "No",
+    "Unknown"
+  ],
+  "derived_from": "binary_certificate_factorial_b15",
+  "n": 192,
+  "only_change": "instruction line and candidate set; theories, certificates and queries byte-identical",
+  "public_sha256": "f07a3a604d3893046c72d4f8ed7733170ea2db3c2b49e23bac8bfdd6cab33b1d",
+  "version": "three-class-broken-chain-b17"
+}

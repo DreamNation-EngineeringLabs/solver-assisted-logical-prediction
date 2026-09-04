@@ -1,0 +1,1477 @@
+{
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "chance_balanced_accuracy": 0.3333333333333333,
+  "models": {
+    "gemma3_4b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "degenerate": false,
+          "max_label_share": 0.3333333333333333,
+          "min_per_class_recall": 1.0,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.3333333333333333,
+            "Unknown": 0.3333333333333333,
+            "Yes": 0.3333333333333333
+          },
+          "viable": true
+        },
+        "full": {
+          "accuracy": 0.9635416666666666,
+          "balanced_accuracy": 0.9635416666666666,
+          "degenerate": false,
+          "max_label_share": 0.3645833333333333,
+          "min_per_class_recall": 0.890625,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 0.890625
+          },
+          "response_distribution": {
+            "No": 0.3645833333333333,
+            "Unknown": 0.296875,
+            "Yes": 0.3385416666666667
+          },
+          "viable": true
+        },
+        "irrelevant": {
+          "accuracy": 0.5104166666666666,
+          "balanced_accuracy": 0.5104166666666666,
+          "degenerate": true,
+          "max_label_share": 0.5260416666666666,
+          "min_per_class_recall": 0.0625,
+          "per_class_recall": {
+            "contradicted": 0.703125,
+            "entailed": 0.0625,
+            "undetermined": 0.765625
+          },
+          "response_distribution": {
+            "No": 0.4375,
+            "Unknown": 0.5260416666666666,
+            "Yes": 0.036458333333333336
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.6354166666666666,
+          "balanced_accuracy": 0.6354166666666666,
+          "degenerate": true,
+          "max_label_share": 0.6145833333333334,
+          "min_per_class_recall": 0.359375,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 0.546875,
+            "undetermined": 0.359375
+          },
+          "response_distribution": {
+            "No": 0.6145833333333334,
+            "Unknown": 0.13020833333333334,
+            "Yes": 0.2552083333333333
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.84375,
+          "balanced_accuracy": 0.84375,
+          "degenerate": false,
+          "max_label_share": 0.453125,
+          "min_per_class_recall": 0.53125,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 0.53125
+          },
+          "response_distribution": {
+            "No": 0.453125,
+            "Unknown": 0.17708333333333334,
+            "Yes": 0.3697916666666667
+          },
+          "viable": true
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.11979166666666663,
+        "answer_effect_without_state": 0.48958333333333337,
+        "cells": {
+          "minus_answer_minus_state": 0.5104166666666666,
+          "minus_answer_plus_state": 0.84375,
+          "no_material": 0.6354166666666666,
+          "plus_answer_minus_state": 1.0,
+          "plus_answer_plus_state": 0.9635416666666666
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.15625,
+        "interaction": -0.36979166666666674,
+        "main_effect_answer": 0.3046875,
+        "main_effect_state": 0.1484375,
+        "state_effect_with_answer": -0.03645833333333337,
+        "state_effect_without_answer": 0.33333333333333337
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          -0.078125,
+          -0.020833333333333332
+        ],
+        "exact_two_sided_mcnemar_p": 0.015625,
+        "left_correct": 185,
+        "paired_risk_difference": -0.036458333333333336,
+        "paired_table": {
+          "both_correct": 185,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 7
+        },
+        "right_correct": 192
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.234375,
+          0.4166666666666667
+        ],
+        "exact_two_sided_mcnemar_p": 6.147806615047977e-11,
+        "left_correct": 162,
+        "paired_risk_difference": 0.3333333333333333,
+        "paired_table": {
+          "both_correct": 80,
+          "left_only_correct": 82,
+          "neither_correct": 12,
+          "right_only_correct": 18
+        },
+        "right_correct": 98
+      },
+      "state_harms_under_answer": -0.109375,
+      "viable_any_arm": true,
+      "viable_in_arms": [
+        "conclusion_only",
+        "proof_prefix",
+        "full"
+      ],
+      "viable_under_full": true
+    },
+    "llama3p2_1b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.578125,
+          "balanced_accuracy": 0.578125,
+          "degenerate": true,
+          "max_label_share": 0.7239583333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.765625,
+            "undetermined": 0.96875
+          },
+          "response_distribution": {
+            "Unknown": 0.7239583333333334,
+            "Yes": 0.2760416666666667
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.3697916666666667,
+          "balanced_accuracy": 0.3697916666666667,
+          "degenerate": true,
+          "max_label_share": 0.953125,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.109375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.953125,
+            "Yes": 0.046875
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.3385416666666667,
+          "balanced_accuracy": 0.3385416666666667,
+          "degenerate": true,
+          "max_label_share": 0.9947916666666666,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.015625,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9947916666666666,
+            "Yes": 0.005208333333333333
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.3385416666666667,
+          "balanced_accuracy": 0.3385416666666667,
+          "degenerate": true,
+          "max_label_share": 0.9583333333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.0625,
+            "undetermined": 0.953125
+          },
+          "response_distribution": {
+            "Unknown": 0.9583333333333334,
+            "Yes": 0.041666666666666664
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.3645833333333333,
+          "balanced_accuracy": 0.3645833333333333,
+          "degenerate": true,
+          "max_label_share": 0.96875,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.09375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.96875,
+            "Yes": 0.03125
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.00520833333333337,
+        "answer_effect_without_state": 0.23958333333333331,
+        "cells": {
+          "minus_answer_minus_state": 0.3385416666666667,
+          "minus_answer_plus_state": 0.3645833333333333,
+          "no_material": 0.3385416666666667,
+          "plus_answer_minus_state": 0.578125,
+          "plus_answer_plus_state": 0.3697916666666667
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.21354166666666669,
+        "interaction": -0.23437499999999994,
+        "main_effect_answer": 0.12239583333333334,
+        "main_effect_state": -0.09114583333333334,
+        "state_effect_with_answer": -0.20833333333333331,
+        "state_effect_without_answer": 0.02604166666666663
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          -0.28125,
+          -0.15625
+        ],
+        "exact_two_sided_mcnemar_p": 1.1266365618212149e-10,
+        "left_correct": 71,
+        "paired_risk_difference": -0.20833333333333334,
+        "paired_table": {
+          "both_correct": 69,
+          "left_only_correct": 2,
+          "neither_correct": 79,
+          "right_only_correct": 42
+        },
+        "right_correct": 111
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.005208333333333333,
+          0.052083333333333336
+        ],
+        "exact_two_sided_mcnemar_p": 0.0625,
+        "left_correct": 70,
+        "paired_risk_difference": 0.026041666666666668,
+        "paired_table": {
+          "both_correct": 65,
+          "left_only_correct": 5,
+          "neither_correct": 122,
+          "right_only_correct": 0
+        },
+        "right_correct": 65
+      },
+      "state_harms_under_answer": 0.0,
+      "viable_any_arm": false,
+      "viable_in_arms": [],
+      "viable_under_full": false
+    },
+    "llama3p2_3b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.671875,
+          "balanced_accuracy": 0.671875,
+          "degenerate": true,
+          "max_label_share": 0.65625,
+          "min_per_class_recall": 0.015625,
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.65625,
+            "Yes": 0.3385416666666667
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.8072916666666666,
+          "balanced_accuracy": 0.8072916666666666,
+          "degenerate": false,
+          "max_label_share": 0.4947916666666667,
+          "min_per_class_recall": 0.421875,
+          "per_class_recall": {
+            "contradicted": 0.421875,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.140625,
+            "Unknown": 0.4947916666666667,
+            "Yes": 0.3645833333333333
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.4322916666666667,
+          "balanced_accuracy": 0.4322916666666667,
+          "degenerate": true,
+          "max_label_share": 0.671875,
+          "min_per_class_recall": 0.015625,
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 0.609375,
+            "undetermined": 0.671875
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.671875,
+            "Yes": 0.3229166666666667
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.4583333333333333,
+          "balanced_accuracy": 0.4583333333333333,
+          "degenerate": true,
+          "max_label_share": 0.5520833333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.84375,
+            "undetermined": 0.53125
+          },
+          "response_distribution": {
+            "Unknown": 0.5520833333333334,
+            "Yes": 0.4479166666666667
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.5520833333333334,
+          "balanced_accuracy": 0.5520833333333334,
+          "degenerate": true,
+          "max_label_share": 0.515625,
+          "min_per_class_recall": 0.015625,
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 1.0,
+            "undetermined": 0.640625
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.515625,
+            "Yes": 0.4791666666666667
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.25520833333333326,
+        "answer_effect_without_state": 0.23958333333333331,
+        "cells": {
+          "minus_answer_minus_state": 0.4322916666666667,
+          "minus_answer_plus_state": 0.5520833333333334,
+          "no_material": 0.4583333333333333,
+          "plus_answer_minus_state": 0.671875,
+          "plus_answer_plus_state": 0.8072916666666666
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.11979166666666663,
+        "interaction": 0.015624999999999944,
+        "main_effect_answer": 0.2473958333333333,
+        "main_effect_state": 0.12760416666666666,
+        "state_effect_with_answer": 0.13541666666666663,
+        "state_effect_without_answer": 0.11979166666666669
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          0.08854166666666667,
+          0.18229166666666666
+        ],
+        "exact_two_sided_mcnemar_p": 2.9802322387695312e-08,
+        "left_correct": 155,
+        "paired_risk_difference": 0.13541666666666666,
+        "paired_table": {
+          "both_correct": 129,
+          "left_only_correct": 26,
+          "neither_correct": 37,
+          "right_only_correct": 0
+        },
+        "right_correct": 129
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.057291666666666664,
+          0.17708333333333334
+        ],
+        "exact_two_sided_mcnemar_p": 0.00019107642583549023,
+        "left_correct": 106,
+        "paired_risk_difference": 0.11979166666666667,
+        "paired_table": {
+          "both_correct": 76,
+          "left_only_correct": 30,
+          "neither_correct": 79,
+          "right_only_correct": 7
+        },
+        "right_correct": 83
+      },
+      "state_harms_under_answer": 0.40625,
+      "viable_any_arm": false,
+      "viable_in_arms": [],
+      "viable_under_full": false
+    },
+    "olmo2_1b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.5364583333333334,
+          "balanced_accuracy": 0.5364583333333334,
+          "degenerate": true,
+          "max_label_share": 0.796875,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.609375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.796875,
+            "Yes": 0.203125
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.421875,
+          "balanced_accuracy": 0.421875,
+          "degenerate": true,
+          "max_label_share": 0.9114583333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.265625,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9114583333333334,
+            "Yes": 0.08854166666666667
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 0.9791666666666666,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.03125,
+            "undetermined": 0.96875
+          },
+          "response_distribution": {
+            "Unknown": 0.9791666666666666,
+            "Yes": 0.020833333333333332
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.359375,
+          "balanced_accuracy": 0.359375,
+          "degenerate": true,
+          "max_label_share": 0.9427083333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.125,
+            "undetermined": 0.953125
+          },
+          "response_distribution": {
+            "Unknown": 0.9427083333333334,
+            "Yes": 0.057291666666666664
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.3489583333333333,
+          "balanced_accuracy": 0.3489583333333333,
+          "degenerate": true,
+          "max_label_share": 0.984375,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.046875,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.984375,
+            "Yes": 0.015625
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.07291666666666669,
+        "answer_effect_without_state": 0.20312500000000006,
+        "cells": {
+          "minus_answer_minus_state": 0.3333333333333333,
+          "minus_answer_plus_state": 0.3489583333333333,
+          "no_material": 0.359375,
+          "plus_answer_minus_state": 0.5364583333333334,
+          "plus_answer_plus_state": 0.421875
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.18750000000000006,
+        "interaction": -0.13020833333333337,
+        "main_effect_answer": 0.13802083333333337,
+        "main_effect_state": -0.049479166666666685,
+        "state_effect_with_answer": -0.11458333333333337,
+        "state_effect_without_answer": 0.015625
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          -0.171875,
+          -0.078125
+        ],
+        "exact_two_sided_mcnemar_p": 2.9802322387695312e-06,
+        "left_correct": 81,
+        "paired_risk_difference": -0.11458333333333333,
+        "paired_table": {
+          "both_correct": 80,
+          "left_only_correct": 1,
+          "neither_correct": 88,
+          "right_only_correct": 23
+        },
+        "right_correct": 103
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          -0.005208333333333333,
+          0.036458333333333336
+        ],
+        "exact_two_sided_mcnemar_p": 0.375,
+        "left_correct": 67,
+        "paired_risk_difference": 0.015625,
+        "paired_table": {
+          "both_correct": 63,
+          "left_only_correct": 4,
+          "neither_correct": 124,
+          "right_only_correct": 1
+        },
+        "right_correct": 64
+      },
+      "state_harms_under_answer": 0.0,
+      "viable_any_arm": false,
+      "viable_in_arms": [],
+      "viable_under_full": false
+    },
+    "phi4_mini": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.6822916666666666,
+          "balanced_accuracy": 0.6822916666666666,
+          "degenerate": true,
+          "max_label_share": 0.6510416666666666,
+          "min_per_class_recall": 0.046875,
+          "per_class_recall": {
+            "contradicted": 0.046875,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.015625,
+            "Unknown": 0.6510416666666666,
+            "Yes": 0.3333333333333333
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.90625,
+          "balanced_accuracy": 0.90625,
+          "degenerate": false,
+          "max_label_share": 0.4270833333333333,
+          "min_per_class_recall": 0.71875,
+          "per_class_recall": {
+            "contradicted": 0.71875,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.23958333333333334,
+            "Unknown": 0.4270833333333333,
+            "Yes": 0.3333333333333333
+          },
+          "viable": true
+        },
+        "irrelevant": {
+          "accuracy": 0.3958333333333333,
+          "balanced_accuracy": 0.3958333333333333,
+          "degenerate": true,
+          "max_label_share": 0.8645833333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.296875,
+            "undetermined": 0.890625
+          },
+          "response_distribution": {
+            "Unknown": 0.8645833333333334,
+            "Yes": 0.13541666666666666
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.4479166666666667,
+          "balanced_accuracy": 0.4479166666666667,
+          "degenerate": true,
+          "max_label_share": 0.546875,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.828125,
+            "undetermined": 0.515625
+          },
+          "response_distribution": {
+            "Unknown": 0.546875,
+            "Yes": 0.453125
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.71875,
+          "balanced_accuracy": 0.71875,
+          "degenerate": true,
+          "max_label_share": 0.5,
+          "min_per_class_recall": 0.328125,
+          "per_class_recall": {
+            "contradicted": 0.328125,
+            "entailed": 1.0,
+            "undetermined": 0.828125
+          },
+          "response_distribution": {
+            "No": 0.109375,
+            "Unknown": 0.5,
+            "Yes": 0.390625
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.1875,
+        "answer_effect_without_state": 0.2864583333333333,
+        "cells": {
+          "minus_answer_minus_state": 0.3958333333333333,
+          "minus_answer_plus_state": 0.71875,
+          "no_material": 0.4479166666666667,
+          "plus_answer_minus_state": 0.6822916666666666,
+          "plus_answer_plus_state": 0.90625
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": 0.03645833333333337,
+        "interaction": -0.09895833333333331,
+        "main_effect_answer": 0.23697916666666666,
+        "main_effect_state": 0.2734375,
+        "state_effect_with_answer": 0.22395833333333337,
+        "state_effect_without_answer": 0.3229166666666667
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          0.16666666666666666,
+          0.28125
+        ],
+        "exact_two_sided_mcnemar_p": 2.2737367544323206e-13,
+        "left_correct": 174,
+        "paired_risk_difference": 0.22395833333333334,
+        "paired_table": {
+          "both_correct": 131,
+          "left_only_correct": 43,
+          "neither_correct": 18,
+          "right_only_correct": 0
+        },
+        "right_correct": 131
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.24479166666666666,
+          0.390625
+        ],
+        "exact_two_sided_mcnemar_p": 2.1448756331687684e-14,
+        "left_correct": 138,
+        "paired_risk_difference": 0.3229166666666667,
+        "paired_table": {
+          "both_correct": 70,
+          "left_only_correct": 68,
+          "neither_correct": 48,
+          "right_only_correct": 6
+        },
+        "right_correct": 76
+      },
+      "state_harms_under_answer": 0.671875,
+      "viable_any_arm": true,
+      "viable_in_arms": [
+        "full"
+      ],
+      "viable_under_full": true
+    },
+    "qwen2p5_0p5b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.4114583333333333,
+          "balanced_accuracy": 0.4114583333333333,
+          "degenerate": true,
+          "max_label_share": 0.8802083333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.296875,
+            "undetermined": 0.9375
+          },
+          "response_distribution": {
+            "Unknown": 0.8802083333333334,
+            "Yes": 0.11979166666666667
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.6354166666666666,
+          "balanced_accuracy": 0.6354166666666666,
+          "degenerate": true,
+          "max_label_share": 0.6145833333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.96875,
+            "undetermined": 0.9375
+          },
+          "response_distribution": {
+            "Unknown": 0.3854166666666667,
+            "Yes": 0.6145833333333334
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.3489583333333333,
+          "balanced_accuracy": 0.3489583333333333,
+          "degenerate": true,
+          "max_label_share": 0.5572916666666666,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.578125,
+            "undetermined": 0.46875
+          },
+          "response_distribution": {
+            "Unknown": 0.4427083333333333,
+            "Yes": 0.5572916666666666
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.3541666666666667,
+          "balanced_accuracy": 0.3541666666666667,
+          "degenerate": true,
+          "max_label_share": 0.78125,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.21875,
+            "undetermined": 0.84375
+          },
+          "response_distribution": {
+            "Unknown": 0.78125,
+            "Yes": 0.21875
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.4322916666666667,
+          "balanced_accuracy": 0.4322916666666667,
+          "degenerate": true,
+          "max_label_share": 0.78125,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.921875,
+            "undetermined": 0.375
+          },
+          "response_distribution": {
+            "Unknown": 0.21875,
+            "Yes": 0.78125
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.20312499999999994,
+        "answer_effect_without_state": 0.0625,
+        "cells": {
+          "minus_answer_minus_state": 0.3489583333333333,
+          "minus_answer_plus_state": 0.4322916666666667,
+          "no_material": 0.3541666666666667,
+          "plus_answer_minus_state": 0.4114583333333333,
+          "plus_answer_plus_state": 0.6354166666666666
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": 0.02083333333333337,
+        "interaction": 0.14062499999999994,
+        "main_effect_answer": 0.13281249999999997,
+        "main_effect_state": 0.15364583333333334,
+        "state_effect_with_answer": 0.22395833333333331,
+        "state_effect_without_answer": 0.08333333333333337
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          0.16145833333333334,
+          0.2864583333333333
+        ],
+        "exact_two_sided_mcnemar_p": 1.6044054973463062e-11,
+        "left_correct": 122,
+        "paired_risk_difference": 0.22395833333333334,
+        "paired_table": {
+          "both_correct": 77,
+          "left_only_correct": 45,
+          "neither_correct": 68,
+          "right_only_correct": 2
+        },
+        "right_correct": 79
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.015625,
+          0.140625
+        ],
+        "exact_two_sided_mcnemar_p": 0.013852965261321515,
+        "left_correct": 83,
+        "paired_risk_difference": 0.08333333333333333,
+        "paired_table": {
+          "both_correct": 56,
+          "left_only_correct": 27,
+          "neither_correct": 98,
+          "right_only_correct": 11
+        },
+        "right_correct": 67
+      },
+      "state_harms_under_answer": 0.0,
+      "viable_any_arm": false,
+      "viable_in_arms": [],
+      "viable_under_full": false
+    },
+    "qwen2p5_1p5b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.4322916666666667,
+          "balanced_accuracy": 0.4322916666666667,
+          "degenerate": true,
+          "max_label_share": 0.9010416666666666,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.296875,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9010416666666666,
+            "Yes": 0.09895833333333333
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.3697916666666667,
+          "balanced_accuracy": 0.3697916666666667,
+          "degenerate": true,
+          "max_label_share": 0.9635416666666666,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.109375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9635416666666666,
+            "Yes": 0.036458333333333336
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 1.0,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 1.0
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 1.0,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 1.0
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.3489583333333333,
+          "balanced_accuracy": 0.3489583333333333,
+          "degenerate": true,
+          "max_label_share": 0.984375,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.046875,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.984375,
+            "Yes": 0.015625
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.02083333333333337,
+        "answer_effect_without_state": 0.09895833333333337,
+        "cells": {
+          "minus_answer_minus_state": 0.3333333333333333,
+          "minus_answer_plus_state": 0.3489583333333333,
+          "no_material": 0.3333333333333333,
+          "plus_answer_minus_state": 0.4322916666666667,
+          "plus_answer_plus_state": 0.3697916666666667
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.08333333333333337,
+        "interaction": -0.078125,
+        "main_effect_answer": 0.05989583333333337,
+        "main_effect_state": -0.0234375,
+        "state_effect_with_answer": -0.0625,
+        "state_effect_without_answer": 0.015625
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          -0.11458333333333333,
+          -0.03125
+        ],
+        "exact_two_sided_mcnemar_p": 0.004180908203125,
+        "left_correct": 71,
+        "paired_risk_difference": -0.0625,
+        "paired_table": {
+          "both_correct": 69,
+          "left_only_correct": 2,
+          "neither_correct": 107,
+          "right_only_correct": 14
+        },
+        "right_correct": 83
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.0,
+          0.036458333333333336
+        ],
+        "exact_two_sided_mcnemar_p": 0.25,
+        "left_correct": 67,
+        "paired_risk_difference": 0.015625,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 3,
+          "neither_correct": 125,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "state_harms_under_answer": 0.0,
+      "viable_any_arm": false,
+      "viable_in_arms": [],
+      "viable_under_full": false
+    },
+    "qwen2p5_3b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.9635416666666666,
+          "balanced_accuracy": 0.9635416666666666,
+          "degenerate": false,
+          "max_label_share": 0.3645833333333333,
+          "min_per_class_recall": 0.90625,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 0.984375,
+            "undetermined": 0.90625
+          },
+          "response_distribution": {
+            "No": 0.3645833333333333,
+            "Unknown": 0.3072916666666667,
+            "Yes": 0.328125
+          },
+          "viable": true
+        },
+        "full": {
+          "accuracy": 0.90625,
+          "balanced_accuracy": 0.90625,
+          "degenerate": false,
+          "max_label_share": 0.4270833333333333,
+          "min_per_class_recall": 0.71875,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 0.71875
+          },
+          "response_distribution": {
+            "No": 0.4270833333333333,
+            "Unknown": 0.23958333333333334,
+            "Yes": 0.3333333333333333
+          },
+          "viable": true
+        },
+        "irrelevant": {
+          "accuracy": 0.390625,
+          "balanced_accuracy": 0.390625,
+          "degenerate": true,
+          "max_label_share": 0.828125,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.28125,
+            "entailed": 0.0,
+            "undetermined": 0.890625
+          },
+          "response_distribution": {
+            "No": 0.171875,
+            "Unknown": 0.828125
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.4114583333333333,
+          "balanced_accuracy": 0.4114583333333333,
+          "degenerate": true,
+          "max_label_share": 0.625,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.71875,
+            "entailed": 0.0,
+            "undetermined": 0.515625
+          },
+          "response_distribution": {
+            "No": 0.625,
+            "Unknown": 0.375
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.7395833333333334,
+          "balanced_accuracy": 0.7395833333333334,
+          "degenerate": true,
+          "max_label_share": 0.5364583333333334,
+          "min_per_class_recall": 0.5625,
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 0.65625,
+            "undetermined": 0.5625
+          },
+          "response_distribution": {
+            "No": 0.5364583333333334,
+            "Unknown": 0.24479166666666666,
+            "Yes": 0.21875
+          },
+          "viable": true
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.16666666666666663,
+        "answer_effect_without_state": 0.5729166666666666,
+        "cells": {
+          "minus_answer_minus_state": 0.390625,
+          "minus_answer_plus_state": 0.7395833333333334,
+          "no_material": 0.4114583333333333,
+          "plus_answer_minus_state": 0.9635416666666666,
+          "plus_answer_plus_state": 0.90625
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.22395833333333326,
+        "interaction": -0.40625,
+        "main_effect_answer": 0.36979166666666663,
+        "main_effect_state": 0.14583333333333337,
+        "state_effect_with_answer": -0.05729166666666663,
+        "state_effect_without_answer": 0.34895833333333337
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          -0.109375,
+          -0.026041666666666668
+        ],
+        "exact_two_sided_mcnemar_p": 0.00738525390625,
+        "left_correct": 174,
+        "paired_risk_difference": -0.057291666666666664,
+        "paired_table": {
+          "both_correct": 172,
+          "left_only_correct": 2,
+          "neither_correct": 5,
+          "right_only_correct": 13
+        },
+        "right_correct": 185
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.25,
+          0.4375
+        ],
+        "exact_two_sided_mcnemar_p": 6.112691638091427e-11,
+        "left_correct": 142,
+        "paired_risk_difference": 0.3489583333333333,
+        "paired_table": {
+          "both_correct": 54,
+          "left_only_correct": 88,
+          "neither_correct": 29,
+          "right_only_correct": 21
+        },
+        "right_correct": 75
+      },
+      "state_harms_under_answer": -0.1875,
+      "viable_any_arm": true,
+      "viable_in_arms": [
+        "conclusion_only",
+        "proof_prefix",
+        "full"
+      ],
+      "viable_under_full": true
+    },
+    "qwen2p5_7b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.9791666666666666,
+          "balanced_accuracy": 0.9791666666666666,
+          "degenerate": false,
+          "max_label_share": 0.3541666666666667,
+          "min_per_class_recall": 0.9375,
+          "per_class_recall": {
+            "contradicted": 0.9375,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.3125,
+            "Unknown": 0.3541666666666667,
+            "Yes": 0.3333333333333333
+          },
+          "viable": true
+        },
+        "full": {
+          "accuracy": 0.7135416666666666,
+          "balanced_accuracy": 0.7135416666666666,
+          "degenerate": true,
+          "max_label_share": 0.6197916666666666,
+          "min_per_class_recall": 0.140625,
+          "per_class_recall": {
+            "contradicted": 0.140625,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.046875,
+            "Unknown": 0.6197916666666666,
+            "Yes": 0.3333333333333333
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 0.9895833333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.015625,
+            "undetermined": 0.984375
+          },
+          "response_distribution": {
+            "Unknown": 0.9895833333333334,
+            "Yes": 0.010416666666666666
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 0.9895833333333334,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.015625,
+            "undetermined": 0.984375
+          },
+          "response_distribution": {
+            "Unknown": 0.9895833333333334,
+            "Yes": 0.010416666666666666
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.671875,
+          "balanced_accuracy": 0.671875,
+          "degenerate": true,
+          "max_label_share": 0.6614583333333334,
+          "min_per_class_recall": 0.015625,
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.6614583333333334,
+            "Yes": 0.3333333333333333
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.04166666666666663,
+        "answer_effect_without_state": 0.6458333333333333,
+        "cells": {
+          "minus_answer_minus_state": 0.3333333333333333,
+          "minus_answer_plus_state": 0.671875,
+          "no_material": 0.3333333333333333,
+          "plus_answer_minus_state": 0.9791666666666666,
+          "plus_answer_plus_state": 0.7135416666666666
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.30729166666666663,
+        "interaction": -0.6041666666666666,
+        "main_effect_answer": 0.34374999999999994,
+        "main_effect_state": 0.03645833333333334,
+        "state_effect_with_answer": -0.265625,
+        "state_effect_without_answer": 0.3385416666666667
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          -0.3385416666666667,
+          -0.21354166666666666
+        ],
+        "exact_two_sided_mcnemar_p": 8.881784197001252e-16,
+        "left_correct": 137,
+        "paired_risk_difference": -0.265625,
+        "paired_table": {
+          "both_correct": 137,
+          "left_only_correct": 0,
+          "neither_correct": 4,
+          "right_only_correct": 51
+        },
+        "right_correct": 188
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.2708333333333333,
+          0.4010416666666667
+        ],
+        "exact_two_sided_mcnemar_p": 5.421010862427522e-20,
+        "left_correct": 129,
+        "paired_risk_difference": 0.3385416666666667,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 65,
+          "neither_correct": 63,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "state_harms_under_answer": -0.796875,
+      "viable_any_arm": true,
+      "viable_in_arms": [
+        "conclusion_only"
+      ],
+      "viable_under_full": false
+    },
+    "smollm2_1p7b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.453125,
+          "balanced_accuracy": 0.453125,
+          "degenerate": true,
+          "max_label_share": 0.875,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.359375,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "No": 0.125,
+            "Yes": 0.875
+          },
+          "viable": false
+        },
+        "full": {
+          "accuracy": 0.6927083333333334,
+          "balanced_accuracy": 0.6927083333333334,
+          "degenerate": false,
+          "max_label_share": 0.4479166666666667,
+          "min_per_class_recall": 0.375,
+          "per_class_recall": {
+            "contradicted": 0.703125,
+            "entailed": 1.0,
+            "undetermined": 0.375
+          },
+          "response_distribution": {
+            "No": 0.4270833333333333,
+            "Unknown": 0.125,
+            "Yes": 0.4479166666666667
+          },
+          "viable": false
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 1.0,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "Yes": 1.0
+          },
+          "viable": false
+        },
+        "none": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "degenerate": true,
+          "max_label_share": 1.0,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "Yes": 1.0
+          },
+          "viable": false
+        },
+        "proof_prefix": {
+          "accuracy": 0.3958333333333333,
+          "balanced_accuracy": 0.3958333333333333,
+          "degenerate": true,
+          "max_label_share": 0.9375,
+          "min_per_class_recall": 0.0,
+          "per_class_recall": {
+            "contradicted": 0.1875,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "No": 0.0625,
+            "Yes": 0.9375
+          },
+          "viable": false
+        }
+      },
+      "factorial_2x2": {
+        "answer_effect_with_state": 0.29687500000000006,
+        "answer_effect_without_state": 0.11979166666666669,
+        "cells": {
+          "minus_answer_minus_state": 0.3333333333333333,
+          "minus_answer_plus_state": 0.3958333333333333,
+          "no_material": 0.3333333333333333,
+          "plus_answer_minus_state": 0.453125,
+          "plus_answer_plus_state": 0.6927083333333334
+        },
+        "diagonal_proof_prefix_minus_conclusion_only": -0.057291666666666685,
+        "interaction": 0.17708333333333337,
+        "main_effect_answer": 0.20833333333333337,
+        "main_effect_state": 0.15104166666666669,
+        "state_effect_with_answer": 0.23958333333333337,
+        "state_effect_without_answer": 0.0625
+      },
+      "paired_full_minus_conclusion_only": {
+        "bca_95": [
+          0.171875,
+          0.3020833333333333
+        ],
+        "exact_two_sided_mcnemar_p": 3.8029690507812575e-11,
+        "left_correct": 133,
+        "paired_risk_difference": 0.23958333333333334,
+        "paired_table": {
+          "both_correct": 83,
+          "left_only_correct": 50,
+          "neither_correct": 55,
+          "right_only_correct": 4
+        },
+        "right_correct": 87
+      },
+      "paired_proof_prefix_minus_irrelevant": {
+        "bca_95": [
+          0.03125,
+          0.09895833333333333
+        ],
+        "exact_two_sided_mcnemar_p": 0.00048828125,
+        "left_correct": 76,
+        "paired_risk_difference": 0.0625,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 12,
+          "neither_correct": 116,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "state_harms_under_answer": 0.375,
+      "viable_any_arm": false,
+      "viable_in_arms": [],
+      "viable_under_full": false
+    }
+  },
+  "n": 192,
+  "replication_summary": {
+    "conclusion_only_at_least_full": 6,
+    "conclusion_only_beats_proof_prefix": 8,
+    "mean_interaction": -0.15885416666666669,
+    "mean_main_effect_answer": 0.21640625,
+    "mean_main_effect_state": 0.08723958333333334,
+    "models_state_hurts": [
+      "gemma3_4b",
+      "qwen2p5_3b",
+      "qwen2p5_7b"
+    ],
+    "n_models": 10,
+    "viable_under_any_arm": 4,
+    "viable_under_conclusion_only": 3,
+    "viable_under_full": 3
+  },
+  "version": "multimodel-three-class-b16-analysis-v2-allarms"
+}

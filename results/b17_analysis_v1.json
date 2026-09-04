@@ -1,0 +1,25 @@
+{
+  "arms": {
+    "broken_chain": {
+      "No": 110,
+      "Unknown": 81,
+      "Yes": 1
+    },
+    "irrelevant": {
+      "No": 48,
+      "Unknown": 144,
+      "Yes": 0
+    },
+    "truncate_1": {
+      "No": 110,
+      "Unknown": 21,
+      "Yes": 61
+    }
+  },
+  "broken_chain_minus_irrelevant_unknown_rate": -0.328125,
+  "consequence": "The claim that the model 'can detect when the chain is broken' is refuted, not merely unsupported, and must be removed from the paper.",
+  "interpretation": "Supplying a broken chain makes the model LESS likely to answer Unknown, not more: 42.2% against a 75.0% baseline, -32.8pp. A validity tracker would move the other way. The model emits `No` on 110/192 under broken_chain and on exactly 110/192 under truncate_1 as well; what separates the two arms is Yes (1 vs 61), i.e. whether a final inference is completable. So the model is not detecting invalidity \u2014 it completes when it can and falls back when it cannot, and the fallback itself shifts once any query-relevant certificate is present.",
+  "n": 192,
+  "verdict": "detection_refuted",
+  "version": "b17-three-class-broken-chain-v1"
+}

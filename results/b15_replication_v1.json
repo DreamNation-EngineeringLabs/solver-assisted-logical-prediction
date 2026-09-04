@@ -1,0 +1,101 @@
+{
+  "gemma3_4b_b15": {
+    "dprime": {
+      "broken_chain": 2.8266399037031107,
+      "full": 5.1305585945370495,
+      "irrelevant": 0.6183765210261034,
+      "misleading": -5.1305585945370495,
+      "none": 1.832867935026681,
+      "same_entity_irrelevant": 0.7672031933748935,
+      "shuffled": 3.801181695817064,
+      "truncate_1": 5.1305585945370495,
+      "truncate_2": 0.8843852949237965,
+      "truncate_3": 0.8843852949237965
+    },
+    "entailed": {
+      "broken_chain": 58,
+      "full": 96,
+      "irrelevant": 2,
+      "misleading": 0,
+      "none": 22,
+      "same_entity_irrelevant": 3,
+      "shuffled": 86,
+      "truncate_1": 96,
+      "truncate_2": 4,
+      "truncate_3": 4
+    },
+    "misleading_all": 0,
+    "p": 7.275957614183426e-12,
+    "rd": 0.3958333333333333,
+    "share": 0.40425531914893614,
+    "surface": 0.5833333333333334,
+    "total": 0.9791666666666666,
+    "validity": 0.3958333333333333
+  },
+  "qwen2p5_3b_4bit": {
+    "dprime": {
+      "broken_chain": 0.4072793391126397,
+      "full": 5.1305585945370495,
+      "irrelevant": 0.0,
+      "misleading": -4.3633554011621545,
+      "none": 0.0,
+      "same_entity_irrelevant": 0.0,
+      "shuffled": 1.5266325842936914,
+      "truncate_1": 2.8534763871272095,
+      "truncate_2": 0.0,
+      "truncate_3": 0.0
+    },
+    "entailed": {
+      "broken_chain": 1,
+      "full": 96,
+      "irrelevant": 0,
+      "misleading": 0,
+      "none": 0,
+      "same_entity_irrelevant": 0,
+      "shuffled": 14,
+      "truncate_1": 59,
+      "truncate_2": 0,
+      "truncate_3": 0
+    },
+    "misleading_all": 3,
+    "p": 6.938893903907228e-18,
+    "rd": 0.6041666666666666,
+    "share": 0.983050847457627,
+    "surface": 0.010416666666666666,
+    "total": 0.6145833333333334,
+    "validity": 0.6041666666666666
+  },
+  "qwen2p5_3b_bf16": {
+    "dprime": {
+      "broken_chain": 0.4072793391126397,
+      "full": 5.1305585945370495,
+      "irrelevant": 0.0,
+      "misleading": -4.063712949610735,
+      "none": 0.0,
+      "same_entity_irrelevant": 0.0,
+      "shuffled": 1.4335112362075533,
+      "truncate_1": 3.231680585718117,
+      "truncate_2": 0.0,
+      "truncate_3": 0.0
+    },
+    "entailed": {
+      "broken_chain": 1,
+      "full": 96,
+      "irrelevant": 0,
+      "misleading": 0,
+      "none": 0,
+      "same_entity_irrelevant": 0,
+      "shuffled": 12,
+      "truncate_1": 72,
+      "truncate_2": 0,
+      "truncate_3": 0
+    },
+    "misleading_all": 6,
+    "p": 8.470329472543003e-22,
+    "rd": 0.7395833333333334,
+    "share": 0.9861111111111112,
+    "surface": 0.010416666666666666,
+    "total": 0.75,
+    "validity": 0.7395833333333334
+  }
+}

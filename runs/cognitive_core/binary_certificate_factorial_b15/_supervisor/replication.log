@@ -1,0 +1,36 @@
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 12 files:   8%|▊         | 1/12 [00:00<00:03,  3.33it/s]Fetching 12 files:  58%|█████▊    | 7/12 [00:00<00:00, 14.20it/s]Fetching 12 files:  83%|████████▎ | 10/12 [00:00<00:00, 17.40it/s]Fetching 12 files:  83%|████████▎ | 10/12 [00:20<00:00, 17.40it/s]Fetching 12 files:  92%|█████████▏| 11/12 [00:59<00:09,  9.25s/it]Fetching 12 files: 100%|██████████| 12/12 [01:42<00:00, 15.52s/it]Fetching 12 files: 100%|██████████| 12/12 [01:42<00:00,  8.58s/it]
+loaded qwen2p5_3b_bf16 (6.17 GB)  candidates={'Yes': 9454, 'No': 2753}
+  qualification[direct] 33/36  {'Yes': 15, 'No': 18}
+  qualification[reordered] 35/36  {'Yes': 17, 'No': 18}
+  agreement 32/36  passed=True
+  none                     192 receipts    56.2s
+  irrelevant               192 receipts    72.8s
+  same_entity_irrelevant   192 receipts    76.2s
+  truncate_3               192 receipts    67.7s
+  truncate_2               192 receipts    73.3s
+  truncate_1               192 receipts    73.5s
+  broken_chain             192 receipts    82.8s
+  misleading               192 receipts    85.6s
+  shuffled                 192 receipts    80.5s
+  full                     192 receipts    85.7s
+COMPLETE in 873s
+freed 6.2 GB
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 13 files:   8%|▊         | 1/13 [00:00<00:03,  3.62it/s]Fetching 13 files:  54%|█████▍    | 7/13 [00:00<00:00, 14.86it/s]Fetching 13 files:  77%|███████▋  | 10/13 [00:02<00:00,  4.05it/s]Fetching 13 files:  85%|████████▍ | 11/13 [00:02<00:00,  4.41it/s]Fetching 13 files:  92%|█████████▏| 12/13 [02:10<00:23, 23.64s/it]Fetching 13 files: 100%|██████████| 13/13 [02:40<00:00, 24.90s/it]Fetching 13 files: 100%|██████████| 13/13 [02:40<00:00, 12.32s/it]
+loaded gemma3_4b_b15 (9.94 GB)  candidates={'Yes': 10784, 'No': 3771}
+  qualification[direct] 35/36  {'Yes': 18, 'No': 17}
+  qualification[reordered] 36/36  {'Yes': 18, 'No': 18}
+  agreement 35/36  passed=True
+  none                     192 receipts    71.2s
+  irrelevant               192 receipts   117.8s
+  same_entity_irrelevant   192 receipts   124.0s
+  truncate_3               192 receipts    89.6s
+  truncate_2               192 receipts   116.7s
+  truncate_1               192 receipts   109.1s
+  broken_chain             192 receipts   107.2s
+  misleading               192 receipts   123.1s
+  shuffled                 192 receipts   105.6s
+  full                     192 receipts   113.0s
+COMPLETE in 1257s
+freed 10.0 GB

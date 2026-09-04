@@ -1,0 +1,82 @@
+{
+  "adversarial": [
+    {
+      "case": "cyclic rules must still saturate",
+      "certifier": "entailed",
+      "expected": "entailed",
+      "pass": true,
+      "reference": "entailed"
+    },
+    {
+      "case": "cycle that never reaches the query",
+      "certifier": "undetermined",
+      "expected": "undetermined",
+      "pass": true,
+      "reference": "undetermined"
+    },
+    {
+      "case": "chain longer than the default round cap is still reached",
+      "certifier": "entailed",
+      "expected": "entailed",
+      "pass": true,
+      "reference": "entailed"
+    },
+    {
+      "case": "negation derived, query positive",
+      "certifier": "contradicted",
+      "expected": "contradicted",
+      "pass": true,
+      "reference": "contradicted"
+    },
+    {
+      "case": "predicate absent from the theory entirely",
+      "certifier": "undetermined",
+      "expected": "undetermined",
+      "pass": true,
+      "reference": "undetermined"
+    },
+    {
+      "case": "query about an entity absent from the theory",
+      "certifier": "undetermined",
+      "expected": "undetermined",
+      "pass": true,
+      "reference": "undetermined"
+    },
+    {
+      "case": "rule fires only for the entity that satisfies it",
+      "certifier": "undetermined",
+      "expected": "undetermined",
+      "pass": true,
+      "reference": "undetermined"
+    },
+    {
+      "case": "theory deriving an atom and its negation is rejected, not labelled",
+      "conflicts": 1,
+      "consistent": false,
+      "pass": true
+    },
+    {
+      "case": "round cap is loud",
+      "pass": true,
+      "saturated": false
+    }
+  ],
+  "all_passed": true,
+  "differential": {
+    "binary_certificate_factorial_b15": {
+      "agree": 192,
+      "caveat": "The reference implementation uses a deliberately different algorithm (exhaustive ground instantiation + naive fixpoint vs bindings-driven chaining) but encodes the SAME intended semantics, so it catches implementation error, not a misconception about the semantics.",
+      "comparison": "three-way: certifier == independent reference == sealed authority verdict",
+      "rate": 1.0,
+      "total": 192
+    },
+    "multimodel_three_class_b16": {
+      "agree": 192,
+      "caveat": "The reference implementation uses a deliberately different algorithm (exhaustive ground instantiation + naive fixpoint vs bindings-driven chaining) but encodes the SAME intended semantics, so it catches implementation error, not a misconception about the semantics.",
+      "comparison": "three-way: certifier == independent reference == sealed authority verdict",
+      "rate": 1.0,
+      "total": 192
+    }
+  },
+  "version": "closure-adversarial-and-differential-v1"
+}
