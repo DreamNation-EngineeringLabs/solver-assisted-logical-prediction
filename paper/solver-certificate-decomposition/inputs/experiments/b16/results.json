@@ -1,0 +1,1560 @@
+{
+  "chance_balanced_accuracy": 0.3333333333333333,
+  "criterion_note": "prespecified >=80% undetermined recall is INVALID (gamed by all-Unknown collapse); corrected criterion is min per-class recall >= 0.50, applied post hoc",
+  "holm_primary_across_models": {
+    "gemma3_4b": 1.1641532182693481e-09,
+    "llama3p2_1b": 1.0,
+    "llama3p2_3b": 1.4901161193847656e-08,
+    "olmo2_1b": 1.0,
+    "phi4_mini": 8.381903171539307e-09,
+    "qwen2p5_0p5b": 0.15625,
+    "qwen2p5_1p5b": 1.0,
+    "qwen2p5_3b": 0.005859375,
+    "qwen2p5_7b": 1.0,
+    "smollm2_1p7b": 8.344650268554688e-07
+  },
+  "models": {
+    "gemma3_4b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.3333333333333333,
+            "Unknown": 0.3333333333333333,
+            "Yes": 0.3333333333333333
+          }
+        },
+        "full": {
+          "accuracy": 0.9635416666666666,
+          "balanced_accuracy": 0.9635416666666666,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->Yes": 64,
+            "undetermined->No": 6,
+            "undetermined->Unknown": 57,
+            "undetermined->Yes": 1
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 0.890625
+          },
+          "response_distribution": {
+            "No": 0.3645833333333333,
+            "Unknown": 0.296875,
+            "Yes": 0.3385416666666667
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.5104166666666666,
+          "balanced_accuracy": 0.5104166666666666,
+          "binary_subset_criterion": 1.952370342717324,
+          "binary_subset_d_prime": 0.94165170458244,
+          "confusion": {
+            "contradicted->No": 45,
+            "contradicted->Unknown": 19,
+            "entailed->No": 27,
+            "entailed->Unknown": 33,
+            "entailed->Yes": 4,
+            "undetermined->No": 12,
+            "undetermined->Unknown": 49,
+            "undetermined->Yes": 3
+          },
+          "per_class_recall": {
+            "contradicted": 0.703125,
+            "entailed": 0.0625,
+            "undetermined": 0.765625
+          },
+          "response_distribution": {
+            "No": 0.4375,
+            "Unknown": 0.5260416666666666,
+            "Yes": 0.036458333333333336
+          }
+        },
+        "none": {
+          "accuracy": 0.6354166666666666,
+          "balanced_accuracy": 0.6354166666666666,
+          "binary_subset_criterion": 1.1536231852353998,
+          "binary_subset_d_prime": 2.5391460195462883,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->No": 27,
+            "entailed->Unknown": 2,
+            "entailed->Yes": 35,
+            "undetermined->No": 27,
+            "undetermined->Unknown": 23,
+            "undetermined->Yes": 14
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 0.546875,
+            "undetermined": 0.359375
+          },
+          "response_distribution": {
+            "No": 0.6145833333333334,
+            "Unknown": 0.13020833333333334,
+            "Yes": 0.2552083333333333
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.84375,
+          "balanced_accuracy": 0.84375,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->Yes": 64,
+            "undetermined->No": 23,
+            "undetermined->Unknown": 34,
+            "undetermined->Yes": 7
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 0.53125
+          },
+          "response_distribution": {
+            "No": 0.453125,
+            "Unknown": 0.17708333333333334,
+            "Yes": 0.3697916666666667
+          }
+        }
+      },
+      "degenerate": false,
+      "max_response_share": 0.3645833333333333,
+      "min_per_class_recall": 0.890625,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.390625,
+          0.640625
+        ],
+        "exact_two_sided_mcnemar_p": 1.1641532182693481e-10,
+        "left_correct": 57,
+        "paired_risk_difference": 0.53125,
+        "paired_table": {
+          "both_correct": 23,
+          "left_only_correct": 34,
+          "neither_correct": 7,
+          "right_only_correct": 0
+        },
+        "right_correct": 23
+      },
+      "relay_verdict_corrected": "viable_relays",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          -0.21875,
+          -0.0625
+        ],
+        "exact_two_sided_mcnemar_p": 0.015625,
+        "left_correct": 57,
+        "paired_risk_difference": -0.109375,
+        "paired_table": {
+          "both_correct": 57,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 7
+        },
+        "right_correct": 64
+      },
+      "undetermined_accuracy_full": 0.890625,
+      "viable_substrate": true
+    },
+    "llama3p2_1b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.578125,
+          "balanced_accuracy": 0.578125,
+          "binary_subset_criterion": 0.5287824733076056,
+          "binary_subset_d_prime": 2.4800851304222005,
+          "confusion": {
+            "contradicted->Unknown": 62,
+            "contradicted->Yes": 2,
+            "entailed->Unknown": 15,
+            "entailed->Yes": 49,
+            "undetermined->Unknown": 62,
+            "undetermined->Yes": 2
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.765625,
+            "undetermined": 0.96875
+          },
+          "response_distribution": {
+            "Unknown": 0.7239583333333334,
+            "Yes": 0.2760416666666667
+          }
+        },
+        "full": {
+          "accuracy": 0.3697916666666667,
+          "balanced_accuracy": 0.3697916666666667,
+          "binary_subset_criterion": 1.4836023704128152,
+          "binary_subset_d_prime": 0.5704453362117814,
+          "confusion": {
+            "contradicted->Unknown": 62,
+            "contradicted->Yes": 2,
+            "entailed->Unknown": 57,
+            "entailed->Yes": 7,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.109375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.953125,
+            "Yes": 0.046875
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3385416666666667,
+          "balanced_accuracy": 0.3385416666666667,
+          "binary_subset_criterion": 2.2085899004485436,
+          "binary_subset_d_prime": 0.4292125891200007,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 63,
+            "entailed->Yes": 1,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.015625,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9947916666666666,
+            "Yes": 0.005208333333333333
+          }
+        },
+        "none": {
+          "accuracy": 0.3385416666666667,
+          "balanced_accuracy": 0.3385416666666667,
+          "binary_subset_criterion": 1.7377640481573235,
+          "binary_subset_d_prime": 0.5124391154624393,
+          "confusion": {
+            "contradicted->Unknown": 63,
+            "contradicted->Yes": 1,
+            "entailed->Unknown": 60,
+            "entailed->Yes": 4,
+            "undetermined->Unknown": 61,
+            "undetermined->Yes": 3
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.0625,
+            "undetermined": 0.953125
+          },
+          "response_distribution": {
+            "Unknown": 0.9583333333333334,
+            "Yes": 0.041666666666666664
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.3645833333333333,
+          "balanced_accuracy": 0.3645833333333333,
+          "binary_subset_criterion": 1.8523738802765721,
+          "binary_subset_d_prime": 1.1416446294639433,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 58,
+            "entailed->Yes": 6,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.09375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.96875,
+            "Yes": 0.03125
+          }
+        }
+      },
+      "degenerate": true,
+      "max_response_share": 0.953125,
+      "min_per_class_recall": 0.0,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.0,
+          0.09375
+        ],
+        "exact_two_sided_mcnemar_p": 0.25,
+        "left_correct": 64,
+        "paired_risk_difference": 0.046875,
+        "paired_table": {
+          "both_correct": 61,
+          "left_only_correct": 3,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 61
+      },
+      "relay_verdict_corrected": "collapsed",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.0,
+          0.078125
+        ],
+        "exact_two_sided_mcnemar_p": 0.5,
+        "left_correct": 64,
+        "paired_risk_difference": 0.03125,
+        "paired_table": {
+          "both_correct": 62,
+          "left_only_correct": 2,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 62
+      },
+      "undetermined_accuracy_full": 1.0,
+      "viable_substrate": false
+    },
+    "llama3p2_3b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.671875,
+          "balanced_accuracy": 0.671875,
+          "binary_subset_criterion": -0.21460629456000102,
+          "binary_subset_d_prime": 4.417179800897088,
+          "confusion": {
+            "contradicted->No": 1,
+            "contradicted->Unknown": 62,
+            "contradicted->Yes": 1,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.65625,
+            "Yes": 0.3385416666666667
+          }
+        },
+        "full": {
+          "accuracy": 0.8072916666666666,
+          "balanced_accuracy": 0.8072916666666666,
+          "binary_subset_criterion": -0.5708223147319723,
+          "binary_subset_d_prime": 3.704747760553146,
+          "confusion": {
+            "contradicted->No": 27,
+            "contradicted->Unknown": 31,
+            "contradicted->Yes": 6,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.421875,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.140625,
+            "Unknown": 0.4947916666666667,
+            "Yes": 0.3645833333333333
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.4322916666666667,
+          "balanced_accuracy": 0.4322916666666667,
+          "binary_subset_criterion": 0.7477578156505715,
+          "binary_subset_d_prime": 2.0421344457362687,
+          "confusion": {
+            "contradicted->No": 1,
+            "contradicted->Unknown": 61,
+            "contradicted->Yes": 2,
+            "entailed->Unknown": 25,
+            "entailed->Yes": 39,
+            "undetermined->Unknown": 43,
+            "undetermined->Yes": 21
+          },
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 0.609375,
+            "undetermined": 0.671875
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.671875,
+            "Yes": 0.3229166666666667
+          }
+        },
+        "none": {
+          "accuracy": 0.4583333333333333,
+          "balanced_accuracy": 0.4583333333333333,
+          "binary_subset_criterion": 0.3903352031362544,
+          "binary_subset_d_prime": 2.756979670764903,
+          "confusion": {
+            "contradicted->Unknown": 62,
+            "contradicted->Yes": 2,
+            "entailed->Unknown": 10,
+            "entailed->Yes": 54,
+            "undetermined->Unknown": 34,
+            "undetermined->Yes": 30
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.84375,
+            "undetermined": 0.53125
+          },
+          "response_distribution": {
+            "Unknown": 0.5520833333333334,
+            "Yes": 0.4479166666666667
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.5520833333333334,
+          "balanced_accuracy": 0.5520833333333334,
+          "binary_subset_criterion": -0.524258250410285,
+          "binary_subset_d_prime": 3.7978758891965203,
+          "confusion": {
+            "contradicted->No": 1,
+            "contradicted->Unknown": 58,
+            "contradicted->Yes": 5,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 41,
+            "undetermined->Yes": 23
+          },
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 1.0,
+            "undetermined": 0.640625
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.515625,
+            "Yes": 0.4791666666666667
+          }
+        }
+      },
+      "degenerate": false,
+      "max_response_share": 0.4947916666666667,
+      "min_per_class_recall": 0.421875,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.328125,
+          0.578125
+        ],
+        "exact_two_sided_mcnemar_p": 1.862645149230957e-09,
+        "left_correct": 64,
+        "paired_risk_difference": 0.46875,
+        "paired_table": {
+          "both_correct": 34,
+          "left_only_correct": 30,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 34
+      },
+      "relay_verdict_corrected": "discriminating_but_below_floor",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.0,
+          0.0
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "undetermined_accuracy_full": 1.0,
+      "viable_substrate": false
+    },
+    "olmo2_1b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.5364583333333334,
+          "balanced_accuracy": 0.5364583333333334,
+          "binary_subset_criterion": 1.0749433938954907,
+          "binary_subset_d_prime": 2.6965056022261065,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 25,
+            "entailed->Yes": 39,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.609375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.796875,
+            "Yes": 0.203125
+          }
+        },
+        "full": {
+          "accuracy": 0.421875,
+          "balanced_accuracy": 0.421875,
+          "binary_subset_criterion": 1.5191686498022587,
+          "binary_subset_d_prime": 1.8080550904125703,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 47,
+            "entailed->Yes": 17,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.265625,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9114583333333334,
+            "Yes": 0.08854166666666667
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": 2.0960106167636248,
+          "binary_subset_d_prime": 0.654371156489838,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 62,
+            "entailed->Yes": 2,
+            "undetermined->Unknown": 62,
+            "undetermined->Yes": 2
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.03125,
+            "undetermined": 0.96875
+          },
+          "response_distribution": {
+            "Unknown": 0.9791666666666666,
+            "Yes": 0.020833333333333332
+          }
+        },
+        "none": {
+          "accuracy": 0.359375,
+          "balanced_accuracy": 0.359375,
+          "binary_subset_criterion": 1.7729792465997427,
+          "binary_subset_d_prime": 1.3004338968176024,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 56,
+            "entailed->Yes": 8,
+            "undetermined->Unknown": 61,
+            "undetermined->Yes": 3
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.125,
+            "undetermined": 0.953125
+          },
+          "response_distribution": {
+            "Unknown": 0.9427083333333334,
+            "Yes": 0.057291666666666664
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.3489583333333333,
+          "balanced_accuracy": 0.3489583333333333,
+          "binary_subset_criterion": 2.015924438780015,
+          "binary_subset_d_prime": 0.8145435124570581,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 61,
+            "entailed->Yes": 3,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.046875,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.984375,
+            "Yes": 0.015625
+          }
+        }
+      },
+      "degenerate": true,
+      "max_response_share": 0.9114583333333334,
+      "min_per_class_recall": 0.0,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.0,
+          0.09375
+        ],
+        "exact_two_sided_mcnemar_p": 0.25,
+        "left_correct": 64,
+        "paired_risk_difference": 0.046875,
+        "paired_table": {
+          "both_correct": 61,
+          "left_only_correct": 3,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 61
+      },
+      "relay_verdict_corrected": "collapsed",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.0,
+          0.0
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "undetermined_accuracy_full": 1.0,
+      "viable_substrate": false
+    },
+    "phi4_mini": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.6822916666666666,
+          "balanced_accuracy": 0.6822916666666666,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 3,
+            "contradicted->Unknown": 61,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.046875,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.015625,
+            "Unknown": 0.6510416666666666,
+            "Yes": 0.3333333333333333
+          }
+        },
+        "full": {
+          "accuracy": 0.90625,
+          "balanced_accuracy": 0.90625,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 46,
+            "contradicted->Unknown": 18,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.71875,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.23958333333333334,
+            "Unknown": 0.4270833333333333,
+            "Yes": 0.3333333333333333
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3958333333333333,
+          "balanced_accuracy": 0.3958333333333333,
+          "binary_subset_criterion": 1.4737983538582924,
+          "binary_subset_d_prime": 1.898795682300503,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 45,
+            "entailed->Yes": 19,
+            "undetermined->Unknown": 57,
+            "undetermined->Yes": 7
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.296875,
+            "undetermined": 0.890625
+          },
+          "response_distribution": {
+            "Unknown": 0.8645833333333334,
+            "Yes": 0.13541666666666666
+          }
+        },
+        "none": {
+          "accuracy": 0.4479166666666667,
+          "balanced_accuracy": 0.4479166666666667,
+          "binary_subset_criterion": 0.34074892854410344,
+          "binary_subset_d_prime": 2.5358075080147646,
+          "confusion": {
+            "contradicted->Unknown": 61,
+            "contradicted->Yes": 3,
+            "entailed->Unknown": 11,
+            "entailed->Yes": 53,
+            "undetermined->Unknown": 33,
+            "undetermined->Yes": 31
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.828125,
+            "undetermined": 0.515625
+          },
+          "response_distribution": {
+            "Unknown": 0.546875,
+            "Yes": 0.453125
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.71875,
+          "balanced_accuracy": 0.71875,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 21,
+            "contradicted->Unknown": 43,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 53,
+            "undetermined->Yes": 11
+          },
+          "per_class_recall": {
+            "contradicted": 0.328125,
+            "entailed": 1.0,
+            "undetermined": 0.828125
+          },
+          "response_distribution": {
+            "No": 0.109375,
+            "Unknown": 0.5,
+            "Yes": 0.390625
+          }
+        }
+      },
+      "degenerate": false,
+      "max_response_share": 0.4270833333333333,
+      "min_per_class_recall": 0.71875,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.34375,
+          0.59375
+        ],
+        "exact_two_sided_mcnemar_p": 9.313225746154785e-10,
+        "left_correct": 64,
+        "paired_risk_difference": 0.484375,
+        "paired_table": {
+          "both_correct": 33,
+          "left_only_correct": 31,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 33
+      },
+      "relay_verdict_corrected": "viable_relays",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.0,
+          0.0
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "undetermined_accuracy_full": 1.0,
+      "viable_substrate": true
+    },
+    "qwen2p5_0p5b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.4114583333333333,
+          "balanced_accuracy": 0.4114583333333333,
+          "binary_subset_criterion": 1.4737983538582924,
+          "binary_subset_d_prime": 1.898795682300503,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 45,
+            "entailed->Yes": 19,
+            "undetermined->Unknown": 60,
+            "undetermined->Yes": 4
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.296875,
+            "undetermined": 0.9375
+          },
+          "response_distribution": {
+            "Unknown": 0.8802083333333334,
+            "Yes": 0.11979166666666667
+          }
+        },
+        "full": {
+          "accuracy": 0.6354166666666666,
+          "balanced_accuracy": 0.6354166666666666,
+          "binary_subset_criterion": -1.3191244059037959,
+          "binary_subset_d_prime": 0.8994012652298198,
+          "confusion": {
+            "contradicted->Unknown": 12,
+            "contradicted->Yes": 52,
+            "entailed->Unknown": 2,
+            "entailed->Yes": 62,
+            "undetermined->Unknown": 60,
+            "undetermined->Yes": 4
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.96875,
+            "undetermined": 0.9375
+          },
+          "response_distribution": {
+            "Unknown": 0.3854166666666667,
+            "Yes": 0.6145833333333334
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3489583333333333,
+          "balanced_accuracy": 0.3489583333333333,
+          "binary_subset_criterion": -0.1744495328366592,
+          "binary_subset_d_prime": 0.039157219174533936,
+          "confusion": {
+            "contradicted->Unknown": 28,
+            "contradicted->Yes": 36,
+            "entailed->Unknown": 27,
+            "entailed->Yes": 37,
+            "undetermined->Unknown": 30,
+            "undetermined->Yes": 34
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.578125,
+            "undetermined": 0.46875
+          },
+          "response_distribution": {
+            "Unknown": 0.4427083333333333,
+            "Yes": 0.5572916666666666
+          }
+        },
+        "none": {
+          "accuracy": 0.3541666666666667,
+          "balanced_accuracy": 0.3541666666666667,
+          "binary_subset_criterion": 0.6655137630652127,
+          "binary_subset_d_prime": -0.19265802764175266,
+          "confusion": {
+            "contradicted->Unknown": 46,
+            "contradicted->Yes": 18,
+            "entailed->Unknown": 50,
+            "entailed->Yes": 14,
+            "undetermined->Unknown": 54,
+            "undetermined->Yes": 10
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.21875,
+            "undetermined": 0.84375
+          },
+          "response_distribution": {
+            "Unknown": 0.78125,
+            "Yes": 0.21875
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.4322916666666667,
+          "balanced_accuracy": 0.4322916666666667,
+          "binary_subset_criterion": -1.0945671079908792,
+          "binary_subset_d_prime": 0.5602251723941922,
+          "confusion": {
+            "contradicted->Unknown": 13,
+            "contradicted->Yes": 51,
+            "entailed->Unknown": 5,
+            "entailed->Yes": 59,
+            "undetermined->Unknown": 24,
+            "undetermined->Yes": 40
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.921875,
+            "undetermined": 0.375
+          },
+          "response_distribution": {
+            "Unknown": 0.21875,
+            "Yes": 0.78125
+          }
+        }
+      },
+      "degenerate": true,
+      "max_response_share": 0.6145833333333334,
+      "min_per_class_recall": 0.0,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.03125,
+          0.171875
+        ],
+        "exact_two_sided_mcnemar_p": 0.03125,
+        "left_correct": 60,
+        "paired_risk_difference": 0.09375,
+        "paired_table": {
+          "both_correct": 54,
+          "left_only_correct": 6,
+          "neither_correct": 4,
+          "right_only_correct": 0
+        },
+        "right_correct": 54
+      },
+      "relay_verdict_corrected": "collapsed",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          -0.078125,
+          0.046875
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 60,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 58,
+          "left_only_correct": 2,
+          "neither_correct": 2,
+          "right_only_correct": 2
+        },
+        "right_correct": 60
+      },
+      "undetermined_accuracy_full": 0.9375,
+      "viable_substrate": false
+    },
+    "qwen2p5_1p5b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.4322916666666667,
+          "balanced_accuracy": 0.4322916666666667,
+          "binary_subset_criterion": 1.4737983538582924,
+          "binary_subset_d_prime": 1.898795682300503,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 45,
+            "entailed->Yes": 19,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.296875,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9010416666666666,
+            "Yes": 0.09895833333333333
+          }
+        },
+        "full": {
+          "accuracy": 0.3697916666666667,
+          "balanced_accuracy": 0.3697916666666667,
+          "binary_subset_criterion": 1.810787948657734,
+          "binary_subset_d_prime": 1.2248164927016194,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 57,
+            "entailed->Yes": 7,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.109375,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.9635416666666666,
+            "Yes": 0.036458333333333336
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": 2.423196195008544,
+          "binary_subset_d_prime": 0.0,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 1.0
+          }
+        },
+        "none": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": 2.423196195008544,
+          "binary_subset_d_prime": 0.0,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 1.0
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.3489583333333333,
+          "balanced_accuracy": 0.3489583333333333,
+          "binary_subset_criterion": 2.015924438780015,
+          "binary_subset_d_prime": 0.8145435124570581,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 61,
+            "entailed->Yes": 3,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.046875,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "Unknown": 0.984375,
+            "Yes": 0.015625
+          }
+        }
+      },
+      "degenerate": true,
+      "max_response_share": 0.9635416666666666,
+      "min_per_class_recall": 0.0,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.0,
+          0.0
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "relay_verdict_corrected": "collapsed",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.0,
+          0.0
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "undetermined_accuracy_full": 1.0,
+      "viable_substrate": false
+    },
+    "qwen2p5_3b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.9635416666666666,
+          "balanced_accuracy": 0.9635416666666666,
+          "binary_subset_criterion": 0.21460629456000058,
+          "binary_subset_d_prime": 4.417179800897086,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->Unknown": 1,
+            "entailed->Yes": 63,
+            "undetermined->No": 6,
+            "undetermined->Unknown": 58
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 0.984375,
+            "undetermined": 0.90625
+          },
+          "response_distribution": {
+            "No": 0.3645833333333333,
+            "Unknown": 0.3072916666666667,
+            "Yes": 0.328125
+          }
+        },
+        "full": {
+          "accuracy": 0.90625,
+          "balanced_accuracy": 0.90625,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->Yes": 64,
+            "undetermined->No": 18,
+            "undetermined->Unknown": 46
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 1.0,
+            "undetermined": 0.71875
+          },
+          "response_distribution": {
+            "No": 0.4270833333333333,
+            "Unknown": 0.23958333333333334,
+            "Yes": 0.3333333333333333
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.390625,
+          "balanced_accuracy": 0.390625,
+          "binary_subset_criterion": 2.423196195008544,
+          "binary_subset_d_prime": 0.0,
+          "confusion": {
+            "contradicted->No": 18,
+            "contradicted->Unknown": 46,
+            "entailed->No": 8,
+            "entailed->Unknown": 56,
+            "undetermined->No": 7,
+            "undetermined->Unknown": 57
+          },
+          "per_class_recall": {
+            "contradicted": 0.28125,
+            "entailed": 0.0,
+            "undetermined": 0.890625
+          },
+          "response_distribution": {
+            "No": 0.171875,
+            "Unknown": 0.828125
+          }
+        },
+        "none": {
+          "accuracy": 0.4114583333333333,
+          "balanced_accuracy": 0.4114583333333333,
+          "binary_subset_criterion": 2.423196195008544,
+          "binary_subset_d_prime": 0.0,
+          "confusion": {
+            "contradicted->No": 46,
+            "contradicted->Unknown": 18,
+            "entailed->No": 43,
+            "entailed->Unknown": 21,
+            "undetermined->No": 31,
+            "undetermined->Unknown": 33
+          },
+          "per_class_recall": {
+            "contradicted": 0.71875,
+            "entailed": 0.0,
+            "undetermined": 0.515625
+          },
+          "response_distribution": {
+            "No": 0.625,
+            "Unknown": 0.375
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.7395833333333334,
+          "balanced_accuracy": 0.7395833333333334,
+          "binary_subset_criterion": 1.0137354495970283,
+          "binary_subset_d_prime": 2.818921490823031,
+          "confusion": {
+            "contradicted->No": 64,
+            "entailed->No": 11,
+            "entailed->Unknown": 11,
+            "entailed->Yes": 42,
+            "undetermined->No": 28,
+            "undetermined->Unknown": 36
+          },
+          "per_class_recall": {
+            "contradicted": 1.0,
+            "entailed": 0.65625,
+            "undetermined": 0.5625
+          },
+          "response_distribution": {
+            "No": 0.5364583333333334,
+            "Unknown": 0.24479166666666666,
+            "Yes": 0.21875
+          }
+        }
+      },
+      "degenerate": false,
+      "max_response_share": 0.4270833333333333,
+      "min_per_class_recall": 0.71875,
+      "prespecified_relay_verdict": "partial",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.09375,
+          0.296875
+        ],
+        "exact_two_sided_mcnemar_p": 0.0009765625,
+        "left_correct": 46,
+        "paired_risk_difference": 0.203125,
+        "paired_table": {
+          "both_correct": 32,
+          "left_only_correct": 14,
+          "neither_correct": 17,
+          "right_only_correct": 1
+        },
+        "right_correct": 33
+      },
+      "relay_verdict_corrected": "viable_partial_relay",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          -0.328125,
+          -0.109375
+        ],
+        "exact_two_sided_mcnemar_p": 0.0018310546875,
+        "left_correct": 46,
+        "paired_risk_difference": -0.1875,
+        "paired_table": {
+          "both_correct": 45,
+          "left_only_correct": 1,
+          "neither_correct": 5,
+          "right_only_correct": 13
+        },
+        "right_correct": 58
+      },
+      "undetermined_accuracy_full": 0.71875,
+      "viable_substrate": true
+    },
+    "qwen2p5_7b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.9791666666666666,
+          "balanced_accuracy": 0.9791666666666666,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 60,
+            "contradicted->Unknown": 4,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.9375,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.3125,
+            "Unknown": 0.3541666666666667,
+            "Yes": 0.3333333333333333
+          }
+        },
+        "full": {
+          "accuracy": 0.7135416666666666,
+          "balanced_accuracy": 0.7135416666666666,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 9,
+            "contradicted->Unknown": 55,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.140625,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.046875,
+            "Unknown": 0.6197916666666666,
+            "Yes": 0.3333333333333333
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": 2.2085899004485436,
+          "binary_subset_d_prime": 0.4292125891200007,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 63,
+            "entailed->Yes": 1,
+            "undetermined->Unknown": 63,
+            "undetermined->Yes": 1
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.015625,
+            "undetermined": 0.984375
+          },
+          "response_distribution": {
+            "Unknown": 0.9895833333333334,
+            "Yes": 0.010416666666666666
+          }
+        },
+        "none": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": 2.2085899004485436,
+          "binary_subset_d_prime": 0.4292125891200007,
+          "confusion": {
+            "contradicted->Unknown": 64,
+            "entailed->Unknown": 63,
+            "entailed->Yes": 1,
+            "undetermined->Unknown": 63,
+            "undetermined->Yes": 1
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 0.015625,
+            "undetermined": 0.984375
+          },
+          "response_distribution": {
+            "Unknown": 0.9895833333333334,
+            "Yes": 0.010416666666666666
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.671875,
+          "balanced_accuracy": 0.671875,
+          "binary_subset_criterion": -6.661338147750939e-16,
+          "binary_subset_d_prime": 4.846392390017089,
+          "confusion": {
+            "contradicted->No": 1,
+            "contradicted->Unknown": 63,
+            "entailed->Yes": 64,
+            "undetermined->Unknown": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.015625,
+            "entailed": 1.0,
+            "undetermined": 1.0
+          },
+          "response_distribution": {
+            "No": 0.005208333333333333,
+            "Unknown": 0.6614583333333334,
+            "Yes": 0.3333333333333333
+          }
+        }
+      },
+      "degenerate": true,
+      "max_response_share": 0.6197916666666666,
+      "min_per_class_recall": 0.140625,
+      "prespecified_relay_verdict": "relays",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.0,
+          0.046875
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.015625,
+        "paired_table": {
+          "both_correct": 63,
+          "left_only_correct": 1,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 63
+      },
+      "relay_verdict_corrected": "collapsed",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.0,
+          0.0
+        ],
+        "exact_two_sided_mcnemar_p": 1.0,
+        "left_correct": 64,
+        "paired_risk_difference": 0.0,
+        "paired_table": {
+          "both_correct": 64,
+          "left_only_correct": 0,
+          "neither_correct": 0,
+          "right_only_correct": 0
+        },
+        "right_correct": 64
+      },
+      "undetermined_accuracy_full": 1.0,
+      "viable_substrate": false
+    },
+    "smollm2_1p7b": {
+      "arms": {
+        "conclusion_only": {
+          "accuracy": 0.453125,
+          "balanced_accuracy": 0.453125,
+          "binary_subset_criterion": -1.388772882477237,
+          "binary_subset_d_prime": 2.0688466250626165,
+          "confusion": {
+            "contradicted->No": 23,
+            "contradicted->Yes": 41,
+            "entailed->Yes": 64,
+            "undetermined->No": 1,
+            "undetermined->Yes": 63
+          },
+          "per_class_recall": {
+            "contradicted": 0.359375,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "No": 0.125,
+            "Yes": 0.875
+          }
+        },
+        "full": {
+          "accuracy": 0.6927083333333334,
+          "balanced_accuracy": 0.6927083333333334,
+          "binary_subset_criterion": -0.9493978411502522,
+          "binary_subset_d_prime": 2.947596707716586,
+          "confusion": {
+            "contradicted->No": 45,
+            "contradicted->Yes": 19,
+            "entailed->Yes": 64,
+            "undetermined->No": 37,
+            "undetermined->Unknown": 24,
+            "undetermined->Yes": 3
+          },
+          "per_class_recall": {
+            "contradicted": 0.703125,
+            "entailed": 1.0,
+            "undetermined": 0.375
+          },
+          "response_distribution": {
+            "No": 0.4270833333333333,
+            "Unknown": 0.125,
+            "Yes": 0.4479166666666667
+          }
+        },
+        "irrelevant": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": -2.423196195008545,
+          "binary_subset_d_prime": 0.0,
+          "confusion": {
+            "contradicted->Yes": 64,
+            "entailed->Yes": 64,
+            "undetermined->Yes": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "Yes": 1.0
+          }
+        },
+        "none": {
+          "accuracy": 0.3333333333333333,
+          "balanced_accuracy": 0.3333333333333333,
+          "binary_subset_criterion": -2.423196195008545,
+          "binary_subset_d_prime": 0.0,
+          "confusion": {
+            "contradicted->Yes": 64,
+            "entailed->Yes": 64,
+            "undetermined->Yes": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.0,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "Yes": 1.0
+          }
+        },
+        "proof_prefix": {
+          "accuracy": 0.3958333333333333,
+          "balanced_accuracy": 0.3958333333333333,
+          "binary_subset_criterion": -1.6463099841487157,
+          "binary_subset_d_prime": 1.5537724217196591,
+          "confusion": {
+            "contradicted->No": 12,
+            "contradicted->Yes": 52,
+            "entailed->Yes": 64,
+            "undetermined->Yes": 64
+          },
+          "per_class_recall": {
+            "contradicted": 0.1875,
+            "entailed": 1.0,
+            "undetermined": 0.0
+          },
+          "response_distribution": {
+            "No": 0.0625,
+            "Yes": 0.9375
+          }
+        }
+      },
+      "degenerate": false,
+      "max_response_share": 0.4479166666666667,
+      "min_per_class_recall": 0.375,
+      "prespecified_relay_verdict": "partial",
+      "primary_full_minus_none_undetermined": {
+        "bca_95": [
+          0.25,
+          0.484375
+        ],
+        "exact_two_sided_mcnemar_p": 1.1920928955078125e-07,
+        "left_correct": 24,
+        "paired_risk_difference": 0.375,
+        "paired_table": {
+          "both_correct": 0,
+          "left_only_correct": 24,
+          "neither_correct": 40,
+          "right_only_correct": 0
+        },
+        "right_correct": 0
+      },
+      "relay_verdict_corrected": "discriminating_but_below_floor",
+      "secondary_full_minus_conclusion_only_undetermined": {
+        "bca_95": [
+          0.25,
+          0.484375
+        ],
+        "exact_two_sided_mcnemar_p": 1.1920928955078125e-07,
+        "left_correct": 24,
+        "paired_risk_difference": 0.375,
+        "paired_table": {
+          "both_correct": 0,
+          "left_only_correct": 24,
+          "neither_correct": 40,
+          "right_only_correct": 0
+        },
+        "right_correct": 0
+      },
+      "undetermined_accuracy_full": 0.375,
+      "viable_substrate": false
+    }
+  },
+  "n": 192,
+  "version": "multimodel-three-class-b16-analysis-v1"
+}

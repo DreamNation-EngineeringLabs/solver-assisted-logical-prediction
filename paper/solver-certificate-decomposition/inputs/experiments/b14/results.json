@@ -1,0 +1,339 @@
+{
+  "analysis_class": "POST HOC - not prespecified in the b14 protocol",
+  "authority_source": "reconstructed from task_id class token; validated against published per-arm counts",
+  "bootstrap": {
+    "method": "paired BCa",
+    "resamples": 100000,
+    "seed": 2026090134
+  },
+  "class_strata": {
+    "contradicted": {
+      "conclusion_only": 96,
+      "full": 96,
+      "irrelevant": 87,
+      "n": 96,
+      "none": 82,
+      "proof_prefix": 96
+    },
+    "entailed": {
+      "conclusion_only": 80,
+      "full": 95,
+      "irrelevant": 9,
+      "n": 96,
+      "none": 9,
+      "proof_prefix": 71
+    }
+  },
+  "contrasts_all_pairs": {
+    "conclusion_only__minus__full": {
+      "bca_95": [
+        -0.130208,
+        -0.052083
+      ],
+      "exact_two_sided_mcnemar_p": 6.103515625e-05,
+      "left": "conclusion_only",
+      "left_correct": 176,
+      "paired_risk_difference": -0.078125,
+      "paired_table": {
+        "both_correct": 176,
+        "left_only_correct": 0,
+        "neither_correct": 1,
+        "right_only_correct": 15
+      },
+      "right": "full",
+      "right_correct": 191
+    },
+    "conclusion_only__minus__proof_prefix": {
+      "bca_95": [
+        0.0,
+        0.088542
+      ],
+      "exact_two_sided_mcnemar_p": 0.0783538818359375,
+      "left": "conclusion_only",
+      "left_correct": 176,
+      "paired_risk_difference": 0.046875,
+      "paired_table": {
+        "both_correct": 161,
+        "left_only_correct": 15,
+        "neither_correct": 10,
+        "right_only_correct": 6
+      },
+      "right": "proof_prefix",
+      "right_correct": 167
+    },
+    "irrelevant__minus__conclusion_only": {
+      "bca_95": [
+        -0.494792,
+        -0.354167
+      ],
+      "exact_two_sided_mcnemar_p": 1.6543612251060553e-24,
+      "left": "irrelevant",
+      "left_correct": 96,
+      "paired_risk_difference": -0.4166666666666667,
+      "paired_table": {
+        "both_correct": 96,
+        "left_only_correct": 0,
+        "neither_correct": 16,
+        "right_only_correct": 80
+      },
+      "right": "conclusion_only",
+      "right_correct": 176
+    },
+    "irrelevant__minus__full": {
+      "bca_95": [
+        -0.567708,
+        -0.427083
+      ],
+      "exact_two_sided_mcnemar_p": 5.048709793414476e-29,
+      "left": "irrelevant",
+      "left_correct": 96,
+      "paired_risk_difference": -0.4947916666666667,
+      "paired_table": {
+        "both_correct": 96,
+        "left_only_correct": 0,
+        "neither_correct": 1,
+        "right_only_correct": 95
+      },
+      "right": "full",
+      "right_correct": 191
+    },
+    "irrelevant__minus__proof_prefix": {
+      "bca_95": [
+        -0.447917,
+        -0.302083
+      ],
+      "exact_two_sided_mcnemar_p": 1.5093068328887564e-19,
+      "left": "irrelevant",
+      "left_correct": 96,
+      "paired_risk_difference": -0.3697916666666667,
+      "paired_table": {
+        "both_correct": 94,
+        "left_only_correct": 2,
+        "neither_correct": 23,
+        "right_only_correct": 73
+      },
+      "right": "proof_prefix",
+      "right_correct": 167
+    },
+    "none__minus__conclusion_only": {
+      "bca_95": [
+        -0.520833,
+        -0.380208
+      ],
+      "exact_two_sided_mcnemar_p": 5.169878828456423e-26,
+      "left": "none",
+      "left_correct": 91,
+      "paired_risk_difference": -0.4427083333333333,
+      "paired_table": {
+        "both_correct": 91,
+        "left_only_correct": 0,
+        "neither_correct": 16,
+        "right_only_correct": 85
+      },
+      "right": "conclusion_only",
+      "right_correct": 176
+    },
+    "none__minus__full": {
+      "bca_95": [
+        -0.598958,
+        -0.453125
+      ],
+      "exact_two_sided_mcnemar_p": 1.5777218104420236e-30,
+      "left": "none",
+      "left_correct": 91,
+      "paired_risk_difference": -0.5208333333333334,
+      "paired_table": {
+        "both_correct": 91,
+        "left_only_correct": 0,
+        "neither_correct": 1,
+        "right_only_correct": 100
+      },
+      "right": "full",
+      "right_correct": 191
+    },
+    "none__minus__irrelevant": {
+      "bca_95": [
+        -0.078125,
+        0.015625
+      ],
+      "exact_two_sided_mcnemar_p": 0.4048728942871094,
+      "left": "none",
+      "left_correct": 91,
+      "paired_risk_difference": -0.026041666666666668,
+      "paired_table": {
+        "both_correct": 82,
+        "left_only_correct": 9,
+        "neither_correct": 87,
+        "right_only_correct": 14
+      },
+      "right": "irrelevant",
+      "right_correct": 96
+    },
+    "none__minus__proof_prefix": {
+      "bca_95": [
+        -0.473958,
+        -0.333333
+      ],
+      "exact_two_sided_mcnemar_p": 5.227781471335135e-22,
+      "left": "none",
+      "left_correct": 91,
+      "paired_risk_difference": -0.3958333333333333,
+      "paired_table": {
+        "both_correct": 90,
+        "left_only_correct": 1,
+        "neither_correct": 24,
+        "right_only_correct": 77
+      },
+      "right": "proof_prefix",
+      "right_correct": 167
+    },
+    "proof_prefix__minus__full": {
+      "bca_95": [
+        -0.182292,
+        -0.088542
+      ],
+      "exact_two_sided_mcnemar_p": 1.1920928955078125e-07,
+      "left": "proof_prefix",
+      "left_correct": 167,
+      "paired_risk_difference": -0.125,
+      "paired_table": {
+        "both_correct": 167,
+        "left_only_correct": 0,
+        "neither_correct": 1,
+        "right_only_correct": 24
+      },
+      "right": "full",
+      "right_correct": 191
+    }
+  },
+  "factorial_2x2": {
+    "answer_value_retained_when_state_present": 0.3,
+    "cells": {
+      "minus_answer_minus_state": 96,
+      "minus_answer_plus_state": 167,
+      "no_material_baseline": 91,
+      "plus_answer_minus_state": 176,
+      "plus_answer_plus_state": 191
+    },
+    "diagonal_prespecified_primary": -0.046875,
+    "edges": {
+      "answer_effect_with_state": 0.125,
+      "answer_effect_without_state": 0.4166666666666667,
+      "state_effect_with_answer": 0.078125,
+      "state_effect_without_answer": 0.3697916666666667
+    },
+    "interaction": -0.2916666666666667,
+    "main_effect_answer": 0.27083333333333337,
+    "main_effect_state": 0.22395833333333334,
+    "state_value_retained_when_answer_present": 0.2112676056338028
+  },
+  "holm_adjusted_edge_family": {
+    "conclusion_only__minus__full": 6.103515625e-05,
+    "irrelevant__minus__conclusion_only": 6.617444900424222e-24,
+    "irrelevant__minus__proof_prefix": 4.527920498666269e-19,
+    "proof_prefix__minus__full": 2.384185791015625e-07
+  },
+  "n": 192,
+  "per_arm_correct": {
+    "conclusion_only": 176,
+    "full": 191,
+    "irrelevant": 96,
+    "none": 91,
+    "proof_prefix": 167
+  },
+  "signal_detection": {
+    "_trivial_always_no_baseline": {
+      "accuracy": 0.5,
+      "correct": 96
+    },
+    "conclusion_only": {
+      "criterion_c": 0.8057606800597068,
+      "d_prime": 3.519037234417634,
+      "false_alarm_rate": 0.0,
+      "false_alarms": 0,
+      "hit_rate": 0.8333333333333334,
+      "hits": 80,
+      "n_noise": 96,
+      "n_signal": 96,
+      "yes_rate_overall": 0.4166666666666667
+    },
+    "full": {
+      "criterion_c": 0.20363966955631896,
+      "d_prime": 4.72327925542441,
+      "false_alarm_rate": 0.0,
+      "false_alarms": 0,
+      "hit_rate": 0.9895833333333334,
+      "hits": 95,
+      "n_noise": 96,
+      "n_signal": 96,
+      "yes_rate_overall": 0.4947916666666667
+    },
+    "irrelevant": {
+      "criterion_c": 1.2933897637306984,
+      "d_prime": 0.0,
+      "false_alarm_rate": 0.09375,
+      "false_alarms": 9,
+      "hit_rate": 0.09375,
+      "hits": 9,
+      "n_noise": 96,
+      "n_signal": 96,
+      "yes_rate_overall": 0.09375
+    },
+    "none": {
+      "criterion_c": 1.1660182383527653,
+      "d_prime": -0.2547430507558659,
+      "false_alarm_rate": 0.14583333333333334,
+      "false_alarms": 14,
+      "hit_rate": 0.09375,
+      "hits": 9,
+      "n_noise": 96,
+      "n_signal": 96,
+      "yes_rate_overall": 0.11979166666666667
+    },
+    "proof_prefix": {
+      "criterion_c": 0.9654039256823068,
+      "d_prime": 3.199750743172434,
+      "false_alarm_rate": 0.0,
+      "false_alarms": 0,
+      "hit_rate": 0.7395833333333334,
+      "hits": 71,
+      "n_noise": 96,
+      "n_signal": 96,
+      "yes_rate_overall": 0.3697916666666667
+    }
+  },
+  "status": "post_hoc_reanalysis_of_sealed_b14_no_model_calls",
+  "top_two_margin": {
+    "conclusion_only": {
+      "max": 14.15625,
+      "mean": 6.39990234375,
+      "median": 7.09375,
+      "min": 0.0625
+    },
+    "full": {
+      "max": 17.375,
+      "mean": 10.863444010416666,
+      "median": 11.0,
+      "min": 1.0625
+    },
+    "irrelevant": {
+      "max": 13.625,
+      "mean": 4.126302083333333,
+      "median": 3.5625,
+      "min": 0.0
+    },
+    "none": {
+      "max": 16.359375,
+      "mean": 4.269124348958333,
+      "median": 3.96875,
+      "min": 0.0
+    },
+    "proof_prefix": {
+      "max": 19.25,
+      "mean": 7.806477864583333,
+      "median": 7.6875,
+      "min": 0.125
+    }
+  },
+  "version": "binary-certificate-factorial-b14-posthoc-reanalysis-v1"
+}

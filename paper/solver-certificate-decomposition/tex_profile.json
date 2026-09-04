@@ -1,0 +1,23 @@
+{
+  "available": [
+    "cleveref",
+    "nicefrac",
+    "microtype",
+    "url",
+    "booktabs",
+    "natbib",
+    "hyperref",
+    "fontenc",
+    "times",
+    "lmodern"
+  ],
+  "missing": [],
+  "use_cleveref": true,
+  "use_nicefrac": true,
+  "use_microtype": true,
+  "use_t1_fontenc": true,
+  "tex_binary": "/opt/homebrew/bin/tectonic",
+  "engine": "tectonic",
+  "note": "tectonic resolves packages from CTAN on demand, so the usual pdflatex package probe does not apply. Verified by compiling inputs/template.tex to PDF on 2026-09-04.",
+  "checked_at": "2026-09-04T09:30:37.612806+00:00"
+}

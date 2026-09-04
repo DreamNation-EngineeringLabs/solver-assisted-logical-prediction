@@ -1,0 +1,53 @@
+% Submission template — ICLR-style section skeleton.
+%
+% NOTE ON THE DOCUMENT CLASS: ICLR's official iclr2027_conference.sty is not yet
+% published and is not a CTAN package, so this template uses `article` with
+% settings that approximate the target layout. Swapping in the official style
+% file is a mechanical change once it is released: replace the \documentclass
+% and geometry lines, nothing else.
+\documentclass[10pt]{article}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage{xcolor}
+
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parskip}{2pt}
+
+\title{TITLE}
+\author{Anonymous authors\\Paper under double-blind review}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+ABSTRACT
+\end{abstract}
+
+\section{Introduction}
+\section{Related Work}
+\section{Method}
+\section{Experiments}
+\section{Results}
+\section{Limitations}
+\section{Conclusion}
+
+\section*{Reproducibility Statement}
+
+\section*{AI-Use Statement}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

@@ -1,0 +1,311 @@
+{
+  "plotting_plan": [
+    {
+      "figure_id": "answer_state_factorial",
+      "title": "The five arms of b14 read as a 2x2 of answer evidence and proof state",
+      "plot_type": "plot",
+      "data_source": "experimental_log.md",
+      "objective": "An annotated 2x2 matrix chart (heatmap-style value grid, four cells) of per-arm correct counts \u2014 irrelevant 96, proof_prefix 167, conclusion_only 176, full 191 of 192 \u2014 with the four one-factor edge effects drawn as annotated arrows between cells (+41.67pp, +36.98pp, +12.50pp, +7.81pp) and the prespecified primary drawn as the diagonal it is (-4.69pp, p=0.078). Shows why the original null attributes to neither factor.",
+      "aspect_ratio": "4:3"
+    },
+    {
+      "figure_id": "arm_decomposition",
+      "title": "Ten matched arms: accuracy and sensitivity, with the validity/surface decomposition",
+      "plot_type": "plot",
+      "data_source": "experimental_log.md",
+      "objective": "A paired horizontal bar chart, two panels sharing arm order. Left panel: correct on the entailed subset (of 96) per arm. Right panel: d' per arm, signed, so misleading at -4.363 reads against full at 5.131. Decomposition annotated beneath: validity +60.4pp, surface +1.0pp, share 98.3%.",
+      "aspect_ratio": "16:9"
+    },
+    {
+      "figure_id": "substrate_size_curve",
+      "title": "Substrate viability across ten models",
+      "plot_type": "plot",
+      "data_source": "experimental_log.md",
+      "objective": "A dumbbell chart, one row per model ordered by parameter count, connecting balanced accuracy with no solver material to balanced accuracy with full material. Rows coloured by the corrected viability verdict; chance line marked at 33.3. Shows the ~3B floor and the non-monotonic collapse of the 7.6B model.",
+      "aspect_ratio": "5:4"
+    }
+  ],
+  "intro_related_work_plan": {
+    "introduction_strategy": {
+      "hook_hypothesis": "Solver-, tool- and retrieval-augmented language model systems routinely report large accuracy gains, and those gains are routinely read as evidence that the model used the supplied information. Two mechanisms produce identical numbers: the model reading a supplied answer, and the model reasoning over supplied state. Almost no published control separates them.",
+      "problem_gap_hypothesis": "The standard control, a same-shape irrelevant proof, rules out proof length, generic validity and formatting but not answer reading, because a relevant certificate stays answer-diagnostic even when the response token is withheld. A prefix stopping one step short still names the query's subject and predicate in adjacent lines, so surface co-occurrence reproduces every number that reasoning would.",
+      "search_directions": [
+        "chain-of-thought faithfulness and whether displayed reasoning is causally used",
+        "solver-augmented and neurosymbolic logical reasoning with language models",
+        "synthetic deductive reasoning benchmarks with proof supervision",
+        "response bias, contextual calibration and label collapse in prompted classification",
+        "signal detection theory applied to language model evaluation",
+        "abstention and answer withholding under open-world assumptions"
+      ]
+    },
+    "related_work_strategy": {
+      "overview": "Four clusters. The first two are the direct technical antecedents: faithfulness work that questions whether displayed reasoning is used, and solver-augmented systems that supply verified reasoning. The third supplies the task family and its proof supervision. The fourth supplies the measurement critique that motivates reporting d' rather than accuracy.",
+      "subsections": [
+        {
+          "subsection_title": "Faithfulness of displayed reasoning",
+          "methodology_cluster": "Chain-of-thought faithfulness, counterfactual and truncation-based interventions on reasoning traces",
+          "sota_investigation_mission": "Establish the state of the art in testing whether a displayed reasoning trace causally determines a model's answer, with particular attention to work that truncates traces or injects mistakes into them.",
+          "limitation_hypothesis": "This literature intervenes on model-generated traces. It does not address externally supplied, formally verified state, where the supplied material is correct by construction and the question becomes whether the model tracks its validity rather than whether the model's own trace is honest.",
+          "limitation_search_queries": [
+            "measuring faithfulness in chain-of-thought reasoning early answering adding mistakes",
+            "language models don't always say what they think unfaithful explanations",
+            "faithful chain-of-thought reasoning",
+            "does chain of thought causally determine the answer counterfactual"
+          ],
+          "bridge_to_our_method": "We apply the truncation and corruption manipulations from this literature to externally supplied solver certificates rather than model-generated traces, and add a surface-matched invalidity control that this literature does not use."
+        },
+        {
+          "subsection_title": "Solver-augmented and tool-augmented reasoning",
+          "methodology_cluster": "Neurosymbolic pipelines that translate natural language into a formal representation, call an external solver, and return the verdict through the model",
+          "sota_investigation_mission": "Establish how solver-augmented systems are built and, critically, how their accuracy gains are attributed \u2014 whether any of them controls for the model simply reading the solver's answer.",
+          "limitation_hypothesis": "These systems report end-to-end accuracy and attribute the gain to the pipeline as a whole. None isolates the contribution of the reasoning state from the contribution of the answer, and none tests what happens when the solver's output is wrong.",
+          "limitation_search_queries": [
+            "Logic-LM empowering large language models with symbolic solvers faithful logical reasoning",
+            "LINC neurosymbolic first-order logic prover language models",
+            "SatLM satisfiability-aided language models declarative prompting",
+            "toolformer language models teach themselves to use tools",
+            "LeanDojo theorem proving retrieval-augmented language models"
+          ],
+          "bridge_to_our_method": "We decompose the solver's contribution into an answer channel and a state channel, measure each separately, and show that the state channel carries real validity information while providing no protection against a corrupted solver."
+        },
+        {
+          "subsection_title": "Synthetic deductive reasoning benchmarks",
+          "methodology_cluster": "Rule-based deductive reasoning datasets with explicit proofs, open-world semantics and controllable depth",
+          "sota_investigation_mission": "Establish the benchmarks that supply rule-chaining tasks with proof supervision and an unknown class, and how contamination is handled in them.",
+          "limitation_hypothesis": "These benchmarks are public and predate the models tested on them, so contamination cannot be excluded; and they supply items and proofs but not the matched adversarial certificate variants needed to isolate validity from surface form.",
+          "limitation_search_queries": [
+            "ProofWriter generating implications proofs abductive statements over natural language",
+            "RuleTaker transformers as soft reasoners over language",
+            "PrOntoQA systematic formal analysis of chain-of-thought deductive reasoning",
+            "FOLIO natural language reasoning first-order logic dataset"
+          ],
+          "bridge_to_our_method": "We generate items after model release with per-item nonce vocabularies, and we construct the matched invalid, misleading, order-scrambled and depth-truncated certificate variants that these benchmarks do not provide."
+        },
+        {
+          "subsection_title": "Response bias and the limits of accuracy",
+          "methodology_cluster": "Calibration, label bias and option-order sensitivity in prompted classification, and sensitivity measures that separate discrimination from bias",
+          "sota_investigation_mission": "Establish what is known about label collapse and prompt-order effects in prompted classification, and what measures are recommended in their presence.",
+          "limitation_hypothesis": "This literature diagnoses bias and proposes calibration fixes, but evaluation practice in solver-augmented reasoning still reports bare accuracy, under which a degenerate single-label responder on a balanced panel is indistinguishable from a chance-level competent one.",
+          "limitation_search_queries": [
+            "calibrate before use improving few-shot performance of language models",
+            "large language models sensitivity to the order of options in multiple choice",
+            "label bias prompted classification language models",
+            "signal detection theory d-prime evaluation of language models"
+          ],
+          "bridge_to_our_method": "We report d' and criterion alongside accuracy throughout, and show two concrete cases where accuracy alone would have licensed a false conclusion, including one of our own prespecified criteria."
+        }
+      ]
+    }
+  },
+  "section_plan": [
+    {
+      "section_title": "1. Introduction",
+      "subsections": []
+    },
+    {
+      "section_title": "2. Related Work",
+      "subsections": []
+    },
+    {
+      "section_title": "3. Method",
+      "subsections": [
+        {
+          "subsection_title": "3.1 The answer-evidence decomposition",
+          "content_bullets": [
+            "Formalize the 2x2 of answer evidence x proof state from experimental_log.md Experiment b14: irrelevant is the empty cell, conclusion_only adds the answer, proof_prefix adds the state, full adds both, and none sits outside as a no-material baseline.",
+            "State the identification argument: a contrast along an edge moves one factor, a contrast along the diagonal moves two, so a null on the diagonal attributes to neither. Reference the four edge effects (+41.67pp, +36.98pp, +12.50pp, +7.81pp) from the log.",
+            "Define the state main effect (+22.4pp) and the answer main effect (+27.1pp) as the averages of their respective edges."
+          ],
+          "citation_hints": [
+            "ProofWriter",
+            "Logic-LM",
+            "Toolformer"
+          ]
+        },
+        {
+          "subsection_title": "3.2 Surface-matched invalidity: the broken_chain control",
+          "content_bullets": [
+            "Specify the construction from experimental_log.md Experiment b15: cut one intermediate link so the displayed lines no longer reach the query, while preserving subject occurrence count matched to truncate_1, query predicate presence in the final rule, line count, fact/rule/literal type sequence, and token length.",
+            "State that every rule shown is a real theory rule and exactly one derived literal is false, and that all 192 items are certified by forward-closure saturation to leave the query undetermined.",
+            "Define the decomposition: total state effect = truncate_1 - irrelevant; surface component = broken_chain - irrelevant; validity component = truncate_1 - broken_chain.",
+            "Specify the companion controls from the log: same_entity_irrelevant for entity repetition (4 mentions vs 0, both lacking the query predicate), shuffled for line order, truncate_2 and truncate_3 for depth, and misleading for corrupted solver output."
+          ],
+          "citation_hints": [
+            "Lanham et al. faithfulness",
+            "PrOntoQA"
+          ]
+        },
+        {
+          "subsection_title": "3.3 Certifying underdetermination",
+          "content_bullets": [
+            "Describe the forward-closure saturation procedure from experimental_log.md Experiment b16 and inputs/experiments/b16/code/: open-world semantics with explicit negation, a round cap with an explicit saturated flag, and rejection of any theory deriving both an atom and its negation.",
+            "State the validation result: 23,240 of 23,240 ProofWriter OWA questions across depths 0, 1, 2, 3 and 5, 100.00%, including 10,440 undetermined, with perfectly diagonal confusion.",
+            "Explain that undetermined items are made by withholding a chain-closing rule and certifying that neither the query nor its negation is in the closure \u2014 formally underdetermined, not merely hard."
+          ],
+          "citation_hints": [
+            "ProofWriter",
+            "RuleTaker"
+          ]
+        },
+        {
+          "subsection_title": "3.4 Measurement: sensitivity, not accuracy",
+          "content_bullets": [
+            "Justify reporting d' and criterion alongside accuracy using the concrete case from the log: b14's irrelevant arm scored 50.0% on a balanced panel with d' = 0.00, an identical 9/96 Yes rate in both classes, at or below the trivial always-No strategy of 96/192.",
+            "Define balanced accuracy as the headline scalar for the three-class panel, with chance at 33.3%, and state that a single-label responder scores exactly chance under it.",
+            "State the analysis plan: complete 2x2 paired tables, exact two-sided McNemar as the decision criterion, seeded 100,000-resample paired BCa intervals, Holm adjustment within declared families."
+          ],
+          "citation_hints": [
+            "Calibrate Before Use",
+            "option order sensitivity",
+            "McNemar",
+            "Efron BCa"
+          ]
+        }
+      ]
+    },
+    {
+      "section_title": "4. Experimental Setup",
+      "subsections": [
+        {
+          "subsection_title": "4.1 Task, panels and scoring",
+          "content_bullets": [
+            "Describe the four named datasets from experimental_log.md Section 1: the three sealed 192-item panels (b14, b15, b16) and ProofWriter OWA used only for certifier validation.",
+            "State that panels are post-training procedurally generated with per-item nonce vocabularies, mutually disjoint, depth fixed and recorded per item for b15 and b16.",
+            "Describe direct next-token likelihood scoring over verified single-token candidates, with no free-text generation, and note the candidate sets: Yes/No for b14 and b15, Yes/No/Unknown for b16."
+          ],
+          "citation_hints": [
+            "ProofWriter",
+            "Calibrate Before Use"
+          ]
+        },
+        {
+          "subsection_title": "4.2 Models",
+          "content_bullets": [
+            "State that b14 and b15 use the same frozen Qwen2.5-3B-Instruct-4bit snapshot, byte-identical weights, so b14's anchors transfer to b15 without a weights caveat.",
+            "List the ten b16 models from the log's b16 table with their parameter counts, and state that all are bf16 so precision is not confounded with model identity.",
+            "State that eligibility screening found 10/10 models load, prefill, and tokenise all three candidates as single distinct tokens."
+          ],
+          "citation_hints": [
+            "Qwen2.5",
+            "Llama 3.2",
+            "Gemma 3",
+            "Phi-4",
+            "OLMo 2",
+            "SmolLM2"
+          ]
+        },
+        {
+          "subsection_title": "4.3 Sealed protocol",
+          "content_bullets": [
+            "Describe the protocol from the log: panels hash-stamped before scoring, the answer authority opened only once every receipt exists, receipts carrying a SHA-256 of their own contents, and stdlib-only audits.",
+            "State the scale from the log's Raw Numeric Data: 12,480 scored prompts, 0 receipt digest failures.",
+            "State the deliberate protocol change in b16 \u2014 no gate blocks the run, because under a reasoning-substitute framing delivery is the capability under test \u2014 and distinguish tooling failure from behavioural failure."
+          ],
+          "citation_hints": []
+        }
+      ]
+    },
+    {
+      "section_title": "5. Results",
+      "subsections": [
+        {
+          "subsection_title": "5.1 Reading the factorial as a 2x2",
+          "content_bullets": [
+            "Present the b14 per-arm counts and the four edges from experimental_log.md, referencing the answer_state_factorial figure.",
+            "Report the state main effect +22.4pp and answer main effect +27.1pp, and that the answer literal retains only 30% of its value once state is present.",
+            "State explicitly that this reanalysis is post hoc, and report the response-bias finding with the signal detection table: irrelevant at d' = 0.00, the 88% No rate, and the contradicted class contributing 0 of 21 discordant pairs."
+          ],
+          "citation_hints": [
+            "McNemar",
+            "Efron BCa"
+          ]
+        },
+        {
+          "subsection_title": "5.2 Validity versus surface overlap",
+          "content_bullets": [
+            "Report the b15 primary contrast from the log: truncate_1 - broken_chain on the entailed subset, +60.4pp, exact McNemar p = 6.9e-18, BCa [+49.0, +68.8], d' drop +2.446, with the complete paired table 1/58/0/37.",
+            "Report the decomposition table: total +61.5pp, surface +1.0pp (p = 1), validity +60.4pp, validity share 98.3%. Reference the arm_decomposition figure.",
+            "Report the supporting contrasts: same_entity_irrelevant - irrelevant at +0.0pp (p = 1) refuting entity repetition, shuffled at +46.9pp establishing order dependence, and truncate_2 - truncate_1 at -61.5pp establishing that inference depth is exactly one step.",
+            "Report that five arms return identical results (96/192, 0/96 entailed, d' = 0.000, c = 2.565), so behaviour is binary."
+          ],
+          "citation_hints": [
+            "Lanham et al. faithfulness"
+          ]
+        },
+        {
+          "subsection_title": "5.3 Following a corrupted apparatus",
+          "content_bullets": [
+            "Report the misleading arm from the log: 3 of 192 correct, d' = -4.363, and misleading - full at -100.0pp with p = 2.5e-29.",
+            "State the interpretation precisely: the model follows a valid-looking certificate whose fabricated final rule points the wrong way 189 times out of 192, so validity tracking confers no resistance to a corrupted apparatus.",
+            "Contrast this with the 98.3% validity share to make the tension explicit: the model demonstrably tracks validity and is nonetheless defenceless against wrong solver output."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "5.4 Which models can serve as the interface",
+          "content_bullets": [
+            "Report the b16 per-model table from the log with balanced accuracy none and full, min per-class recall and max label share, referencing the substrate_size_curve figure.",
+            "Report that the prespecified >=80% undetermined-recall threshold passed 8 of 10 and was invalid, because four models answer Unknown to 62-96% of everything and three never emit No; state the post hoc replacement, min per-class recall >= 0.50, and that it yields 3 viable substrates of 10.",
+            "Report the minimum viable interface size of approximately 3B, the non-monotonicity (the 7.6B collapses while a 3B does not), and that the earlier 0/12 unknown failure does not generalise (gemma-3-4b 89.1%, phi-4-mini 100%).",
+            "State that model is not a randomised factor, so between-model comparisons are descriptive."
+          ],
+          "citation_hints": [
+            "Qwen2.5",
+            "Gemma 3",
+            "Phi-4"
+          ]
+        }
+      ]
+    },
+    {
+      "section_title": "6. Limitations",
+      "subsections": [
+        {
+          "subsection_title": "6.1 Scope of the mechanism claim",
+          "content_bullets": [
+            "State from the log's b15 Notes & Limitations that inference depth is exactly one step, and that this is a hard bound on how the validity result may be described.",
+            "State the visible-theory caveat: the full theory appears in every arm, so the query stays derivable regardless of certificate; breaking a certificate is diagnostic only because the model scores 0/96 from the theory alone, and a model using the broken certificate as a pointer back into the theory would be doing inference of a different kind.",
+            "State that truncate_2 and truncate_3 drop the query predicate out of the certificate, so the depth ladder confounds depth with predicate presence and must be read against same_entity_irrelevant."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "6.2 Post hoc analyses and superseded criteria",
+          "content_bullets": [
+            "State that the b14 2x2 reading is post hoc, and that the b16 viability criterion replaced an invalid prespecified threshold post hoc; both originals are retained in the results files rather than deleted.",
+            "State the b14 design errors carried as lessons: a 15pp prespecified effect against 8.3pp of headroom, no recorded proof depth, and task ids that encoded the semantic class so the authority was reconstructible from the public panel."
+          ],
+          "citation_hints": []
+        },
+        {
+          "subsection_title": "6.3 Generalisation",
+          "content_bullets": [
+            "State the boundaries from the log: one task family, small models only, synthetic panels, and a mechanism result established on a single model.",
+            "State the b16 caveat that undetermined proof_prefix cannot contain the query predicate, so undetermined items offer fewer surface cues and a surface-matching model looks worse there for reasons unrelated to abstention.",
+            "State that nothing here tests formalisation: every theory arrives already in logical form, so the claim that a system can work in an unfamiliar framework is untested, and finding 5.3 implies a formalisation error would propagate silently."
+          ],
+          "citation_hints": [
+            "Logic-LM",
+            "LINC",
+            "autoformalization"
+          ]
+        }
+      ]
+    },
+    {
+      "section_title": "7. Conclusion",
+      "subsections": []
+    }
+  ],
+  "_reconciliation": {
+    "step": "3.5",
+    "date": "2026-09-04",
+    "outcome": "no structural change",
+    "reason": "The literature review's four Related Work subsections matched the outline's four clusters exactly, and all 39 verified references map onto existing citation_hints. No cluster was empty, none needed splitting or merging, and no new competing methodology surfaced that the section_plan does not already accommodate.",
+    "dropped_candidates_noted": [
+      "sycophancy (Sharma et al.)",
+      "ReAct (Yao et al.)"
+    ],
+    "dropped_reason": "failed OpenAlex/Crossref corroboration; cited nowhere"
+  }
+}

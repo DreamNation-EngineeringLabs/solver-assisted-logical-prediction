@@ -1,0 +1,34 @@
+{
+  "built": "2026-09-04T10:10:40.254800+00:00",
+  "engine": "tectonic",
+  "file_hashes": {
+    "workspace/final/figures/answer_state_factorial.png": "99e554cc50e143d0f2557a449f513aa5e05b880703b85cfbba4c975c8838ebcb",
+    "workspace/final/figures/arm_decomposition.png": "0ddcfd21ace8d362bf478f39437f6b0e83cd1679fa4decff17fe1e7446f1e235",
+    "workspace/final/figures/substrate_size_curve.png": "260e9dcdc96e1dbe434d196ec1c5489893b42be820cfe5a1c3fac9d1512f433a",
+    "workspace/final/paper.pdf": "f2f9d66b0e8bf36e3f95e29002b811777fb003cce66e446d1353179d8b7fa61c",
+    "workspace/final/paper.tex": "b71b195a1369fab4ed23af2cd1e190289a598243ed22b6ae8a166903fe3d5bce",
+    "workspace/inputs/conference_guidelines.md": "7f8e20e0d519ac4df74bf093b760518e8b7c9edd204d58f77b99a560733b3e23",
+    "workspace/inputs/experimental_log.md": "a73c3af859ac4d56d0f2e1334de0ad02f098d57181fee6b7353d6d8e374d79df",
+    "workspace/inputs/idea.md": "a9ca53a5d4157132766868348b7e0293a6dfce202c93abcd9c52804bf664f2b8",
+    "workspace/inputs/template.tex": "c2edfbea8bda7957c3e03672ebbc2096f4b46835c51e40961d1e44a2425eac88",
+    "workspace/outline.json": "9eecc8c82fad3a427058099ab5f964feb663379f8852c9dd44ccdae7a3a93f55",
+    "workspace/outline_reconciled.json": "c5e076d24afbed95b75b0188487e1d25f54250a54bf38dbe89f7c99530e9669f",
+    "workspace/refs.bib": "78f5f5af7b65735558ad4251bccca88f42dd66d64e189ce1098bb86205fe2f8b"
+  },
+  "gates": {
+    "anti_leakage": "PASS",
+    "claim_evidence": "PASS",
+    "claim_vs_code": "PASS (0 claims extracted)",
+    "figure_dupe": "PASS",
+    "figure_provenance": "PASS \u2014 3 reused, 0 generated",
+    "latex_sanity": "FAIL (gate bug: strips at escaped \\%)",
+    "metric_consistency": "PASS",
+    "orphan_cite": "PASS"
+  },
+  "page_limit": 9,
+  "pages_main_text": 9,
+  "receipts_behind_the_numbers": 12480,
+  "references_verified": 39,
+  "scope": "Option A \u2014 b14 + b15 + b16 in one paper",
+  "version": "paper-orchestra-run-1"
+}

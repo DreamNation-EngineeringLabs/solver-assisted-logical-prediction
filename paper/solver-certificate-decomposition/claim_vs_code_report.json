@@ -1,0 +1,25 @@
+{
+  "code_files": [
+    "b16/code/analyse_cognitive_multimodel_three_class_b16.py",
+    "b16/code/prepare_cognitive_multimodel_three_class_b16.py",
+    "b16/code/run_cognitive_multimodel_three_class_b16.py",
+    "b16/code/screen_cognitive_binary_multimodel_b16.py",
+    "b14/code/reanalyse_cognitive_binary_certificate_factorial_b14_posthoc_v1.py",
+    "b15/code/analyse_cognitive_binary_certificate_factorial_b15.py",
+    "b15/code/audit_cognitive_binary_certificate_factorial_b15.py",
+    "b15/code/closure.py",
+    "b15/code/paired.py",
+    "b15/code/prepare_cognitive_binary_certificate_factorial_b15.py",
+    "b15/code/run_cognitive_binary_certificate_factorial_b15.py",
+    "b15/code/sdt.py"
+  ],
+  "supported": [],
+  "unsupported": [],
+  "summary": {
+    "total": 0,
+    "supported": 0,
+    "unsupported": 0,
+    "code_files": 12,
+    "experiments": 3
+  }
+}

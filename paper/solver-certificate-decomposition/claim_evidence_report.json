@@ -1,0 +1,182 @@
+{
+  "supported": [
+    {
+      "claim": "indings; the screen found none.  \\section{Results}  \\subsection{Reading the factorial as a \\texorpdfstring{$2\\times2$}{2x2}}  \\Cref{fig:factorial} shows the five arms of Experiment 1 arranged by \\cref",
+      "value": "2",
+      "context": "indings; the screen found none.  \\section{Results}  \\subsection{Reading the factorial as a \\texorpdfstring{$2\\times2$}{2x2}}  \\Cref{fig:factorial} shows the five arms of Experiment 1 arranged by \\cref{sec:decomposition}. The prespecified prim",
+      "evidence_snippet": "entailed / contradicted / undetermined | b16 | | `ProofWriter OWA` (depths 0,1,2,3,5) | 23,240 questions | entailed / contradicted / unknown | closure-certifier"
+    },
+    {
+      "claim": "ia}  Two analyses in this paper are post hoc and are labelled where they are used. The $2\\times2$ reading of Experiment 1 is a different analysis of sealed data, not a re-run. The viability criterion ",
+      "value": "1",
+      "context": "ia}  Two analyses in this paper are post hoc and are labelled where they are used. The $2\\times2$ reading of Experiment 1 is a different analysis of sealed data, not a re-run. The viability criterion of Experiment 3 replaced a prespecified thre",
+      "evidence_snippet": "tdlib-only so verification never depends on the environment resolving.  ---  ## 1. Experimental Setup  All three experiments run on the same task family and the"
+    },
+    {
+      "claim": ".0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80",
+      "value": "90.6",
+      "context": ".0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8",
+      "evidence_snippet": "| smollm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-4-mini"
+    },
+    {
+      "claim": "low floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71",
+      "value": "96.4",
+      "context": "low floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Thre",
+      "evidence_snippet": "b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2.5-1.5b | 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smollm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1"
+    },
+    {
+      "claim": "& Params (B) & \\textsc{none} & \\textsc{full} & Min recall & Max label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0",
+      "value": "35.4",
+      "context": "& Params (B) & \\textsc{none} & \\textsc{full} & Min recall & Max label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 &",
+      "evidence_snippet": "label share | | --- | ---: | ---: | ---: | ---: | ---: | | qwen2.5-0.5b | 0.5 | 35.4 | 63.5 | 0.0 | 61.5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-"
+    },
+    {
+      "claim": "s (B) & \\textsc{none} & \\textsc{full} & Min recall & Max label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.",
+      "value": "63.5",
+      "context": "s (B) & \\textsc{none} & \\textsc{full} & Min recall & Max label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 &",
+      "evidence_snippet": "hare | | --- | ---: | ---: | ---: | ---: | ---: | | qwen2.5-0.5b | 0.5 | 35.4 | 63.5 | 0.0 | 61.5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1."
+    },
+    {
+      "claim": "c{none} & \\textsc{full} & Min recall & Max label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed ",
+      "value": "61.5",
+      "context": "c{none} & \\textsc{full} & Min recall & Max label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  &",
+      "evidence_snippet": "+60.4pp, p = 6.9e-18, BCa [+49.0, +68.8], d' drop +2.446. Decomposition: total +61.5pp, surface +1.0pp (p = 1), validity +60.4pp, validity share 98.3%. Qualificatio"
+    },
+    {
+      "claim": "label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0 ",
+      "value": "35.9",
+      "context": "label share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 &",
+      "evidence_snippet": ": | ---: | | qwen2.5-0.5b | 0.5 | 35.4 | 63.5 | 0.0 | 61.5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2."
+    },
+    {
+      "claim": "share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.",
+      "value": "42.2",
+      "context": "share & Verdict \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 &",
+      "evidence_snippet": ": | | qwen2.5-0.5b | 0.5 | 35.4 | 63.5 | 0.0 | 61.5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2.5-1.5b"
+    },
+    {
+      "claim": "t \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed ",
+      "value": "91.1",
+      "context": "t \\\\ \\midrule Qwen2.5-0.5B  & 0.5 & 35.4 & 63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  &",
+      "evidence_snippet": "-0.5b | 0.5 | 35.4 | 63.5 | 0.0 | 61.5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2.5-1.5b | 1.5 | 33.3"
+    },
+    {
+      "claim": "63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0 ",
+      "value": "33.9",
+      "context": "63.5 & 0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 &",
+      "evidence_snippet": ".0 | 61.5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2.5-1.5b | 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smoll"
+    },
+    {
+      "claim": "0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4",
+      "value": "37.0",
+      "context": "0.0  & 61.5 & collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 &",
+      "evidence_snippet": ".5 | | olmo2-1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2.5-1.5b | 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smollm2-1.7b"
+    },
+    {
+      "claim": "collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\",
+      "value": "95.3",
+      "context": "collapsed \\\\ OLMo-2-1B     & 1.0 & 35.9 & 42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 &",
+      "evidence_snippet": "1b | 1.0 | 35.9 | 42.2 | 0.0 | 91.1 | | llama3.2-1b | 1.2 | 33.9 | 37.0 | 0.0 | 95.3 | | qwen2.5-1.5b | 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smollm2-1.7b | 1.7 | 33.3"
+    },
+    {
+      "claim": "42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5",
+      "value": "33.3",
+      "context": "42.2 & 0.0  & 91.1 & collapsed \\\\ Llama-3.2-1B  & 1.2 & 33.9 & 37.0 & 0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0",
+      "evidence_snippet": "eordered, 35/36 agreement.  ### b16 — balanced accuracy (%) per model, chance = 33.3  | Model | params (B) | none | full | min per-class recall | max label share |"
+    },
+    {
+      "claim": "0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & ",
+      "value": "69.3",
+      "context": "0.0  & 95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B",
+      "evidence_snippet": "| qwen2.5-1.5b | 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smollm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b"
+    },
+    {
+      "claim": "95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & ",
+      "value": "37.5",
+      "context": "95.3 & collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2",
+      "evidence_snippet": ".5-1.5b | 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smollm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 |"
+    },
+    {
+      "claim": "collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & ",
+      "value": "44.8",
+      "context": "collapsed \\\\ Qwen2.5-1.5B  & 1.5 & 33.3 & 37.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8",
+      "evidence_snippet": "| 1.5 | 33.3 | 37.0 | 0.0 | 96.4 | | smollm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 |"
+    },
+    {
+      "claim": "7.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45",
+      "value": "41.1",
+      "context": "7.0 & 0.0  & 96.4 & collapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4",
+      "evidence_snippet": "96.4 | | smollm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-"
+    },
+    {
+      "claim": "lapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5",
+      "value": "71.9",
+      "context": "lapsed \\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 &",
+      "evidence_snippet": "lm2-1.7b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-4-mini | 3.8 |"
+    },
+    {
+      "claim": "\\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & belo",
+      "value": "42.7",
+      "context": "\\\\ SmolLM2-1.7B  & 1.7 & 33.3 & 69.3 & 37.5 & 44.8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textb",
+      "evidence_snippet": "b | 1.7 | 33.3 | 69.3 | 37.5 | 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-4-mini | 3.8 | 44.8 |"
+    },
+    {
+      "claim": ".8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{",
+      "value": "45.8",
+      "context": ".8 & below floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma",
+      "evidence_snippet": "| 44.8 | | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-4-mini | 3.8 | 44.8 | 90.6 | 71.9 | 42.7 | | gemma"
+    },
+    {
+      "claim": "low floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} &",
+      "value": "80.7",
+      "context": "low floor \\\\ Qwen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B",
+      "evidence_snippet": "| | qwen2.5-3b | 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-4-mini | 3.8 | 44.8 | 90.6 | 71.9 | 42.7 | | gemma-3-4b |"
+    },
+    {
+      "claim": "wen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 &",
+      "value": "49.5",
+      "context": "wen2.5-3B    & 3.0 & 41.1 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Llama-3.2-3B  & 3.2 & 45.8 & 80.7 & 42.2 & 49.5 & below floor \\\\ Phi-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5",
+      "evidence_snippet": "| 3.0 | 41.1 | 90.6 | 71.9 | 42.7 | | llama3.2-3b | 3.2 | 45.8 | 80.7 | 42.2 | 49.5 | | phi-4-mini | 3.8 | 44.8 | 90.6 | 71.9 | 42.7 | | gemma-3-4b | 4.3 | 63.5 |"
+    },
+    {
+      "claim": "-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0",
+      "value": "89.1",
+      "context": "-4-mini    & 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three finding",
+      "evidence_snippet": "i-4-mini | 3.8 | 44.8 | 90.6 | 71.9 | 42.7 | | gemma-3-4b | 4.3 | 63.5 | 96.4 | 89.1 | 36.5 | | qwen2.5-7b | 7.6 | 33.3 | 71.4 | 14.1 | 62.0 |  Viable substrates: 3"
+    },
+    {
+      "claim": "& 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapse",
+      "value": "36.5",
+      "context": "& 3.8 & 44.8 & \\textbf{90.6} & 71.9 & 42.7 & \\textbf{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follo",
+      "evidence_snippet": "i | 3.8 | 44.8 | 90.6 | 71.9 | 42.7 | | gemma-3-4b | 4.3 | 63.5 | 96.4 | 89.1 | 36.5 | | qwen2.5-7b | 7.6 | 33.3 | 71.4 | 14.1 | 62.0 |  Viable substrates: 3 of 10."
+    },
+    {
+      "claim": "f{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follow. Supply",
+      "value": "71.4",
+      "context": "f{viable} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follow. Supplying full solver material takes viable models f",
+      "evidence_snippet": "| | gemma-3-4b | 4.3 | 63.5 | 96.4 | 89.1 | 36.5 | | qwen2.5-7b | 7.6 | 33.3 | 71.4 | 14.1 | 62.0 |  Viable substrates: 3 of 10. Prespecified threshold passed 8 of"
+    },
+    {
+      "claim": "e} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follow. Supplying ful",
+      "value": "14.1",
+      "context": "e} \\\\ Gemma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follow. Supplying full solver material takes viable models from at",
+      "evidence_snippet": "mma-3-4b | 4.3 | 63.5 | 96.4 | 89.1 | 36.5 | | qwen2.5-7b | 7.6 | 33.3 | 71.4 | 14.1 | 62.0 |  Viable substrates: 3 of 10. Prespecified threshold passed 8 of 10 and"
+    },
+    {
+      "claim": "emma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follow. Supplying full solve",
+      "value": "62.0",
+      "context": "emma-3-4B    & 4.3 & 63.5 & \\textbf{96.4} & 89.1 & 36.5 & \\textbf{viable} \\\\ Qwen2.5-7B    & 7.6 & 33.3 & 71.4 & 14.1 & 62.0 & collapsed \\\\ \\bottomrule      Three findings follow. Supplying full solver material takes viable models from at or near",
+      "evidence_snippet": "b | 4.3 | 63.5 | 96.4 | 89.1 | 36.5 | | qwen2.5-7b | 7.6 | 33.3 | 71.4 | 14.1 | 62.0 |  Viable substrates: 3 of 10. Prespecified threshold passed 8 of 10 and was in"
+    }
+  ],
+  "unsupported": [],
+  "uncertain": [],
+  "skipped": [],
+  "summary": {
+    "total": 28,
+    "supported": 28,
+    "unsupported": 0,
+    "uncertain": 0,
+    "skipped": 0
+  }
+}

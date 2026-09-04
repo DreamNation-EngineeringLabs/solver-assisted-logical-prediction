@@ -1,0 +1,30 @@
+{
+  "warnings": [],
+  "occurrences": [
+    {
+      "metric": "accuracy",
+      "value": 50.0,
+      "aggregate": false,
+      "line": 129,
+      "context": ", accuracy alone is not interpretable here: one arm scored $50.0%$ on a balanced panel with $d'"
+    },
+    {
+      "metric": "accuracy",
+      "value": 96.0,
+      "aggregate": false,
+      "line": 655,
+      "context": "terial takes viable models from at or near chance to $90$--$96%$ balanced accuracy on a task"
+    },
+    {
+      "metric": "accuracy",
+      "value": 50.0,
+      "aggregate": false,
+      "line": 746,
+      "context": "oked like competence was a degenerate responder: an arm at $50.0%$ accuracy with $d' = 0.00$, a"
+    }
+  ],
+  "summary": {
+    "metrics_checked": 1,
+    "warnings": 0
+  }
+}

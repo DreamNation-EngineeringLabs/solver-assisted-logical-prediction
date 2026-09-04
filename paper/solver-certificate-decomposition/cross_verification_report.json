@@ -1,0 +1,56 @@
+{
+  "total_papers": 39,
+  "indices_checked": [
+    "crossref",
+    "openalex"
+  ],
+  "indices_unavailable": [],
+  "summary": {
+    "pool_size": 39,
+    "high": 39,
+    "medium": 0,
+    "low": 0,
+    "conflict": 0,
+    "candidates_searched": 41,
+    "dropped": 2
+  },
+  "flagged": [],
+  "manual_review": {
+    "grattafiori2024llama": {
+      "automated_tier": "low",
+      "final_tier": "high",
+      "resolution": "corroborated by hand against the arXiv API (id_list=2407.21783: exact title, 2024-07-31, first author Grattafiori). OpenAlex indexes only the HAL deposit of the same work, which carries no DOI, so the automated title lookup could not match it."
+    }
+  },
+  "dropped_candidates": [
+    {
+      "title": "Towards Understanding Sycophancy in Language Models",
+      "reason": "resolved in neither OpenAlex nor Crossref (no DOI-bearing record); dropped rather than cited unverified",
+      "verified": false
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "reason": "resolved in neither OpenAlex nor Crossref (no DOI-bearing record); dropped rather than cited unverified",
+      "verified": false
+    }
+  ],
+  "indices_used": [
+    "openalex (primary resolution: DOI / arXiv-DOI / title search, difflib title ratio >= 0.70)",
+    "crossref (independent corroboration)",
+    "arxiv API (manual corroboration, one entry)"
+  ],
+  "semantic_scholar": {
+    "attempted": true,
+    "status": "no SEMANTIC_SCHOLAR_API_KEY configured; the keyless public endpoint did not complete within the session (throttled)",
+    "impact": "none on the pool \u2014 every entry is corroborated by at least one, and 38/39 by two, independent indices (OpenAlex + Crossref)"
+  },
+  "cutoff_date": "2026-08-01",
+  "flagged_resolved": [
+    {
+      "key": "grattafiori2024llama",
+      "automated_tier": "low",
+      "final_tier": "high",
+      "note": "see manual_review"
+    }
+  ]
+}

@@ -1,0 +1,3046 @@
+{
+  "papers": [
+    {
+      "paperId": "W4385327568",
+      "title": "Measuring Faithfulness in Chain-of-Thought Reasoning",
+      "abstract": "Large language models (LLMs) perform better when they produce step-by-step, \"Chain-of-Thought\" (CoT) reasoning before answering a question, but it is unclear if the stated reasoning is a faithful explanation of the model's actual reasoning (i.e., its process for answering the question). We investigate hypotheses for how CoT reasoning may be unfaithful, by examining how the model predictions change when we intervene on the CoT (e.g., by adding mistakes or paraphrasing it). Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. CoT's performance boost does not seem to come from CoT's added test-time compute alone or from information encoded via the particular phrasing of the CoT. As models become larger and more capable, they produce less faithful reasoning on most tasks we study. Overall, our results suggest that CoT can be faithful if the circumstances such as the model size and task are carefully chosen.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Tamera Lanham"
+        },
+        {
+          "name": "Anna Chen"
+        },
+        {
+          "name": "Ansh Radhakrishnan"
+        },
+        {
+          "name": "Benoit Steiner"
+        },
+        {
+          "name": "Carson Denison"
+        },
+        {
+          "name": "Danny Hernandez"
+        },
+        {
+          "name": "Dustin Li"
+        },
+        {
+          "name": "Esin Durmus"
+        },
+        {
+          "name": "Evan Hubinger"
+        },
+        {
+          "name": "Jackson Kernion"
+        },
+        {
+          "name": "Kamil\u0117 Luko\u0161i\u016bt\u0117"
+        },
+        {
+          "name": "Karina Nguyen"
+        },
+        {
+          "name": "Newton Cheng"
+        },
+        {
+          "name": "Nicholas Joseph"
+        },
+        {
+          "name": "Nicholas Schiefer"
+        },
+        {
+          "name": "Oliver Rausch"
+        },
+        {
+          "name": "Robin J. Larson"
+        },
+        {
+          "name": "Sam McCandlish"
+        },
+        {
+          "name": "Sandipan Kundu"
+        },
+        {
+          "name": "Saurav Kadavath"
+        },
+        {
+          "name": "Shannon Yang"
+        },
+        {
+          "name": "Thomas Henighan"
+        },
+        {
+          "name": "T. Maxwell"
+        },
+        {
+          "name": "Timothy Telleen-Lawton"
+        },
+        {
+          "name": "Tristan Hume"
+        },
+        {
+          "name": "Zac Hatfield-Dodds"
+        },
+        {
+          "name": "Jared Kaplan"
+        },
+        {
+          "name": "Jan Brauner"
+        },
+        {
+          "name": "Samuel R. Bowman"
+        },
+        {
+          "name": "Ethan Perez"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2307.13702",
+        "ArXiv": "2307.13702"
+      },
+      "openalex_id": "https://openalex.org/W4385327568",
+      "type": "preprint",
+      "cited_by_count": 29,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Measuring Faithfulness in Chain-of-Thought Reasoning"
+    },
+    {
+      "paperId": "W4375958700",
+      "title": "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting",
+      "abstract": "Large Language Models (LLMs) can achieve strong performance on many tasks by producing step-by-step reasoning before giving a final output, often referred to as chain-of-thought reasoning (CoT). It is tempting to interpret these CoT explanations as the LLM's process for solving a task. This level of transparency into LLMs' predictions would yield significant safety benefits. However, we find that CoT explanations can systematically misrepresent the true reason for a model's prediction. We demonstrate that CoT explanations can be heavily influenced by adding biasing features to model inputs--e.g., by reordering the multiple-choice options in a few-shot prompt to make the answer always \"(A)\"--which models systematically fail to mention in their explanations. When we bias models toward incorrect answers, they frequently generate CoT explanations rationalizing those answers. This causes accuracy to drop by as much as 36% on a suite of 13 tasks from BIG-Bench Hard, when testing with GPT-3.5 from OpenAI and Claude 1.0 from Anthropic. On a social-bias task, model explanations justify giving answers in line with stereotypes without mentioning the influence of these social biases. Our findings indicate that CoT explanations can be plausible yet misleading, which risks increasing our trust in LLMs without guaranteeing their safety. Building more transparent and explainable systems will require either improving CoT faithfulness through targeted efforts or abandoning CoT in favor of alternative methods.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Miles Turpin"
+        },
+        {
+          "name": "Julian Michael"
+        },
+        {
+          "name": "Ethan Perez"
+        },
+        {
+          "name": "Samuel R. Bowman"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2305.04388",
+        "ArXiv": "2305.04388"
+      },
+      "openalex_id": "https://openalex.org/W4375958700",
+      "type": "preprint",
+      "cited_by_count": 90,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting"
+    },
+    {
+      "paperId": "W4318903783",
+      "title": "Faithful Chain-of-Thought Reasoning",
+      "abstract": "While Chain-of-Thought (CoT) prompting boosts Language Models' (LM) performance on a gamut of complex reasoning tasks, the generated reasoning chain does not necessarily reflect how the model arrives at the answer (aka. faithfulness). We propose Faithful CoT, a reasoning framework involving two stages: Translation (Natural Language query $\\rightarrow$ symbolic reasoning chain) and Problem Solving (reasoning chain $\\rightarrow$ answer), using an LM and a deterministic solver respectively. This guarantees that the reasoning chain provides a faithful explanation of the final answer. Aside from interpretability, Faithful CoT also improves empirical performance: it outperforms standard CoT on 9 of 10 benchmarks from 4 diverse domains, with a relative accuracy gain of 6.3% on Math Word Problems (MWP), 3.4% on Planning, 5.5% on Multi-hop Question Answering (QA), and 21.4% on Relational Inference. Furthermore, with GPT-4 and Codex, it sets the new state-of-the-art few-shot performance on 7 datasets (with 95.0+ accuracy on 6 of them), showing a strong synergy between faithfulness and accuracy.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Qing Lyu"
+        },
+        {
+          "name": "Shreya Havaldar"
+        },
+        {
+          "name": "Adam Stein"
+        },
+        {
+          "name": "Li Zhang"
+        },
+        {
+          "name": "Delip Rao"
+        },
+        {
+          "name": "Eric Wong"
+        },
+        {
+          "name": "Marianna Apidianaki"
+        },
+        {
+          "name": "Chris Callison-Burch"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2301.13379",
+        "ArXiv": "2301.13379"
+      },
+      "openalex_id": "https://openalex.org/W4318903783",
+      "type": "preprint",
+      "cited_by_count": 23,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Faithful Chain-of-Thought Reasoning"
+    },
+    {
+      "paperId": "W4416030400",
+      "title": "Chain-of-Thought Reasoning In The Wild Is Not Always Faithful",
+      "abstract": "Recent studies indicate that when faced with explicit biases in prompts, models often omit mentioning these biases in their Chain-of-Thought (CoT) output, revealing that verbalized reasoning can give an incorrect picture of how models arrive at conclusions (unfaithfulness). In this work, we show that unfaithful CoT also occurs on naturally worded, non-adversarial prompts without adding artificial biases or editing model outputs. We find that when separately presented with the questions \"Is X bigger than Y?\" and \"Is Y bigger than X?\", models sometimes produce superficially coherent arguments to justify systematically answering Yes to both or No to both, despite the contradiction. We present preliminary evidence that this is due to models' implicit biases towards Yes or No, labeling this Implicit Post-Hoc Rationalization. Our results reveal rates up to 13% for production models, and while frontier models are more faithful, none are entirely so, including thinking models like DeepSeek R1 (0.37%) and Sonnet 3.7 with thinking (0.04%). We also investigate Unfaithful Illogical Shortcuts, where models use subtly illogical reasoning to make speculative answers to hard math problems seem rigorously proven. Our findings indicate that while CoT can be useful for assessing outputs, it is not a complete account of the internal process that produced the model's answer and should be used with caution in agentic or safety-critical settings.",
+      "year": 2025,
+      "authors": [
+        {
+          "name": "Iv\u00e1n Arcuschin"
+        },
+        {
+          "name": "Jett Janiak"
+        },
+        {
+          "name": "Robert Krzyzanowski"
+        },
+        {
+          "name": "Senthooran Rajamanoharan"
+        },
+        {
+          "name": "Neel Nanda"
+        },
+        {
+          "name": "Arthur Conmy"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2503.08679",
+        "ArXiv": "2503.08679"
+      },
+      "openalex_id": "https://openalex.org/W4416030400",
+      "type": "preprint",
+      "cited_by_count": 2,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Chain-of-Thought Reasoning In The Wild Is Not Always Faithful"
+    },
+    {
+      "paperId": "W4416091752",
+      "title": "Reasoning Models Don't Always Say What They Think",
+      "abstract": "Chain-of-thought (CoT) offers a potential boon for AI safety as it allows monitoring a model's CoT to try to understand its intentions and reasoning processes. However, the effectiveness of such monitoring hinges on CoTs faithfully representing models' actual reasoning processes. We evaluate CoT faithfulness of state-of-the-art reasoning models across 6 reasoning hints presented in the prompts and find: (1) for most settings and models tested, CoTs reveal their usage of hints in at least 1% of examples where they use the hint, but the reveal rate is often below 20%, (2) outcome-based reinforcement learning initially improves faithfulness but plateaus without saturating, and (3) when reinforcement learning increases how frequently hints are used (reward hacking), the propensity to verbalize them does not increase, even without training against a CoT monitor. These results suggest that CoT monitoring is a promising way of noticing undesired behaviors during training and evaluations, but that it is not sufficient to rule them out. They also suggest that in settings like ours where CoT reasoning is not necessary, test-time monitoring of CoTs is unlikely to reliably catch rare and catastrophic unexpected behaviors.",
+      "year": 2025,
+      "authors": [
+        {
+          "name": "Yanda Chen"
+        },
+        {
+          "name": "Joe Benton"
+        },
+        {
+          "name": "Ansh Radhakrishnan"
+        },
+        {
+          "name": "Jonathan Uesato"
+        },
+        {
+          "name": "Carson Denison"
+        },
+        {
+          "name": "John Schulman"
+        },
+        {
+          "name": "Arushi Somani"
+        },
+        {
+          "name": "Peter Hase"
+        },
+        {
+          "name": "Wagner, Misha"
+        },
+        {
+          "name": "Fabien Roger"
+        },
+        {
+          "name": "Vlad Mikulik"
+        },
+        {
+          "name": "Samuel R. Bowman"
+        },
+        {
+          "name": "Jan Leike"
+        },
+        {
+          "name": "Jared Kaplan"
+        },
+        {
+          "name": "Ethan Perez"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2505.05410",
+        "ArXiv": "2505.05410"
+      },
+      "openalex_id": "https://openalex.org/W4416091752",
+      "type": "preprint",
+      "cited_by_count": 9,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Reasoning Models Don't Always Say What They Think"
+    },
+    {
+      "paperId": "W4319049323",
+      "title": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+      "abstract": "Large language models have achieved impressive performance on various natural language processing tasks. However, so far they have been evaluated primarily on benchmarks where all information in the input context is relevant for solving the task. In this work, we investigate the distractibility of large language models, i.e., how the model problem-solving accuracy can be influenced by irrelevant context. In particular, we introduce Grade-School Math with Irrelevant Context (GSM-IC), an arithmetic reasoning dataset with irrelevant information in the problem description. We use this benchmark to measure the distractibility of cutting-edge prompting techniques for large language models, and find that the model performance is dramatically decreased when irrelevant information is included. We also identify several approaches for mitigating this deficiency, such as decoding with self-consistency and adding to the prompt an instruction that tells the language model to ignore the irrelevant information.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Freda Shi"
+        },
+        {
+          "name": "Xinyun Chen"
+        },
+        {
+          "name": "Kanishka Misra"
+        },
+        {
+          "name": "Nathan Scales"
+        },
+        {
+          "name": "D. Dohan"
+        },
+        {
+          "name": "Ed H."
+        },
+        {
+          "name": "Nathanael Sch\u00e4rli"
+        },
+        {
+          "name": "Denny Zhou"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2302.00093",
+        "ArXiv": "2302.00093"
+      },
+      "openalex_id": "https://openalex.org/W4319049323",
+      "type": "preprint",
+      "cited_by_count": 106,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Large Language Models Can Be Easily Distracted by Irrelevant Context"
+    },
+    {
+      "paperId": "W4377865953",
+      "title": "Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large Language Models in Knowledge Conflicts",
+      "abstract": "By providing external information to large language models (LLMs), tool augmentation (including retrieval augmentation) has emerged as a promising solution for addressing the limitations of LLMs' static parametric memory. However, how receptive are LLMs to such external evidence, especially when the evidence conflicts with their parametric memory? We present the first comprehensive and controlled investigation into the behavior of LLMs when encountering knowledge conflicts. We propose a systematic framework to elicit high-quality parametric memory from LLMs and construct the corresponding counter-memory, which enables us to conduct a series of controlled experiments. Our investigation reveals seemingly contradicting behaviors of LLMs. On the one hand, different from prior wisdom, we find that LLMs can be highly receptive to external evidence even when that conflicts with their parametric memory, given that the external evidence is coherent and convincing. On the other hand, LLMs also demonstrate a strong confirmation bias when the external evidence contains some information that is consistent with their parametric memory, despite being presented with conflicting evidence at the same time. These results pose important implications that are worth careful consideration for the further development and deployment of tool- and retrieval-augmented LLMs. Resources are available at https://github.com/OSU-NLP-Group/LLM-Knowledge-Conflict.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Xie Jian"
+        },
+        {
+          "name": "Kai Zhang"
+        },
+        {
+          "name": "Jiangjie Chen"
+        },
+        {
+          "name": "Renze Lou"
+        },
+        {
+          "name": "Yu Su"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2305.13300",
+        "ArXiv": "2305.13300"
+      },
+      "openalex_id": "https://openalex.org/W4377865953",
+      "type": "preprint",
+      "cited_by_count": 8,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[1]",
+      "candidate_title": "Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large Language Models in Knowledge Conflicts"
+    },
+    {
+      "paperId": "W4383473944",
+      "title": "Reasoning or Reciting? Exploring the Capabilities and Limitations of Language Models Through Counterfactual Tasks",
+      "abstract": "The impressive performance of recent language models across a wide range of tasks suggests that they possess a degree of abstract reasoning skills. Are these skills general and transferable, or specialized to specific tasks seen during pretraining? To disentangle these effects, we propose an evaluation framework based on \"counterfactual\" task variants that deviate from the default assumptions underlying standard tasks. Across a suite of 11 tasks, we observe nontrivial performance on the counterfactual variants, but nevertheless find that performance substantially and consistently degrades compared to the default conditions. This suggests that while current LMs may possess abstract task-solving skills to an extent, they often also rely on narrow, non-transferable procedures for task-solving. These results motivate a more careful interpretation of language model performance that teases apart these aspects of behavior.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Zhaofeng Wu"
+        },
+        {
+          "name": "Linlu Qiu"
+        },
+        {
+          "name": "Alexis Ross"
+        },
+        {
+          "name": "Ekin Aky\u00fcrek"
+        },
+        {
+          "name": "Boyuan Chen"
+        },
+        {
+          "name": "Bailin Wang"
+        },
+        {
+          "name": "Najoung Kim"
+        },
+        {
+          "name": "Jacob Andreas"
+        },
+        {
+          "name": "Yoon Kim"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2307.02477",
+        "ArXiv": "2307.02477"
+      },
+      "openalex_id": "https://openalex.org/W4383473944",
+      "type": "preprint",
+      "cited_by_count": 20,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "Reasoning or Reciting? Exploring the Capabilities and Limitations of Language Models Through Counterfactual Tasks"
+    },
+    {
+      "paperId": "W4377864123",
+      "title": "Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning",
+      "abstract": "Large Language Models (LLMs) have shown human-like reasoning abilities but still struggle with complex logical problems. This paper introduces a novel framework, Logic-LM, which integrates LLMs with symbolic solvers to improve logical problem-solving. Our method first utilizes LLMs to translate a natural language problem into a symbolic formulation. Afterward, a deterministic symbolic solver performs inference on the formulated problem. We also introduce a self-refinement module, which utilizes the symbolic solver's error messages to revise symbolic formalizations. We demonstrate Logic-LM's effectiveness on five logical reasoning datasets: ProofWriter, PrOntoQA, FOLIO, LogicalDeduction, and AR-LSAT. On average, Logic-LM achieves a significant performance boost of 39.2% over using LLM alone with standard prompting and 18.4% over LLM with chain-of-thought prompting. Our findings suggest that Logic-LM, by combining LLMs with symbolic logic, offers a promising avenue for faithful logical reasoning. Code and data are publicly available at https://github.com/teacherpeterpan/Logic-LLM.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Liangming Pan"
+        },
+        {
+          "name": "Alon Albalak"
+        },
+        {
+          "name": "Xinyi Wang"
+        },
+        {
+          "name": "William Yang Wang"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2305.12295",
+        "ArXiv": "2305.12295"
+      },
+      "openalex_id": "https://openalex.org/W4377864123",
+      "type": "preprint",
+      "cited_by_count": 8,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[2]",
+      "candidate_title": "Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning"
+    },
+    {
+      "paperId": "W4387929841",
+      "title": "LINC: A Neurosymbolic Approach for Logical Reasoning by Combining Language Models with First-Order Logic Provers",
+      "abstract": "Logical reasoning, i.e., deductively inferring the truth value of a conclusion from a set of premises, is an important task for artificial intelligence with wide potential impacts on science, mathematics, and society. While many prompting-based strategies have been proposed to enable Large Language Models (LLMs) to do such reasoning more effectively, they still appear unsatisfactory, often failing in subtle and unpredictable ways. In this work, we investigate the validity of instead reformulating such tasks as modular neurosymbolic programming, which we call LINC: Logical Inference via Neurosymbolic Computation. In LINC, the LLM acts as a semantic parser, translating premises and conclusions from natural language to expressions in first-order logic. These expressions are then offloaded to an external theorem prover, which symbolically performs deductive inference. Leveraging this approach, we observe significant performance gains on FOLIO and a balanced subset of ProofWriter for three different models in nearly all experimental conditions we evaluate. On ProofWriter, augmenting the comparatively small open-source StarCoder+ (15.5B parameters) with LINC even outperforms GPT-3.5 and GPT-4 with Chain-of-Thought (CoT) prompting by an absolute 38% and 10%, respectively. When used with GPT-4, LINC scores 26% higher than CoT on ProofWriter while performing comparatively on FOLIO. Further analysis reveals that although both methods on average succeed roughly equally often on this dataset, they exhibit distinct and complementary failure modes. We thus provide promising evidence for how logical reasoning over natural language can be tackled through jointly leveraging LLMs alongside symbolic provers. All corresponding code is publicly available at https://github.com/benlipkin/linc",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Theo Olausson"
+        },
+        {
+          "name": "Alex Gu"
+        },
+        {
+          "name": "Benjamin Lipkin"
+        },
+        {
+          "name": "Cedegao E. Zhang"
+        },
+        {
+          "name": "Armando Solar-Lezama"
+        },
+        {
+          "name": "Joshua B. Tenenbaum"
+        },
+        {
+          "name": "Roger L\u00e9vy"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2310.15164",
+        "ArXiv": "2310.15164"
+      },
+      "openalex_id": "https://openalex.org/W4387929841",
+      "type": "preprint",
+      "cited_by_count": 0,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[2]",
+      "candidate_title": "LINC: A Neurosymbolic Approach for Logical Reasoning by Combining Language Models with First-Order Logic Provers"
+    },
+    {
+      "paperId": "W4377086492",
+      "title": "SatLM: Satisfiability-Aided Language Models Using Declarative Prompting",
+      "abstract": "Prior work has combined chain-of-thought prompting in large language models (LLMs) with programmatic representations to perform effective and transparent reasoning. While such an approach works well for tasks that only require forward reasoning (e.g., straightforward arithmetic), it is less effective for constraint solving problems that require more sophisticated planning and search. In this paper, we propose a new satisfiability-aided language modeling (SatLM) approach for improving the reasoning capabilities of LLMs. We use an LLM to generate a declarative task specification rather than an imperative program and leverage an off-the-shelf automated theorem prover to derive the final answer. This approach has two key advantages. The declarative specification is closer to the problem description than the reasoning steps are, so the LLM can parse it out of the description more accurately. Furthermore, by offloading the actual reasoning task to an automated theorem prover, our approach can guarantee the correctness of the answer with respect to the parsed specification and avoid planning errors in the solving process. We evaluate SATLM on 8 different datasets and show that it consistently outperforms program-aided LMs in the imperative paradigm. In particular, SATLM outperforms program-aided LMs by 23% on a challenging subset of the GSM arithmetic reasoning dataset; SATLM also achieves a new SoTA on LSAT and BoardgameQA, surpassing previous models that are trained on the respective training sets.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Xi Ye"
+        },
+        {
+          "name": "Qiaochu Chen"
+        },
+        {
+          "name": "I\u015f\u0131l Dillig"
+        },
+        {
+          "name": "Greg Durrett"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2305.09656",
+        "ArXiv": "2305.09656"
+      },
+      "openalex_id": "https://openalex.org/W4377086492",
+      "type": "preprint",
+      "cited_by_count": 4,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[2]",
+      "candidate_title": "SatLM: Satisfiability-Aided Language Models Using Declarative Prompting"
+    },
+    {
+      "paperId": "W4309591663",
+      "title": "PAL: Program-aided Language Models",
+      "abstract": "Large language models (LLMs) have recently demonstrated an impressive ability to perform arithmetic and symbolic reasoning tasks, when provided with a few examples at test time (\"few-shot prompting\"). Much of this success can be attributed to prompting methods such as \"chain-of-thought'', which employ LLMs for both understanding the problem description by decomposing it into steps, as well as solving each step of the problem. While LLMs seem to be adept at this sort of step-by-step decomposition, LLMs often make logical and arithmetic mistakes in the solution part, even when the problem is decomposed correctly. In this paper, we present Program-Aided Language models (PAL): a novel approach that uses the LLM to read natural language problems and generate programs as the intermediate reasoning steps, but offloads the solution step to a runtime such as a Python interpreter. With PAL, decomposing the natural language problem into runnable steps remains the only learning task for the LLM, while solving is delegated to the interpreter. We demonstrate this synergy between a neural LLM and a symbolic interpreter across 13 mathematical, symbolic, and algorithmic reasoning tasks from BIG-Bench Hard and other benchmarks. In all these natural language reasoning tasks, generating code using an LLM and reasoning using a Python interpreter leads to more accurate results than much larger models. For example, PAL using Codex achieves state-of-the-art few-shot accuracy on the GSM8K benchmark of math word problems, surpassing PaLM-540B which uses chain-of-thought by absolute 15% top-1. Our code and data are publicly available at http://reasonwithpal.com/ .",
+      "year": 2022,
+      "authors": [
+        {
+          "name": "Luyu Gao"
+        },
+        {
+          "name": "Aman Madaan"
+        },
+        {
+          "name": "Shuyan Zhou"
+        },
+        {
+          "name": "Uri Alon"
+        },
+        {
+          "name": "Pengfei Liu"
+        },
+        {
+          "name": "Yiming Yang"
+        },
+        {
+          "name": "Jamie Callan"
+        },
+        {
+          "name": "Graham Neubig"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2211.10435",
+        "ArXiv": "2211.10435"
+      },
+      "openalex_id": "https://openalex.org/W4309591663",
+      "type": "preprint",
+      "cited_by_count": 105,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[2]",
+      "candidate_title": "PAL: Program-aided Language Models"
+    },
+    {
+      "paperId": "W4320165837",
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "abstract": "Language models (LMs) exhibit remarkable abilities to solve new tasks from just a few examples or textual instructions, especially at scale. They also, paradoxically, struggle with basic functionality, such as arithmetic or factual lookup, where much simpler and smaller models excel. In this paper, we show that LMs can teach themselves to use external tools via simple APIs and achieve the best of both worlds. We introduce Toolformer, a model trained to decide which APIs to call, when to call them, what arguments to pass, and how to best incorporate the results into future token prediction. This is done in a self-supervised way, requiring nothing more than a handful of demonstrations for each API. We incorporate a range of tools, including a calculator, a Q\\&A system, two different search engines, a translation system, and a calendar. Toolformer achieves substantially improved zero-shot performance across a variety of downstream tasks, often competitive with much larger models, without sacrificing its core language modeling abilities.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Timo Schick"
+        },
+        {
+          "name": "Jane Dwivedi-Yu"
+        },
+        {
+          "name": "Roberto Dess\u00ec"
+        },
+        {
+          "name": "Roberta R\u0103ileanu"
+        },
+        {
+          "name": "Mar\u00eda Lomel\u00ed"
+        },
+        {
+          "name": "Luke Zettlemoyer"
+        },
+        {
+          "name": "Nicola Cancedda"
+        },
+        {
+          "name": "Thomas Scialom"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2302.04761",
+        "ArXiv": "2302.04761"
+      },
+      "openalex_id": "https://openalex.org/W4320165837",
+      "type": "preprint",
+      "cited_by_count": 399,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[2]",
+      "candidate_title": "Toolformer: Language Models Can Teach Themselves to Use Tools"
+    },
+    {
+      "paperId": "W4382498654",
+      "title": "LeanDojo: Theorem Proving with Retrieval-Augmented Language Models",
+      "abstract": "Large language models (LLMs) have shown promise in proving formal theorems using proof assistants such as Lean. However, existing methods are difficult to reproduce or build on, due to private code, data, and large compute requirements. This has created substantial barriers to research on machine learning methods for theorem proving. This paper removes these barriers by introducing LeanDojo: an open-source Lean playground consisting of toolkits, data, models, and benchmarks. LeanDojo extracts data from Lean and enables interaction with the proof environment programmatically. It contains fine-grained annotations of premises in proofs, providing valuable data for premise selection: a key bottleneck in theorem proving. Using this data, we develop ReProver (Retrieval-Augmented Prover): an LLM-based prover augmented with retrieval for selecting premises from a vast math library. It is inexpensive and needs only one GPU week of training. Our retriever leverages LeanDojo's program analysis capability to identify accessible premises and hard negative examples, which makes retrieval much more effective. Furthermore, we construct a new benchmark consisting of 98,734 theorems and proofs extracted from Lean's math library. It features challenging data split requiring the prover to generalize to theorems relying on novel premises that are never used in training. We use this benchmark for training and evaluation, and experimental results demonstrate the effectiveness of ReProver over non-retrieval baselines and GPT-4. We thus provide the first set of open-source LLM-based theorem provers without any proprietary datasets and release it under a permissive MIT license to facilitate further research.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Kaiyu Yang"
+        },
+        {
+          "name": "Aidan Swope"
+        },
+        {
+          "name": "Alex Gu"
+        },
+        {
+          "name": "R Chalamala"
+        },
+        {
+          "name": "Peiyang Song"
+        },
+        {
+          "name": "Shixing Yu"
+        },
+        {
+          "name": "Saad Godil"
+        },
+        {
+          "name": "Ryan Prenger"
+        },
+        {
+          "name": "Anima Anandkumar"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2306.15626",
+        "ArXiv": "2306.15626"
+      },
+      "openalex_id": "https://openalex.org/W4382498654",
+      "type": "preprint",
+      "cited_by_count": 40,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[2]",
+      "candidate_title": "LeanDojo: Theorem Proving with Retrieval-Augmented Language Models"
+    },
+    {
+      "paperId": "W3098425262",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "abstract": "Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.",
+      "year": 2020,
+      "authors": [
+        {
+          "name": "Patrick Lewis"
+        },
+        {
+          "name": "Ethan Perez"
+        },
+        {
+          "name": "Aleksandra Piktus"
+        },
+        {
+          "name": "Fabio Petroni"
+        },
+        {
+          "name": "Vladimir Karpukhin"
+        },
+        {
+          "name": "Naman Goyal"
+        },
+        {
+          "name": "Heinrich K\u00fcttler"
+        },
+        {
+          "name": "Mike Lewis"
+        },
+        {
+          "name": "Wen-tau Yih"
+        },
+        {
+          "name": "Tim Rockt\u00e4schel"
+        },
+        {
+          "name": "Sebastian Riedel"
+        },
+        {
+          "name": "Douwe Kiela"
+        }
+      ],
+      "venue": "UCL Discovery (University College London)",
+      "externalIds": {},
+      "openalex_id": "https://openalex.org/W3098425262",
+      "type": "conference-paper",
+      "cited_by_count": 18,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "title-search"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+    },
+    {
+      "paperId": "W4287549118",
+      "title": "ProofWriter: Generating Implications, Proofs, and Abductive Statements\\n over Natural Language",
+      "abstract": "Transformers have been shown to emulate logical deduction over natural\\nlanguage theories (logical rules expressed in natural language), reliably\\nassigning true/false labels to candidate implications. However, their ability\\nto generate implications of a theory has not yet been demonstrated, and methods\\nfor reconstructing proofs of answers are imperfect. In this work we show that a\\ngenerative model, called ProofWriter, can reliably generate both implications\\nof a theory and the natural language proof(s) that support them. In particular,\\niterating a 1-step implication generator results in proofs that are highly\\nreliable, and represent actual model decisions (rather than post-hoc\\nrationalizations). On the RuleTaker dataset, the accuracy of ProofWriter's\\nproofs exceed previous methods by +9% absolute, and in a way that generalizes\\nto proof depths unseen in training and on out-of-domain problems. We also show\\nthat generative techniques can perform a type of abduction with high precision:\\nGiven a theory and an unprovable conclusion, identify a missing fact that\\nallows the conclusion to be proved, along with a proof. These results\\nsignificantly improve the viability of neural methods for systematically\\nreasoning over natural language.\\n",
+      "year": 2020,
+      "authors": [
+        {
+          "name": "Oyvind Tafjord"
+        },
+        {
+          "name": "Bhavana Dalvi Mishra"
+        },
+        {
+          "name": "Peter Clark"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2012.13048",
+        "ArXiv": "2012.13048"
+      },
+      "openalex_id": "https://openalex.org/W4287549118",
+      "type": "preprint",
+      "cited_by_count": 1,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 0.989,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "ProofWriter: Generating Implications, Proofs, and Abductive Statements over Natural Language"
+    },
+    {
+      "paperId": "W3006188107",
+      "title": "Transformers as Soft Reasoners over Language",
+      "abstract": "Beginning with McCarthy's Advice Taker (1959), AI has pursued the goal of providing a system with explicit, general knowledge and having the system reason over that knowledge. However, expressing the knowledge in a formal (logical or probabilistic) representation has been a major obstacle to this research. This paper investigates a modern approach to this problem where the facts and rules are provided as natural language sentences, thus bypassing a formal representation. We train transformers to reason (or emulate reasoning) over these sentences using synthetically generated data. Our models, that we call RuleTakers, provide the first empirical demonstration that this kind of soft reasoning over language is learnable, can achieve high (99%) accuracy, and generalizes to test data requiring substantially deeper chaining than seen during training (95%+ scores). We also demonstrate that the models transfer well to two hand-authored rulebases, and to rulebases paraphrased into more natural language. These findings are significant as it suggests a new role for transformers, namely as limited \"soft theorem provers\" operating over explicit theories in language. This in turn suggests new possibilities for explainability, correctability, and counterfactual reasoning in question-answering.",
+      "year": 2020,
+      "authors": [
+        {
+          "name": "Peter E. Clark"
+        },
+        {
+          "name": "Oyvind Tafjord"
+        },
+        {
+          "name": "Kyle Richardson"
+        }
+      ],
+      "venue": "",
+      "externalIds": {
+        "DOI": "10.24963/ijcai.2020/537",
+        "ArXiv": "2002.05867"
+      },
+      "openalex_id": "https://openalex.org/W3006188107",
+      "type": "conference-paper",
+      "cited_by_count": 16,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "title-search"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "Transformers as Soft Reasoners over Language"
+    },
+    {
+      "paperId": "W4302305823",
+      "title": "Language Models Are Greedy Reasoners: A Systematic Formal Analysis of Chain-of-Thought",
+      "abstract": "Large language models (LLMs) have shown remarkable reasoning capabilities given chain-of-thought prompts (examples with intermediate reasoning steps). Existing benchmarks measure reasoning ability indirectly, by evaluating accuracy on downstream tasks such as mathematical reasoning. However, it is unclear how these models obtain the answers and whether they rely on simple heuristics rather than the generated chain-of-thought. To enable systematic exploration of the reasoning ability of LLMs, we present a new synthetic question-answering dataset called PrOntoQA, where each example is generated from a synthetic world model represented in first-order logic. This allows us to parse the generated chain-of-thought into symbolic proofs for formal analysis. Our analysis on InstructGPT and GPT-3 shows that LLMs are quite capable of making correct individual deduction steps, and so are generally capable of reasoning, even in fictional contexts. However, they have difficulty with proof planning: When multiple valid deduction steps are available, they are not able to systematically explore the different options.",
+      "year": 2022,
+      "authors": [
+        {
+          "name": "Abulhair Saparov"
+        },
+        {
+          "name": "He He"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2210.01240",
+        "ArXiv": "2210.01240"
+      },
+      "openalex_id": "https://openalex.org/W4302305823",
+      "type": "preprint",
+      "cited_by_count": 40,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "Language Models Are Greedy Reasoners: A Systematic Formal Analysis of Chain-of-Thought"
+    },
+    {
+      "paperId": "W4294753225",
+      "title": "FOLIO: Natural Language Reasoning with First-Order Logic",
+      "abstract": "Large language models (LLMs) have achieved remarkable performance on a variety of natural language understanding tasks. However, existing benchmarks are inadequate in measuring the complex logical reasoning capabilities of a model. We present FOLIO, a human-annotated, logically complex and diverse dataset for reasoning in natural language (NL), equipped with first-order logic (FOL) annotations. FOLIO consists of 1,430 examples (unique conclusions), each paired with one of 487 sets of premises used to deductively reason for the validity of each conclusion. The logical correctness of the premises and conclusions is ensured by their FOL annotations, which are automatically verified by an FOL inference engine. In addition to the main NL reasoning task, NL-FOL pairs in FOLIO constitute a new NL-FOL translation dataset. Our experiments on FOLIO systematically evaluate the FOL reasoning ability of supervised fine-tuning on medium-sized language models. For both NL reasoning and NL-FOL translation, we benchmark multiple state-of-the-art language models. Our results show that a subset of FOLIO presents a challenge for one of the most capable {Large Language Model (LLM)} publicly available, GPT-4.",
+      "year": 2022,
+      "authors": [
+        {
+          "name": "Simeng Han"
+        },
+        {
+          "name": "Hailey Schoelkopf"
+        },
+        {
+          "name": "Yilun Zhao"
+        },
+        {
+          "name": "Zhenting Qi"
+        },
+        {
+          "name": "Martin Riddell"
+        },
+        {
+          "name": "Zhou, Wenfei"
+        },
+        {
+          "name": "Coady, James"
+        },
+        {
+          "name": "David Peng"
+        },
+        {
+          "name": "Yujie Qiao"
+        },
+        {
+          "name": "Luke Benson"
+        },
+        {
+          "name": "Lucy Sun"
+        },
+        {
+          "name": "Wardle-Solano, Alex"
+        },
+        {
+          "name": "Szabo, Hannah"
+        },
+        {
+          "name": "Ekaterina Zubova"
+        },
+        {
+          "name": "Matthew Burtell"
+        },
+        {
+          "name": "Jonathan A. Fan"
+        },
+        {
+          "name": "Yixin Liu"
+        },
+        {
+          "name": "Brian J. F. Wong"
+        },
+        {
+          "name": "Malcolm Sailor"
+        },
+        {
+          "name": "Ansong Ni"
+        },
+        {
+          "name": "Linyong Nan"
+        },
+        {
+          "name": "Jungo Kasai"
+        },
+        {
+          "name": "Changyuan Yu"
+        },
+        {
+          "name": "Rui Zhang"
+        },
+        {
+          "name": "Alexander R. Fabbri"
+        },
+        {
+          "name": "Wojciech Kry\u015bci\u0144ski"
+        },
+        {
+          "name": "Yavuz, Semih"
+        },
+        {
+          "name": "Liu, Ye"
+        },
+        {
+          "name": "Xi Victoria Lin"
+        },
+        {
+          "name": "Shafiq Joty"
+        },
+        {
+          "name": "Zhou, Yingbo"
+        },
+        {
+          "name": "Caiming Xiong"
+        },
+        {
+          "name": "Ying, Rex"
+        },
+        {
+          "name": "Cohan, Arman"
+        },
+        {
+          "name": "Dragomir Radev"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2209.00840",
+        "ArXiv": "2209.00840"
+      },
+      "openalex_id": "https://openalex.org/W4294753225",
+      "type": "preprint",
+      "cited_by_count": 31,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "FOLIO: Natural Language Reasoning with First-Order Logic"
+    },
+    {
+      "paperId": "W4401043273",
+      "title": "Investigating Data Contamination in Modern Benchmarks for Large Language Models",
+      "abstract": "Chunyuan Deng, Yilun Zhao, Xiangru Tang, Mark Gerstein, Arman Cohan. Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers). 2024.",
+      "year": 2024,
+      "authors": [
+        {
+          "name": "Chunyuan Deng"
+        },
+        {
+          "name": "Yilun Zhao"
+        },
+        {
+          "name": "Xiangru Tang"
+        },
+        {
+          "name": "Mark Gerstein"
+        },
+        {
+          "name": "Arman Cohan"
+        }
+      ],
+      "venue": "",
+      "externalIds": {
+        "DOI": "10.18653/v1/2024.naacl-long.482"
+      },
+      "openalex_id": "https://openalex.org/W4401043273",
+      "type": "conference-paper",
+      "cited_by_count": 30,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "title-search"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "Investigating Data Contamination in Modern Benchmarks for Large Language Models"
+    },
+    {
+      "paperId": "W4385965989",
+      "title": "Time Travel in LLMs: Tracing Data Contamination in Large Language Models",
+      "abstract": "Data contamination, i.e., the presence of test data from downstream tasks in the training data of large language models (LLMs), is a potential major issue in measuring LLMs' real effectiveness on other tasks. We propose a straightforward yet effective method for identifying data contamination within LLMs. At its core, our approach starts by identifying potential contamination at the instance level; using this information, our approach then assesses wider contamination at the partition level. To estimate contamination of individual instances, we employ \"guided instruction:\" a prompt consisting of the dataset name, partition type, and the random-length initial segment of a reference instance, asking the LLM to complete it. An instance is flagged as contaminated if the LLM's output either exactly or nearly matches the latter segment of the reference. To understand if an entire partition is contaminated, we propose two ideas. The first idea marks a dataset partition as contaminated if the average overlap score with the reference instances (as measured by ROUGE-L or BLEURT) is statistically significantly better with the completions from guided instruction compared to a \"general instruction\" that does not include the dataset and partition name. The second idea marks a dataset partition as contaminated if a classifier based on GPT-4 with few-shot in-context learning prompt marks multiple generated completions as exact/near-exact matches of the corresponding reference instances. Our best method achieves an accuracy between 92% and 100% in detecting if an LLM is contaminated with seven datasets, containing train and test/validation partitions, when contrasted with manual evaluation by human experts. Further, our findings indicate that GPT-4 is contaminated with AG News, WNLI, and XSum datasets.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Shahriar Golchin"
+        },
+        {
+          "name": "Mihai Surdeanu"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2308.08493",
+        "ArXiv": "2308.08493"
+      },
+      "openalex_id": "https://openalex.org/W4385965989",
+      "type": "preprint",
+      "cited_by_count": 24,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "Time Travel in LLMs: Tracing Data Contamination in Large Language Models"
+    },
+    {
+      "paperId": "W3132736064",
+      "title": "Calibrate Before Use: Improving Few-Shot Performance of Language Models",
+      "abstract": "GPT-3 can perform numerous tasks when provided a natural language prompt that contains a few training examples. We show that this type of few-shot learning can be unstable: the choice of prompt format, training examples, and even the order of the training examples can cause accuracy to vary from near chance to near state-of-the-art. We demonstrate that this instability arises from the bias of language models towards predicting certain answers, e.g., those that are placed near the end of the prompt or are common in the pre-training data. To mitigate this, we first estimate the model's bias towards each answer by asking for its prediction when given the training prompt and a content-free test input such as \"N/A\". We then fit calibration parameters that cause the prediction for this input to be uniform across answers. On a diverse set of tasks, this contextual calibration procedure substantially improves GPT-3 and GPT-2's average accuracy (up to 30.0% absolute) and reduces variance across different choices of the prompt.",
+      "year": 2021,
+      "authors": [
+        {
+          "name": "Tony Z. Zhao"
+        },
+        {
+          "name": "Eric Wallace"
+        },
+        {
+          "name": "Shi Feng"
+        },
+        {
+          "name": "Dan Klein"
+        },
+        {
+          "name": "Sameer Singh"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2102.09690",
+        "ArXiv": "2102.09690"
+      },
+      "openalex_id": "https://openalex.org/W3132736064",
+      "type": "preprint",
+      "cited_by_count": 72,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Calibrate Before Use: Improving Few-Shot Performance of Language Models"
+    },
+    {
+      "paperId": "W4386114306",
+      "title": "Large Language Models Sensitivity to The Order of Options in Multiple-Choice Questions",
+      "abstract": "Large Language Models (LLMs) have demonstrated remarkable capabilities in various NLP tasks. However, previous works have shown these models are sensitive towards prompt wording, and few-shot demonstrations and their order, posing challenges to fair assessment of these models. As these models become more powerful, it becomes imperative to understand and address these limitations. In this paper, we focus on LLMs robustness on the task of multiple-choice questions -- commonly adopted task to study reasoning and fact-retrieving capability of LLMs. Investigating the sensitivity of LLMs towards the order of options in multiple-choice questions, we demonstrate a considerable performance gap of approximately 13% to 75% in LLMs on different benchmarks, when answer options are reordered, even when using demonstrations in a few-shot setting. Through a detailed analysis, we conjecture that this sensitivity arises when LLMs are uncertain about the prediction between the top-2/3 choices, and specific options placements may favor certain prediction between those top choices depending on the question caused by positional bias. We also identify patterns in top-2 choices that amplify or mitigate the model's bias toward option placement. We found that for amplifying bias, the optimal strategy involves positioning the top two choices as the first and last options. Conversely, to mitigate bias, we recommend placing these choices among the adjacent options. To validate our conjecture, we conduct various experiments and adopt two approaches to calibrate LLMs' predictions, leading to up to 8 percentage points improvement across different models and benchmarks.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Pouya Pezeshkpour"
+        },
+        {
+          "name": "Estevam Hruschka"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2308.11483",
+        "ArXiv": "2308.11483"
+      },
+      "openalex_id": "https://openalex.org/W4386114306",
+      "type": "preprint",
+      "cited_by_count": 9,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Large Language Models Sensitivity to The Order of Options in Multiple-Choice Questions"
+    },
+    {
+      "paperId": "W4386555476",
+      "title": "Large Language Models Are Not Robust Multiple Choice Selectors",
+      "abstract": "Multiple choice questions (MCQs) serve as a common yet important task format in the evaluation of large language models (LLMs). This work shows that modern LLMs are vulnerable to option position changes in MCQs due to their inherent \"selection bias\", namely, they prefer to select specific option IDs as answers (like \"Option A\"). Through extensive empirical analyses with 20 LLMs on three benchmarks, we pinpoint that this behavioral bias primarily stems from LLMs' token bias, where the model a priori assigns more probabilistic mass to specific option ID tokens (e.g., A/B/C/D) when predicting answers from the option IDs. To mitigate selection bias, we propose a label-free, inference-time debiasing method, called PriDe, which separates the model's prior bias for option IDs from the overall prediction distribution. PriDe first estimates the prior by permutating option contents on a small number of test samples, and then applies the estimated prior to debias the remaining samples. We demonstrate that it achieves interpretable and transferable debiasing with high computational efficiency. We hope this work can draw broader research attention to the bias and robustness of modern LLMs.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Chujie Zheng"
+        },
+        {
+          "name": "Hao Zhou"
+        },
+        {
+          "name": "Fandong Meng"
+        },
+        {
+          "name": "Jie Zhou"
+        },
+        {
+          "name": "Minlie Huang"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2309.03882",
+        "ArXiv": "2309.03882"
+      },
+      "openalex_id": "https://openalex.org/W4386555476",
+      "type": "preprint",
+      "cited_by_count": 23,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Large Language Models Are Not Robust Multiple Choice Selectors"
+    },
+    {
+      "paperId": "W4287209352",
+      "title": "Surface Form Competition: Why the Highest Probability Answer Isn't\\n Always Right",
+      "abstract": "Large language models have shown promising results in zero-shot settings\\n(Brown et al.,2020; Radford et al., 2019). For example, they can perform\\nmultiple choice tasks simply by conditioning on a question and selecting the\\nanswer with the highest probability.\\n However, ranking by string probability can be problematic due to surface form\\ncompetition-wherein different surface forms compete for probability mass, even\\nif they represent the same underlying concept, e.g. \"computer\" and \"PC.\" Since\\nprobability mass is finite, this lowers the probability of the correct answer,\\ndue to competition from other strings that are valid answers (but not one of\\nthe multiple choice options).\\n We introduce Domain Conditional Pointwise Mutual Information, an alternative\\nscoring function that directly compensates for surface form competition by\\nsimply reweighing each option according to a term that is proportional to its a\\npriori likelihood within the context of the specific zero-shot task. It\\nachieves consistent gains in zero-shot performance over both calibrated (Zhao\\net al., 2021) and uncalibrated scoring functions on all GPT-2 and GPT-3 models\\nover a variety of multiple choice datasets.\\n",
+      "year": 2021,
+      "authors": [
+        {
+          "name": "Ari Holtzman"
+        },
+        {
+          "name": "Peter West"
+        },
+        {
+          "name": "Vered Shwartz"
+        },
+        {
+          "name": "Yejin Choi"
+        },
+        {
+          "name": "Luke Zettlemoyer"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2104.08315",
+        "ArXiv": "2104.08315"
+      },
+      "openalex_id": "https://openalex.org/W4287209352",
+      "type": "preprint",
+      "cited_by_count": 3,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 0.987,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Surface Form Competition: Why the Highest Probability Answer Isn't Always Right"
+    },
+    {
+      "paperId": "W4285429195",
+      "title": "Language Models (Mostly) Know What They Know",
+      "abstract": "We study whether language models can evaluate the validity of their own claims and predict which questions they will be able to answer correctly. We first show that larger models are well-calibrated on diverse multiple choice and true/false questions when they are provided in the right format. Thus we can approach self-evaluation on open-ended sampling tasks by asking models to first propose answers, and then to evaluate the probability \"P(True)\" that their answers are correct. We find encouraging performance, calibration, and scaling for P(True) on a diverse array of tasks. Performance at self-evaluation further improves when we allow models to consider many of their own samples before predicting the validity of one specific possibility. Next, we investigate whether models can be trained to predict \"P(IK)\", the probability that \"I know\" the answer to a question, without reference to any particular proposed answer. Models perform well at predicting P(IK) and partially generalize across tasks, though they struggle with calibration of P(IK) on new tasks. The predicted P(IK) probabilities also increase appropriately in the presence of relevant source materials in the context, and in the presence of hints towards the solution of mathematical word problems. We hope these observations lay the groundwork for training more honest models, and for investigating how honesty generalizes to cases where models are trained on objectives other than the imitation of human writing.",
+      "year": 2022,
+      "authors": [
+        {
+          "name": "Saurav Kadavath"
+        },
+        {
+          "name": "Tom Conerly"
+        },
+        {
+          "name": "Amanda Askell"
+        },
+        {
+          "name": "Tom Henighan"
+        },
+        {
+          "name": "Dawn Drain"
+        },
+        {
+          "name": "Ethan Perez"
+        },
+        {
+          "name": "Nicholas Schiefer"
+        },
+        {
+          "name": "Zac Hatfield Dodds"
+        },
+        {
+          "name": "Nova DasSarma"
+        },
+        {
+          "name": "Eli Tran-Johnson"
+        },
+        {
+          "name": "Scott G. Johnston"
+        },
+        {
+          "name": "Sheer El-Showk"
+        },
+        {
+          "name": "Andy Jones"
+        },
+        {
+          "name": "Nelson Elhage"
+        },
+        {
+          "name": "Tristan Hume"
+        },
+        {
+          "name": "Anna Chen"
+        },
+        {
+          "name": "Yuntao Bai"
+        },
+        {
+          "name": "Sam Bowman"
+        },
+        {
+          "name": "Stanislav Fort"
+        },
+        {
+          "name": "Deep Ganguli"
+        },
+        {
+          "name": "Danny Hernandez"
+        },
+        {
+          "name": "Josh Jacobson"
+        },
+        {
+          "name": "Jackson Kernion"
+        },
+        {
+          "name": "Shauna Kravec"
+        },
+        {
+          "name": "Liane Lovitt"
+        },
+        {
+          "name": "Kamal Ndousse"
+        },
+        {
+          "name": "Catherine Olsson"
+        },
+        {
+          "name": "Sam Ringer"
+        },
+        {
+          "name": "Dario Amodei"
+        },
+        {
+          "name": "Tom Brown"
+        },
+        {
+          "name": "Jack A. Clark"
+        },
+        {
+          "name": "Nicholas Joseph"
+        },
+        {
+          "name": "Ben Mann"
+        },
+        {
+          "name": "Sam McCandlish"
+        },
+        {
+          "name": "Chris Olah"
+        },
+        {
+          "name": "Jared Kaplan"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2207.05221",
+        "ArXiv": "2207.05221"
+      },
+      "openalex_id": "https://openalex.org/W4285429195",
+      "type": "preprint",
+      "cited_by_count": 170,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Language Models (Mostly) Know What They Know"
+    },
+    {
+      "paperId": "W4378942171",
+      "title": "Do Large Language Models Know What They Don't Know?",
+      "abstract": "Large language models (LLMs) have a wealth of knowledge that allows them to excel in various Natural Language Processing (NLP) tasks. Current research focuses on enhancing their performance within their existing knowledge. Despite their vast knowledge, LLMs are still limited by the amount of information they can accommodate and comprehend. Therefore, the ability to understand their own limitations on the unknows, referred to as self-knowledge, is of paramount importance. This study aims to evaluate LLMs' self-knowledge by assessing their ability to identify unanswerable or unknowable questions. We introduce an automated methodology to detect uncertainty in the responses of these models, providing a novel measure of their self-knowledge. We further introduce a unique dataset, SelfAware, consisting of unanswerable questions from five diverse categories and their answerable counterparts. Our extensive analysis, involving 20 LLMs including GPT-3, InstructGPT, and LLaMA, discovering an intrinsic capacity for self-knowledge within these models. Moreover, we demonstrate that in-context learning and instruction tuning can further enhance this self-knowledge. Despite this promising insight, our findings also highlight a considerable gap between the capabilities of these models and human proficiency in recognizing the limits of their knowledge.",
+      "year": 2023,
+      "authors": [
+        {
+          "name": "Zhangyue Yin"
+        },
+        {
+          "name": "Qiushi Sun"
+        },
+        {
+          "name": "Qipeng Guo"
+        },
+        {
+          "name": "Jiawen Wu"
+        },
+        {
+          "name": "Xipeng Qiu"
+        },
+        {
+          "name": "Xuanjing Huang"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2305.18153",
+        "ArXiv": "2305.18153"
+      },
+      "openalex_id": "https://openalex.org/W4378942171",
+      "type": "preprint",
+      "cited_by_count": 7,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Do Large Language Models Know What They Don't Know?"
+    },
+    {
+      "paperId": "W4391835676",
+      "title": "Premise Order Matters in Reasoning with Large Language Models",
+      "abstract": "Large language models (LLMs) have accomplished remarkable reasoning performance in various domains. However, in the domain of reasoning tasks, we discover a frailty: LLMs are surprisingly brittle to the ordering of the premises, despite the fact that such ordering does not alter the underlying task. In particular, we observe that LLMs achieve the best performance when the premise order aligns with the context required in intermediate reasoning steps. For example, in deductive reasoning tasks, presenting the premises in the same order as the ground truth proof in the prompt (as opposed to random ordering) drastically increases the model's accuracy. We first examine the effect of premise ordering on deductive reasoning on a variety of LLMs, and our evaluation shows that permuting the premise order can cause a performance drop of over 30%. In addition, we release the benchmark R-GSM, based on GSM8K, to examine the ordering effect for mathematical problem-solving, and we again observe a significant drop in accuracy, relative to the original GSM8K benchmark.",
+      "year": 2024,
+      "authors": [
+        {
+          "name": "Xinyun Chen"
+        },
+        {
+          "name": "Ryan A. Chi"
+        },
+        {
+          "name": "Xuezhi Wang"
+        },
+        {
+          "name": "Denny Zhou"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2402.08939",
+        "ArXiv": "2402.08939"
+      },
+      "openalex_id": "https://openalex.org/W4391835676",
+      "type": "preprint",
+      "cited_by_count": 3,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "related_work[3]",
+      "candidate_title": "Premise Order Matters in Reasoning with Large Language Models"
+    },
+    {
+      "paperId": "W2084413241",
+      "title": "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages",
+      "abstract": "Two formulas are presented for judging the significance of the difference between correlated proportions. The chi square equivalent of one of the developed formulas is pointed out.",
+      "year": 1947,
+      "authors": [
+        {
+          "name": "Quinn McNemar"
+        }
+      ],
+      "venue": "Psychometrika",
+      "externalIds": {
+        "DOI": "10.1007/bf02295996"
+      },
+      "openalex_id": "https://openalex.org/W2084413241",
+      "type": "article",
+      "cited_by_count": 4508,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Note on the sampling error of the difference between correlated proportions or percentages"
+    },
+    {
+      "paperId": "W2126728600",
+      "title": "Better Bootstrap Confidence Intervals",
+      "abstract": "We consider the problem of setting approximate confidence intervals for a single parameter \u03b8 in a multiparameter family. The standard approximate intervals based on maximum likelihood theory, , can be quite misleading. In practice, tricks based on transformations, bias corrections, and so forth, are often used to improve their accuracy. The bootstrap confidence intervals discussed in this article automatically incorporate such tricks without requiring the statistician to think them through for each new application, at the price of a considerable increase in computational effort. The new intervals incorporate an improvement over previously suggested methods, which results in second-order correctness in a wide variety of problems. In addition to parametric families, bootstrap intervals are also developed for nonparametric situations.",
+      "year": 1987,
+      "authors": [
+        {
+          "name": "Bradley Efron"
+        }
+      ],
+      "venue": "Journal of the American Statistical Association",
+      "externalIds": {
+        "DOI": "10.1080/01621459.1987.10478410"
+      },
+      "openalex_id": "https://openalex.org/W2126728600",
+      "type": "article",
+      "cited_by_count": 3371,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Better Bootstrap Confidence Intervals"
+    },
+    {
+      "paperId": "W2057748516",
+      "title": "Calculation of signal detection theory measures",
+      "abstract": "",
+      "year": 1999,
+      "authors": [
+        {
+          "name": "Harold Stanislaw"
+        },
+        {
+          "name": "Natasha Todorov"
+        }
+      ],
+      "venue": "Behavior Research Methods, Instruments, & Computers",
+      "externalIds": {
+        "DOI": "10.3758/bf03207704"
+      },
+      "openalex_id": "https://openalex.org/W2057748516",
+      "type": "article",
+      "cited_by_count": 3192,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "doi"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Calculation of signal detection theory measures"
+    },
+    {
+      "paperId": "W2160719354",
+      "title": "Detection Theory: A User's Guide",
+      "abstract": "Both a user's guide and a theoretical exposition of modern detection theory, incorporating recent developments and covering the two major alternative versions of detection theory.",
+      "year": 1991,
+      "authors": [
+        {
+          "name": "Neil A. Macmillan"
+        },
+        {
+          "name": "C. Douglas Creelman"
+        }
+      ],
+      "venue": "",
+      "externalIds": {},
+      "openalex_id": "https://openalex.org/W2160719354",
+      "type": "article",
+      "cited_by_count": 5243,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "title-search"
+      },
+      "discovered_for": "related_work[4]",
+      "candidate_title": "Detection Theory: A User's Guide"
+    },
+    {
+      "paperId": "W4405655184",
+      "title": "Qwen2.5 Technical Report",
+      "abstract": "In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet diverse needs. Compared to previous iterations, Qwen 2.5 has been significantly improved during both the pre-training and post-training stages. In terms of pre-training, we have scaled the high-quality pre-training datasets from the previous 7 trillion tokens to 18 trillion tokens. This provides a strong foundation for common sense, expert knowledge, and reasoning capabilities. In terms of post-training, we implement intricate supervised finetuning with over 1 million samples, as well as multistage reinforcement learning. Post-training techniques enhance human preference, and notably improve long text generation, structural data analysis, and instruction following. To handle diverse and varied use cases effectively, we present Qwen2.5 LLM series in rich sizes. Open-weight offerings include base and instruction-tuned models, with quantized versions available. In addition, for hosted solutions, the proprietary models currently include two mixture-of-experts (MoE) variants: Qwen2.5-Turbo and Qwen2.5-Plus, both available from Alibaba Cloud Model Studio. Qwen2.5 has demonstrated top-tier performance on a wide range of benchmarks evaluating language understanding, reasoning, mathematics, coding, human preference alignment, etc. Specifically, the open-weight flagship Qwen2.5-72B-Instruct outperforms a number of open and proprietary models and demonstrates competitive performance to the state-of-the-art open-weight model, Llama-3-405B-Instruct, which is around 5 times larger. Qwen2.5-Turbo and Qwen2.5-Plus offer superior cost-effectiveness while performing competitively against GPT-4o-mini and GPT-4o respectively. Additionally, as the foundation, Qwen2.5 models have been instrumental in training specialized models such as Qwen2.5-Math, Qwen2.5-Coder, QwQ, and multimodal models.",
+      "year": 2024,
+      "authors": [
+        {
+          "name": "Qwen"
+        },
+        {
+          "name": ":"
+        },
+        {
+          "name": "Yang An"
+        },
+        {
+          "name": "Baosong Yang"
+        },
+        {
+          "name": "Beichen Zhang"
+        },
+        {
+          "name": "Binyuan Hui"
+        },
+        {
+          "name": "B. Zheng"
+        },
+        {
+          "name": "Bowen Yu"
+        },
+        {
+          "name": "Chengyuan Li"
+        },
+        {
+          "name": "Dayiheng Liu"
+        },
+        {
+          "name": "Fei Huang"
+        },
+        {
+          "name": "Haoran Wei"
+        },
+        {
+          "name": "Huancai Lin"
+        },
+        {
+          "name": "Jian Yang"
+        },
+        {
+          "name": "Jianhong Tu"
+        },
+        {
+          "name": "Jianwei Zhang"
+        },
+        {
+          "name": "Jianxin Yang"
+        },
+        {
+          "name": "Jiaxi Yang"
+        },
+        {
+          "name": "Jingren Zhou"
+        },
+        {
+          "name": "Junyang Lin"
+        },
+        {
+          "name": "Kai Dang"
+        },
+        {
+          "name": "Keming Lu"
+        },
+        {
+          "name": "Keqin Bao"
+        },
+        {
+          "name": "Kexin Yang"
+        },
+        {
+          "name": "Le Yu"
+        },
+        {
+          "name": "Mei Li"
+        },
+        {
+          "name": "Mingfeng Xue"
+        },
+        {
+          "name": "Pei Zhang"
+        },
+        {
+          "name": "Qin Zhu"
+        },
+        {
+          "name": "Rui Men"
+        },
+        {
+          "name": "Runji Lin"
+        },
+        {
+          "name": "Tianhao Li"
+        },
+        {
+          "name": "Tang, Tianyi"
+        },
+        {
+          "name": "Xia, Tingyu"
+        },
+        {
+          "name": "Xingzhang Ren"
+        },
+        {
+          "name": "Xuancheng Ren"
+        },
+        {
+          "name": "Fan, Yang"
+        },
+        {
+          "name": "Su Yang"
+        },
+        {
+          "name": "Yichang Zhang"
+        },
+        {
+          "name": "Yuqin Wan"
+        },
+        {
+          "name": "Yuqiong Liu"
+        },
+        {
+          "name": "Zeyu Cui"
+        },
+        {
+          "name": "Zhenru Zhang"
+        },
+        {
+          "name": "Zihan Qiu"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2412.15115",
+        "ArXiv": "2412.15115"
+      },
+      "openalex_id": "https://openalex.org/W4405655184",
+      "type": "preprint",
+      "cited_by_count": 103,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "Qwen2.5 Technical Report"
+    },
+    {
+      "paperId": "W7115097999",
+      "title": "The Llama 3 herd of models",
+      "abstract": "International audience",
+      "year": 2025,
+      "authors": [
+        {
+          "name": "Grattafiori, Aaron"
+        },
+        {
+          "name": "Dubey, Abhimanyu"
+        },
+        {
+          "name": "Jauhri, Abhinav"
+        },
+        {
+          "name": "Pandey, Abhinav"
+        },
+        {
+          "name": "Kadian, Abhishek"
+        },
+        {
+          "name": "Al-Dahle, Ahmad"
+        },
+        {
+          "name": "Letman, Aiesha"
+        },
+        {
+          "name": "Mathur, Akhil"
+        },
+        {
+          "name": "Schelten, Alan"
+        },
+        {
+          "name": "Vaughan, Alex"
+        },
+        {
+          "name": "Yang, Amy"
+        },
+        {
+          "name": "Fan, Angela"
+        },
+        {
+          "name": "Goyal, Anirudh"
+        },
+        {
+          "name": "Hartshorn, Anthony"
+        },
+        {
+          "name": "Yang, Aobo"
+        },
+        {
+          "name": "Mitra, Archi"
+        },
+        {
+          "name": "Sravankumar, Archie"
+        },
+        {
+          "name": "Korenev, Artem"
+        },
+        {
+          "name": "Hinsvark, Arthur"
+        },
+        {
+          "name": "Rao, Arun"
+        },
+        {
+          "name": "Zhang, Aston"
+        },
+        {
+          "name": "Rodriguez, Aurelien"
+        },
+        {
+          "name": "Gregerson, Austen"
+        },
+        {
+          "name": "Spataru, Ava"
+        },
+        {
+          "name": "Roziere, Baptiste"
+        },
+        {
+          "name": "Biron, Bethany"
+        },
+        {
+          "name": "Tang, Binh"
+        },
+        {
+          "name": "Chern, Bobbie"
+        },
+        {
+          "name": "Caucheteux, Charlotte"
+        },
+        {
+          "name": "Nayak, Chaya"
+        },
+        {
+          "name": "Bi, Chloe"
+        },
+        {
+          "name": "Marra, Chris"
+        },
+        {
+          "name": "Mcconnell, Chris"
+        },
+        {
+          "name": "Keller, Christian"
+        },
+        {
+          "name": "Touret, Christophe"
+        },
+        {
+          "name": "Wu, Chunyang"
+        },
+        {
+          "name": "Wong, Corinne"
+        },
+        {
+          "name": "Ferrer, Cristian Canton"
+        },
+        {
+          "name": "Nikolaidis, Cyrus"
+        },
+        {
+          "name": "Allonsius, Damien"
+        },
+        {
+          "name": "Song, Daniel"
+        },
+        {
+          "name": "Pintz, Danielle"
+        },
+        {
+          "name": "Livshits, Danny"
+        },
+        {
+          "name": "Wyatt, Danny"
+        },
+        {
+          "name": "Esiobu, David"
+        },
+        {
+          "name": "Choudhary, Dhruv"
+        },
+        {
+          "name": "Mahajan, Dhruv"
+        },
+        {
+          "name": "Garcia-Olano, Diego"
+        },
+        {
+          "name": "Perino, Diego"
+        },
+        {
+          "name": "Valko, Michal"
+        }
+      ],
+      "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+      "externalIds": {},
+      "openalex_id": "https://openalex.org/W7115097999",
+      "type": "preprint",
+      "cited_by_count": 0,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "title-search"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "The Llama 3 Herd of Models"
+    },
+    {
+      "paperId": "W6947991961",
+      "title": "Gemma 3 Technical Report",
+      "abstract": "We introduce Gemma 3, a multimodal addition to the Gemma family of lightweight open models, ranging in scale from 1 to 27 billion parameters. This version introduces vision understanding abilities, a wider coverage of languages and longer context - at least 128K tokens. We also change the architecture of the model to reduce the KV-cache memory that tends to explode with long context. This is achieved by increasing the ratio of local to global attention layers, and keeping the span on local attention short. The Gemma 3 models are trained with distillation and achieve superior performance to Gemma 2 for both pre-trained and instruction finetuned versions. In particular, our novel post-training recipe significantly improves the math, chat, instruction-following and multilingual abilities, making Gemma3-4B-IT competitive with Gemma2-27B-IT and Gemma3-27B-IT comparable to Gemini-1.5-Pro across benchmarks. We release all our models to the community.",
+      "year": 2025,
+      "authors": [
+        {
+          "name": "Gemma Team"
+        },
+        {
+          "name": "Kamath, Aishwarya"
+        },
+        {
+          "name": "Ferret, Johan"
+        },
+        {
+          "name": "Pathak, Shreya"
+        },
+        {
+          "name": "Vieillard, Nino"
+        },
+        {
+          "name": "Merhej, Ramona"
+        },
+        {
+          "name": "Perrin, Sarah"
+        },
+        {
+          "name": "Matejovicova, Tatiana"
+        },
+        {
+          "name": "Ram\u00e9, Alexandre"
+        },
+        {
+          "name": "Rivi\u00e8re, Morgane"
+        },
+        {
+          "name": "Rouillard, Louis"
+        },
+        {
+          "name": "Mesnard, Thomas"
+        },
+        {
+          "name": "Cideron, Geoffrey"
+        },
+        {
+          "name": "Grill, Jean-bastien"
+        },
+        {
+          "name": "Ramos, Sabela"
+        },
+        {
+          "name": "Yvinec, Edouard"
+        },
+        {
+          "name": "Casbon, Michelle"
+        },
+        {
+          "name": "Pot, Etienne"
+        },
+        {
+          "name": "Penchev, Ivo"
+        },
+        {
+          "name": "Liu, Ga\u00ebl"
+        },
+        {
+          "name": "Visin, Francesco"
+        },
+        {
+          "name": "Kenealy, Kathleen"
+        },
+        {
+          "name": "Beyer, Lucas"
+        },
+        {
+          "name": "Zhai, Xiaohai"
+        },
+        {
+          "name": "Tsitsulin, Anton"
+        },
+        {
+          "name": "Busa-Fekete, Robert"
+        },
+        {
+          "name": "Feng, Alex"
+        },
+        {
+          "name": "Sachdeva, Noveen"
+        },
+        {
+          "name": "Coleman, Benjamin"
+        },
+        {
+          "name": "Gao, Yi"
+        },
+        {
+          "name": "Mustafa, Basil"
+        },
+        {
+          "name": "Barr, Iain"
+        },
+        {
+          "name": "Parisotto, Emilio"
+        },
+        {
+          "name": "Tian, David"
+        },
+        {
+          "name": "Eyal, Matan"
+        },
+        {
+          "name": "Cherry, Colin"
+        },
+        {
+          "name": "Peter, Jan-Thorsten"
+        },
+        {
+          "name": "Sinopalnikov, Danila"
+        },
+        {
+          "name": "Bhupatiraju, Surya"
+        },
+        {
+          "name": "Agarwal, Rishabh"
+        },
+        {
+          "name": "Kazemi, Mehran"
+        },
+        {
+          "name": "Malkin, Dan"
+        },
+        {
+          "name": "Kumar, Ravin"
+        },
+        {
+          "name": "Vilar, David"
+        },
+        {
+          "name": "Brusilovsky, Idan"
+        },
+        {
+          "name": "Luo, Jiaming"
+        },
+        {
+          "name": "Steiner, Andreas"
+        },
+        {
+          "name": "Friesen, Abe"
+        },
+        {
+          "name": "Sharma, Abhanshu"
+        },
+        {
+          "name": "Sharma, Abheesht"
+        },
+        {
+          "name": "Gilady, Adi Mayrav"
+        },
+        {
+          "name": "Goedeckemeyer, Adrian"
+        },
+        {
+          "name": "Saade, Alaa"
+        },
+        {
+          "name": "Feng, Alex"
+        },
+        {
+          "name": "Kolesnikov, Alexander"
+        },
+        {
+          "name": "Bendebury, Alexei"
+        },
+        {
+          "name": "Abdagic, Alvin"
+        },
+        {
+          "name": "Vadi, Amit"
+        },
+        {
+          "name": "Gy\u00f6rgy, Andr\u00e1s"
+        },
+        {
+          "name": "Pinto, Andr\u00e9 Susano"
+        },
+        {
+          "name": "Das, Anil"
+        },
+        {
+          "name": "Bapna, Ankur"
+        },
+        {
+          "name": "Miech, Antoine"
+        },
+        {
+          "name": "Yang, Antoine"
+        },
+        {
+          "name": "Paterson, Antonia"
+        },
+        {
+          "name": "Shenoy, Ashish"
+        },
+        {
+          "name": "Chakrabarti, Ayan"
+        },
+        {
+          "name": "Piot, Bilal"
+        },
+        {
+          "name": "Wu, Bo"
+        },
+        {
+          "name": "Shahriari, Bobak"
+        },
+        {
+          "name": "Petrini, Bryce"
+        },
+        {
+          "name": "Chen, Charlie"
+        },
+        {
+          "name": "Lan, Charline Le"
+        },
+        {
+          "name": "Choquette-Choo, Christopher A."
+        },
+        {
+          "name": "Carey, CJ"
+        },
+        {
+          "name": "Brick, Cormac"
+        },
+        {
+          "name": "Deutsch, Daniel"
+        },
+        {
+          "name": "Eisenbud, Danielle"
+        },
+        {
+          "name": "Cattle, Dee"
+        },
+        {
+          "name": "Cheng, Derek"
+        },
+        {
+          "name": "Paparas, Dimitris"
+        },
+        {
+          "name": "Sreepathihalli, Divyashree Shivakumar"
+        },
+        {
+          "name": "Reid, Doug"
+        },
+        {
+          "name": "Tran, Dustin"
+        },
+        {
+          "name": "Zelle, Dustin"
+        },
+        {
+          "name": "Noland, Eric"
+        },
+        {
+          "name": "Huizenga, Erwin"
+        },
+        {
+          "name": "Kharitonov, Eugene"
+        },
+        {
+          "name": "Liu, Frederick"
+        },
+        {
+          "name": "Amirkhanyan, Gagik"
+        },
+        {
+          "name": "Cameron, Glenn"
+        },
+        {
+          "name": "Hashemi, Hadi"
+        },
+        {
+          "name": "Klimczak-Pluci\u0144ska, Hanna"
+        },
+        {
+          "name": "Singh, Harman"
+        },
+        {
+          "name": "Mehta, Harsh"
+        },
+        {
+          "name": "Lehri, Harshal Tushar"
+        },
+        {
+          "name": "Hazimeh, Hussein"
+        },
+        {
+          "name": "Ballantyne, Ian"
+        },
+        {
+          "name": "Szpektor, Idan"
+        },
+        {
+          "name": "Nardini, Ivan"
+        },
+        {
+          "name": "Pouget-Abadie, Jean"
+        },
+        {
+          "name": "Chan, Jetha"
+        },
+        {
+          "name": "Stanton, Joe"
+        },
+        {
+          "name": "Wieting, John"
+        },
+        {
+          "name": "Lai, Jonathan"
+        },
+        {
+          "name": "Orbay, Jordi"
+        },
+        {
+          "name": "Fernandez, Joseph"
+        },
+        {
+          "name": "Newlan, Josh"
+        },
+        {
+          "name": "Ji, Ju-yeong"
+        },
+        {
+          "name": "Singh, Jyotinder"
+        },
+        {
+          "name": "Black, Kat"
+        },
+        {
+          "name": "Yu, Kathy"
+        },
+        {
+          "name": "Hui, Kevin"
+        },
+        {
+          "name": "Vodrahalli, Kiran"
+        },
+        {
+          "name": "Greff, Klaus"
+        },
+        {
+          "name": "Qiu, Linhai"
+        },
+        {
+          "name": "Valentine, Marcella"
+        },
+        {
+          "name": "Coelho, Marina"
+        },
+        {
+          "name": "Ritter, Marvin"
+        },
+        {
+          "name": "Hoffman, Matt"
+        },
+        {
+          "name": "Watson, Matthew"
+        },
+        {
+          "name": "Chaturvedi, Mayank"
+        },
+        {
+          "name": "Moynihan, Michael"
+        },
+        {
+          "name": "Ma, Min"
+        },
+        {
+          "name": "Babar, Nabila"
+        },
+        {
+          "name": "Noy, Natasha"
+        },
+        {
+          "name": "Byrd, Nathan"
+        },
+        {
+          "name": "Roy, Nick"
+        },
+        {
+          "name": "Momchev, Nikola"
+        },
+        {
+          "name": "Chauhan, Nilay"
+        },
+        {
+          "name": "Sachdeva, Noveen"
+        },
+        {
+          "name": "Bunyan, Oskar"
+        },
+        {
+          "name": "Botarda, Pankil"
+        },
+        {
+          "name": "Caron, Paul"
+        },
+        {
+          "name": "Rubenstein, Paul Kishan"
+        },
+        {
+          "name": "Culliton, Phil"
+        },
+        {
+          "name": "Schmid, Philipp"
+        },
+        {
+          "name": "Sessa, Pier Giuseppe"
+        },
+        {
+          "name": "Xu, Pingmei"
+        },
+        {
+          "name": "Stanczyk, Piotr"
+        },
+        {
+          "name": "Tafti, Pouya"
+        },
+        {
+          "name": "Shivanna, Rakesh"
+        },
+        {
+          "name": "Wu, Renjie"
+        },
+        {
+          "name": "Pan, Renke"
+        },
+        {
+          "name": "Rokni, Reza"
+        },
+        {
+          "name": "Willoughby, Rob"
+        },
+        {
+          "name": "Vallu, Rohith"
+        },
+        {
+          "name": "Mullins, Ryan"
+        },
+        {
+          "name": "Jerome, Sammy"
+        },
+        {
+          "name": "Smoot, Sara"
+        },
+        {
+          "name": "Girgin, Sertan"
+        },
+        {
+          "name": "Iqbal, Shariq"
+        },
+        {
+          "name": "Reddy, Shashir"
+        },
+        {
+          "name": "Sheth, Shruti"
+        },
+        {
+          "name": "P\u00f5der, Siim"
+        },
+        {
+          "name": "Bhatnagar, Sijal"
+        },
+        {
+          "name": "Panyam, Sindhu Raghuram"
+        },
+        {
+          "name": "Eiger, Sivan"
+        },
+        {
+          "name": "Zhang, Susan"
+        },
+        {
+          "name": "Liu, Tianqi"
+        },
+        {
+          "name": "Yacovone, Trevor"
+        },
+        {
+          "name": "Liechty, Tyler"
+        },
+        {
+          "name": "Kalra, Uday"
+        },
+        {
+          "name": "Evci, Utku"
+        },
+        {
+          "name": "Misra, Vedant"
+        },
+        {
+          "name": "Roseberry, Vincent"
+        },
+        {
+          "name": "Feinberg, Vlad"
+        },
+        {
+          "name": "Kolesnikov, Vlad"
+        },
+        {
+          "name": "Han, Woohyun"
+        },
+        {
+          "name": "Kwon, Woosuk"
+        },
+        {
+          "name": "Chen, Xi"
+        },
+        {
+          "name": "Chow, Yinlam"
+        },
+        {
+          "name": "Zhu, Yuvein"
+        },
+        {
+          "name": "Wei, Zichuan"
+        },
+        {
+          "name": "Egyed, Zoltan"
+        },
+        {
+          "name": "Cotruta, Victor"
+        },
+        {
+          "name": "Giang, Minh"
+        },
+        {
+          "name": "Kirk, Phoebe"
+        },
+        {
+          "name": "Rao, Anand"
+        },
+        {
+          "name": "Black, Kat"
+        },
+        {
+          "name": "Babar, Nabila"
+        },
+        {
+          "name": "Lo, Jessica"
+        },
+        {
+          "name": "Moreira, Erica"
+        },
+        {
+          "name": "Martins, Luiz Gustavo"
+        },
+        {
+          "name": "Sanseviero, Omar"
+        },
+        {
+          "name": "Gonzalez, Lucas"
+        },
+        {
+          "name": "Gleicher, Zach"
+        },
+        {
+          "name": "Warkentin, Tris"
+        },
+        {
+          "name": "Mirrokni, Vahab"
+        },
+        {
+          "name": "Senter, Evan"
+        },
+        {
+          "name": "Collins, Eli"
+        },
+        {
+          "name": "Barral, Joelle"
+        },
+        {
+          "name": "Ghahramani, Zoubin"
+        },
+        {
+          "name": "Hadsell, Raia"
+        },
+        {
+          "name": "Matias, Yossi"
+        },
+        {
+          "name": "Sculley, D."
+        },
+        {
+          "name": "Petrov, Slav"
+        },
+        {
+          "name": "Fiedel, Noah"
+        },
+        {
+          "name": "Shazeer, Noam"
+        },
+        {
+          "name": "Vinyals, Oriol"
+        },
+        {
+          "name": "Dean, Jeff"
+        },
+        {
+          "name": "Hassabis, Demis"
+        },
+        {
+          "name": "Kavukcuoglu, Koray"
+        },
+        {
+          "name": "Farabet, Clement"
+        },
+        {
+          "name": "Buchatskaya, Elena"
+        },
+        {
+          "name": "Alayrac, Jean-Baptiste"
+        },
+        {
+          "name": "Anil, Rohan"
+        },
+        {
+          "name": "Dmitry"
+        },
+        {
+          "name": "Lepikhin"
+        },
+        {
+          "name": "Borgeaud, Sebastian"
+        },
+        {
+          "name": "Bachem, Olivier"
+        },
+        {
+          "name": "Joulin, Armand"
+        },
+        {
+          "name": "Andreev, Alek"
+        },
+        {
+          "name": "Hardin, Cassidy"
+        },
+        {
+          "name": "Dadashi, Robert"
+        },
+        {
+          "name": "Hussenot, L\u00e9onard"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2503.19786",
+        "ArXiv": "2503.19786"
+      },
+      "openalex_id": "https://openalex.org/W6947991961",
+      "type": "preprint",
+      "cited_by_count": 65,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "Gemma 3 Technical Report"
+    },
+    {
+      "paperId": "W4415085804",
+      "title": "Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs",
+      "abstract": "We introduce Phi-4-Mini and Phi-4-Multimodal, compact yet highly capable language and multimodal models. Phi-4-Mini is a 3.8-billion-parameter language model trained on high-quality web and synthetic data, significantly outperforming recent open-source models of similar size and matching the performance of models twice its size on math and coding tasks requiring complex reasoning. This achievement is driven by a carefully curated synthetic data recipe emphasizing high-quality math and coding datasets. Compared to its predecessor, Phi-3.5-Mini, Phi-4-Mini features an expanded vocabulary size of 200K tokens to better support multilingual applications, as well as group query attention for more efficient long-sequence generation. Phi-4-Multimodal is a multimodal model that integrates text, vision, and speech/audio input modalities into a single model. Its novel modality extension approach leverages LoRA adapters and modality-specific routers to allow multiple inference modes combining various modalities without interference. For example, it now ranks first in the OpenASR leaderboard to date, although the LoRA component of the speech/audio modality has just 460 million parameters. Phi-4-Multimodal supports scenarios involving (vision + language), (vision + speech), and (speech/audio) inputs, outperforming larger vision-language and speech-language models on a wide range of tasks. Additionally, we experiment to further train Phi-4-Mini to enhance its reasoning capabilities. Despite its compact 3.8-billion-parameter size, this experimental version achieves reasoning performance on par with or surpassing significantly larger models, including DeepSeek-R1-Distill-Qwen-7B and DeepSeek-R1-Distill-Llama-8B.",
+      "year": 2025,
+      "authors": [
+        {
+          "name": "Microsoft"
+        },
+        {
+          "name": ":"
+        },
+        {
+          "name": "Abdelrahman Abouelenin"
+        },
+        {
+          "name": "Atabak Ashfaq"
+        },
+        {
+          "name": "Adam Atkinson"
+        },
+        {
+          "name": "Hany Hassan Awadalla"
+        },
+        {
+          "name": "Nguy\u1ec5n B\u00e1ch"
+        },
+        {
+          "name": "Jianmin Bao"
+        },
+        {
+          "name": "Alon Benhaim"
+        },
+        {
+          "name": "Martin Cai"
+        },
+        {
+          "name": "Vishrav Chaudhary"
+        },
+        {
+          "name": "Congcong Chen"
+        },
+        {
+          "name": "Dong Chen"
+        },
+        {
+          "name": "Dongdong Chen"
+        },
+        {
+          "name": "Junkun Chen"
+        },
+        {
+          "name": "Weizhu Chen"
+        },
+        {
+          "name": "Yen\u2010Chun Chen"
+        },
+        {
+          "name": "Yiling Chen"
+        },
+        {
+          "name": "Qi Dai"
+        },
+        {
+          "name": "Xiyang Dai"
+        },
+        {
+          "name": "Ruchao Fan"
+        },
+        {
+          "name": "Mei Gao"
+        },
+        {
+          "name": "Min Gao"
+        },
+        {
+          "name": "Amit Garg"
+        },
+        {
+          "name": "Abhishek Goswami"
+        },
+        {
+          "name": "Junheng Hao"
+        },
+        {
+          "name": "Amr Hendy"
+        },
+        {
+          "name": "Yuxuan Hu"
+        },
+        {
+          "name": "Xin Jin"
+        },
+        {
+          "name": "Mahmoud Khademi"
+        },
+        {
+          "name": "Dongwoo Kim"
+        },
+        {
+          "name": "Young Jin Kim"
+        },
+        {
+          "name": "Gina Lee"
+        },
+        {
+          "name": "Jinyu Li"
+        },
+        {
+          "name": "Yunsheng Li"
+        },
+        {
+          "name": "Liang Chen"
+        },
+        {
+          "name": "Xihui Lin"
+        },
+        {
+          "name": "Zeqi Lin"
+        },
+        {
+          "name": "Mengchen Liu"
+        },
+        {
+          "name": "Yang Liu"
+        },
+        {
+          "name": "Gilsinia Lopez"
+        },
+        {
+          "name": "Chong Luo"
+        },
+        {
+          "name": "Piyush Madan"
+        },
+        {
+          "name": "Vadim Mazalov"
+        },
+        {
+          "name": "Arindam Mitra"
+        },
+        {
+          "name": "Alireza Mousavi"
+        },
+        {
+          "name": "Anh D. Nguyen"
+        },
+        {
+          "name": "Jing Pan"
+        },
+        {
+          "name": "Daniel Perez-Becker"
+        },
+        {
+          "name": "Jacob Platin"
+        },
+        {
+          "name": "Thomas Portet"
+        },
+        {
+          "name": "Kai Qiu"
+        },
+        {
+          "name": "Bo Ren"
+        },
+        {
+          "name": "Liliang Ren"
+        },
+        {
+          "name": "Sambuddha Roy"
+        },
+        {
+          "name": "Ning Shang"
+        },
+        {
+          "name": "Yelong Shen"
+        },
+        {
+          "name": "Saksham Singhal"
+        },
+        {
+          "name": "Subhojit Som"
+        },
+        {
+          "name": "Xia Song"
+        },
+        {
+          "name": "Tetyana Sych"
+        },
+        {
+          "name": "Praneetha Vaddamanu"
+        },
+        {
+          "name": "Shuohang Wang"
+        },
+        {
+          "name": "Yiming Wang"
+        },
+        {
+          "name": "Zhenghao Wang"
+        },
+        {
+          "name": "Haibin Wu"
+        },
+        {
+          "name": "Haoran Xu"
+        },
+        {
+          "name": "Weijian Xu"
+        },
+        {
+          "name": "Yifan Yang"
+        },
+        {
+          "name": "Ziyi Yang"
+        },
+        {
+          "name": "Donghan Yu"
+        },
+        {
+          "name": "Ishmam Zabir"
+        },
+        {
+          "name": "Jianwen Zhang"
+        },
+        {
+          "name": "Li Lyna Zhang"
+        },
+        {
+          "name": "Yunan Zhang"
+        },
+        {
+          "name": "Xiren Zhou"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2503.01743",
+        "ArXiv": "2503.01743"
+      },
+      "openalex_id": "https://openalex.org/W4415085804",
+      "type": "preprint",
+      "cited_by_count": 7,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs"
+    },
+    {
+      "paperId": "W4406032137",
+      "title": "2 OLMo 2 Furious",
+      "abstract": "We present OLMo 2, the next generation of our fully open language models. OLMo 2 includes a family of dense autoregressive language models at 7B, 13B and 32B scales with fully released artifacts -- model weights, full training data, training code and recipes, training logs and thousands of intermediate checkpoints. In this work, we describe our modified model architecture and training recipe, focusing on techniques for achieving better training stability and improved per-token efficiency. Our updated pretraining data mixture introduces a new, specialized data mix called Dolmino Mix 1124, which significantly improves model capabilities across many downstream task benchmarks when introduced via late-stage curriculum training (i.e. specialized data during the annealing phase of pretraining). Finally, we incorporate best practices from T\u00fclu 3 to develop OLMo 2-Instruct, focusing on permissive data and extending our final-stage reinforcement learning with verifiable rewards (RLVR). Our OLMo 2 base models sit at the Pareto frontier of performance to training compute, often matching or outperforming open-weight only models like Llama 3.1, Qwen 2.5, and Gemma 2 while using fewer FLOPs and with fully transparent training data, code, and recipe. Our fully open OLMo 2-Instruct models are competitive with open-weight only models of comparable size and even some proprietary models like GPT-3.5 Turbo and GPT 4o Mini.",
+      "year": 2024,
+      "authors": [
+        {
+          "name": "Team OLMo"
+        },
+        {
+          "name": "P N Walsh"
+        },
+        {
+          "name": "Luca Soldaini"
+        },
+        {
+          "name": "Dirk Groeneveld"
+        },
+        {
+          "name": "Kyle Lo"
+        },
+        {
+          "name": "Shane Arora"
+        },
+        {
+          "name": "Akshita Bhagia"
+        },
+        {
+          "name": "Yuling Gu"
+        },
+        {
+          "name": "Shengyi Huang"
+        },
+        {
+          "name": "Matt Jordan"
+        },
+        {
+          "name": "Nathan Lambert"
+        },
+        {
+          "name": "Dustin Schwenk"
+        },
+        {
+          "name": "Oyvind Tafjord"
+        },
+        {
+          "name": "Anderson, Taira"
+        },
+        {
+          "name": "David Atkinson"
+        },
+        {
+          "name": "Faeze Brahman"
+        },
+        {
+          "name": "Christopher Clark"
+        },
+        {
+          "name": "Pradeep Dasigi"
+        },
+        {
+          "name": "Nouha Dziri"
+        },
+        {
+          "name": "Ettinger, Allyson"
+        },
+        {
+          "name": "Michal Guerquin"
+        },
+        {
+          "name": "Heineman, David"
+        },
+        {
+          "name": "Hamish Ivison"
+        },
+        {
+          "name": "Pang Wei Koh"
+        },
+        {
+          "name": "Jiacheng Liu"
+        },
+        {
+          "name": "Saumya Malik"
+        },
+        {
+          "name": "William Merrill"
+        },
+        {
+          "name": "Lester James V. Miranda"
+        },
+        {
+          "name": "Jacob Morrison"
+        },
+        {
+          "name": "Tyler Murray"
+        },
+        {
+          "name": "Crystal Nam"
+        },
+        {
+          "name": "Poznanski, Jake"
+        },
+        {
+          "name": "Valentina Pyatkin"
+        },
+        {
+          "name": "Aman Rangapur"
+        },
+        {
+          "name": "Michael Schmitz"
+        },
+        {
+          "name": "Sam Skjonsberg"
+        },
+        {
+          "name": "David Wadden"
+        },
+        {
+          "name": "Christopher Wilhelm"
+        },
+        {
+          "name": "Michael D. Wilson"
+        },
+        {
+          "name": "Luke Zettlemoyer"
+        },
+        {
+          "name": "Ali Farhadi"
+        },
+        {
+          "name": "Noah A. Smith"
+        },
+        {
+          "name": "Hannaneh Hajishirzi"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2501.00656",
+        "ArXiv": "2501.00656"
+      },
+      "openalex_id": "https://openalex.org/W4406032137",
+      "type": "preprint",
+      "cited_by_count": 2,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "2 OLMo 2 Furious"
+    },
+    {
+      "paperId": "W4407209014",
+      "title": "SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model",
+      "abstract": "While large language models have facilitated breakthroughs in many applications of artificial intelligence, their inherent largeness makes them computationally expensive and challenging to deploy in resource-constrained settings. In this paper, we document the development of SmolLM2, a state-of-the-art \"small\" (1.7 billion parameter) language model (LM). To attain strong performance, we overtrain SmolLM2 on ~11 trillion tokens of data using a multi-stage training process that mixes web text with specialized math, code, and instruction-following data. We additionally introduce new specialized datasets (FineMath, Stack-Edu, and SmolTalk) at stages where we found existing datasets to be problematically small or low-quality. To inform our design decisions, we perform both small-scale ablations as well as a manual refinement process that updates the dataset mixing rates at each stage based on the performance at the previous stage. Ultimately, we demonstrate that SmolLM2 outperforms other recent small LMs including Qwen2.5-1.5B and Llama3.2-1B. To facilitate future research on LM development as well as applications of small LMs, we release both SmolLM2 as well as all of the datasets we prepared in the course of this project.",
+      "year": 2025,
+      "authors": [
+        {
+          "name": "Loubna Ben Allal"
+        },
+        {
+          "name": "Anton Lozhkov"
+        },
+        {
+          "name": "Elie Bakouch"
+        },
+        {
+          "name": "G. Bl\u00e1zquez"
+        },
+        {
+          "name": "Guilherme Penedo"
+        },
+        {
+          "name": "Lewis Tunstall"
+        },
+        {
+          "name": "Andr\u00e9s Marafioti"
+        },
+        {
+          "name": "Hynek Kydl\u00ed\u010dek"
+        },
+        {
+          "name": "Agust\u00edn Piqueres Lajar\u00edn"
+        },
+        {
+          "name": "Vaibhav Srivastav"
+        },
+        {
+          "name": "Lochner, Joshua"
+        },
+        {
+          "name": "Caleb Fahlgren"
+        },
+        {
+          "name": "X. Nguyen"
+        },
+        {
+          "name": "Cl\u00e9mentine Fourrier"
+        },
+        {
+          "name": "Ben Burtenshaw"
+        },
+        {
+          "name": "Hugo Larcher"
+        },
+        {
+          "name": "Haojun Zhao"
+        },
+        {
+          "name": "Cyril Zakka"
+        },
+        {
+          "name": "Mathieu Morlon"
+        },
+        {
+          "name": "Colin Raffel"
+        },
+        {
+          "name": "Leandro von Werra"
+        },
+        {
+          "name": "Thomas Wolf"
+        }
+      ],
+      "venue": "arXiv (Cornell University)",
+      "externalIds": {
+        "DOI": "10.48550/arxiv.2502.02737",
+        "ArXiv": "2502.02737"
+      },
+      "openalex_id": "https://openalex.org/W4407209014",
+      "type": "preprint",
+      "cited_by_count": 10,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "arxiv-doi"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model"
+    },
+    {
+      "paperId": "W7133224126",
+      "title": "Chain-Of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "abstract": "",
+      "year": 2022,
+      "authors": [
+        {
+          "name": "Jason Wei"
+        },
+        {
+          "name": "Xuezhi Wang"
+        },
+        {
+          "name": "Dale Schuurmans"
+        },
+        {
+          "name": "Maarten Bosma"
+        },
+        {
+          "name": "Brian Ichter"
+        },
+        {
+          "name": "Fei Xia"
+        },
+        {
+          "name": "Ed Chi"
+        },
+        {
+          "name": "Quoc V Le"
+        },
+        {
+          "name": "Denny Zhou"
+        }
+      ],
+      "venue": "",
+      "externalIds": {
+        "DOI": "10.52202/068431-1800"
+      },
+      "openalex_id": "https://openalex.org/W7133224126",
+      "type": "conference-paper",
+      "cited_by_count": 1792,
+      "verification": {
+        "index": "openalex",
+        "title_ratio": 1.0,
+        "resolved_by": "title-search"
+      },
+      "discovered_for": "intro",
+      "candidate_title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+    }
+  ],
+  "failures": [
+    {
+      "title": "Towards Understanding Sycophancy in Language Models",
+      "reason": "title ratio 0.253"
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "reason": "title ratio 0.273"
+    }
+  ],
+  "min_cite_paper_count": 35
+}
