@@ -1,0 +1,30 @@
+{
+  "arm_seconds": {
+    "conclusion_only": 47.8,
+    "full": 77.2,
+    "irrelevant": 65.2,
+    "none": 45.4,
+    "proof_prefix": 89.7
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 2822,
+    "Unknown": 14109,
+    "Yes": 9642
+  },
+  "completion_id": "20b79079a199f489b0a82afe8fbb8f0cac2d4decb08cf8533415180773f87c82",
+  "key": "llama3p2_3b",
+  "n": 192,
+  "repo": "mlx-community/Llama-3.2-3B-Instruct-bf16",
+  "revision": "6d88ba43024fef71b10e52e101c7cd4598322601",
+  "total_seconds": 435.3,
+  "version": "multimodel-three-class-b16",
+  "weights_bytes": 6425528971,
+  "weights_sha256": "6cea564f8b68d6c918cfb827d24a9ad9f2072c8e1a41f1532ea3d6c6585c8e02"
+}

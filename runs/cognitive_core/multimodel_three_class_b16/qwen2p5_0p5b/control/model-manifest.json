@@ -1,0 +1,19 @@
+{
+  "family": "qwen2.5",
+  "key": "qwen2p5_0p5b",
+  "params_b": 0.5,
+  "repo": "mlx-community/Qwen2.5-0.5B-Instruct-bf16",
+  "revision": "56d07e766edd7159fbe12ed12d9cf114bf38bf1e",
+  "version": "multimodel-three-class-b16",
+  "weights": {
+    "aggregate_sha256": "c3842946c1c81928bb0efd0c857147330ec6b398427c16eac5d0a1b1bf5168f5",
+    "files": [
+      {
+        "bytes": 988097734,
+        "name": "model.safetensors",
+        "sha256": "39da1e4174f12953ad7ace17239da672aa2b4b9ba723a09835963484c5a05b41"
+      }
+    ],
+    "total_bytes": 988097734
+  }
+}

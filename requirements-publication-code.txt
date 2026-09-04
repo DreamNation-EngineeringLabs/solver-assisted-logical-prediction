@@ -1,0 +1,7 @@
+# Publication-code dependencies
+# The b14 audit uses only Python's standard library.
+# The PDF builder additionally requires reportlab.
+reportlab
+numpy==2.5.1
+mlx==0.32.0
+mlx-lm==0.31.3

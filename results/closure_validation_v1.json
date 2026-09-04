@@ -1,0 +1,49 @@
+{
+  "confusion": {
+    "contradicted->contradicted": 6400,
+    "entailed->entailed": 6400,
+    "undetermined->undetermined": 10440
+  },
+  "corpus": "hitachi-nlp/proofwriter_processed_OWA (test splits)",
+  "disagreements": [],
+  "overall_agreement": 1.0,
+  "per_split": {
+    "depth-0": {
+      "agree": 1476,
+      "agreement": 1.0,
+      "questions": 1476,
+      "theories": 400,
+      "unusable_theories": 0
+    },
+    "depth-1": {
+      "agree": 3100,
+      "agreement": 1.0,
+      "questions": 3100,
+      "theories": 400,
+      "unusable_theories": 0
+    },
+    "depth-2": {
+      "agree": 4426,
+      "agreement": 1.0,
+      "questions": 4426,
+      "theories": 400,
+      "unusable_theories": 0
+    },
+    "depth-3": {
+      "agree": 5784,
+      "agreement": 1.0,
+      "questions": 5784,
+      "theories": 400,
+      "unusable_theories": 0
+    },
+    "depth-5": {
+      "agree": 8454,
+      "agreement": 1.0,
+      "questions": 8454,
+      "theories": 400,
+      "unusable_theories": 0
+    }
+  },
+  "questions_checked": 23240,
+  "version": "closure-validation-v1"
+}

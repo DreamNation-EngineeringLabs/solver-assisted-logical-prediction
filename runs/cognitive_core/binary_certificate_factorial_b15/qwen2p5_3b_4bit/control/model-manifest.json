@@ -1,0 +1,20 @@
+{
+  "family": "qwen2.5",
+  "key": "qwen2p5_3b_4bit",
+  "matches_b14_snapshot": true,
+  "params_b": 3.0,
+  "repo": "mlx-community/Qwen2.5-3B-Instruct-4bit",
+  "revision": "4f83f8f146fdf28b512a06562b671d7af4fab457",
+  "version": "binary-certificate-factorial-b15",
+  "weights": {
+    "aggregate_sha256": "f7ff6ce6a068e92d5db9b597a5cb93e98cb3d4a08c463bac62ae16b5ed512221",
+    "files": [
+      {
+        "bytes": 1736293090,
+        "name": "model.safetensors",
+        "sha256": "f212cf6fb9923281a09c135e05d43a052ee5ef7121f5b1dc0b0fb2de80f97cfd"
+      }
+    ],
+    "total_bytes": 1736293090
+  }
+}

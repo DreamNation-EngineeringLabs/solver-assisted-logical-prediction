@@ -1,0 +1,84 @@
+{
+  "candidate_checks": {
+    "binary": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          3160
+        ],
+        "Yes": [
+          13022
+        ]
+      },
+      "first_token_ids": {
+        "No": 3160,
+        "Yes": 13022
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Yes": true
+      }
+    },
+    "three_way": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          3160
+        ],
+        "Unknown": [
+          24560
+        ],
+        "Yes": [
+          13022
+        ]
+      },
+      "first_token_ids": {
+        "No": 3160,
+        "Unknown": 24560,
+        "Yes": 13022
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Unknown": true,
+        "Yes": true
+      }
+    }
+  },
+  "family": "phi4",
+  "key": "phi4_mini",
+  "params_b": 3.8,
+  "probe": {
+    "argmax": "Yes",
+    "candidate_scores": {
+      "No": 33.5,
+      "Yes": 38.25
+    }
+  },
+  "repo": "microsoft/Phi-4-mini-instruct",
+  "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+  "status": "screened",
+  "timing_s": {
+    "download": 160.6,
+    "prefill": 1.632
+  },
+  "version": "binary-multimodel-survey-b16-screen-v1",
+  "vocab_size": 200064,
+  "weights": {
+    "aggregate_sha256": "3ddfa43c460dce884fef54c4d8450498def1adefa5c2a747adca2446964758b7",
+    "files": [
+      {
+        "bytes": 4903637712,
+        "name": "model-00001-of-00002.safetensors",
+        "sha256": "bc703090b63eda16f639fa4de7ac54635c23105ab1da2f6ec4d3403151d38ee6"
+      },
+      {
+        "bytes": 2768428504,
+        "name": "model-00002-of-00002.safetensors",
+        "sha256": "7ff79b9d2d31076bac2663393451f6530f4fc8ca49b09002116c92c373dba983"
+      }
+    ],
+    "total_bytes": 7672066216
+  }
+}

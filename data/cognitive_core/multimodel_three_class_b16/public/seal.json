@@ -1,0 +1,25 @@
+{
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "authority_path": "data/cognitive_core/multimodel_three_class_b16/sealed/authority.jsonl",
+  "authority_sha256": "abb915527146127f81b47811d0af414bf9622d0eaa9d1df85bfb265bbc823235",
+  "classes": [
+    "entailed",
+    "contradicted",
+    "undetermined"
+  ],
+  "closure_validation": "results/closure_validation_v1.json",
+  "depth": 4,
+  "n": 192,
+  "per_class": 64,
+  "public_path": "data/cognitive_core/multimodel_three_class_b16/public/panel.jsonl",
+  "public_sha256": "ef080fd5fc36904567e97255d48ad6a150214533638af879b7f7f63ef741d90e",
+  "seal_id": "0887ed11d1cacd960c536facde709f937516c5dea9bc6effcfb58ac6fbb7b7fb",
+  "task_seed": 2026090301,
+  "version": "multimodel-three-class-b16"
+}

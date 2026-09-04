@@ -1,0 +1,79 @@
+{
+  "candidate_checks": {
+    "binary": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          2822
+        ],
+        "Yes": [
+          9642
+        ]
+      },
+      "first_token_ids": {
+        "No": 2822,
+        "Yes": 9642
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Yes": true
+      }
+    },
+    "three_way": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          2822
+        ],
+        "Unknown": [
+          14109
+        ],
+        "Yes": [
+          9642
+        ]
+      },
+      "first_token_ids": {
+        "No": 2822,
+        "Unknown": 14109,
+        "Yes": 9642
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Unknown": true,
+        "Yes": true
+      }
+    }
+  },
+  "family": "olmo2",
+  "key": "olmo2_1b",
+  "params_b": 1.0,
+  "probe": {
+    "argmax": "Yes",
+    "candidate_scores": {
+      "No": 1.28125,
+      "Yes": 5.15625
+    }
+  },
+  "repo": "allenai/OLMo-2-0425-1B-Instruct",
+  "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+  "status": "screened",
+  "timing_s": {
+    "download": 62.5,
+    "prefill": 0.432
+  },
+  "version": "binary-multimodel-survey-b16-screen-v1",
+  "vocab_size": 100352,
+  "weights": {
+    "aggregate_sha256": "2f4b6ac046b03f989281d170e9e76e6639a86f24ced302e73be4165372ad9654",
+    "files": [
+      {
+        "bytes": 2969854224,
+        "name": "model.safetensors",
+        "sha256": "36d044c73655bb904f822915e6294ba3dae8e6e1af5e703e9d452f2d6a3a294f"
+      }
+    ],
+    "total_bytes": 2969854224
+  }
+}

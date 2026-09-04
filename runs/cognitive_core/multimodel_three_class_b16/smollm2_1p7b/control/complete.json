@@ -1,0 +1,30 @@
+{
+  "arm_seconds": {
+    "conclusion_only": 34.0,
+    "full": 87.4,
+    "irrelevant": 39.9,
+    "none": 24.5,
+    "proof_prefix": 75.4
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 5230,
+    "Unknown": 33873,
+    "Yes": 10539
+  },
+  "completion_id": "39aa56585a47f0bf399451ffa0e6487a850b6ba31dd99e8815edc490e406dc29",
+  "key": "smollm2_1p7b",
+  "n": 192,
+  "repo": "mlx-community/SmolLM2-1.7B-Instruct",
+  "revision": "464b438b25894353a54836ec5d5a09157e62aa71",
+  "total_seconds": 330.9,
+  "version": "multimodel-three-class-b16",
+  "weights_bytes": 3422777902,
+  "weights_sha256": "01a6a240fbba6f65eb0b1338249dda365aee08af4d7e6688ebecb81d25784d46"
+}

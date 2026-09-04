@@ -1,0 +1,9 @@
+{
+  "candidate_token_ids": {
+    "No": 5230,
+    "Unknown": 33873,
+    "Yes": 10539
+  },
+  "key": "smollm2_1p7b",
+  "version": "multimodel-three-class-b16"
+}

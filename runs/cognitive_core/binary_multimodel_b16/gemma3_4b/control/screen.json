@@ -1,0 +1,84 @@
+{
+  "candidate_checks": {
+    "binary": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          3771
+        ],
+        "Yes": [
+          10784
+        ]
+      },
+      "first_token_ids": {
+        "No": 3771,
+        "Yes": 10784
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Yes": true
+      }
+    },
+    "three_way": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          3771
+        ],
+        "Unknown": [
+          41387
+        ],
+        "Yes": [
+          10784
+        ]
+      },
+      "first_token_ids": {
+        "No": 3771,
+        "Unknown": 41387,
+        "Yes": 10784
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Unknown": true,
+        "Yes": true
+      }
+    }
+  },
+  "family": "gemma3",
+  "key": "gemma3_4b",
+  "params_b": 4.3,
+  "probe": {
+    "argmax": "Yes",
+    "candidate_scores": {
+      "No": 10.875,
+      "Yes": 17.5
+    }
+  },
+  "repo": "mlx-community/gemma-3-4b-it-bf16",
+  "revision": "665e04d28e93290c77b7832307606f7e87bb7616",
+  "status": "screened",
+  "timing_s": {
+    "download": 222.8,
+    "prefill": 3.359
+  },
+  "version": "binary-multimodel-survey-b16-screen-v1",
+  "vocab_size": 262208,
+  "weights": {
+    "aggregate_sha256": "e6b98455ee3b552003a48ead66a7a547b7f37e6d52837fc51f32aeb347d9042c",
+    "files": [
+      {
+        "bytes": 5332884576,
+        "name": "model-00001-of-00002.safetensors",
+        "sha256": "fd403562b6115241b4992b400350a71eb7901eb734db4465f609ff6771d07c00"
+      },
+      {
+        "bytes": 4609898146,
+        "name": "model-00002-of-00002.safetensors",
+        "sha256": "d553982d81fc932b62d2b9908e2faf36d31241968aec9fa9ee0ac55be3477ed2"
+      }
+    ],
+    "total_bytes": 9942782722
+  }
+}

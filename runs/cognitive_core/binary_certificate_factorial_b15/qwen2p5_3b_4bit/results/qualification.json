@@ -1,0 +1,28 @@
+{
+  "agreement": 35,
+  "passed": true,
+  "per_template": {
+    "direct": {
+      "by_class": {
+        "No": 18,
+        "Yes": 18
+      },
+      "correct": 36
+    },
+    "reordered": {
+      "by_class": {
+        "No": 18,
+        "Yes": 17
+      },
+      "correct": 35
+    }
+  },
+  "role": "recorded smoke check; blocking only with --require-qualification",
+  "thresholds": {
+    "agreement": 32,
+    "n": 36,
+    "per_class_correct": 12,
+    "per_template_correct": 27
+  },
+  "version": "binary-certificate-factorial-b15"
+}

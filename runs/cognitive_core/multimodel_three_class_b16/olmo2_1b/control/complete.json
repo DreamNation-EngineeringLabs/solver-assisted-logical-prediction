@@ -1,0 +1,30 @@
+{
+  "arm_seconds": {
+    "conclusion_only": 18.8,
+    "full": 61.8,
+    "irrelevant": 26.2,
+    "none": 18.3,
+    "proof_prefix": 50.5
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 2822,
+    "Unknown": 14109,
+    "Yes": 9642
+  },
+  "completion_id": "6935cde784415b59ca1eb61c858330bcf01497cb43854e61903bf6f3f5136b06",
+  "key": "olmo2_1b",
+  "n": 192,
+  "repo": "allenai/OLMo-2-0425-1B-Instruct",
+  "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+  "total_seconds": 242.0,
+  "version": "multimodel-three-class-b16",
+  "weights_bytes": 2969854224,
+  "weights_sha256": "2f4b6ac046b03f989281d170e9e76e6639a86f24ced302e73be4165372ad9654"
+}

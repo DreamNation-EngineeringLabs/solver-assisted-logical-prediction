@@ -1,0 +1,40 @@
+{
+  "arms": [
+    {
+      "arm": "none",
+      "path": "runs/cognitive_core/binary_certificate_factorial_b14/qwen2p5_3b/receipts/prospective-none.jsonl",
+      "records": 192,
+      "sha256": "dab928eb4de0e746dba15369a0ba37a4f96802d2e9d1ee674102db7e459cd37a"
+    },
+    {
+      "arm": "irrelevant",
+      "path": "runs/cognitive_core/binary_certificate_factorial_b14/qwen2p5_3b/receipts/prospective-irrelevant.jsonl",
+      "records": 192,
+      "sha256": "c8e705d6c6180589e3c83ecf8b13f851a50d3663b3e8540f866e51f28acdb4c3"
+    },
+    {
+      "arm": "conclusion_only",
+      "path": "runs/cognitive_core/binary_certificate_factorial_b14/qwen2p5_3b/receipts/prospective-conclusion_only.jsonl",
+      "records": 192,
+      "sha256": "1d6e5a1498c54e4e8cc7869a64424878b5988f99b09ddac30c0a01666e2eae86"
+    },
+    {
+      "arm": "proof_prefix",
+      "path": "runs/cognitive_core/binary_certificate_factorial_b14/qwen2p5_3b/receipts/prospective-proof_prefix.jsonl",
+      "records": 192,
+      "sha256": "1d9a42048154d8d03d7383f842fed1ced29444cb6c93ebeeb62ca415f78c9ce7"
+    },
+    {
+      "arm": "full",
+      "path": "runs/cognitive_core/binary_certificate_factorial_b14/qwen2p5_3b/receipts/prospective-full.jsonl",
+      "records": 192,
+      "sha256": "1d11608ac5dc9f77e16cf3c128799846a99f2bd1aca6a660d5326c8c129c79e5"
+    }
+  ],
+  "format": "JSON Lines; one unmodified raw receipt per prospective model call",
+  "note": "This export contains model likelihood receipts only; it does not include the sealed answer authority.",
+  "output": "output/reproducibility/b14_raw_model_calls_960.jsonl",
+  "output_sha256": "f4583fdb8702077a213911703a4baa20e7e506060cb35752973085ed7194328d",
+  "records": 960,
+  "status": "b14_raw_receipts_exported"
+}

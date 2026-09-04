@@ -1,0 +1,9 @@
+{
+  "candidate_token_ids": {
+    "No": 3160,
+    "Unknown": 24560,
+    "Yes": 13022
+  },
+  "key": "phi4_mini",
+  "version": "multimodel-three-class-b16"
+}

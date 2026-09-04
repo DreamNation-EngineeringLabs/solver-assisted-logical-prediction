@@ -1,0 +1,30 @@
+{
+  "arm_seconds": {
+    "conclusion_only": 58.5,
+    "full": 116.9,
+    "irrelevant": 94.5,
+    "none": 54.0,
+    "proof_prefix": 106.6
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 3771,
+    "Unknown": 41387,
+    "Yes": 10784
+  },
+  "completion_id": "9a17782a5a808a9939fedd3a5ef404577625d2de2b8e24fc71aa1c2dff1b341a",
+  "key": "gemma3_4b",
+  "n": 192,
+  "repo": "mlx-community/gemma-3-4b-it-bf16",
+  "revision": "665e04d28e93290c77b7832307606f7e87bb7616",
+  "total_seconds": 610.1,
+  "version": "multimodel-three-class-b16",
+  "weights_bytes": 9942782722,
+  "weights_sha256": "e6b98455ee3b552003a48ead66a7a547b7f37e6d52837fc51f32aeb347d9042c"
+}

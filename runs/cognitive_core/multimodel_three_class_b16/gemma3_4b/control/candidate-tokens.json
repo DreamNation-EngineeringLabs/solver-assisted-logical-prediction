@@ -1,0 +1,9 @@
+{
+  "candidate_token_ids": {
+    "No": 3771,
+    "Unknown": 41387,
+    "Yes": 10784
+  },
+  "key": "gemma3_4b",
+  "version": "multimodel-three-class-b16"
+}

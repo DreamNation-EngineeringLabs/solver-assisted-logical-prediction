@@ -1,0 +1,30 @@
+{
+  "arm_seconds": {
+    "conclusion_only": 166.4,
+    "full": 96.9,
+    "irrelevant": 118.0,
+    "none": 45.4,
+    "proof_prefix": 79.7
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 2753,
+    "Unknown": 13790,
+    "Yes": 9454
+  },
+  "completion_id": "2b53c83c453cbdd3d2f772e6bb39ebed8c0fe0fd282a9bfd98237c0bebe2e712",
+  "key": "qwen2p5_3b",
+  "n": 192,
+  "repo": "mlx-community/Qwen2.5-3B-Instruct-bf16",
+  "revision": "bec1ad658e380044bbfe06d4a2268801d3379a11",
+  "total_seconds": 619.7,
+  "version": "multimodel-three-class-b16",
+  "weights_bytes": 6171926868,
+  "weights_sha256": "a85faae39d05fef445b57be5fd266ace5aafca88249c19c394b1cabbf09dd030"
+}

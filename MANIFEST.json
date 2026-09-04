@@ -1,0 +1,195 @@
+{
+  "archive": "solver_assisted_logical_prediction_paper_code_v1.zip",
+  "file_count": 37,
+  "files": [
+    {
+      "bytes": 28451,
+      "path": "manuscript/grounded_state_repair_preprint_v1/manuscript.md",
+      "sha256": "23fa0dfc19b079a1ecc1cbff233da58cd0efe018a912595605f9e9ba49629ae8"
+    },
+    {
+      "bytes": 4385,
+      "path": "manuscript/grounded_state_repair_preprint_v1/references.bib",
+      "sha256": "2a1f284345ad02e0070e85e4d974193471a772f5be30c1c7a30b5cf7f20b3b69"
+    },
+    {
+      "bytes": 14737,
+      "path": "manuscript/grounded_state_repair_preprint_v1/build_preprint_pdf.py",
+      "sha256": "4fef5785bfe8272894ee2a7ef452a0f50a08e83dbcd44e054eb987555cf6033d"
+    },
+    {
+      "bytes": 7613,
+      "path": "src/scientist/domains/cognitive_core/proofwriter_verified_trace_v4.py",
+      "sha256": "a7f5cd1af1c1284649ec849354cb9795212ac12f4f8a79b23cba5dda38326808"
+    },
+    {
+      "bytes": 15020,
+      "path": "scripts/prepare_cognitive_repairability_proofwriter_grounded_state_v7.py",
+      "sha256": "602d44617a1b7419876bcac04bbd35b788efeb5638e595e9a1a07c8622571c68"
+    },
+    {
+      "bytes": 13280,
+      "path": "scripts/audit_cognitive_repairability_proofwriter_grounded_state_v7.py",
+      "sha256": "f05b835871baf186c75e0e2aabc3672e0636d45a925ce47a742fdf7d3736588b"
+    },
+    {
+      "bytes": 10749,
+      "path": "scripts/score_cognitive_repairability_proofwriter_grounded_state_base_v7.py",
+      "sha256": "ae1e2beeb688530710714795cc231243d4cab1932b5a63e028dd34486e0c50d8"
+    },
+    {
+      "bytes": 12915,
+      "path": "scripts/score_cognitive_repairability_proofwriter_grounded_state_positive_v7.py",
+      "sha256": "7d70d520efa3e6a116e137fa98cdcf1bf0950780d818f4880848797a85ef92d3"
+    },
+    {
+      "bytes": 13642,
+      "path": "scripts/score_cognitive_repairability_proofwriter_grounded_state_prospective_v7.py",
+      "sha256": "497c5eb5ef182f7bb5d50ec759207e2319522994fb8e4ef5617a1cf05bd01ac6"
+    },
+    {
+      "bytes": 7576,
+      "path": "scripts/audit_cognitive_solver_assisted_v7_publication.py",
+      "sha256": "bec5b3fbfbd7e10e5ef1b35a4c8abdd679a2cdafbdf4f95f828deac47cf5c683"
+    },
+    {
+      "bytes": 16054,
+      "path": "scripts/prepare_cognitive_solver_assisted_certificate_factorial_v8.py",
+      "sha256": "51007e95c4b52fe37463fa7d1d7bf958d26ae6c893fd72a7fffae7bf166feae2"
+    },
+    {
+      "bytes": 24698,
+      "path": "scripts/run_cognitive_solver_assisted_certificate_factorial_v8.py",
+      "sha256": "a3be5ce06419825ed23cb71ff5b34c9fdc25a307023a9295065739810d905cff"
+    },
+    {
+      "bytes": 10578,
+      "path": "scripts/qualify_cognitive_semantic_three_way_interface_v9.py",
+      "sha256": "a3623c386c0832e83c42a545ca09a8babce6953d5a5acc9c8a712753d87f1d5f"
+    },
+    {
+      "bytes": 5170,
+      "path": "scripts/prepare_cognitive_solver_assisted_certificate_factorial_v10.py",
+      "sha256": "e2a52d0c6068fa284be92a7547c1e29ad47c2bc54619060fcd1f5eb7a948cb92"
+    },
+    {
+      "bytes": 5190,
+      "path": "scripts/run_cognitive_solver_assisted_certificate_factorial_v10.py",
+      "sha256": "3652b0b4d2f1c81da0eec15dd6796f18d5db7294864a12278768db7a99adce1e"
+    },
+    {
+      "bytes": 12674,
+      "path": "scripts/prepare_cognitive_binary_certificate_factorial_b11.py",
+      "sha256": "4f8625b2b824e63d755e9093aee3282d240e63ba6a9765f375abd3874c7a1fb7"
+    },
+    {
+      "bytes": 16164,
+      "path": "scripts/run_cognitive_binary_certificate_factorial_b11.py",
+      "sha256": "462f7d96e96bc62697d6355373d4488df90541e0f3c7d448362fd08e23dc8dfb"
+    },
+    {
+      "bytes": 5325,
+      "path": "scripts/prepare_cognitive_binary_certificate_factorial_b12.py",
+      "sha256": "c934424b0454f51430710a2164c4d72abc016b6287dad64179e51741653616dc"
+    },
+    {
+      "bytes": 14122,
+      "path": "scripts/run_cognitive_binary_certificate_factorial_b12.py",
+      "sha256": "e2b8f0617862b54017a1cb145a1679c302966b8bd8b36dcd52e4fe2f1d0b3d87"
+    },
+    {
+      "bytes": 5094,
+      "path": "scripts/prepare_cognitive_binary_certificate_factorial_b13.py",
+      "sha256": "42e5f5e61390ce02c6266d84b6510291d9b1f45fc474c0b0ec2b822fa206103b"
+    },
+    {
+      "bytes": 5331,
+      "path": "scripts/run_cognitive_binary_certificate_factorial_b13.py",
+      "sha256": "206d5f87b7ec8b33ba68432178e5f9c4e0a61d018805a401e87248fae5c730aa"
+    },
+    {
+      "bytes": 5012,
+      "path": "scripts/prepare_cognitive_binary_certificate_factorial_b14.py",
+      "sha256": "1976690daa65010995ef61dac5980d055706878ae585015cdec26b99e0e6c7ec"
+    },
+    {
+      "bytes": 2370,
+      "path": "scripts/run_cognitive_binary_certificate_factorial_b14.py",
+      "sha256": "238347561df3af5ccd75b8a46df9b65542335541badcdc6ca1e432e89635fcee"
+    },
+    {
+      "bytes": 6692,
+      "path": "scripts/audit_cognitive_binary_certificate_factorial_b14.py",
+      "sha256": "741fc2c0baacabe9bf76d6dfd47bd55a6f954ddec637d9592ab921a4efe3a429"
+    },
+    {
+      "bytes": 6891,
+      "path": "scripts/package_cognitive_solver_assisted_public_release_v1.py",
+      "sha256": "403fbe94385521bacd85a2041808b6c2898e2c56385d54e089aaac3e7d64da1a"
+    },
+    {
+      "bytes": 894,
+      "path": "scripts/package_cognitive_solver_assisted_public_release_v2.py",
+      "sha256": "c03beefbacc2b3ad0666416b41ecad0335b9ac0cc9335a8fdd78435be8a8d338"
+    },
+    {
+      "bytes": 2944,
+      "path": "scripts/package_cognitive_solver_assisted_public_release_v3.py",
+      "sha256": "cc063172ef672cdbe7effe6e314b5386d748cc16ec4f63f0587768f0bac5a5d0"
+    },
+    {
+      "bytes": 742,
+      "path": "scripts/package_cognitive_solver_assisted_public_release_v4.py",
+      "sha256": "cc9001bfa626c0bd84ca11fa967baa898635975540f265fd0647b57c6d96244c"
+    },
+    {
+      "bytes": 3582,
+      "path": "scripts/package_cognitive_solver_assisted_public_release_v5.py",
+      "sha256": "9829452544a60412d4bae12657dd9dd2fc95efa0108aae896bf5875bb124ddb4"
+    },
+    {
+      "bytes": 3250,
+      "path": "scripts/package_cognitive_solver_assisted_public_release_v6.py",
+      "sha256": "11229493a62fd4d11869eed610cbe55f64faf36c7cfe597e31b81468cdb44d72"
+    },
+    {
+      "bytes": 8394,
+      "path": "scripts/package_solver_assisted_paper_code_v1.py",
+      "sha256": "0f81de73da31d799a9e92f0c224ae89e5544fb7fec69d656b73c4d1c4c806a47"
+    },
+    {
+      "bytes": 2780,
+      "path": "docs/cognitive-core/repairability-grounded-state-design-v7.md",
+      "sha256": "2be68dc2c101e31b2bd99be28ab61bf7890ed2b586e553759d3c6caa42c90a08"
+    },
+    {
+      "bytes": 5864,
+      "path": "docs/cognitive-core/solver_assisted_certificate_factorial_design_v8.md",
+      "sha256": "46d1a86bd72e0e7266774ed5358b2f99adfec07b7d52411e078ea8089944e902"
+    },
+    {
+      "bytes": 1569,
+      "path": "docs/cognitive-core/solver_assisted_certificate_factorial_design_v10.md",
+      "sha256": "c96b973003c839f977f0a6107a9c2ed187ab0abefcd48349db48fc37e206fe61"
+    },
+    {
+      "bytes": 1421,
+      "path": "docs/cognitive-core/binary_certificate_factorial_b11.md",
+      "sha256": "de2138f646d3f3aee3369eaf609b2777c83b67caa5fcff40e93c18bb10eb133a"
+    },
+    {
+      "bytes": 1131,
+      "path": "docs/cognitive-core/binary_certificate_factorial_b12.md",
+      "sha256": "e1c1ca831448a9a38f06bc910fe9b5ef33ef92011a9cdc02722a259f841555aa"
+    },
+    {
+      "bytes": 732,
+      "path": "docs/cognitive-core/binary_certificate_factorial_b14.md",
+      "sha256": "de30e03e157a1ec72bfe4abe9bde467c2200abc8aae47dec33cb12a36e4166f3"
+    }
+  ],
+  "manifest_id": "c3fe580a547bcbdd207ffe0be8da616a368dbf156c61e6e40926f4fe2efc14b2",
+  "results_companion": "solver_assisted_reasoning_release_v6.zip",
+  "scope": "code-only companion; data, receipts, authorities, results, and model weights are excluded",
+  "version": "solver-assisted-paper-code-v1"
+}

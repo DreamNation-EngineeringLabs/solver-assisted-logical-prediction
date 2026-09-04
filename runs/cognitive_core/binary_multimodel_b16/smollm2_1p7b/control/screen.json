@@ -1,0 +1,79 @@
+{
+  "candidate_checks": {
+    "binary": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          5230
+        ],
+        "Yes": [
+          10539
+        ]
+      },
+      "first_token_ids": {
+        "No": 5230,
+        "Yes": 10539
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Yes": true
+      }
+    },
+    "three_way": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          5230
+        ],
+        "Unknown": [
+          33873
+        ],
+        "Yes": [
+          10539
+        ]
+      },
+      "first_token_ids": {
+        "No": 5230,
+        "Unknown": 33873,
+        "Yes": 10539
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Unknown": true,
+        "Yes": true
+      }
+    }
+  },
+  "family": "smollm2",
+  "key": "smollm2_1p7b",
+  "params_b": 1.7,
+  "probe": {
+    "argmax": "Yes",
+    "candidate_scores": {
+      "No": 12.5,
+      "Yes": 13.0
+    }
+  },
+  "repo": "mlx-community/SmolLM2-1.7B-Instruct",
+  "revision": "464b438b25894353a54836ec5d5a09157e62aa71",
+  "status": "screened",
+  "timing_s": {
+    "download": 117.9,
+    "prefill": 0.093
+  },
+  "version": "binary-multimodel-survey-b16-screen-v1",
+  "vocab_size": 49152,
+  "weights": {
+    "aggregate_sha256": "01a6a240fbba6f65eb0b1338249dda365aee08af4d7e6688ebecb81d25784d46",
+    "files": [
+      {
+        "bytes": 3422777902,
+        "name": "model.safetensors",
+        "sha256": "821ae8a85a20a81957b36a03d93b1313b54e7ac6946907331442156282879499"
+      }
+    ],
+    "total_bytes": 3422777902
+  }
+}

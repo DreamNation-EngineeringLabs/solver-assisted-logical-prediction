@@ -1,0 +1,29 @@
+{
+  "family": "qwen2.5",
+  "key": "qwen2p5_7b",
+  "params_b": 7.6,
+  "repo": "mlx-community/Qwen2.5-7B-Instruct-bf16",
+  "revision": "349a12f0e5f131c3914e3a66e78a3db71e9f9527",
+  "version": "multimodel-three-class-b16",
+  "weights": {
+    "aggregate_sha256": "3c346bd98fc24f7e935e4e00d448decab6db3ad115dd5320b7673c1d3b3385f8",
+    "files": [
+      {
+        "bytes": 5343777648,
+        "name": "model-00001-of-00003.safetensors",
+        "sha256": "2d67034c181238a2978fead9169969328d016a7bc88c2cf75abf81ceb39452a6"
+      },
+      {
+        "bytes": 5263077247,
+        "name": "model-00002-of-00003.safetensors",
+        "sha256": "e59a51540a99f1992d8a05ff263b042b869368d0082ac6e4dae596e658eb3116"
+      },
+      {
+        "bytes": 4624416869,
+        "name": "model-00003-of-00003.safetensors",
+        "sha256": "d6b92aab8dd7e0d757bbb048cb814463ef992adb79d4e720ba5d6c942885287b"
+      }
+    ],
+    "total_bytes": 15231271764
+  }
+}

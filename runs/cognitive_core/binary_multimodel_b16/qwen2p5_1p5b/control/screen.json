@@ -1,0 +1,79 @@
+{
+  "candidate_checks": {
+    "binary": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          2753
+        ],
+        "Yes": [
+          9454
+        ]
+      },
+      "first_token_ids": {
+        "No": 2753,
+        "Yes": 9454
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Yes": true
+      }
+    },
+    "three_way": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          2753
+        ],
+        "Unknown": [
+          13790
+        ],
+        "Yes": [
+          9454
+        ]
+      },
+      "first_token_ids": {
+        "No": 2753,
+        "Unknown": 13790,
+        "Yes": 9454
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Unknown": true,
+        "Yes": true
+      }
+    }
+  },
+  "family": "qwen2.5",
+  "key": "qwen2p5_1p5b",
+  "params_b": 1.5,
+  "probe": {
+    "argmax": "Yes",
+    "candidate_scores": {
+      "No": 12.5625,
+      "Yes": 17.625
+    }
+  },
+  "repo": "mlx-community/Qwen2.5-1.5B-Instruct-bf16",
+  "revision": "4ae77cb209f06199b8df1c94e21ff341332a3a89",
+  "status": "screened",
+  "timing_s": {
+    "download": 91.1,
+    "prefill": 0.356
+  },
+  "version": "binary-multimodel-survey-b16-screen-v1",
+  "vocab_size": 151936,
+  "weights": {
+    "aggregate_sha256": "5874413839325eb20adc34124e10826dd817a9be2e6257e9b23cb0d93a732459",
+    "files": [
+      {
+        "bytes": 3087467067,
+        "name": "model.safetensors",
+        "sha256": "073400b311d049b6379b8f3f7ad5a0258268031dd009b99389cfd4030144850a"
+      }
+    ],
+    "total_bytes": 3087467067
+  }
+}

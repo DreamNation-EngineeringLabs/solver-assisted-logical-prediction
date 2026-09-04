@@ -1,0 +1,84 @@
+{
+  "candidate_checks": {
+    "binary": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          2822
+        ],
+        "Yes": [
+          9642
+        ]
+      },
+      "first_token_ids": {
+        "No": 2822,
+        "Yes": 9642
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Yes": true
+      }
+    },
+    "three_way": {
+      "eligible": true,
+      "encodings": {
+        "No": [
+          2822
+        ],
+        "Unknown": [
+          14109
+        ],
+        "Yes": [
+          9642
+        ]
+      },
+      "first_token_ids": {
+        "No": 2822,
+        "Unknown": 14109,
+        "Yes": 9642
+      },
+      "scoring_mode": "single_token",
+      "single_token": {
+        "No": true,
+        "Unknown": true,
+        "Yes": true
+      }
+    }
+  },
+  "family": "llama3.2",
+  "key": "llama3p2_3b",
+  "params_b": 3.2,
+  "probe": {
+    "argmax": "Yes",
+    "candidate_scores": {
+      "No": 8.8125,
+      "Yes": 12.1875
+    }
+  },
+  "repo": "mlx-community/Llama-3.2-3B-Instruct-bf16",
+  "revision": "6d88ba43024fef71b10e52e101c7cd4598322601",
+  "status": "screened",
+  "timing_s": {
+    "download": 131.7,
+    "prefill": 1.461
+  },
+  "version": "binary-multimodel-survey-b16-screen-v1",
+  "vocab_size": 128256,
+  "weights": {
+    "aggregate_sha256": "6cea564f8b68d6c918cfb827d24a9ad9f2072c8e1a41f1532ea3d6c6585c8e02",
+    "files": [
+      {
+        "bytes": 5368478882,
+        "name": "model-00001-of-00002.safetensors",
+        "sha256": "b475af8535933afaf9393b30c6bcb4bfede59586b16ecdd010e7da8a83dfc95b"
+      },
+      {
+        "bytes": 1057050089,
+        "name": "model-00002-of-00002.safetensors",
+        "sha256": "9b2903fa2b3728423f6442c0dc667db645906fb113c9d0cd794faeb820cc82d3"
+      }
+    ],
+    "total_bytes": 6425528971
+  }
+}

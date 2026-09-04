@@ -1,0 +1,35 @@
+{
+  "arms": [
+    "none",
+    "irrelevant",
+    "same_entity_irrelevant",
+    "truncate_3",
+    "truncate_2",
+    "truncate_1",
+    "broken_chain",
+    "misleading",
+    "shuffled",
+    "full"
+  ],
+  "authority_path": "data/cognitive_core/binary_certificate_factorial_b15/sealed/authority.jsonl",
+  "authority_sha256": "c95e4bcdb2e879bd869949aff937e18f6726ddfe3e42a02cf91e83d9796d5af7",
+  "depth": 4,
+  "n": 192,
+  "note": "tenth arm `full` added before data collection as a comparability anchor",
+  "per_class": 96,
+  "public_path": "data/cognitive_core/binary_certificate_factorial_b15/public/panel.jsonl",
+  "public_sha256": "37c996fccb234843692b529c4aa4fc8aa8a080a061290fe5c6b02c96cca0eb6a",
+  "qualification_authority_sha256": "53b3f73ff20ae0dab4e7c64363c17a17cbc6ba8802ef9300c4cc6bacce97ce45",
+  "qualification_n": 36,
+  "qualification_public_path": "data/cognitive_core/binary_certificate_factorial_b15/public/qualification.jsonl",
+  "qualification_public_sha256": "031e0330b9c8945c6c6cf10aa6a5d8a12e2be1092f00736c65bac6dc03671f2d",
+  "qualification_role": "recorded smoke check, not a blocking gate",
+  "qualification_seed": 2026090316,
+  "qualification_templates": [
+    "direct",
+    "reordered"
+  ],
+  "seal_id": "e2bcbc4a2331806cfb7a5a4abda890a18af714901497977cf1fedc7353f32db7",
+  "task_seed": 2026090315,
+  "version": "binary-certificate-factorial-b15"
+}
