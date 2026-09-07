@@ -242,6 +242,70 @@ candidate set on byte-identical inputs and the response distribution shifts
 enormously — a prompt-format sensitivity result, recorded as a limitation in
 §6.3 rather than claimed as a finding.
 
+### 3.4c Not adjacency, but direction (b18)
+
+`results/b18_permutations_v1.json`. `shuffled` was one seeded permutation per
+item, and scrambling moves the gap between the final rule and its premise, the
+order of that pair, and everything else, all at once. Eight permutations per item
+on all three checkpoints, with the signed gap recorded per permutation.
+
+`perm_identity` re-scores `truncate_1`'s exact bytes and reproduces the b15
+receipts **192/192 on all three checkpoints**.
+
+**The single draw was representative.** Order effect over 8 permutations:
+
+| Checkpoint | min … median … max | published |
+| --- | --- | --- |
+| qwen2.5-3b 4-bit | +41.7 … +44.8 … +50.0 pp | +46.9 (inside) |
+| qwen2.5-3b bf16 | +60.4 … +61.5 … +63.5 pp | — |
+| gemma-3-4b | +6.2 … +11.5 … +13.5 pp | +10.4 (inside) |
+
+**Adjacency is refuted.** Accuracy by |gap| is flat on every checkpoint — 4-bit
+18.1% at gap 1 against 24.0% at gap 7; gemma 94.9% against 92.0%. But direction
+decides it:
+
+| Checkpoint | rule **after** premise | rule **before** |
+| --- | ---: | ---: |
+| qwen2.5-3b 4-bit | **26.8%** | 5.8% |
+| qwen2.5-3b bf16 | **22.4%** | 4.8% |
+| gemma-3-4b | **94.9%** | 84.9% |
+
+Paired within item on the 4-bit checkpoint: 45 favour rule-after, 2 favour
+rule-before, **p = 1.6e-11**. Distance contributes little once direction is
+fixed (near 29.8% vs far 23.6%).
+
+Three tiers: canonical order 61.5% > correctly-ordered-but-scrambled ~27% >
+wrongly-ordered ~6%. So the rule must **follow** its premise, and the chain
+before it must be in order. §6.1's "present and adjacent" was wrong and is
+corrected.
+
+### 3.4d Second backend, and the ladder past 7.6B (b19)
+
+`results/b16_backend_comparison_v1.json`, `results/b19_scale_extension_v1.json`.
+The sealed b16 panel re-scored through `transformers` on an A100, plus two new
+models.
+
+**Backends disagree, once decisively.** Nine of ten agree on 95.5–99.7% of
+responses with no verdict moving. Phi-4-mini is the exception: `full` is viable
+under MLX (0.719 min per-class recall) and not under CUDA (0.203), median flip
+margin 0.25 logits, reproduced on two GPUs and two torch versions. Viability is a
+property of (model × arm × **runtime**).
+
+**One weight mirror will not load at all.** `mlx-community/gemma-3-4b-it-bf16` is
+an MLX conversion that transformers rejects, so a table cannot simply be moved
+between backends.
+
+**The scale trend does not exist.** Qwen2.5 within-family ladder, harm measured
+as the drop in min per-class recall from `conclusion_only` to `full`:
+
+| Size | 0.5B | 1.5B | 3.0B | 7.6B | 14.7B |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| harm | +0.000 | +0.000 | −0.219 | **−0.688** | **+0.062** |
+
+Harm peaks in a mid-range band and is **absent** at the top — 7.6B was a peak,
+not the start of a trend. This vindicates §5.6's existing "not monotonic in
+scale" hedge. Llama-3.1-8B is degenerate under both arms.
+
 ### 3.5 Uncertainty on the validity share
 
 `results/b15_share_interval_v2.json`. Bootstrapping the whole ratio over paired

@@ -1,0 +1,48 @@
+{
+  "backend": "transformers+cuda",
+  "family": "qwen2.5",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_total_gib": 39.49,
+  "key": "qwen2p5_14b",
+  "params_b": 14.7,
+  "repo": "mlx-community/Qwen2.5-14B-Instruct-bf16",
+  "revision": "3b4b6d22265656633ced8bdfa0784ee8c97b3397",
+  "torch": "2.11.0+cu128",
+  "version": "multimodel-three-class-b19-cuda",
+  "weights": {
+    "aggregate_sha256": "ad5e1f2571081de2f61c31f002391cb9fd095ef56b796aea7f3fa5043b77afbe",
+    "files": [
+      {
+        "bytes": 5269326978,
+        "name": "model-00001-of-00006.safetensors",
+        "sha256": "bfb8a4b957367bcd7e935c7be2585e6c51bd593822507d0b738b625a42647a4a"
+      },
+      {
+        "bytes": 5363828073,
+        "name": "model-00002-of-00006.safetensors",
+        "sha256": "eb405180db464931ef8b898060f03c0242eecebb0f2686e7a1c77f3efc42dda9"
+      },
+      {
+        "bytes": 5363828106,
+        "name": "model-00003-of-00006.safetensors",
+        "sha256": "8fcd0f324e7935a0d4628b423a641c0de0156b0294f160123fff1d412fe0bc49"
+      },
+      {
+        "bytes": 5237963142,
+        "name": "model-00004-of-00006.safetensors",
+        "sha256": "4c513ec8ec151117d60b8e134a08e10b6e5263fdbfaa767801e2e7711d7268d9"
+      },
+      {
+        "bytes": 5363828126,
+        "name": "model-00005-of-00006.safetensors",
+        "sha256": "32a37dd8f311e317078aea1444c0635596dd166daec1404a7c3b058c5fdf88d9"
+      },
+      {
+        "bytes": 2941359441,
+        "name": "model-00006-of-00006.safetensors",
+        "sha256": "97ce4b3a256ec55d7dc9a5a37ffe14134cc68fffe07ea3f7d099912863d57447"
+      }
+    ],
+    "total_bytes": 29540133866
+  }
+}

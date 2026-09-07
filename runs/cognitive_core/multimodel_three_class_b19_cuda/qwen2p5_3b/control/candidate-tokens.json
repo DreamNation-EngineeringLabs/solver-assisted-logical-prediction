@@ -1,0 +1,9 @@
+{
+  "candidate_token_ids": {
+    "No": 2753,
+    "Unknown": 13790,
+    "Yes": 9454
+  },
+  "key": "qwen2p5_3b",
+  "version": "multimodel-three-class-b19-cuda"
+}

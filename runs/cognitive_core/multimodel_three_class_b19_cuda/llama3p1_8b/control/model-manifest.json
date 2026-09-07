@@ -1,0 +1,38 @@
+{
+  "backend": "transformers+cuda",
+  "family": "llama3.1",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_total_gib": 39.49,
+  "key": "llama3p1_8b",
+  "params_b": 8.0,
+  "repo": "mlx-community/Meta-Llama-3.1-8B-Instruct-bf16",
+  "revision": "f8311090f9ee47782b6f094984a20c856eb841d6",
+  "torch": "2.11.0+cu128",
+  "version": "multimodel-three-class-b19-cuda",
+  "weights": {
+    "aggregate_sha256": "2554b09b5a330a3db7f0b1acec88b7e22b959430712430f951b5278ce9fb2942",
+    "files": [
+      {
+        "bytes": 5295466428,
+        "name": "model-00001-of-00004.safetensors",
+        "sha256": "e8f8bd79686b2bf28b7f47826c14f038488c1e23311ffa64c5a6c84b9bd80a03"
+      },
+      {
+        "bytes": 5352157832,
+        "name": "model-00002-of-00004.safetensors",
+        "sha256": "0ba199f8cba7b46e09dad10ee239a2877d6467f9448c08db87f7a74e43ead599"
+      },
+      {
+        "bytes": 4362258775,
+        "name": "model-00003-of-00004.safetensors",
+        "sha256": "c37b5389bcd3d822c9a712b8fec3327585f760cc9b10081c81f9dfa9194d2794"
+      },
+      {
+        "bytes": 1050673279,
+        "name": "model-00004-of-00004.safetensors",
+        "sha256": "bfca38e630589bdba9d83040a771d63b36ea18ce5bce8f7c70493119a1f77fd5"
+      }
+    ],
+    "total_bytes": 16060556314
+  }
+}

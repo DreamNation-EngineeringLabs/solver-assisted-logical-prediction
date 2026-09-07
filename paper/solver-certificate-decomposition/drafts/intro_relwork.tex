@@ -76,31 +76,30 @@ forward-closure saturation. Experiment 4 rescores the broken-chain items with a
 third candidate, separating detection of an invalid certificate from failure to
 complete one.
 
-\textbf{The method is the contribution; what it returns is model-specific.} On
-the checkpoint of Experiment 2, breaking validity alone removes almost the whole
-state effect --- a validity share of $98.3\%$. On a different family the same
-control returns $40.4\%$, because gemma-3-4b answers correctly on $58$ of $96$
-items whose certificate has been broken where the first checkpoint manages $1$.
-We therefore offer the decomposition and decline to generalise the value it
-returns, ours included. Three results do hold on every checkpoint: the inference
-is one step deep; it is \emph{not} detection, since a broken certificate
-\emph{lowers} abstention rather than raising it; and none resists a corrupted
-apparatus, the three answering incorrectly on $189$, $186$ and $192$ of $192$
-items given a certificate whose fabricated final rule establishes the negation.
+\textbf{The method is the contribution; what it returns is model-specific.}
+Breaking validity alone removes almost the whole state effect on one checkpoint
+--- a validity share of $98.3\%$ --- and $40.4\%$ on another, which answers $58$
+of $96$ broken certificates correctly where the first manages $1$. We offer the
+decomposition and decline to generalise the value it returns, ours included.
+Three results do hold everywhere: the inference is one step deep and requires the
+final rule to \emph{follow} the premise it fires on; it is \emph{not} detection,
+since a broken certificate \emph{lowers} abstention; and none of the three
+checkpoints resists a corrupted apparatus, answering incorrectly on $189$, $186$
+and $192$ of $192$ items given a certificate whose fabricated final rule
+establishes the negation.
 
 Two measurement points shape how this may be reported. Accuracy alone is not
-interpretable here: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$,
+interpretable: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$,
 matching a trivial always-one-label strategy while discriminating nothing, so
-sensitivity and criterion accompany accuracy throughout
+sensitivity and criterion accompany it throughout
 \citep{macmillan1991detection,stanislaw1999calculation}, with the exact McNemar
-test \citep{mcnemar1947note} and BCa intervals \citep{efron1987better} for
-paired contrasts. And the claim boundary is strict: on the Qwen checkpoints every
-arm without a near-complete chain returns $d' = 0$, so those models do not reason
-unaided, and high accuracy with full solver material describes a faithful
-transcriber. Gemma-3-4b is not in that position ($22/96$ unaided, $d' = 1.83$),
-which is why its share is reported against two baselines in
-\cref{sec:replication}. System-level effects are never upgraded into claims about
-the model's own reasoning.
+test \citep{mcnemar1947note} and BCa intervals \citep{efron1987better}. And the
+claim boundary is strict: on the Qwen checkpoints every arm without a
+near-complete chain returns $d' = 0$, so those models do not reason unaided and
+high accuracy with full solver material describes a faithful transcriber.
+Gemma-3-4b is not in that position ($22/96$ unaided), which is why its share is
+reported against two baselines. System-level effects are never upgraded into
+claims about the model's own reasoning.
 
 The contributions are: (i) an \emph{answer-evidence decomposition} separating
 solver-supplied answers from solver-supplied reasoning state, reusable for any

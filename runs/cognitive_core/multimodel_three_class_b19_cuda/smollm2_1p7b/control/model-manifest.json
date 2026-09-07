@@ -1,0 +1,23 @@
+{
+  "backend": "transformers+cuda",
+  "family": "smollm2",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_total_gib": 39.49,
+  "key": "smollm2_1p7b",
+  "params_b": 1.7,
+  "repo": "mlx-community/SmolLM2-1.7B-Instruct",
+  "revision": "464b438b25894353a54836ec5d5a09157e62aa71",
+  "torch": "2.11.0+cu128",
+  "version": "multimodel-three-class-b19-cuda",
+  "weights": {
+    "aggregate_sha256": "01a6a240fbba6f65eb0b1338249dda365aee08af4d7e6688ebecb81d25784d46",
+    "files": [
+      {
+        "bytes": 3422777902,
+        "name": "model.safetensors",
+        "sha256": "821ae8a85a20a81957b36a03d93b1313b54e7ac6946907331442156282879499"
+      }
+    ],
+    "total_bytes": 3422777902
+  }
+}

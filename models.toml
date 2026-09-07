@@ -131,3 +131,33 @@ revision = "665e04d28e93290c77b7832307606f7e87bb7616"
 family = "gemma3"
 params_b = 4.3
 role = "b15 replication; different family, best substrate in the sweep"
+
+# --- Experiment 3 scale extension (b19, CUDA) --------------------------------
+# b16 stops at 7.6B because mlx-lm on Apple Silicon does. These continue the
+# sweep on a rented A100 and are kept in a separate table so the sealed ten are
+# untouched.
+#
+# Sourced from mlx-community bf16 mirrors, as eight of the original ten were --
+# consistent provenance rather than a new pattern mid-table. The Qwen and Llama
+# mirrors both load cleanly under transformers (99.3-99.8% receipt agreement
+# with MLX); the gemma mirror does NOT, so no gemma model appears here.
+#
+# Qwen2.5 at 0.5 / 1.5 / 3 / 7.6 / 14B is a within-family ladder: scale varies
+# while family, tokenizer and training recipe are held fixed, which one model
+# per family cannot do.
+
+[[scale_model]]
+key = "llama3p1_8b"
+repo = "mlx-community/Meta-Llama-3.1-8B-Instruct-bf16"
+revision = "f8311090f9ee47782b6f094984a20c856eb841d6"
+family = "llama3.1"
+params_b = 8.0
+role = "b19 scale extension; ungated mirror of a gated upstream repo"
+
+[[scale_model]]
+key = "qwen2p5_14b"
+repo = "mlx-community/Qwen2.5-14B-Instruct-bf16"
+revision = "3b4b6d22265656633ced8bdfa0784ee8c97b3397"
+family = "qwen2.5"
+params_b = 14.7
+role = "b19 scale extension; extends the within-family ladder to 14B"

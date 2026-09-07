@@ -1,0 +1,9 @@
+{
+  "candidate_token_ids": {
+    "No": 2822,
+    "Unknown": 14109,
+    "Yes": 9642
+  },
+  "key": "llama3p1_8b",
+  "version": "multimodel-three-class-b19-cuda"
+}

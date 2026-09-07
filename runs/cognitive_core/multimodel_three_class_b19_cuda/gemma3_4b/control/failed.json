@@ -1,0 +1,8 @@
+{
+  "error": "You set `ignore_mismatched_sizes` to `False`, thus raising an error. For details look at the above report!",
+  "error_type": "RuntimeError",
+  "key": "gemma3_4b",
+  "repo": "mlx-community/gemma-3-4b-it-bf16",
+  "revision": "665e04d28e93290c77b7832307606f7e87bb7616",
+  "version": "multimodel-three-class-b19-cuda"
+}

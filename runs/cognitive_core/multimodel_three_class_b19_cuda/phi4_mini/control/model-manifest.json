@@ -1,0 +1,28 @@
+{
+  "backend": "transformers+cuda",
+  "family": "phi4",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_total_gib": 39.49,
+  "key": "phi4_mini",
+  "params_b": 3.8,
+  "repo": "microsoft/Phi-4-mini-instruct",
+  "revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+  "torch": "2.11.0+cu128",
+  "version": "multimodel-three-class-b19-cuda",
+  "weights": {
+    "aggregate_sha256": "3ddfa43c460dce884fef54c4d8450498def1adefa5c2a747adca2446964758b7",
+    "files": [
+      {
+        "bytes": 4903637712,
+        "name": "model-00001-of-00002.safetensors",
+        "sha256": "bc703090b63eda16f639fa4de7ac54635c23105ab1da2f6ec4d3403151d38ee6"
+      },
+      {
+        "bytes": 2768428504,
+        "name": "model-00002-of-00002.safetensors",
+        "sha256": "7ff79b9d2d31076bac2663393451f6530f4fc8ca49b09002116c92c373dba983"
+      }
+    ],
+    "total_bytes": 7672066216
+  }
+}

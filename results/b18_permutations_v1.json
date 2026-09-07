@@ -1,0 +1,244 @@
+{
+ "checkpoints": {
+  "gemma3_4b_b15": {
+   "accuracy_by_abs_gap": {
+    "1": {
+     "acc": 0.9490740740740741,
+     "correct": 205,
+     "n": 216
+    },
+    "2": {
+     "acc": 0.8805031446540881,
+     "correct": 140,
+     "n": 159
+    },
+    "3": {
+     "acc": 0.8536585365853658,
+     "correct": 105,
+     "n": 123
+    },
+    "4": {
+     "acc": 0.9270833333333334,
+     "correct": 89,
+     "n": 96
+    },
+    "5": {
+     "acc": 0.8817204301075269,
+     "correct": 82,
+     "n": 93
+    },
+    "6": {
+     "acc": 0.8035714285714286,
+     "correct": 45,
+     "n": 56
+    },
+    "7": {
+     "acc": 0.92,
+     "correct": 23,
+     "n": 25
+    }
+   },
+   "accuracy_by_rule_after_premise": {
+    "False": {
+     "acc": 0.8492462311557789,
+     "correct": 338,
+     "n": 398
+    },
+    "True": {
+     "acc": 0.9486486486486486,
+     "correct": 351,
+     "n": 370
+    }
+   },
+   "identity_agreement": "192/192",
+   "identity_correct_entailed": 96,
+   "identity_reproduces_b15_truncate_1": true,
+   "order_effect_pp": {
+    "all": [
+     6.25,
+     7.291666666666667,
+     9.375,
+     9.375,
+     11.458333333333332,
+     12.5,
+     12.5,
+     13.541666666666666
+    ],
+    "max": 13.541666666666666,
+    "median": 11.458333333333332,
+    "min": 6.25
+   },
+   "per_permutation_correct_entailed": {
+    "perm_1": 87,
+    "perm_2": 87,
+    "perm_3": 84,
+    "perm_4": 89,
+    "perm_5": 83,
+    "perm_6": 85,
+    "perm_7": 84,
+    "perm_8": 90
+   }
+  },
+  "qwen2p5_3b_4bit": {
+   "accuracy_by_abs_gap": {
+    "1": {
+     "acc": 0.18055555555555555,
+     "correct": 39,
+     "n": 216
+    },
+    "2": {
+     "acc": 0.18867924528301888,
+     "correct": 30,
+     "n": 159
+    },
+    "3": {
+     "acc": 0.15447154471544716,
+     "correct": 19,
+     "n": 123
+    },
+    "4": {
+     "acc": 0.14583333333333334,
+     "correct": 14,
+     "n": 96
+    },
+    "5": {
+     "acc": 0.07526881720430108,
+     "correct": 7,
+     "n": 93
+    },
+    "6": {
+     "acc": 0.125,
+     "correct": 7,
+     "n": 56
+    },
+    "7": {
+     "acc": 0.24,
+     "correct": 6,
+     "n": 25
+    }
+   },
+   "accuracy_by_rule_after_premise": {
+    "False": {
+     "acc": 0.05778894472361809,
+     "correct": 23,
+     "n": 398
+    },
+    "True": {
+     "acc": 0.26756756756756755,
+     "correct": 99,
+     "n": 370
+    }
+   },
+   "identity_agreement": "192/192",
+   "identity_correct_entailed": 59,
+   "identity_reproduces_b15_truncate_1": true,
+   "order_effect_pp": {
+    "all": [
+     41.66666666666667,
+     43.75,
+     43.75,
+     44.79166666666667,
+     44.79166666666667,
+     46.875,
+     48.95833333333333,
+     50.0
+    ],
+    "max": 50.0,
+    "median": 44.79166666666667,
+    "min": 41.66666666666667
+   },
+   "per_permutation_correct_entailed": {
+    "perm_1": 16,
+    "perm_2": 14,
+    "perm_3": 17,
+    "perm_4": 12,
+    "perm_5": 19,
+    "perm_6": 17,
+    "perm_7": 11,
+    "perm_8": 16
+   }
+  },
+  "qwen2p5_3b_bf16": {
+   "accuracy_by_abs_gap": {
+    "1": {
+     "acc": 0.1527777777777778,
+     "correct": 33,
+     "n": 216
+    },
+    "2": {
+     "acc": 0.11320754716981132,
+     "correct": 18,
+     "n": 159
+    },
+    "3": {
+     "acc": 0.12195121951219512,
+     "correct": 15,
+     "n": 123
+    },
+    "4": {
+     "acc": 0.14583333333333334,
+     "correct": 14,
+     "n": 96
+    },
+    "5": {
+     "acc": 0.10752688172043011,
+     "correct": 10,
+     "n": 93
+    },
+    "6": {
+     "acc": 0.125,
+     "correct": 7,
+     "n": 56
+    },
+    "7": {
+     "acc": 0.2,
+     "correct": 5,
+     "n": 25
+    }
+   },
+   "accuracy_by_rule_after_premise": {
+    "False": {
+     "acc": 0.04773869346733668,
+     "correct": 19,
+     "n": 398
+    },
+    "True": {
+     "acc": 0.22432432432432434,
+     "correct": 83,
+     "n": 370
+    }
+   },
+   "identity_agreement": "192/192",
+   "identity_correct_entailed": 72,
+   "identity_reproduces_b15_truncate_1": true,
+   "order_effect_pp": {
+    "all": [
+     60.416666666666664,
+     60.416666666666664,
+     61.458333333333336,
+     61.458333333333336,
+     61.458333333333336,
+     62.5,
+     62.5,
+     63.541666666666664
+    ],
+    "max": 63.541666666666664,
+    "median": 61.458333333333336,
+    "min": 60.416666666666664
+   },
+   "per_permutation_correct_entailed": {
+    "perm_1": 13,
+    "perm_2": 12,
+    "perm_3": 12,
+    "perm_4": 14,
+    "perm_5": 13,
+    "perm_6": 14,
+    "perm_7": 13,
+    "perm_8": 11
+   }
+  }
+ },
+ "n_entailed": 96,
+ "n_permutations": 8,
+ "version": "shuffled-permutations-b18-v1"
+}

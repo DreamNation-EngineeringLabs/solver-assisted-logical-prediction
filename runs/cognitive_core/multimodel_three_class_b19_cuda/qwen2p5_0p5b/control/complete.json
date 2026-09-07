@@ -1,0 +1,27 @@
+{
+  "arm_seconds": {
+    "conclusion_only": 5.9,
+    "full": 6.0,
+    "irrelevant": 5.9,
+    "none": 6.3,
+    "proof_prefix": 5.9
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "conclusion_only",
+    "proof_prefix",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 2753,
+    "Unknown": 13790,
+    "Yes": 9454
+  },
+  "key": "qwen2p5_0p5b",
+  "n": 192,
+  "total_seconds": 41.8,
+  "version": "multimodel-three-class-b19-cuda",
+  "weights_bytes": 988097734,
+  "weights_sha256": "c3842946c1c81928bb0efd0c857147330ec6b398427c16eac5d0a1b1bf5168f5"
+}

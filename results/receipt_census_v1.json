@@ -12,6 +12,14 @@
    "responses": 9600,
    "runs": 10
   },
+  "multimodel_three_class_b19_cuda": {
+   "responses": 10560,
+   "runs": 11
+  },
+  "shuffled_permutations_b18": {
+   "responses": 5184,
+   "runs": 3
+  },
   "three_class_broken_chain_b17": {
    "responses": 1728,
    "runs": 3
@@ -36,6 +44,20 @@
   "multimodel_three_class_b16/qwen2p5_3b": 960,
   "multimodel_three_class_b16/qwen2p5_7b": 960,
   "multimodel_three_class_b16/smollm2_1p7b": 960,
+  "multimodel_three_class_b19_cuda/llama3p1_8b": 960,
+  "multimodel_three_class_b19_cuda/llama3p2_1b": 960,
+  "multimodel_three_class_b19_cuda/llama3p2_3b": 960,
+  "multimodel_three_class_b19_cuda/olmo2_1b": 960,
+  "multimodel_three_class_b19_cuda/phi4_mini": 960,
+  "multimodel_three_class_b19_cuda/qwen2p5_0p5b": 960,
+  "multimodel_three_class_b19_cuda/qwen2p5_14b": 960,
+  "multimodel_three_class_b19_cuda/qwen2p5_1p5b": 960,
+  "multimodel_three_class_b19_cuda/qwen2p5_3b": 960,
+  "multimodel_three_class_b19_cuda/qwen2p5_7b": 960,
+  "multimodel_three_class_b19_cuda/smollm2_1p7b": 960,
+  "shuffled_permutations_b18/gemma3_4b_b15": 1728,
+  "shuffled_permutations_b18/qwen2p5_3b_4bit": 1728,
+  "shuffled_permutations_b18/qwen2p5_3b_bf16": 1728,
   "three_class_broken_chain_b17/gemma3_4b_b15": 576,
   "three_class_broken_chain_b17/qwen2p5_3b_4bit": 576,
   "three_class_broken_chain_b17/qwen2p5_3b_bf16": 576,
@@ -43,8 +65,8 @@
   "three_class_none_baseline_b17b/qwen2p5_3b_4bit": 192,
   "three_class_none_baseline_b17b/qwen2p5_3b_bf16": 192
  },
- "model_runs": 20,
+ "model_runs": 34,
  "note": "b14 released its responses as results/b14_raw_model_calls_960.jsonl rather than under runs/*/receipts/; it is counted as one model-run.",
- "total_scored_responses": 18840,
+ "total_scored_responses": 34584,
  "version": "receipt-census-v1"
 }

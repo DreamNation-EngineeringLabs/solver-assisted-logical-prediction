@@ -1,0 +1,23 @@
+{
+  "backend": "transformers+cuda",
+  "family": "olmo2",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_total_gib": 39.49,
+  "key": "olmo2_1b",
+  "params_b": 1.0,
+  "repo": "allenai/OLMo-2-0425-1B-Instruct",
+  "revision": "48d788eca847d4d7548f375ad03d3c9312f6139e",
+  "torch": "2.11.0+cu128",
+  "version": "multimodel-three-class-b19-cuda",
+  "weights": {
+    "aggregate_sha256": "2f4b6ac046b03f989281d170e9e76e6639a86f24ced302e73be4165372ad9654",
+    "files": [
+      {
+        "bytes": 2969854224,
+        "name": "model.safetensors",
+        "sha256": "36d044c73655bb904f822915e6294ba3dae8e6e1af5e703e9d452f2d6a3a294f"
+      }
+    ],
+    "total_bytes": 2969854224
+  }
+}

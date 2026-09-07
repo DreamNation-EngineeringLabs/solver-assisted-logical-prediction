@@ -1,0 +1,16 @@
+{
+  "arms": [
+    "perm_identity",
+    "perm_1",
+    "perm_2",
+    "perm_3",
+    "perm_4",
+    "perm_5",
+    "perm_6",
+    "perm_7",
+    "perm_8"
+  ],
+  "n": 192,
+  "seconds": 1092.3,
+  "version": "shuffled-permutations-b18"
+}

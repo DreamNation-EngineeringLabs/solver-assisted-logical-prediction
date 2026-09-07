@@ -1,0 +1,28 @@
+{
+  "backend": "transformers+cuda",
+  "family": "qwen2.5",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_memory_total_gib": 39.49,
+  "key": "qwen2p5_3b",
+  "params_b": 3.0,
+  "repo": "mlx-community/Qwen2.5-3B-Instruct-bf16",
+  "revision": "bec1ad658e380044bbfe06d4a2268801d3379a11",
+  "torch": "2.11.0+cu128",
+  "version": "multimodel-three-class-b19-cuda",
+  "weights": {
+    "aggregate_sha256": "a85faae39d05fef445b57be5fd266ace5aafca88249c19c394b1cabbf09dd030",
+    "files": [
+      {
+        "bytes": 5356048687,
+        "name": "model-00001-of-00002.safetensors",
+        "sha256": "feb3c8c4721f4503d07509e59c1768fe90804340f1d28d9c2aa406215eb6490b"
+      },
+      {
+        "bytes": 815878181,
+        "name": "model-00002-of-00002.safetensors",
+        "sha256": "77b5846eb11fecb6eb27fb70bcc0d0c73a57b8443d01ebcaa558f4066eb34b70"
+      }
+    ],
+    "total_bytes": 6171926868
+  }
+}
