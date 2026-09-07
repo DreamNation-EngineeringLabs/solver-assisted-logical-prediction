@@ -172,35 +172,26 @@ TITLE = ("What a Language Model Does with a Solver Certificate:\\\\\n"
 ABSTRACT = r"""
 Solver-, tool- and retrieval-augmented systems report large accuracy gains,
 routinely read as evidence that the model used the supplied material. Two
-mechanisms produce the same number: reading a supplied answer, and reasoning
-over supplied state. The standard control, a same-shape irrelevant record,
-separates neither --- a \emph{relevant} certificate stays answer-diagnostic even
-with the answer withheld. We build a control that does, holding every surface
-property fixed while destroying validity alone, and apply it across four sealed
-experiments and two robustness studies --- NMODELRUNS model-runs,
-$NSCOREDRESPONSES$ scored responses, all re-derivable from released receipts.
+mechanisms give the same number: reading a supplied answer, and reasoning over
+supplied state. The standard control, a same-shape irrelevant record, separates
+neither. We build one that does --- holding every surface property fixed while
+destroying validity alone --- and apply it across four sealed experiments and two
+robustness studies, $NSCOREDRESPONSES$ scored responses re-derivable from
+released receipts.
 
-The decomposition is the contribution. Reading a five-arm factorial as a
-$2\times2$ of answer evidence by proof state recovers a state main effect its
-prespecified diagonal contrast could not attribute, and across ten models the
-answer channel dominates the state channel in $8$ of $10$. What it \emph{returns},
-however, is model-specific: the validity share is $98.3\%$ (95\% BCa
-$[94.4, 100.0]$) on one checkpoint and, on another, $40.4\%$ or $51.4\%$ according
-to whether the denominator is a same-shape control or the model's unaided score
---- the two diverge only once a substrate has competence of its own. A
-single-model mechanism result should not be generalised, ours included.
+The decomposition is the contribution; what it returns is not. The validity
+share is $98.3\%$ on one checkpoint and $40.4$--$51.4\%$ on another depending on
+the denominator, so a single-model mechanism result should not be generalised,
+ours included. Two negative results replicate everywhere: given a valid-looking
+certificate whose fabricated final rule establishes the negation, models follow
+it on $189$, $186$ and $192$ of $192$ items; and a three-candidate test refutes
+the reading that they detect invalidity at all, the strongest substrate
+abstaining on $0$ of $192$ broken certificates while completing $76$.
 
-Two negative results replicate everywhere. Given a valid-looking certificate
-whose fabricated final rule establishes the negation, models follow it on $189$,
-$186$ and $192$ of $192$ items. And a three-candidate test refutes the reading
-that the model detects invalidity at all: a broken chain \emph{lowers} abstention
-on every checkpoint against both baselines, and the strongest substrate abstains
-on $0$ of $192$ broken certificates while completing $76$.
-
-We report what the design cannot support: the $2\times2$ is ceiling-limited,
-viability is a property of (model $\times$ arm) rather than of a model, supplying
-proof state degrades three of ten interfaces, and two prespecified criteria of
-our own were invalidated by our own data.
+We also report what the design cannot support: the $2\times2$ is
+ceiling-limited, viability is a property of (model $\times$ arm $\times$
+runtime) rather than of a model, and two prespecified criteria of our own were
+invalidated by our own data.
 """.strip()
 
 BODY = r"""
@@ -899,17 +890,17 @@ do not treat the two as one artefact.
 
 \textbf{Prior report.} Experiment 1's per-arm counts and prespecified primary
 contrast appeared in an earlier unpublished report by the same authors, cited
-here anonymously; the $2\times2$ reading, the response-bias finding and all of
-Experiments 2--4 are new. That report concluded the 3B checkpoint failed an
-open-world unknown gate, whereas Experiment 3 finds the same family viable;
-panels, candidate sets and quantisation all differ, which plausibly explains the
-discrepancy, but we flag it rather than leave it to a reader who finds both.
+anonymously; the $2\times2$ reading, the response-bias finding and Experiments
+2--4 are new. That report concluded the 3B checkpoint failed an open-world
+unknown gate whereas Experiment 3 finds the same family viable; panels, candidate
+sets and quantisation all differ, which plausibly explains it, but we flag the
+discrepancy rather than leave it to a reader who finds both.
 
 An undetermined \textsc{proof\_prefix} cannot contain the query predicate, since
-the solver has nothing to say about it, whereas entailed and contradicted
-prefixes can. Undetermined items therefore offer fewer surface cues and a
-surface-matching model will look worse on them for reasons unrelated to
-abstention; per-arm entity-mention counts are recorded so this is analysable.
+the solver has nothing to say about it. Undetermined items therefore offer fewer
+surface cues, and a surface-matching model will look worse on them for reasons
+unrelated to abstention; per-arm entity-mention counts are recorded so this is
+analysable.
 
 Finally, every theory here arrives \emph{already formalised}. Nothing tests
 whether a model can turn a framework described in prose into the solver's input,
@@ -922,29 +913,26 @@ formalisation error would not be caught downstream, but followed.
 Solver assistance improves a small model's accuracy on rule-chaining queries, and
 end-to-end accuracy cannot say why. The decomposition can: arrange the arms so
 each contrast moves one factor, and hold every surface property fixed while
-destroying validity alone. It needs no new data collection.
+breaking validity alone.
 
 What it returns is model-specific: $98.3\%$ of the state effect survives the
-control on one checkpoint, and $40.4$--$51.4\%$ on the strongest substrate in our
-sweep, depending on the denominator. We offer the method as the contribution and
-decline to generalise its value, ours included.
+control on one checkpoint and $40.4$--$51.4\%$ on another, so we offer the method
+as the contribution and decline to generalise its value, ours included.
 
-\looseness=-1
 \looseness=-1
 Three findings hold on every checkpoint, and all are negative. The inference is
-one step deep. It is not detection: the strongest substrate abstains on $0$ of
-$192$ broken certificates and completes $76$. And nothing defends
-against a wrong apparatus: given a certificate whose fabricated final rule
-establishes the negation, the three checkpoints answer incorrectly on $189$, $186$
-and $192$ of $192$. The interface inherits the apparatus's errors in full, and
-more proof state degrades three of ten interfaces.
+one step deep, and requires the rule to follow its premise. It is not detection:
+the strongest substrate abstains on $0$ of $192$ broken certificates and completes
+$76$. And nothing defends against a wrong apparatus --- given a certificate whose
+fabricated final rule establishes the negation, the three checkpoints answer
+incorrectly on $189$, $186$ and $192$ of $192$. The interface inherits the
+apparatus's errors in full.
 
-\looseness=-1
-Two criteria we had prespecified failed here: an arm at $50.0\%$ accuracy with
-$d' = 0.00$ was degenerate rather than chance-level, and a viability threshold
-was maximised by answering \texttt{Unknown} to everything. Only reporting
-sensitivity alongside accuracy caught either; we recommend it, with the
-decomposition, as standard.
+Two criteria we had prespecified failed here --- an arm at $50.0\%$ accuracy was
+degenerate rather than chance-level, and a viability threshold was maximised by
+answering \texttt{Unknown} to everything --- and only reporting sensitivity
+alongside accuracy caught either. We recommend it, with the decomposition, as
+standard.
 
 \section*{Reproducibility Statement}
 

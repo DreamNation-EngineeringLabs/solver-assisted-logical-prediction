@@ -40,13 +40,12 @@ ABSTRACT
 Pairing a language model with an external solver, tool or retrieval index
 reliably raises accuracy on tasks the model cannot do alone. Systems that
 translate a problem into a formal representation, dispatch it to a symbolic
-engine, and return the engine's verdict through the model report large
-end-to-end gains on logical reasoning
-\citep{pan2023logiclm,olausson2023linc,ye2023satlm}, on tasks solved by an
-interpreter \citep{gao2022pal}, on API-mediated subtasks
-\citep{schick2023toolformer}, on theorem proving \citep{yang2023leandojo}, and on
-retrieval-supported generation \citep{lewis2020retrievalaugmented}. Those gains
-are routinely read as evidence that the model \emph{used} the supplied material.
+engine and return the verdict through the model report large end-to-end gains
+across logical reasoning, program execution, API use, theorem proving and
+retrieval-supported generation
+\citep{pan2023logiclm,olausson2023linc,ye2023satlm,gao2022pal,schick2023toolformer,yang2023leandojo,lewis2020retrievalaugmented}.
+Those gains are routinely read as evidence that the model \emph{used} the
+supplied material.
 
 That reading is underdetermined. Two mechanisms produce the same accuracy
 number. Under \emph{answer reading}, the supplied record contains the
@@ -66,15 +65,13 @@ validity alone. This paper builds one and applies it across four sealed
 experiments on frozen small models, scoring by direct next-token likelihood over
 verified single-token candidates so that no free text is parsed. Experiment 1
 reads a five-arm certificate factorial as a $2\times2$ of \emph{answer evidence}
-$\times$ \emph{proof state}. Experiment 2 holds line count, line types,
-query-entity occurrences, query-predicate presence and token length fixed across
-ten arms and breaks only the logic, and additionally varies entity repetition,
-line order and truncation depth and supplies a valid-looking certificate whose
-fabricated final rule points the wrong way. Experiment 3 scores ten models on a
-three-class panel whose \emph{undetermined} items are certified by
-forward-closure saturation. Experiment 4 rescores the broken-chain items with a
-third candidate, separating detection of an invalid certificate from failure to
-complete one.
+$\times$ \emph{proof state}. Experiment 2 holds every surface property fixed
+across ten arms while breaking only the logic, and varies entity repetition, line
+order and truncation depth alongside a valid-looking certificate whose fabricated
+final rule points the wrong way. Experiment 3 scores ten models on a three-class
+panel whose \emph{undetermined} items are certified by forward-closure
+saturation. Experiment 4 rescores the broken-chain items with a third candidate,
+separating detection of an invalid certificate from failure to complete one.
 
 \textbf{The method is the contribution; what it returns is model-specific.}
 Breaking validity alone removes almost the whole state effect on one checkpoint
@@ -89,8 +86,7 @@ and $192$ of $192$ items given a certificate whose fabricated final rule
 establishes the negation.
 
 Two measurement points shape how this may be reported. Accuracy alone is not
-interpretable: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$,
-matching a trivial always-one-label strategy while discriminating nothing, so
+interpretable: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$, so
 sensitivity and criterion accompany it throughout
 \citep{macmillan1991detection,stanislaw1999calculation}, with the exact McNemar
 test \citep{mcnemar1947note} and BCa intervals \citep{efron1987better}. And the
@@ -144,52 +140,44 @@ unfaithful, whereas following a corrupted external certificate is unsafe.
 
 \subsection{Solver-augmented and tool-augmented reasoning}
 
-Neurosymbolic pipelines put the formal step outside the model. Logic-LM
-translates a problem into a symbolic language and refines the formalisation from
-solver errors \citep{pan2023logiclm}; LINC parses into first-order logic and
-offloads deduction to a prover \citep{olausson2023linc}; SatLM dispatches a
-declarative specification to a theorem prover \citep{ye2023satlm}; PAL emits a
+Neurosymbolic pipelines put the formal step outside the model: translating into
+a symbolic language and repairing from solver errors \citep{pan2023logiclm},
+parsing into first-order logic for a prover \citep{olausson2023linc},
+dispatching a declarative specification \citep{ye2023satlm}, or emitting a
 program for an interpreter \citep{gao2022pal}. The pattern extends to
 self-supervised API use \citep{schick2023toolformer}, premise selection in
 interactive theorem proving \citep{yang2023leandojo}, and retrieval as general
 external evidence \citep{lewis2020retrievalaugmented}.
 
-These systems report end-to-end accuracy and attribute the gain to the pipeline,
-which leaves two things open. The contribution of the \emph{reasoning state} is
-not separated from that of the \emph{answer}: the solver's output normally
-contains both, so no reported number distinguishes reasoning over supplied
-premises from reading off a supplied conclusion. And the solver is assumed
-correct, so behaviour under wrong-but-well-formed output is unmeasured. The
-model side is not neutral to context: irrelevant material degrades accuracy
-\citep{shi2023large}, and models are highly receptive to coherent evidence
-contradicting their parametric knowledge \citep{xie2023adaptive}. We decompose
-the solver's contribution into an answer channel and a state channel, measure
-each on matched arms, and add an arm whose certificate is valid-looking but
-points the wrong way.
+All report end-to-end accuracy and attribute the gain to the pipeline, leaving
+two things open. The \emph{reasoning state}'s contribution is not separated from
+the \emph{answer}'s, since the solver's output contains both. And the solver is
+assumed correct, so behaviour under wrong-but-well-formed output is unmeasured
+--- though the model side is demonstrably not neutral to context, with irrelevant
+material degrading accuracy \citep{shi2023large} and coherent evidence
+overriding parametric knowledge \citep{xie2023adaptive}. We decompose the
+solver's contribution into an answer channel and a state channel, and add an arm
+whose certificate is valid-looking but points the wrong way.
 
 \subsection{Synthetic deductive reasoning benchmarks}
 
-The task family descends from rule-based deductive datasets in natural language.
-RuleTaker showed transformers can assign truth values to implications of a
-theory and generalise beyond training depth \citep{clark2020transformers}.
-ProofWriter added generated proofs and open-world semantics with an explicit
-unknown class \citep{tafjord2020proofwriter}. PrOntoQA generates items from a
-synthetic world model so chains can be parsed into symbolic proofs, finding
-individual steps usually correct while proof planning is not
-\citep{saparov2022language}. FOLIO supplies human-written premises with verified
-first-order annotations \citep{han2022folio}. Two properties matter here: order
-effects are large in deductive prompting \citep{chen2024premise}, and the sets
-are public and predate the models evaluated on them, so contamination cannot be
-excluded --- documented for modern benchmarks generally
-\citep{deng2024investigating,golchin2023time} and sharpened by sharp drops on
-counterfactual variants of familiar tasks \citep{wu2023reasoning}.
+The task family descends from rule-based deductive datasets in natural language:
+RuleTaker \citep{clark2020transformers}, ProofWriter, which added generated
+proofs and open-world semantics with an explicit unknown class
+\citep{tafjord2020proofwriter}, PrOntoQA, whose chains parse into symbolic proofs
+and whose individual steps are usually correct while proof planning is not
+\citep{saparov2022language}, and FOLIO's human-written premises with verified
+annotations \citep{han2022folio}. Two properties matter here: order effects are
+large in deductive prompting \citep{chen2024premise}, and these sets are public
+and predate the models evaluated on them, so contamination cannot be excluded
+\citep{deng2024investigating,golchin2023time,wu2023reasoning}.
 
-These benchmarks supply items and proofs but not the matched adversarial
-certificate variants an attribution question needs. We generate items after model
-release with per-item nonce vocabularies, and construct the matched invalid,
-misleading, order-scrambled and depth-truncated certificates the public sets do
-not provide. A public open-world corpus is used only as an independent check on
-the forward-closure certifier; no item from it is scored by any model here.
+They supply items and proofs but not the matched adversarial certificate variants
+an attribution question needs. We generate items after model release with
+per-item nonce vocabularies and construct the matched invalid, misleading,
+order-scrambled and depth-truncated certificates the public sets do not provide.
+A public open-world corpus is used only to check the forward-closure certifier;
+no item from it is scored by any model here.
 
 \subsection{Response bias and the limits of accuracy}
 
