@@ -195,11 +195,82 @@ under **both** `broken_chain` and `truncate_1`; the arms differ only in `Yes`
 The model completes a final inference when it can and falls back when it cannot.
 **Detection is refuted, not merely unsupported.**
 
+### 3.4a Refuted on all three checkpoints (b17 replication)
+
+`results/b17_replication_v2.json`. Round 2 caught that the above was one
+checkpoint while the Conclusion claimed "every checkpoint" — and that it was
+missing on gemma-3-4b, the only model that answers broken chains correctly
+(58/96) and therefore the only one where the two hypotheses visibly diverge.
+
+| Checkpoint | `irrelevant` | `broken_chain` | Δ | `truncate_1` |
+| --- | ---: | ---: | ---: | ---: |
+| qwen2.5-3b 4-bit | 144 (75.0%) | 81 (42.2%) | **-32.8pp** | 21 (10.9%) |
+| qwen2.5-3b bf16 | 108 (56.2%) | 34 (17.7%) | **-38.5pp** | 12 (6.2%) |
+| gemma-3-4b | 15 (7.8%) | **0** (0.0%) | **-7.8pp** | 0 (0.0%) |
+
+### 3.4b The abstention floor (b17b), and why it changed the reading
+
+`results/b17_detection_both_baselines_v3.json`. Round 2, minor 11 asked whether
+`irrelevant` is the right reference, since a record is present in that arm. A
+`none` arm under the same instruction and candidates separates the instruction
+effect from the record effect. 192 items x 3 checkpoints.
+
+| Checkpoint | `none` | `irrelevant` | `irrel.` - `none` | Δ vs `none` | Δ vs `irrel.` |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| qwen2.5-3b 4-bit | 153 (79.7%) | 144 (75.0%) | -4.7pp | -37.5pp | -32.8pp |
+| qwen2.5-3b bf16 | 41 (21.4%) | 108 (56.2%) | **+34.9pp** | **-3.6pp** | -38.5pp |
+| gemma-3-4b | 1 (0.5%) | 15 (7.8%) | +7.3pp | **-0.5pp** | -7.8pp |
+
+`irrelevant` is near-neutral on the 4-bit checkpoint and inflates abstention by
+34.9pp at bfloat16, so a Δ against it is **not comparable across checkpoints**.
+The direction holds against both references everywhere, so the refutation does
+not depend on the baseline — but two of the three Δ-vs-`none` values are near
+zero, and gemma-3-4b's -0.5pp is a **no-power null** (it abstains on 1 of 192
+with no record at all), not a refutation in its own right.
+
+The composition carries the argument instead, and no baseline choice moves it:
+
+| Evidence | Value |
+| --- | --- |
+| gemma-3-4b `Unknown` under `broken_chain` | **0 / 192** |
+| gemma-3-4b `Yes` under `broken_chain` — completing a chain that does not connect | **76** |
+| qwen 4-bit `No`, `broken_chain` vs `truncate_1` | **110 / 110** — identical |
+| qwen 4-bit `Yes`, `broken_chain` vs `truncate_1` | 1 vs 61 |
+
+**Second, unlooked-for result.** b17 moves only the instruction line and
+candidate set on byte-identical inputs and the response distribution shifts
+enormously — a prompt-format sensitivity result, recorded as a limitation in
+§6.3 rather than claimed as a finding.
+
 ### 3.5 Uncertainty on the validity share
 
 `results/b15_share_interval_v2.json`. Bootstrapping the whole ratio over paired
 item resamples, rather than the numerator alone: validity share 98.3%, **95% BCa
 [94.4, 100.0]**; surface component +1.0pp, 95% [+0.0, +3.1]pp.
+
+`results/b15_share_baselines_v3.json`. Round 2: the share divides by the effect
+measured against `irrelevant`, which coincides with `none` on both Qwen
+checkpoints (both 0/96) and does not on gemma-3-4b, which answers **22 of 96**
+entailed items unaided — **20 of those 22** also correct under `broken_chain`.
+
+| Checkpoint | vs `irrelevant` | vs `none` |
+| --- | ---: | ---: |
+| qwen2.5-3b 4-bit | 98.3% | 98.3% |
+| qwen2.5-3b bf16 | 98.6% | 98.6% |
+| gemma-3-4b | **40.4%** | **51.4%** |
+
+Both are reported and the "most of Gemma's effect is surface overlap" reading is
+declined. The divergence appears exactly when a substrate has unaided competence,
+and that is the finding rather than either number.
+
+`results/b16_state_effect_v3.json`. The ten-model mean state effect averages over
+four responders with minimum per-class recall 0.000 in *every* arm, three with
+negative state effects. Excluding them: state **+14.7pp**, answer **+28.5pp**,
+against b14's single-model +22.4pp — so "less than half" is withdrawn.
+
+`results/receipt_census_v1.json`. Scored responses are counted from disk rather
+than typed: **18,840 across 20 model-runs**. The composer substitutes the census
+at build time.
 
 ### 3.6 Holm-adjusted p-values
 
