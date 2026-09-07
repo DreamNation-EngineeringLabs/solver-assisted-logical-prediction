@@ -1,0 +1,24 @@
+{
+  "arms": [
+    "perm_identity",
+    "perm_1",
+    "perm_2",
+    "perm_3",
+    "perm_4",
+    "perm_5",
+    "perm_6",
+    "perm_7",
+    "perm_8"
+  ],
+  "candidates": [
+    "Yes",
+    "No"
+  ],
+  "derived_from": "binary_certificate_factorial_b15 truncate_1",
+  "n": 192,
+  "n_permutations": 8,
+  "only_change": "order of the solver-record sentences; every other byte identical",
+  "public_sha256": "582c2ae0d47d99df22367fd419fcfa288d1af2c87d58c50f7d3eea7b4df6b6c9",
+  "seed_base": 2026090701,
+  "version": "shuffled-permutations-b18"
+}

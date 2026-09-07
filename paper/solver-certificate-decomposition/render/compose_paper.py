@@ -167,38 +167,37 @@ TITLE = ("What a Language Model Does with a Solver Certificate:\\\\\n"
          "An Answer-Evidence Decomposition Across Ten Models")
 
 ABSTRACT = r"""
-Solver-, tool- and retrieval-augmented language model systems report large
-accuracy gains, and those gains are routinely read as evidence that the model
-used the supplied material. Two mechanisms produce the same number: the model
-reading a supplied answer, and the model reasoning over supplied state. The
-standard control, a same-shape irrelevant record, separates neither. We build a
-control that does --- holding line count, line types, query-entity occurrence
-count, query-predicate presence and token length fixed while destroying validity
-alone --- and apply it across four sealed experiments, NMODELRUNS model-runs and
-$NSCOREDRESPONSES$ scored responses, all re-derivable from released receipts.
+Solver-, tool- and retrieval-augmented systems report large accuracy gains,
+routinely read as evidence that the model used the supplied material. Two
+mechanisms produce the same number: reading a supplied answer, and reasoning
+over supplied state. The standard control, a same-shape irrelevant record,
+separates neither --- a \emph{relevant} certificate stays answer-diagnostic even
+with the answer withheld. We build a control that does, holding every surface
+property fixed while destroying validity alone, and apply it across four sealed
+experiments, NMODELRUNS model-runs and $NSCOREDRESPONSES$ scored responses, all
+re-derivable from released receipts.
 
-Three results. First, the decomposition works and is worth adopting: reading a
-five-arm factorial as a $2\times2$ of answer evidence by proof state recovers a
-state main effect its prespecified diagonal contrast could not attribute, and
-the same $2\times2$ computed across ten models shows the answer channel
-dominating the state channel in $8$ of $10$. Second, how much of the state
-effect is genuine inference is \emph{model-specific}: the validity share is
-$98.3\%$ (95\% BCa $[94.4, 100.0]$) on one checkpoint and, on another, either
-$40.4\%$ or $51.4\%$ depending on whether the denominator is a same-shape control
-or the model's unaided score --- the two diverge only once a substrate has
-competence of its own. A single-model mechanism result should not be
-generalised, ours included. Third, the finding that does replicate
-everywhere is a negative one: given a valid-looking certificate whose fabricated
-final rule establishes the negation, models follow it on $189/192$, $186/192$ and
-$192/192$ items. A three-candidate test refutes the reading that the model
-detects invalidity at all: a broken chain \emph{lowers} abstention on every
-checkpoint and against both baselines, and the strongest substrate abstains on
-$0$ of $192$ broken certificates while completing $76$ of them.
+The decomposition is the contribution. Reading a five-arm factorial as a
+$2\times2$ of answer evidence by proof state recovers a state main effect its
+prespecified diagonal contrast could not attribute, and across ten models the
+answer channel dominates the state channel in $8$ of $10$. What it \emph{returns},
+however, is model-specific: the validity share is $98.3\%$ (95\% BCa
+$[94.4, 100.0]$) on one checkpoint and, on another, $40.4\%$ or $51.4\%$ according
+to whether the denominator is a same-shape control or the model's unaided score
+--- the two diverge only once a substrate has competence of its own. A
+single-model mechanism result should not be generalised, ours included.
 
-We also report what the design cannot support: the $2\times2$ is ceiling-limited,
-viability is a property of (model $\times$ arm) rather than of a model, and
-supplying proof state actively degrades three of ten interfaces. Two prespecified
-criteria of our own were invalidated by our own data and are reported as such.
+Two negative results replicate everywhere. Given a valid-looking certificate
+whose fabricated final rule establishes the negation, models follow it on $189$,
+$186$ and $192$ of $192$ items. And a three-candidate test refutes the reading
+that the model detects invalidity at all: a broken chain \emph{lowers} abstention
+on every checkpoint against both baselines, and the strongest substrate abstains
+on $0$ of $192$ broken certificates while completing $76$.
+
+We report what the design cannot support: the $2\times2$ is ceiling-limited,
+viability is a property of (model $\times$ arm) rather than of a model, supplying
+proof state degrades three of ten interfaces, and two prespecified criteria of
+our own were invalidated by our own data.
 """.strip()
 
 BODY = r"""
@@ -281,20 +280,22 @@ the closure.
 Validation has three layers, because a single one would not be worth much.
 Against the open-world splits of a public corpus \citep{tafjord2020proofwriter}
 at depths $0$--$3$ and $5$, $23{,}240$ of $23{,}240$ questions agree, including
-$10{,}440$ undetermined --- but those labels come from forward chaining over the
-same fragment, so this largely measures one chainer agreeing with another, and
-covers none of the generated nonce theories. We therefore add nine adversarial
-theories (cyclic rules; a cycle that never reaches the query; a chain longer than
-the round cap; derived negation; absent predicates and entities; a rule that must
-fire only for the satisfying entity; an inconsistent theory, which must be
-\emph{rejected} rather than labelled; and a cap overrun, which must report
-failure rather than a wrong answer), all of which pass; and a \emph{differential}
-test on the generated panels against an independently written reference --- naive
-fixpoint over the exhaustive Herbrand base, a deliberately different algorithm
---- agreeing with the certifier and the sealed authority on $192/192$ items. The
-reference encodes the same intended semantics, so it catches implementation error
-rather than a misconception about the semantics; we claim the former only. No
-item enters a sealed panel without a certification record.
+$10{,}440$ undetermined. That is weaker than it sounds. Those labels also come
+from forward chaining over the same fragment, so the agreement largely measures
+one chainer against another, and it covers none of the generated nonce theories. We therefore add two checks with different failure modes. The first is nine
+adversarial theories: cyclic rules, a cycle that never reaches the query, a chain
+longer than the round cap, derived negation, absent predicates and entities, and
+a rule that must fire only for the satisfying entity. Two of the nine must fail
+rather than answer --- an inconsistent theory must be \emph{rejected}, and a cap
+overrun must report failure rather than a wrong verdict. All nine pass.
+
+The second is a \emph{differential} test on the generated panels. An
+independently written reference --- naive fixpoint over the exhaustive Herbrand
+base, a deliberately different algorithm --- agrees with the certifier and the
+sealed authority on $192/192$ items. It encodes the same intended semantics, so
+it catches implementation error and not a misconception about the semantics; we
+claim the former only. No item enters a sealed panel without a certification
+record.
 
 \subsection{Measurement: sensitivity, not accuracy}
 \label{sec:measurement}
@@ -411,22 +412,23 @@ neither.}
 \label{fig:factorial}
 \end{figure}
 
-The four edges are reported in \cref{tab:edges}. \textbf{This reading is post
-hoc}: it is a different analysis of sealed data, not a re-run, and every value
-is re-derived from the 960 raw receipts by a script that reconstructs the answer
-key and asserts it reproduces all five published per-arm counts before
-reporting. The state main effect is $+22.4$pp and the answer main effect
+The four edges are reported in \cref{tab:edges}. \textbf{This reading is post hoc}: a different analysis of sealed data, not a
+re-run. Every value is re-derived from the 960 raw receipts by a script that
+reconstructs the answer key and asserts it reproduces all five published per-arm
+counts before reporting anything. The state main effect is $+22.4$pp and the answer main effect
 $+27.1$pp.
 
-The \textbf{interaction is $-29.2$pp}, larger in magnitude than either main
-effect, and the design is \textbf{ceiling-limited}: \textsc{full} at $191/192$
-($99.5\%$) leaves only $13.0$pp of headroom above \textsc{proof\_prefix}, so both
-``other factor present'' edges are compressed and the averaged main effects are
-correspondingly deflated. It follows that the ratio $12.50/41.67$ --- the answer
-literal apparently retaining $30\%$ of its value once state is present --- is
-substantially a measurement of remaining headroom rather than of channel
-redundancy, and we do not draw a redundancy conclusion from it. A design with
-\textsc{full} away from ceiling would be required to separate the two.
+The \textbf{interaction is $-29.2$pp}, larger than either main effect. The design
+is also \textbf{ceiling-limited}: \textsc{full} reaches $191/192$ ($99.5\%$),
+leaving only $13.0$pp of headroom above \textsc{proof\_prefix}. Both
+``other factor present'' edges are therefore compressed, and the averaged main
+effects deflated with them.
+
+This bears on one tempting reading. The answer literal appears to retain $30\%$
+of its value once state is present ($12.50/41.67$), which would suggest the two
+channels are partly redundant. But with \textsc{full} at ceiling that ratio
+largely measures the headroom left, not the redundancy, so we do not draw the
+conclusion. Separating them needs a design with \textsc{full} away from ceiling.
 
 \begin{table}[t]
 \centering
@@ -477,13 +479,12 @@ Arm & Hits & FA & $d'$ & $c$ \\
 
 \subsection{Validity versus surface overlap}
 
-Experiment 2 holds surface form fixed and destroys validity alone. The primary
-contrast, evaluated on the entailed subset ($n = 96$) as declared before the run
-because the contradicted class contributes no discordance, is
-$\textsc{truncate\_1} - \textsc{broken\_chain} = +60.4$pp, exact McNemar
-$p = 6.9\times10^{-18}$, BCa $[+49.0, +68.8]$, with a paired table of $1$ both
-correct, $58$ \textsc{truncate\_1}-only, $0$ \textsc{broken\_chain}-only and
-$37$ neither. Sensitivity moves with it: $d'$ drops by $+2.446$, satisfying the
+Experiment 2 holds surface form fixed and destroys validity alone. The primary contrast is
+$\textsc{truncate\_1} - \textsc{broken\_chain} = +60.4$pp: exact McNemar
+$p = 6.9\times10^{-18}$, BCa $[+49.0, +68.8]$, from a paired table of $1$ both
+correct, $58$ \textsc{truncate\_1}-only, $0$ \textsc{broken\_chain}-only and $37$
+neither. It is evaluated on the entailed subset ($n = 96$), as declared before
+the run, because the contradicted class contributes no discordant pairs. Sensitivity moves with it: $d'$ drops by $+2.446$, satisfying the
 same-sign requirement declared in advance, so this is a change in
 discrimination and not in criterion placement.
 
@@ -924,7 +925,17 @@ environment. Panels are hash-stamped and the runners refuse a modified panel;
 each receipt carries a SHA-256 of its own contents, and all $NSCOREDRESPONSES$
 verified with zero failures. The count is not typed into the manuscript: it is
 produced by \texttt{scripts/census\_receipts\_v1.py} from the released receipts
-and substituted at compose time. Model weights are not redistributed, but each run records the
+and substituted at compose time.
+
+\textbf{Checking one number takes a minute.} \texttt{scripts/verify.py} re-derives
+each headline value from the receipts and the sealed authority --- not from a
+stored analysis file --- and prints it beside the value this paper states:
+\texttt{python3 scripts/verify.py validity-share} recomputes the $98.3\%$ of
+\cref{sec:broken} and shows the four counts it came from.
+\texttt{--all} does the same for the validity share, Gemma's two baselines, the
+corruption counts, the detection direction on three checkpoints, the $2\times2$
+state main effect, the cross-model mean and the response census. It uses the
+standard library only, so a reviewer needs no environment beyond Python. Model weights are not redistributed, but each run records the
 pinned revision and a hash of the weight files before those files are deleted. A
 permanent archive with a DOI will accompany the camera-ready version.
 
