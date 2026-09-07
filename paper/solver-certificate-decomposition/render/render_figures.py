@@ -230,8 +230,14 @@ def fig_b16_size():
 
 # ---------------------------------------------------------------- figure 4
 def fig_b15_replication():
-    """Does the 98.3% validity share survive a change of checkpoint? No."""
+    """Does the 98.3% validity share survive a change of checkpoint? No.
+
+    Round-3 review: this figure still told the single-baseline story after the
+    text had stopped. Both denominators are drawn, because the whole point is
+    that they diverge once a substrate has unaided competence.
+    """
     r = json.loads((RES / "b15_replication_v1.json").read_text())
+    b = json.loads((RES / "b15_share_baselines_v3.json").read_text())["checkpoints"]
     order = ["qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15"]
     short = {"qwen2p5_3b_4bit": "qwen2.5-3b 4bit", "qwen2p5_3b_bf16": "qwen2.5-3b bf16",
              "gemma3_4b_b15": "gemma-3-4b bf16"}
@@ -239,7 +245,7 @@ def fig_b15_replication():
     sur = [r[k]["surface"] * 100 for k in order]
     y = [0, 1, 2]
     H, G = .32, .19
-    XMAX = 122
+    XMAX = 136
 
     fig, ax = plt.subplots(figsize=(6.0, 2.8))
     ax.barh([i - G for i in y], val, height=H, color=BLUE, zorder=2)
@@ -249,8 +255,16 @@ def fig_b15_replication():
         ax.text(v + 1.6, i - G, f"{v:+.1f}pp{tag[0]}", va="center", fontsize=7.3, color=BLUE)
         ax.text(u + 1.6, i + G, f"{u:+.1f}pp{tag[1]}", va="center", fontsize=7.3, color=VERM)
     for i, k in zip(y, order):
-        ax.text(XMAX, i, f"validity share  {r[k]['share']*100:.1f}%", ha="right", va="center",
-                fontsize=7.6, color=INK)
+        vs_irr = b[k]["share_vs_irrelevant"] * 100
+        vs_none = b[k]["share_vs_none"] * 100
+        same = abs(vs_irr - vs_none) < 0.05
+        label = (f"share  {vs_irr:.1f}%" if same
+                 else f"share  {vs_irr:.1f}%  /  {vs_none:.1f}%")
+        ax.text(XMAX, i - G, label, ha="right", va="center", fontsize=7.6,
+                color=INK if same else VERM)
+        if not same:
+            ax.text(XMAX, i + G, "vs irrelevant / vs none", ha="right", va="center",
+                    fontsize=6.6, color=MUTED)
 
     ax.set_yticks(y)
     ax.set_yticklabels([short[k] for k in order], family="DejaVu Sans Mono", fontsize=7.6)
@@ -262,11 +276,14 @@ def fig_b15_replication():
     ax.spines["bottom"].set_bounds(0, 80)
 
     g, q = r["gemma3_4b_b15"], r["qwen2p5_3b_4bit"]
+    gb = b["gemma3_4b_b15"]
     fig.text(.5, -.055,
              f"The {q['share']*100:.1f}% share does not generalise: gemma-3-4b's surface "
-             f"component is {g['surface']*100:+.1f}pp\n"
-             f"against {q['surface']*100:+.1f}pp on both qwen checkpoints, and its validity "
-             f"share falls to {g['share']*100:.1f}%.",
+             f"component is {g['surface']*100:+.1f}pp against {q['surface']*100:+.1f}pp\n"
+             f"on both qwen checkpoints. Its share is {gb['share_vs_irrelevant']*100:.1f}% against "
+             f"the same-shape control and {gb['share_vs_none']*100:.1f}% against what it manages\n"
+             f"unaided — the two denominators diverge only where a substrate has competence of "
+             f"its own.",
              ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
     fig.savefig(OUT / "b15/figures/replication.png")
     plt.close(fig)
