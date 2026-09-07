@@ -281,22 +281,23 @@ def fig_b17_detection():
     against its own irrelevant baseline, because baseline abstention differs by
     a factor of ten across them.
     """
-    r = json.loads((RES / "b17_replication_v2.json").read_text())
+    r = json.loads((RES / "b17_detection_both_baselines_v3.json").read_text())
     nice = {"qwen2p5_3b_4bit": "Qwen2.5-3B 4-bit", "qwen2p5_3b_bf16": "Qwen2.5-3B bf16",
             "gemma3_4b_b15": "Gemma-3-4B"}
     keys = [k for k in ("qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15")
             if k in r["checkpoints"]]
-    order = ["irrelevant", "broken_chain", "truncate_1"]
+    order = ["none", "irrelevant", "broken_chain", "truncate_1"]
     labels = [("Unknown", BLUE), ("No", VERM), ("Yes", GREEN)]
     H, G = .22, .25
 
-    fig, axes = plt.subplots(1, len(keys), figsize=(7.3, 2.5), sharey=True,
+    fig, axes = plt.subplots(1, len(keys), figsize=(7.3, 2.9), sharey=True,
                              gridspec_kw={"wspace": .12})
     for ax, key in zip(np.atleast_1d(axes), keys):
         ck = r["checkpoints"][key]
         arms, n = ck["arms"], ck["arms"]["irrelevant"]["n"]
-        base = arms["irrelevant"]["Unknown"]
-        ax.axvline(base, color=BLUE, lw=.9, linestyle=(0, (3, 2)), zorder=1)
+        # both references drawn: they coincide on one checkpoint and not the others
+        ax.axvline(arms["none"]["Unknown"], color=BLUE, lw=.9, linestyle=(0, (1, 2)), zorder=1)
+        ax.axvline(arms["irrelevant"]["Unknown"], color=BLUE, lw=.9, linestyle=(0, (3, 2)), zorder=1)
         for j, (lab, col) in enumerate(labels):
             offs = (j - 1) * G
             vals = [arms[a][lab] for a in order]
@@ -304,23 +305,25 @@ def fig_b17_detection():
                     zorder=2, label=lab if ax is np.atleast_1d(axes)[0] else None)
             for i, v in enumerate(vals):
                 ax.text(v + 3, i + offs, f"{v}", va="center", fontsize=6.2, color=INK)
-        delta = ck["broken_chain_minus_irrelevant_unknown_rate"] * 100
-        ax.set_title(f"{nice.get(key, key)}\n{delta:+.1f}pp abstention", loc="left",
-                     pad=5, fontsize=7.4)
+        ax.set_title(f"{nice.get(key, key)}\n"
+                     f"{ck['vs_none_pp']:+.1f}pp vs none · {ck['vs_irrelevant_pp']:+.1f}pp vs irrel.",
+                     loc="left", pad=5, fontsize=7.0)
         ax.set_xlim(0, n * 1.16); ax.set_xticks([0, 96, 192])
-        ax.set_ylim(2.5, -.62)
+        ax.set_ylim(3.5, -.62)
         _clean(ax)
     a0 = np.atleast_1d(axes)[0]
     a0.set_yticks(range(len(order)))
     a0.set_yticklabels(order, family="DejaVu Sans Mono", fontsize=7.0)
-    fig.text(.5, -.02, "responses (of 192)   ·   dashed = that checkpoint's irrelevant baseline",
+    fig.text(.5, -.02,
+             "responses (of 192)   ·   dotted = none baseline   ·   dashed = irrelevant baseline",
              ha="center", fontsize=7.4, color=MUTED)
     a0.legend(frameon=False, fontsize=7.2, loc="upper center", ncol=3,
-              bbox_to_anchor=(1.72, 1.44), handlelength=1.1, handletextpad=.5,
+              bbox_to_anchor=(1.72, 1.36), handlelength=1.1, handletextpad=.5,
               columnspacing=1.4)
     fig.text(.5, -.13,
-             "On every checkpoint a broken chain lowers abstention rather than raising it. "
-             "Gemma-3-4B\nabstains on 0 of 192 broken chains and completes 76 of them.",
+             "On every checkpoint, against either reference, a broken chain lowers abstention "
+             "rather than\nraising it. Gemma-3-4B abstains on 0 of 192 broken chains and completes "
+             "76 of them.",
              ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
     fig.savefig(OUT / "b17/figures/response_distribution.png")
     plt.close(fig)

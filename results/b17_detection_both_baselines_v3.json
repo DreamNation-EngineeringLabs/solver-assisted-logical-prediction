@@ -1,0 +1,115 @@
+{
+ "checkpoints": {
+  "gemma3_4b_b15": {
+   "arms": {
+    "broken_chain": {
+     "No": 116,
+     "Unknown": 0,
+     "Yes": 76,
+     "n": 192,
+     "unknown_rate": 0.0
+    },
+    "irrelevant": {
+     "No": 173,
+     "Unknown": 15,
+     "Yes": 4,
+     "n": 192,
+     "unknown_rate": 0.078125
+    },
+    "none": {
+     "No": 152,
+     "Unknown": 1,
+     "Yes": 39,
+     "n": 192,
+     "unknown_rate": 0.005208333333333333
+    },
+    "truncate_1": {
+     "No": 96,
+     "Unknown": 0,
+     "Yes": 96,
+     "n": 192,
+     "unknown_rate": 0.0
+    }
+   },
+   "detection_supported": false,
+   "irrelevant_minus_none_pp": 7.291666666666667,
+   "vs_irrelevant_pp": -7.8125,
+   "vs_none_pp": -0.5208333333333333
+  },
+  "qwen2p5_3b_4bit": {
+   "arms": {
+    "broken_chain": {
+     "No": 110,
+     "Unknown": 81,
+     "Yes": 1,
+     "n": 192,
+     "unknown_rate": 0.421875
+    },
+    "irrelevant": {
+     "No": 48,
+     "Unknown": 144,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.75
+    },
+    "none": {
+     "No": 38,
+     "Unknown": 153,
+     "Yes": 1,
+     "n": 192,
+     "unknown_rate": 0.796875
+    },
+    "truncate_1": {
+     "No": 110,
+     "Unknown": 21,
+     "Yes": 61,
+     "n": 192,
+     "unknown_rate": 0.109375
+    }
+   },
+   "detection_supported": false,
+   "irrelevant_minus_none_pp": -4.6875,
+   "vs_irrelevant_pp": -32.8125,
+   "vs_none_pp": -37.5
+  },
+  "qwen2p5_3b_bf16": {
+   "arms": {
+    "broken_chain": {
+     "No": 158,
+     "Unknown": 34,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.17708333333333334
+    },
+    "irrelevant": {
+     "No": 84,
+     "Unknown": 108,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.5625
+    },
+    "none": {
+     "No": 151,
+     "Unknown": 41,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.21354166666666666
+    },
+    "truncate_1": {
+     "No": 109,
+     "Unknown": 12,
+     "Yes": 71,
+     "n": 192,
+     "unknown_rate": 0.0625
+    }
+   },
+   "detection_supported": false,
+   "irrelevant_minus_none_pp": 34.895833333333336,
+   "vs_irrelevant_pp": -38.541666666666664,
+   "vs_none_pp": -3.6458333333333313
+  }
+ },
+ "detection_supported_anywhere": false,
+ "interpretation": "Abstention under `broken_chain` against each reference, in pp: qwen2p5_3b_4bit -32.8 vs irrelevant, -37.5 vs none; qwen2p5_3b_bf16 -38.5 vs irrelevant, -3.6 vs none; gemma3_4b_b15 -7.8 vs irrelevant, -0.5 vs none. Detection predicts a rise against either reference and there is none on any checkpoint, so the refutation does not depend on the baseline. The magnitude does: qwen2p5_3b_4bit irrelevant sits -4.7pp from none; qwen2p5_3b_bf16 irrelevant sits +34.9pp from none; gemma3_4b_b15 irrelevant sits +7.3pp from none -- so `irrelevant` is a near-neutral reference on the 4-bit checkpoint and inflates abstention substantially at bfloat16. Deltas against it are not comparable across checkpoints, and both are reported.",
+ "version": "b17-detection-both-baselines-v3"
+}

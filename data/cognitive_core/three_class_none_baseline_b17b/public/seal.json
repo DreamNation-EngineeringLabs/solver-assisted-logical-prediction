@@ -1,0 +1,15 @@
+{
+  "arms": [
+    "none"
+  ],
+  "candidates": [
+    "Yes",
+    "No",
+    "Unknown"
+  ],
+  "derived_from": "binary_certificate_factorial_b15",
+  "n": 192,
+  "only_change": "instruction line and candidate set; theories, certificates and queries byte-identical",
+  "public_sha256": "f2d79494fcc7b043d09973d7aace59e8e4c9fe83956e240e776635922c2b8543",
+  "version": "three-class-none-baseline-b17b"
+}

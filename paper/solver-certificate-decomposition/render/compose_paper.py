@@ -632,23 +632,25 @@ certified undetermined, were rescored with three candidates rather than two ---
 theories, certificates and queries byte-identical, only the instruction line and
 candidate set changed. A validity tracker should answer \texttt{Unknown} more
 often when the chain is broken; a pattern completer should fall back to its
-default. \textsc{irrelevant} fixes that default under three candidates. All three
-checkpoints of \cref{sec:replication} were rescored; \cref{tab:detection} and
-\cref{fig:detection} report them.
+default. Two arms fix it: \textsc{irrelevant}, a same-shape record, and
+\textsc{none}, no record at all under the same instruction.
+\Cref{tab:detection} and \cref{fig:detection} report all three checkpoints on
+all four arms.
 
 \begin{table}[t]
 \centering
 \caption{Three-candidate rescoring, all three checkpoints: \texttt{Unknown}
-responses out of 192 per arm. Detection predicts a \emph{rise} from the
-\textsc{irrelevant} baseline under \textsc{broken\_chain}; every checkpoint falls.}
+responses out of 192 per arm, against both abstention baselines. Detection
+predicts a \emph{rise} under \textsc{broken\_chain}; no checkpoint rises against
+either reference.}
 \label{tab:detection}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
-Checkpoint & \textsc{irrelevant} & \textsc{broken\_chain} & $\Delta$ & \textsc{truncate\_1} \\
+Checkpoint & \textsc{none} & \textsc{irrel.} & \textsc{broken} & $\Delta_{\textsc{none}}$ & $\Delta_{\textsc{irrel.}}$ & \textsc{trunc\_1} \\
 \midrule
-Qwen2.5-3B 4-bit & 144 ($75.0\%$) & 81 ($42.2\%$)        & $-32.8$pp & 21 ($10.9\%$) \\
-Qwen2.5-3B bf16  & 108 ($56.2\%$) & 34 ($17.7\%$)        & $-38.5$pp & 12 ($6.2\%$) \\
-Gemma-3-4B       &  15 ($7.8\%$)  & \textbf{0} ($0.0\%$) & $-7.8$pp  &  0 ($0.0\%$) \\
+Qwen2.5-3B 4-bit & 153 ($79.7\%$) & 144 ($75.0\%$) & 81 ($42.2\%$) & $-37.5$ & $-32.8$ & 21 \\
+Qwen2.5-3B bf16  &  41 ($21.4\%$) & 108 ($56.2\%$) & 34 ($17.7\%$) & $-3.6$  & $-38.5$ & 12 \\
+Gemma-3-4B       &   1 ($0.5\%$)  &  15 ($7.8\%$)  & \textbf{0} ($0.0\%$) & $-0.5$ & $-7.8$ & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -662,13 +664,18 @@ the opposite of the direction validity detection predicts.}
 \label{fig:detection}
 \end{figure}
 
-The abstention rate falls on every checkpoint: $-32.8$pp on the 4-bit
-checkpoint, $-38.5$pp at bfloat16, and $-7.8$pp on Gemma-3-4B. The last figure
-understates the effect, because Gemma-3-4B abstains rarely to begin with: it
-answers \texttt{Unknown} on $15$ of $192$ items given an irrelevant record and on
-\textbf{$0$ of $192$} given a broken certificate, while answering \texttt{Yes} ---
-completing a chain that does not connect --- on $76$. Detection predicts the
-opposite movement in each case.
+Abstention falls on every checkpoint against \emph{both} references, so the
+refutation does not turn on the baseline. Its magnitude does: the references
+coincide on the 4-bit checkpoint ($79.7\%$ against $75.0\%$) but diverge sharply
+at bfloat16, where a same-shape irrelevant record raises abstention by $34.9$pp
+over supplying nothing. A $\Delta$ against \textsc{irrelevant} is therefore not
+comparable across checkpoints, and against the conservative \textsc{none}
+baseline the falls are $-37.5$, $-3.6$ and $-0.5$pp --- two of them small, with
+almost no room to fall on Gemma-3-4B.
+
+The response composition is the baseline-free evidence, and it is stronger:
+Gemma-3-4B answers \texttt{Unknown} on \textbf{$0$ of $192$} broken certificates
+while \emph{completing} $76$ of them.
 
 The response counts show why. On the 4-bit checkpoint \texttt{No} is $110$ of
 $192$ under \textbf{both} \textsc{broken\_chain} and \textsc{truncate\_1}; the

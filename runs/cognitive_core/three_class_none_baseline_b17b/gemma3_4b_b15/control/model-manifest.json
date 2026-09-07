@@ -1,0 +1,22 @@
+{
+  "key": "gemma3_4b_b15",
+  "repo": "mlx-community/gemma-3-4b-it-bf16",
+  "revision": "665e04d28e93290c77b7832307606f7e87bb7616",
+  "version": "three-class-none-baseline-b17b",
+  "weights": {
+    "aggregate_sha256": "e6b98455ee3b552003a48ead66a7a547b7f37e6d52837fc51f32aeb347d9042c",
+    "files": [
+      {
+        "bytes": 5332884576,
+        "name": "model-00001-of-00002.safetensors",
+        "sha256": "fd403562b6115241b4992b400350a71eb7901eb734db4465f609ff6771d07c00"
+      },
+      {
+        "bytes": 4609898146,
+        "name": "model-00002-of-00002.safetensors",
+        "sha256": "d553982d81fc932b62d2b9908e2faf36d31241968aec9fa9ee0ac55be3477ed2"
+      }
+    ],
+    "total_bytes": 9942782722
+  }
+}
