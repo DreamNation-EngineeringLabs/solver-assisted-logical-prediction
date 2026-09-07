@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -47,11 +48,24 @@ def _clean(ax, keep=("left", "bottom")):
 def fig_b14_factorial():
     r = json.loads((RES / "b14_posthoc_2x2_reanalysis_v1.json").read_text())
     c, e = r["factorial_2x2"]["cells"], r["factorial_2x2"]["edges"]
-    fig, ax = plt.subplots(figsize=(5.0, 3.6))
-    ax.set_xlim(0, 10.2); ax.set_ylim(0, 9.0); ax.axis("off")
+    fig, ax = plt.subplots(figsize=(6.1, 3.7))
+    ax.set_xlim(0, 12.4); ax.set_ylim(0, 9.0); ax.axis("off")
 
     W, H = 3.0, 2.3
-    X1, X2, YT, YB = 1.2, 6.0, 5.1, 1.6          # 1.8 of gap between columns
+    X1, X2, YT, YB = 3.4, 8.2, 5.1, 1.6          # 1.8 of gap between columns
+    # R1/R2 minor 3: the caption promised a no-material baseline outside the
+    # square and the figure did not draw one. It sits to the left, dashed and
+    # detached, because it is not a cell of the factorial.
+    BW, BX = 1.9, 0.25
+    BY = (YB + YT + H) / 2 - H / 2
+    ax.add_patch(Rectangle((BX, BY), BW, H, facecolor="white", edgecolor=MUTED,
+                           linewidth=1.1, linestyle=(0, (3, 2)), zorder=2))
+    ax.text(BX + BW / 2, BY + 1.62, "none", ha="center", fontsize=7.4, color=MUTED,
+            family="DejaVu Sans Mono", zorder=3)
+    ax.text(BX + BW / 2, BY + .42, f"{c['no_material_baseline']}", ha="center",
+            fontsize=20, color=MUTED, zorder=3)
+    ax.text(BX + BW / 2, BY - .52, "no material", ha="center", fontsize=6.8, color=MUTED)
+
     cells = [(X1, YT, "irrelevant", c["minus_answer_minus_state"], GREY),
              (X2, YT, "proof_prefix", c["minus_answer_plus_state"], BLUE),
              (X1, YB, "conclusion_only", c["plus_answer_minus_state"], GREY),
@@ -86,11 +100,16 @@ def fig_b14_factorial():
     # the prespecified primary is the diagonal — two factors move at once
     ax.annotate("", (X2 - .08, YT + .12), (X1 + W + .08, YB + H - .12),
                 arrowprops=dict(arrowstyle="<->", color=VERM, lw=1.3, linestyle=(0, (3, 2))))
-    ax.text(5.1, .62,
+    ax.text((X1 + X2 + W) / 2, .62,
             f"prespecified primary — the diagonal:  "
             f"{r['factorial_2x2']['diagonal_prespecified_primary']*100:.1f}pp,  p = 0.078",
             ha="center", fontsize=7.4, color=VERM)
-    ax.text(5.1, 8.62, "correct of 192", ha="center", fontsize=7.4, color=MUTED)
+    # R2 minor 3: the section's two main qualifications belong on the figure.
+    ax.text((X1 + X2 + W) / 2, 8.62,
+            f"correct of 192   ·   interaction "
+            f"{r['factorial_2x2']['interaction']*100:.1f}pp   ·   "
+            f"\textsf{{full}} at 191/192 is ceiling-limited".replace("\textsf{full}", "full"),
+            ha="center", fontsize=7.4, color=MUTED)
     fig.savefig(OUT / "b14/figures/factorial_2x2.png")
     plt.close(fig)
 
@@ -159,10 +178,25 @@ def fig_b16_size():
     for ax, m in zip(axes.ravel(), ms):
         cell = r["models"][m]["arms"]
         vals = [cell[a]["balanced_accuracy"] * 100 for a in arms]
-        cols = [GREEN if cell[a]["viable"] else (VERM if cell[a]["degenerate"] else GREY)
-                for a in arms]
+        # Verdict carries a hatch as well as a hue: colour-alone status encoding
+        # fails for CVD readers and in print, and green/red is the worst pair to
+        # ask anyone to separate. Hatch is the secondary channel, the legend
+        # names both.
+        cols, hatches = [], []
+        for a in arms:
+            if cell[a]["viable"]:
+                cols.append(GREEN); hatches.append("")
+            elif cell[a]["degenerate"]:
+                cols.append(VERM); hatches.append("x")
+            else:
+                cols.append(GREY); hatches.append("//")
         ax.axvline(chance, color=MUTED, lw=.9, linestyle=(0, (3, 2)), zorder=0)
-        ax.barh(y, vals, color=cols, height=.68, zorder=2)
+        bars = ax.barh(y, vals, color=cols, height=.68, zorder=2)
+        for bar, h in zip(bars, hatches):
+            if h:
+                bar.set_hatch(h)
+                bar.set_edgecolor("white")
+                bar.set_linewidth(0)
         ax.axvline(chance, color="white", lw=.9, linestyle=(0, (3, 2)), zorder=3)
         for i, v in enumerate(vals):
             ax.text(v + 4, i, f"{v:.1f}", va="center", ha="left", fontsize=6.2, color=INK)
@@ -180,8 +214,8 @@ def fig_b16_size():
     fig.text(.5, .012, f"balanced accuracy (%)   ·   dashed = chance {chance:.1f}",
              ha="center", fontsize=7.6, color=MUTED)
     fig.text(.5, -.048,
-             "green = viable arm (min per-class recall ≥ 0.50)   ·   "
-             "red = collapsed to one label   ·   grey = below floor",
+             "solid green = viable arm (min per-class recall ≥ 0.50)   ·   "
+             "crosshatch red = collapsed to one label   ·   diagonal grey = below floor",
              ha="center", fontsize=7.2, color=MUTED)
     fig.text(.5, -.105,
              "Viability is a property of (model × arm), not of the model: qwen2.5-7b is viable\n"
@@ -240,50 +274,53 @@ def fig_b15_replication():
 
 # ---------------------------------------------------------------- figure 5
 def fig_b17_detection():
-    """Three-class response distribution: broken-chain detection is refuted."""
-    r = json.loads((RES / "b17_analysis_v1.json").read_text())
-    n = r["n"]
+    """Three-class response distribution on all three checkpoints.
+
+    Round-2 review: the refutation was single-checkpoint, and missing on the one
+    model that answers broken chains correctly. One panel per checkpoint, each
+    against its own irrelevant baseline, because baseline abstention differs by
+    a factor of ten across them.
+    """
+    r = json.loads((RES / "b17_replication_v2.json").read_text())
+    nice = {"qwen2p5_3b_4bit": "Qwen2.5-3B 4-bit", "qwen2p5_3b_bf16": "Qwen2.5-3B bf16",
+            "gemma3_4b_b15": "Gemma-3-4B"}
+    keys = [k for k in ("qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15")
+            if k in r["checkpoints"]]
     order = ["irrelevant", "broken_chain", "truncate_1"]
     labels = [("Unknown", BLUE), ("No", VERM), ("Yes", GREEN)]
-    base = r["arms"]["irrelevant"]["Unknown"]
-    bc, t1 = r["arms"]["broken_chain"], r["arms"]["truncate_1"]
     H, G = .22, .25
 
-    fig, ax = plt.subplots(figsize=(5.9, 3.0))
-    ax.axvline(base, color=BLUE, lw=.9, linestyle=(0, (3, 2)), zorder=1)
-    for j, (lab, col) in enumerate(labels):
-        offs = (j - 1) * G
-        vals = [r["arms"][a][lab] for a in order]
-        ax.barh([i + offs for i in range(len(order))], vals, height=H, color=col, zorder=2,
-                label=lab)
-        for i, v in enumerate(vals):
-            ax.text(v + 2.5, i + offs, f"{v}", va="center", fontsize=7.0, color=INK)
-
-    ax.text(base - 3, -.95, f"irrelevant baseline  {base/n*100:.1f}% Unknown",
-            ha="right", va="center", fontsize=7.2, color=BLUE)
-    # the abstention gap, drawn in the empty band between the first two groups
-    ax.annotate("", (bc["Unknown"], .56), (base, .56),
-                arrowprops=dict(arrowstyle="->", color=BLUE, lw=1.0, shrinkA=0, shrinkB=1))
-    ax.text(bc["Unknown"] - 5, .56,
-            f"{r['broken_chain_minus_irrelevant_unknown_rate']*100:+.1f}pp",
-            ha="right", va="center", fontsize=7.2, color=BLUE)
-
-    ax.set_yticks(range(len(order)))
-    ax.set_yticklabels(order, family="DejaVu Sans Mono", fontsize=7.6)
-    ax.set_xlim(0, n * 1.06); ax.set_xticks([0, 48, 96, 144, 192])
-    ax.set_ylim(2.55, -1.12)
-    ax.set_xlabel(f"responses (of {n})")
-    ax.set_title("Broken chains do not raise abstention", loc="left", pad=8)
-    _clean(ax)
-    ax.legend(frameon=False, fontsize=7.4, loc="lower right", ncol=3,
-              bbox_to_anchor=(1.01, -.03), handlelength=1.1, handletextpad=.5,
-              columnspacing=1.1)
-
-    fig.text(.5, -.055,
-             f"broken_chain abstains on {bc['Unknown']/n*100:.1f}% against a "
-             f"{base/n*100:.1f}% baseline — the opposite of what validity detection predicts.\n"
-             f"`No` is {bc['No']}/{n} under broken_chain and {t1['No']}/{n} under truncate_1; "
-             f"only `Yes` separates them ({bc['Yes']} vs {t1['Yes']}).",
+    fig, axes = plt.subplots(1, len(keys), figsize=(7.3, 2.5), sharey=True,
+                             gridspec_kw={"wspace": .12})
+    for ax, key in zip(np.atleast_1d(axes), keys):
+        ck = r["checkpoints"][key]
+        arms, n = ck["arms"], ck["arms"]["irrelevant"]["n"]
+        base = arms["irrelevant"]["Unknown"]
+        ax.axvline(base, color=BLUE, lw=.9, linestyle=(0, (3, 2)), zorder=1)
+        for j, (lab, col) in enumerate(labels):
+            offs = (j - 1) * G
+            vals = [arms[a][lab] for a in order]
+            ax.barh([i + offs for i in range(len(order))], vals, height=H, color=col,
+                    zorder=2, label=lab if ax is np.atleast_1d(axes)[0] else None)
+            for i, v in enumerate(vals):
+                ax.text(v + 3, i + offs, f"{v}", va="center", fontsize=6.2, color=INK)
+        delta = ck["broken_chain_minus_irrelevant_unknown_rate"] * 100
+        ax.set_title(f"{nice.get(key, key)}\n{delta:+.1f}pp abstention", loc="left",
+                     pad=5, fontsize=7.4)
+        ax.set_xlim(0, n * 1.16); ax.set_xticks([0, 96, 192])
+        ax.set_ylim(2.5, -.62)
+        _clean(ax)
+    a0 = np.atleast_1d(axes)[0]
+    a0.set_yticks(range(len(order)))
+    a0.set_yticklabels(order, family="DejaVu Sans Mono", fontsize=7.0)
+    fig.text(.5, -.02, "responses (of 192)   ·   dashed = that checkpoint's irrelevant baseline",
+             ha="center", fontsize=7.4, color=MUTED)
+    a0.legend(frameon=False, fontsize=7.2, loc="upper center", ncol=3,
+              bbox_to_anchor=(1.72, 1.44), handlelength=1.1, handletextpad=.5,
+              columnspacing=1.4)
+    fig.text(.5, -.13,
+             "On every checkpoint a broken chain lowers abstention rather than raising it. "
+             "Gemma-3-4B\nabstains on 0 of 192 broken chains and completes 76 of them.",
              ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
     fig.savefig(OUT / "b17/figures/response_distribution.png")
     plt.close(fig)

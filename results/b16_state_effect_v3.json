@@ -1,0 +1,74 @@
+{
+ "all_models": {
+  "mean_answer": 0.21640625,
+  "mean_state": 0.08723958333333334,
+  "n": 10
+ },
+ "answer_beats_state_count": 8,
+ "b14_single_model_state_main_effect": 0.224,
+ "degenerate_models": [
+  "llama3p2_1b",
+  "olmo2_1b",
+  "qwen2p5_0p5b",
+  "qwen2p5_1p5b"
+ ],
+ "excluding_degenerate": {
+  "mean_answer": 0.28515625,
+  "mean_state": 0.14713541666666666,
+  "n": 6
+ },
+ "interpretation": "Across all 10 models the mean state main effect is +8.7pp; excluding the 4 responders that never discriminate a class in any arm it is +14.7pp, against b14's single-model +22.4pp. The 'less than half' comparison therefore holds only with the degenerate responders included and is not made. What holds on both subsets is that the answer channel exceeds the state channel: +28.5pp against +14.7pp on the non-degenerate models, and in 8 of 10 models individually.",
+ "per_model": {
+  "gemma3_4b": {
+   "answer_main_effect": 0.3046875,
+   "degenerate_in_every_arm": false,
+   "state_main_effect": 0.1484375
+  },
+  "llama3p2_1b": {
+   "answer_main_effect": 0.12239583333333334,
+   "degenerate_in_every_arm": true,
+   "state_main_effect": -0.09114583333333334
+  },
+  "llama3p2_3b": {
+   "answer_main_effect": 0.2473958333333333,
+   "degenerate_in_every_arm": false,
+   "state_main_effect": 0.12760416666666666
+  },
+  "olmo2_1b": {
+   "answer_main_effect": 0.13802083333333337,
+   "degenerate_in_every_arm": true,
+   "state_main_effect": -0.049479166666666685
+  },
+  "phi4_mini": {
+   "answer_main_effect": 0.23697916666666666,
+   "degenerate_in_every_arm": false,
+   "state_main_effect": 0.2734375
+  },
+  "qwen2p5_0p5b": {
+   "answer_main_effect": 0.13281249999999997,
+   "degenerate_in_every_arm": true,
+   "state_main_effect": 0.15364583333333334
+  },
+  "qwen2p5_1p5b": {
+   "answer_main_effect": 0.05989583333333337,
+   "degenerate_in_every_arm": true,
+   "state_main_effect": -0.0234375
+  },
+  "qwen2p5_3b": {
+   "answer_main_effect": 0.36979166666666663,
+   "degenerate_in_every_arm": false,
+   "state_main_effect": 0.14583333333333337
+  },
+  "qwen2p5_7b": {
+   "answer_main_effect": 0.34374999999999994,
+   "degenerate_in_every_arm": false,
+   "state_main_effect": 0.03645833333333334
+  },
+  "smollm2_1p7b": {
+   "answer_main_effect": 0.20833333333333337,
+   "degenerate_in_every_arm": false,
+   "state_main_effect": 0.15104166666666669
+  }
+ },
+ "version": "b16-state-effect-v3-degenerate-exclusion"
+}

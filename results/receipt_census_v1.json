@@ -1,0 +1,43 @@
+{
+ "by_experiment": {
+  "binary_certificate_factorial_b14": {
+   "responses": 960,
+   "runs": 1
+  },
+  "binary_certificate_factorial_b15": {
+   "responses": 5976,
+   "runs": 3
+  },
+  "multimodel_three_class_b16": {
+   "responses": 9600,
+   "runs": 10
+  },
+  "three_class_broken_chain_b17": {
+   "responses": 1728,
+   "runs": 3
+  }
+ },
+ "by_run": {
+  "binary_certificate_factorial_b14/qwen2p5_3b": 960,
+  "binary_certificate_factorial_b15/gemma3_4b_b15": 1992,
+  "binary_certificate_factorial_b15/qwen2p5_3b_4bit": 1992,
+  "binary_certificate_factorial_b15/qwen2p5_3b_bf16": 1992,
+  "multimodel_three_class_b16/gemma3_4b": 960,
+  "multimodel_three_class_b16/llama3p2_1b": 960,
+  "multimodel_three_class_b16/llama3p2_3b": 960,
+  "multimodel_three_class_b16/olmo2_1b": 960,
+  "multimodel_three_class_b16/phi4_mini": 960,
+  "multimodel_three_class_b16/qwen2p5_0p5b": 960,
+  "multimodel_three_class_b16/qwen2p5_1p5b": 960,
+  "multimodel_three_class_b16/qwen2p5_3b": 960,
+  "multimodel_three_class_b16/qwen2p5_7b": 960,
+  "multimodel_three_class_b16/smollm2_1p7b": 960,
+  "three_class_broken_chain_b17/gemma3_4b_b15": 576,
+  "three_class_broken_chain_b17/qwen2p5_3b_4bit": 576,
+  "three_class_broken_chain_b17/qwen2p5_3b_bf16": 576
+ },
+ "model_runs": 17,
+ "note": "b14 released its responses as results/b14_raw_model_calls_960.jsonl rather than under runs/*/receipts/; it is counted as one model-run.",
+ "total_scored_responses": 18264,
+ "version": "receipt-census-v1"
+}

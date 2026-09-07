@@ -1,0 +1,95 @@
+{
+ "checkpoints": {
+  "gemma3_4b_b15": {
+   "arms": {
+    "broken_chain": {
+     "No": 116,
+     "Unknown": 0,
+     "Yes": 76,
+     "n": 192,
+     "unknown_rate": 0.0
+    },
+    "irrelevant": {
+     "No": 173,
+     "Unknown": 15,
+     "Yes": 4,
+     "n": 192,
+     "unknown_rate": 0.078125
+    },
+    "truncate_1": {
+     "No": 96,
+     "Unknown": 0,
+     "Yes": 96,
+     "n": 192,
+     "unknown_rate": 0.0
+    }
+   },
+   "baseline_unknown_rate": 0.078125,
+   "broken_chain_minus_irrelevant_unknown_rate": -0.078125,
+   "broken_chain_unknown_count": 0,
+   "verdict": "detection_refuted"
+  },
+  "qwen2p5_3b_4bit": {
+   "arms": {
+    "broken_chain": {
+     "No": 110,
+     "Unknown": 81,
+     "Yes": 1,
+     "n": 192,
+     "unknown_rate": 0.421875
+    },
+    "irrelevant": {
+     "No": 48,
+     "Unknown": 144,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.75
+    },
+    "truncate_1": {
+     "No": 110,
+     "Unknown": 21,
+     "Yes": 61,
+     "n": 192,
+     "unknown_rate": 0.109375
+    }
+   },
+   "baseline_unknown_rate": 0.75,
+   "broken_chain_minus_irrelevant_unknown_rate": -0.328125,
+   "broken_chain_unknown_count": 81,
+   "verdict": "detection_refuted"
+  },
+  "qwen2p5_3b_bf16": {
+   "arms": {
+    "broken_chain": {
+     "No": 158,
+     "Unknown": 34,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.17708333333333334
+    },
+    "irrelevant": {
+     "No": 84,
+     "Unknown": 108,
+     "Yes": 0,
+     "n": 192,
+     "unknown_rate": 0.5625
+    },
+    "truncate_1": {
+     "No": 109,
+     "Unknown": 12,
+     "Yes": 71,
+     "n": 192,
+     "unknown_rate": 0.0625
+    }
+   },
+   "baseline_unknown_rate": 0.5625,
+   "broken_chain_minus_irrelevant_unknown_rate": -0.38541666666666663,
+   "broken_chain_unknown_count": 34,
+   "verdict": "detection_refuted"
+  }
+ },
+ "interpretation": "Unknown rate under `broken_chain` minus the `irrelevant` baseline, per checkpoint: gemma3_4b_b15 -7.8pp (detection_refuted); qwen2p5_3b_4bit -32.8pp (detection_refuted); qwen2p5_3b_bf16 -38.5pp (detection_refuted). The sign is the same on all 3 checkpoints, so the refutation is not an artefact of one model.",
+ "n_checkpoints": 3,
+ "replicates": true,
+ "version": "b17-three-class-replication-v2"
+}

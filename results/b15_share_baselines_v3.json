@@ -1,0 +1,64 @@
+{
+ "checkpoints": {
+  "gemma3_4b_b15": {
+   "correct_entailed": {
+    "broken_chain": 58,
+    "full": 96,
+    "irrelevant": 2,
+    "misleading": 0,
+    "none": 22,
+    "same_entity_irrelevant": 3,
+    "shuffled": 86,
+    "truncate_1": 96,
+    "truncate_2": 4,
+    "truncate_3": 4
+   },
+   "share_vs_irrelevant": 0.40425531914893614,
+   "share_vs_none": 0.5135135135135135,
+   "surface_vs_irrelevant": 0.5957446808510638,
+   "surface_vs_none": 0.4864864864864865,
+   "unaided_also_correct_under_broken_chain": 20
+  },
+  "qwen2p5_3b_4bit": {
+   "correct_entailed": {
+    "broken_chain": 1,
+    "full": 96,
+    "irrelevant": 0,
+    "misleading": 0,
+    "none": 0,
+    "same_entity_irrelevant": 0,
+    "shuffled": 14,
+    "truncate_1": 59,
+    "truncate_2": 0,
+    "truncate_3": 0
+   },
+   "share_vs_irrelevant": 0.9830508474576272,
+   "share_vs_none": 0.9830508474576272,
+   "surface_vs_irrelevant": 0.01694915254237288,
+   "surface_vs_none": 0.01694915254237288,
+   "unaided_also_correct_under_broken_chain": 0
+  },
+  "qwen2p5_3b_bf16": {
+   "correct_entailed": {
+    "broken_chain": 1,
+    "full": 96,
+    "irrelevant": 0,
+    "misleading": 0,
+    "none": 0,
+    "same_entity_irrelevant": 0,
+    "shuffled": 12,
+    "truncate_1": 72,
+    "truncate_2": 0,
+    "truncate_3": 0
+   },
+   "share_vs_irrelevant": 0.9861111111111112,
+   "share_vs_none": 0.9861111111111112,
+   "surface_vs_irrelevant": 0.013888888888888888,
+   "surface_vs_none": 0.013888888888888888,
+   "unaided_also_correct_under_broken_chain": 0
+  }
+ },
+ "interpretation": "The two baselines agree on both Qwen checkpoints (unaided score 0/96) and diverge on gemma-3-4b: 40.4% against `irrelevant`, 51.4% against `none`. Under the second, the split between surface overlap and inference is close to even rather than surface-dominated, so the claim 'most of the effect is surface overlap' does not survive the more conservative denominator and is not made. What survives on either baseline is that the share is checkpoint-specific.",
+ "n_entailed": 96,
+ "version": "b15-share-baselines-v3"
+}

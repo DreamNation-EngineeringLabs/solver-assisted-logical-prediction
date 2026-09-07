@@ -24,9 +24,6 @@
 \usepackage{nicefrac}
 \usepackage{url}
 \usepackage{cleveref}
-\usepackage{microtype}
-\usepackage{nicefrac}
-\usepackage{cleveref}
 
 \captionsetup{font=small,labelfont=bf}
 \setlength{\parskip}{2pt}
@@ -39,6 +36,16 @@
 \setlength{\floatsep}{8pt plus 2pt minus 2pt}
 \setlength{\dblfloatsep}{8pt plus 2pt minus 2pt}
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\usepackage{stfloats}
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\dbltopfraction}{0.92}
+\renewcommand{\bottomfraction}{0.75}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.80}
+\renewcommand{\dblfloatpagefraction}{0.80}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\setcounter{totalnumber}{4}
 
 \title{What a Language Model Does with a Solver Certificate:\\
 An Answer-Evidence Decomposition Across Ten Models}
@@ -56,8 +63,8 @@ reading a supplied answer, and the model reasoning over supplied state. The
 standard control, a same-shape irrelevant record, separates neither. We build a
 control that does --- holding line count, line types, query-entity occurrence
 count, query-predicate presence and token length fixed while destroying validity
-alone --- and apply it across four sealed experiments, twelve model-runs and
-$18{,}816$ scored prompts, all re-derivable from released receipts.
+alone --- and apply it across four sealed experiments, seventeen model-runs and
+$18{,}264$ scored responses, all re-derivable from released receipts.
 
 Three results. First, the decomposition works and is worth adopting: reading a
 five-arm factorial as a $2\times2$ of answer evidence by proof state recovers a
@@ -84,207 +91,178 @@ criteria of our own were invalidated by our own data and are reported as such.
 
 Pairing a language model with an external solver, tool or retrieval index
 reliably raises accuracy on tasks the model cannot do alone. Systems that
-translate a natural-language problem into a formal representation, dispatch it
-to a symbolic engine, and return the engine's verdict through the model report
-large end-to-end gains on logical reasoning
-\citep{pan2023logiclm,olausson2023linc,ye2023satlm}, on arithmetic and
-algorithmic tasks solved by an interpreter \citep{gao2022pal}, on API-mediated
-subtasks \citep{schick2023toolformer}, on formal theorem proving
-\citep{yang2023leandojo}, and on knowledge-intensive generation supported by
-retrieved passages \citep{lewis2020retrievalaugmented}. Those gains are
-routinely read as evidence that the model \emph{used} the supplied material.
+translate a problem into a formal representation, dispatch it to a symbolic
+engine, and return the engine's verdict through the model report large
+end-to-end gains on logical reasoning
+\citep{pan2023logiclm,olausson2023linc,ye2023satlm}, on tasks solved by an
+interpreter \citep{gao2022pal}, on API-mediated subtasks
+\citep{schick2023toolformer}, on theorem proving \citep{yang2023leandojo}, and on
+retrieval-supported generation \citep{lewis2020retrievalaugmented}. Those gains
+are routinely read as evidence that the model \emph{used} the supplied material.
 
-That reading is underdetermined. At least two mechanisms produce the same
-accuracy number. Under \emph{answer reading}, the supplied record contains the
+That reading is underdetermined. Two mechanisms produce the same accuracy
+number. Under \emph{answer reading}, the supplied record contains the
 conclusion, or something that co-occurs with it, and the model copies out the
 implied response. Under \emph{state use}, the model works with the supplied
 premises and completes the remaining inference itself. The first says nothing
 about what the model does with reasoning; the second says something specific.
-The standard control in this literature is a same-shape but irrelevant record,
-which rules out proof length, generic validity and formatting. It does not rule
-out answer reading, because a \emph{relevant} certificate stays
-answer-diagnostic even when the response token is withheld: a prefix that stops
-one step short still names the query's subject and predicate in adjacent lines,
-so a model that only checks surface co-occurrence reproduces every number a
-reasoning model would.
+The standard control is a same-shape but irrelevant record, which rules out
+proof length, generic validity and formatting. It does not rule out answer
+reading, because a \emph{relevant} certificate stays answer-diagnostic even when
+the response token is withheld: a prefix stopping one step short still names the
+query's subject and predicate in adjacent lines, so a model that only checks
+surface co-occurrence reproduces every number a reasoning model would.
 
-Separating the two requires a control that holds surface form fixed and
-destroys validity alone. This paper builds one. Three sealed experiments on
-frozen small models score responses by direct next-token likelihood over
-verified single-token candidates, so no free text is parsed and no verdict is
-inferred from prose. The first reads a completed five-arm certificate factorial
-as a $2\times2$ of \emph{answer evidence} $\times$ \emph{proof state}, which
-separates the two channels that end-to-end accuracy conflates. The second holds
-line count, line types, query-entity occurrence count, query-predicate presence
-and token length fixed across ten arms and breaks only the logic, which splits
-the state effect into a surface-overlap component and a validity-tracking
-component, and additionally varies entity repetition, line order and truncation
-depth, and supplies a valid-looking certificate whose fabricated final rule
-points the wrong way. The third scores ten models on a three-class panel whose
-\emph{undetermined} items are certified by forward-closure saturation, and asks
-which models can serve as the interface at all.
+Separating the two requires a control that holds surface form fixed and destroys
+validity alone. This paper builds one and applies it across four sealed
+experiments on frozen small models, scoring by direct next-token likelihood over
+verified single-token candidates so that no free text is parsed. Experiment 1
+reads a five-arm certificate factorial as a $2\times2$ of \emph{answer evidence}
+$\times$ \emph{proof state}. Experiment 2 holds line count, line types,
+query-entity occurrences, query-predicate presence and token length fixed across
+ten arms and breaks only the logic, and additionally varies entity repetition,
+line order and truncation depth and supplies a valid-looking certificate whose
+fabricated final rule points the wrong way. Experiment 3 scores ten models on a
+three-class panel whose \emph{undetermined} items are certified by
+forward-closure saturation. Experiment 4 rescores the broken-chain items with a
+third candidate, separating detection of an invalid certificate from failure to
+complete one.
 
-The picture that emerges is narrower than the headline accuracy suggests.
-Holding surface form fixed and breaking only validity removes almost the entire
-state effect: the validity component is $+60.4$pp against a surface component
-of $+1.0$pp, so $98.3\%$ of the state effect is inference over the supplied
-lines rather than text matching. Entity repetition contributes nothing --- a
-valid derivation about the query entity toward an unrelated predicate scores
-identically ($+0.0$pp) to one about a different entity, despite naming the query
-subject four times rather than zero. The inference is exactly one step deep:
-withholding two steps instead of one scores identically to supplying no
-certificate at all, a cliff rather than a slope. And the tracking confers no
-robustness: handed a valid-looking certificate whose fabricated final rule
-establishes the negation, the model follows it on 189 of 192 items. Across ten
-models, three clear a per-class recall floor; below 1.7B parameters models
-collapse to a single label whatever the solver supplies, and the largest model
-tested collapses while a 3B model does not.
+\textbf{The method is the contribution; what it returns is model-specific.} On
+the checkpoint of Experiment 2, breaking validity alone removes almost the whole
+state effect --- a validity share of $98.3\%$. On a different family the same
+control returns $40.4\%$, because gemma-3-4b answers correctly on $58$ of $96$
+items whose certificate has been broken where the first checkpoint manages $1$.
+We therefore offer the decomposition and decline to generalise the value it
+returns, ours included. Three results do hold on every checkpoint: the inference
+is one step deep; it is \emph{not} detection, since a broken certificate
+\emph{lowers} abstention rather than raising it; and none resists a corrupted
+apparatus, the three answering incorrectly on $189$, $186$ and $192$ of $192$
+items given a certificate whose fabricated final rule establishes the negation.
 
-Two measurement points shape how any of this may be reported. First, accuracy
-alone is not interpretable here: one arm scored $50.0\%$ on a balanced panel
-with $d' = 0.00$, matching a trivial always-one-label strategy while
-discriminating nothing, so sensitivity and criterion are reported alongside
-accuracy throughout \citep{macmillan1991detection,stanislaw1999calculation}.
-Paired contrasts use the exact McNemar test \citep{mcnemar1947note} and
-bias-corrected accelerated bootstrap intervals \citep{efron1987better}. Second,
-the claim boundary is strict and is maintained everywhere in this paper. Every
-arm without a near-complete supplied chain returns $d' = 0$, so the models
-studied do not reason unaided; high accuracy with full solver material describes
-a faithful transcriber, not a reasoner. System-level effects are never upgraded
-into claims about the model's own reasoning.
+Two measurement points shape how this may be reported. Accuracy alone is not
+interpretable here: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$,
+matching a trivial always-one-label strategy while discriminating nothing, so
+sensitivity and criterion accompany accuracy throughout
+\citep{macmillan1991detection,stanislaw1999calculation}, with the exact McNemar
+test \citep{mcnemar1947note} and BCa intervals \citep{efron1987better} for
+paired contrasts. And the claim boundary is strict: on the Qwen checkpoints every
+arm without a near-complete chain returns $d' = 0$, so those models do not reason
+unaided, and high accuracy with full solver material describes a faithful
+transcriber. Gemma-3-4b is not in that position ($22/96$ unaided, $d' = 1.83$),
+which is why its share is reported against two baselines in
+\cref{sec:replication}. System-level effects are never upgraded into claims about
+the model's own reasoning.
 
-The contributions are: (i) an \emph{answer-evidence decomposition} that
-separates solver-supplied answers from solver-supplied reasoning state, reusable
-for any tool-augmented system; (ii) a \emph{surface-matched invalidity control}
-that isolates logical validity from every co-occurring surface cue, with
-per-item certification that the displayed lines do not settle the query; (iii) a
-\emph{forward-closure certifier} for constructing formally underdetermined
-items, validated at $23{,}240/23{,}240$ against an independently labelled
-corpus \citep{tafjord2020proofwriter}; (iv) evidence that validity tracking is
-real, shallow, and offers no protection against corrupted solver output, a
-reliability result for the whole class of solver-in-the-loop architectures; and
-(v) a substrate-size floor from a ten-model sweep spanning open instruction-tuned
-families \citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}.
+The contributions are: (i) an \emph{answer-evidence decomposition} separating
+solver-supplied answers from solver-supplied reasoning state, reusable for any
+tool-augmented system; (ii) a \emph{surface-matched invalidity control} isolating
+validity from every co-occurring surface cue, certified per item; (iii) a
+\emph{forward-closure certifier} for underdetermined items, validated at
+$23{,}240/23{,}240$ against an independently labelled corpus
+\citep{tafjord2020proofwriter} and against nine adversarial classes; (iv)
+evidence that apparent use of proof state can be surface exploitation, that the
+behaviour is completion rather than detection, and that no checkpoint resists a
+corrupted certificate; and (v) a ten-model sweep showing viability to be a
+property of (model $\times$ arm), with proof state \emph{degrading} three of ten
+interfaces
+\citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}.
 
 \section{Related Work}
 
 \subsection{Faithfulness of displayed reasoning}
 
-Chain-of-thought prompting made intermediate reasoning steps a standard part of
-the model's output \citep{wei2022chainofthought}, and a body of work then asked
-whether those steps are what the answer actually rests on.
-\citet{turpin2023language} show that explanations systematically fail to mention
-biasing features that demonstrably drive the prediction, so a plausible trace
-can misrepresent the true cause. \citet{lanham2023measuring} intervene directly
-on the trace --- truncating it so the model must answer early, and injecting
-mistakes into it --- and read the resulting change in the answer as a measure of
-how strongly the answer is conditioned on the displayed reasoning; they find
-wide variation across tasks and models, and that mistakes are often ignored.
-The same manipulations have since been applied to naturally worded prompts
-without artificial bias \citep{arcuschin2025chainofthought} and to models trained
-to produce long reasoning traces, where hints that determine the answer are
-verbalised only a minority of the time \citep{chen2025reasoning}. A separate
-response to the problem is architectural: \citet{lyu2023faithful} make the trace
-a formal program executed by a deterministic solver, so the displayed chain is
-faithful to the answer by construction.
+Chain-of-thought prompting made intermediate steps part of the output
+\citep{wei2022chainofthought}, and a body of work then asked whether the answer
+rests on them. \citet{turpin2023language} show explanations systematically omit
+biasing features that demonstrably drive the prediction.
+\citet{lanham2023measuring} intervene on the trace --- truncating it, and
+injecting mistakes --- and read the change in the answer as a measure of
+conditioning; they find wide variation and that mistakes are often ignored. The
+same manipulations have been applied to naturally worded prompts
+\citep{arcuschin2025chainofthought} and to models trained for long traces, where
+answer-determining hints are verbalised only a minority of the time
+\citep{chen2025reasoning}; \citet{lyu2023faithful} respond architecturally,
+making the trace a program executed by a solver.
 
-The limitation this paper addresses is one of object rather than of method.
-This literature intervenes on \emph{model-generated} traces, where the question
-is whether the model's own account is honest. It does not address
-\emph{externally supplied, formally verified} state, where the material is
-correct by construction and the question inverts: does the model track the
-validity of a derivation it did not produce? This paper adapts the truncation
-and mistake-injection manipulations to solver certificates, and adds a control
+The limitation is one of object rather than method. This literature intervenes on
+\emph{model-generated} traces, asking whether the model's own account is honest.
+It does not address \emph{externally supplied, formally verified} state, where
+the question inverts: does the model track a derivation it did not produce? We
+adapt truncation and mistake injection to solver certificates and add a control
 this literature does not use --- an invalid certificate matched to a valid one on
-every surface property, with per-item certification that the displayed lines
-leave the query underdetermined. Adapting the manipulation also changes what a
-null means: a model that ignores an injected mistake in its own trace is
-unfaithful, whereas a model that follows a corrupted external certificate is
-unsafe.
+every surface property, certified per item not to settle the query. That also
+changes what a null means: ignoring an injected mistake in one's own trace is
+unfaithful, whereas following a corrupted external certificate is unsafe.
 
 \subsection{Solver-augmented and tool-augmented reasoning}
 
 Neurosymbolic pipelines put the formal step outside the model. Logic-LM
-translates a problem into a task-specific symbolic language, calls a solver, and
-refines the formalisation from solver error messages \citep{pan2023logiclm};
-LINC has the model act as a semantic parser into first-order logic and offloads
-deduction to a theorem prover \citep{olausson2023linc}; SatLM generates a
-declarative specification and dispatches it to an automated theorem prover
-\citep{ye2023satlm}; PAL emits a program and defers execution to an interpreter
-\citep{gao2022pal}. Related work extends the pattern to self-supervised API use
-\citep{schick2023toolformer}, to retrieval-augmented premise selection in
-interactive theorem proving \citep{yang2023leandojo}, and to retrieval as a
-general source of external evidence \citep{lewis2020retrievalaugmented}.
+translates a problem into a symbolic language and refines the formalisation from
+solver errors \citep{pan2023logiclm}; LINC parses into first-order logic and
+offloads deduction to a prover \citep{olausson2023linc}; SatLM dispatches a
+declarative specification to a theorem prover \citep{ye2023satlm}; PAL emits a
+program for an interpreter \citep{gao2022pal}. The pattern extends to
+self-supervised API use \citep{schick2023toolformer}, premise selection in
+interactive theorem proving \citep{yang2023leandojo}, and retrieval as general
+external evidence \citep{lewis2020retrievalaugmented}.
 
-These systems report end-to-end accuracy and attribute the gain to the pipeline.
-Two things are consequently left open. First, the contribution of the
-\emph{reasoning state} is not separated from the contribution of the
-\emph{answer}: because the solver's output normally contains both, no reported
-number distinguishes a model that reasons over supplied premises from one that
-reads off a supplied conclusion. Second, the solver is assumed correct, so the
-behaviour of the pipeline under a wrong-but-well-formed solver output is not
-measured. Adjacent work shows the model side is not neutral to what the context
-contains: irrelevant material inserted into a problem degrades accuracy
-\citep{shi2023large}, and models are highly receptive to coherent external
-evidence that contradicts their parametric knowledge \citep{xie2023adaptive}.
-This paper decomposes the solver's contribution into an answer channel and a
-state channel, measures each on matched arms, and adds an arm in which the
-certificate is valid-looking but points the wrong way. The state channel carries
-real validity information; it supplies no protection against a corrupted
-apparatus.
+These systems report end-to-end accuracy and attribute the gain to the pipeline,
+which leaves two things open. The contribution of the \emph{reasoning state} is
+not separated from that of the \emph{answer}: the solver's output normally
+contains both, so no reported number distinguishes reasoning over supplied
+premises from reading off a supplied conclusion. And the solver is assumed
+correct, so behaviour under wrong-but-well-formed output is unmeasured. The
+model side is not neutral to context: irrelevant material degrades accuracy
+\citep{shi2023large}, and models are highly receptive to coherent evidence
+contradicting their parametric knowledge \citep{xie2023adaptive}. We decompose
+the solver's contribution into an answer channel and a state channel, measure
+each on matched arms, and add an arm whose certificate is valid-looking but
+points the wrong way.
 
 \subsection{Synthetic deductive reasoning benchmarks}
 
-The task family used here descends from rule-based deductive datasets stated in
-natural language. RuleTaker showed that transformers can assign truth values to
-candidate implications of a theory expressed in language and generalise to
-deeper chaining than seen in training \citep{clark2020transformers}. ProofWriter
-added generated proofs and open-world semantics with an explicit unknown class
-\citep{tafjord2020proofwriter}. PrOntoQA generates items from a synthetic world
-model in first-order logic so that a generated chain can be parsed into a
-symbolic proof and analysed step by step, and finds that individual deduction
-steps are usually correct while proof planning is not
+The task family descends from rule-based deductive datasets in natural language.
+RuleTaker showed transformers can assign truth values to implications of a
+theory and generalise beyond training depth \citep{clark2020transformers}.
+ProofWriter added generated proofs and open-world semantics with an explicit
+unknown class \citep{tafjord2020proofwriter}. PrOntoQA generates items from a
+synthetic world model so chains can be parsed into symbolic proofs, finding
+individual steps usually correct while proof planning is not
 \citep{saparov2022language}. FOLIO supplies human-written premises with verified
-first-order logic annotations \citep{han2022folio}. Two properties of these
-resources matter for the present design: order effects are known to be large in
-deductive prompting \citep{chen2024premise}, and the sets are public and predate
-the models evaluated on them, so contamination cannot be excluded --- a problem
-documented for modern benchmarks generally
-\citep{deng2024investigating,golchin2023time} and sharpened by the finding that
-performance can drop sharply on counterfactual variants of familiar tasks
-\citep{wu2023reasoning}.
+first-order annotations \citep{han2022folio}. Two properties matter here: order
+effects are large in deductive prompting \citep{chen2024premise}, and the sets
+are public and predate the models evaluated on them, so contamination cannot be
+excluded --- documented for modern benchmarks generally
+\citep{deng2024investigating,golchin2023time} and sharpened by sharp drops on
+counterfactual variants of familiar tasks \citep{wu2023reasoning}.
 
-The gap is that these benchmarks supply items and proofs but not the matched
-adversarial certificate variants an attribution question needs. This paper
-generates items after model release with per-item nonce vocabularies, and
-constructs the matched invalid, misleading, order-scrambled and depth-truncated
-certificates that the public sets do not provide. A public open-world corpus is
-still used, but only as an independent check on the forward-closure certifier
-that labels the underdetermined items; no item from it is scored by any model
-here.
+These benchmarks supply items and proofs but not the matched adversarial
+certificate variants an attribution question needs. We generate items after model
+release with per-item nonce vocabularies, and construct the matched invalid,
+misleading, order-scrambled and depth-truncated certificates the public sets do
+not provide. A public open-world corpus is used only as an independent check on
+the forward-closure certifier; no item from it is scored by any model here.
 
 \subsection{Response bias and the limits of accuracy}
 
-Prompted classification is well documented to be biased rather than merely
-noisy. \citet{zhao2021calibrate} show that few-shot accuracy swings from near
-chance to near state of the art with prompt format and example order because the
-model carries a prior toward particular answer strings, and propose estimating
-and removing that prior. Option order alone moves multiple-choice accuracy
-substantially \citep{pezeshkpour2023large}, and the effect traces to a token-level
-prior over option identifiers rather than to the content of the options
-\citep{zheng2023large}. Scoring by raw likelihood introduces a further
-confound, since strings compete for probability mass independently of their
-correctness \citep{holtzman2021surface}. On the abstention side, models are
-partially able to assess whether their own answers are right
-\citep{kadavath2022language}, and can be evaluated on whether they recognise
-questions that admit no answer \citep{yin2023large}.
+Prompted classification is biased rather than merely noisy.
+Few-shot accuracy swings from near chance to near state of the art with format
+and example order, because the model carries a prior toward particular answer
+strings \citep{zhao2021calibrate}; option order alone moves multiple-choice
+accuracy substantially \citep{pezeshkpour2023large}, tracing to a token-level
+prior over option identifiers rather than option content \citep{zheng2023large};
+and likelihood scoring adds a confound, since strings compete for probability
+mass independently of correctness \citep{holtzman2021surface}. On abstention,
+models can partially assess whether their own answers are right
+\citep{kadavath2022language} and be evaluated on recognising questions that admit
+no answer \citep{yin2023large}.
 
-What this literature diagnoses, evaluation practice in solver-augmented
-reasoning has not absorbed: bare accuracy remains the reported quantity. On a
-balanced panel, a degenerate single-label responder is indistinguishable from a
-chance-level competent one, and both are indistinguishable from a genuine
-partial discriminator with a shifted criterion. Signal detection theory
-separates exactly these
+Evaluation practice in solver-augmented reasoning has not absorbed this: bare
+accuracy remains the reported quantity. On a balanced panel a degenerate
+single-label responder is indistinguishable from a chance-level competent one,
+and both from a partial discriminator with a shifted criterion. Signal detection
+theory separates exactly these
 \citep{macmillan1991detection,stanislaw1999calculation}, and this paper
 therefore reports $d'$ and criterion $c$ alongside accuracy for every arm, with
 paired significance from the exact McNemar test \citep{mcnemar1947note} and
@@ -373,30 +351,23 @@ negation is marked inconsistent and its items rejected rather than labelled. An
 item is \emph{undetermined} when neither the query nor its negation appears in
 the closure.
 
-We validated the certifier before generating any panel, against the open-world
-splits of a public corpus \citep{tafjord2020proofwriter} at depths $0$, $1$, $2$,
-$3$ and $5$: $23{,}240$ of $23{,}240$ questions agree, $100.00\%$, with perfectly
-diagonal confusion, including $10{,}440$ undetermined items.
-
-That check is weaker than a perfect score suggests, and we state its limits.
-Those labels are themselves produced by forward chaining over the same fragment,
-so the agreement partly measures one chainer agreeing with another. It would
-catch a coding bug; it does not probe adversarial structure, and it gives no
-coverage of the generated nonce theories where the certifier is actually used.
-
-We therefore add two checks with different failure modes. Nine adversarial
-theories: cyclic rules; a cycle that never reaches the query; a chain longer than
-the round cap; derived negation; absent predicates and absent entities; a rule
-that must fire only for the satisfying entity; a theory deriving an atom and its
-negation, which must be \emph{rejected} rather than labelled; and a cap overrun,
-which must report failure rather than a wrong answer. All nine pass. And a
-\emph{differential} test on the generated panels against an independently written
-reference implementation --- exhaustive ground instantiation over the Herbrand
-base with a naive fixpoint, a deliberately different algorithm --- which agrees
-with the certifier and the sealed authority on $192/192$ and $192/192$ items. That
+Validation has three layers, because a single one would not be worth much.
+Against the open-world splits of a public corpus \citep{tafjord2020proofwriter}
+at depths $0$--$3$ and $5$, $23{,}240$ of $23{,}240$ questions agree, including
+$10{,}440$ undetermined --- but those labels come from forward chaining over the
+same fragment, so this largely measures one chainer agreeing with another, and
+covers none of the generated nonce theories. We therefore add nine adversarial
+theories (cyclic rules; a cycle that never reaches the query; a chain longer than
+the round cap; derived negation; absent predicates and entities; a rule that must
+fire only for the satisfying entity; an inconsistent theory, which must be
+\emph{rejected} rather than labelled; and a cap overrun, which must report
+failure rather than a wrong answer), all of which pass; and a \emph{differential}
+test on the generated panels against an independently written reference --- naive
+fixpoint over the exhaustive Herbrand base, a deliberately different algorithm
+--- agreeing with the certifier and the sealed authority on $192/192$ items. The
 reference encodes the same intended semantics, so it catches implementation error
-rather than a misconception about the semantics; we claim the former only. No item
-enters a sealed panel without a certification record.
+rather than a misconception about the semantics; we claim the former only. No
+item enters a sealed panel without a certification record.
 
 \subsection{Measurement: sensitivity, not accuracy}
 \label{sec:measurement}
@@ -448,11 +419,15 @@ tokenise all three candidates as single distinct tokens.
 \subsection{Sealed protocol}
 
 Panels are hash-stamped before scoring and the runner refuses a modified panel.
-Each response is written to a receipt carrying a SHA-256 of its own contents,
+Scoring takes the highest-likelihood candidate token; on an exact tie the first
+candidate in the declared order wins, which across Experiment 2's $5{,}760$
+responses occurs twice. Each response is written to a receipt carrying a SHA-256
+of its own contents,
 and the answer authority is opened only once every receipt exists, so nothing
 can be tuned to a result. Audits depend on the standard library alone, so
-verification never requires the environment to resolve. In total $12{,}480$
-prompts were scored with zero receipt digest failures.
+verification never requires the environment to resolve. In total
+$18{,}264$ responses were scored across seventeen model-runs, with zero
+receipt digest failures.
 
 Experiment 3 makes a deliberate protocol change: \emph{no gate blocks the run}.
 Where earlier practice excluded a model that failed a delivery screen, delivery
@@ -471,7 +446,7 @@ found none.
 $\textsc{proof\_prefix} - \textsc{conclusion\_only}$, was $-4.7$pp with exact
 McNemar $p = 0.078$ and was reported as a null. It is the diagonal.
 
-\begin{figure}[t]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth]{figures/answer_state_factorial.png}
 \caption{The five arms form a $2\times2$ of answer evidence by proof state, with
@@ -499,25 +474,6 @@ substantially a measurement of remaining headroom rather than of channel
 redundancy, and we do not draw a redundancy conclusion from it. A design with
 \textsc{full} away from ceiling would be required to separate the two.
 
-\begin{table*}[t]
-\centering\small
-\caption{The four one-factor edges of the $2\times2$, and the prespecified
-diagonal. Post hoc reanalysis of sealed data.}
-\label{tab:edges}
-\begin{tabular}{lrrl}
-\toprule
-Contrast & Effect & Exact McNemar $p$ & Reported originally \\
-\midrule
-Add answer, no state present   & $+41.67$pp & $1.7\times10^{-24}$ & no \\
-Add state, no answer present   & $+36.98$pp & $1.5\times10^{-19}$ & secondary \\
-Add answer, state present      & $+12.50$pp & $1.2\times10^{-7}$  & no \\
-Add state, answer present      & $+7.81$pp  & $6.1\times10^{-5}$  & secondary \\
-\midrule
-\emph{Diagonal (prespecified primary)} & $-4.69$pp & $0.078$ & primary \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
 Splitting by class overturns the baseline description. The model answers
 \texttt{No} to $88\%$ of items. \Cref{tab:sdt} gives the signal detection
 summary: \textsc{irrelevant} returns an identical $9/96$ ``Yes'' rate in both
@@ -526,6 +482,25 @@ classes, $d' = 0.00$. A trivial always-\texttt{No} strategy scores $96/192$;
 contradicted class sits at ceiling in every certificate arm and contributed
 $0$ of the $21$ discordant pairs in the primary contrast, so the effective
 sample was 96, not 192.
+
+\begin{table}[tb]
+\centering\footnotesize
+\caption{Signal detection for Experiment 1; hits and false alarms out of 96
+each. Apparent chance and zero
+sensitivity are not the same thing.}
+\label{tab:sdt}
+\begin{tabular}{lrrrr}
+\toprule
+Arm & Hits & FA & $d'$ & $c$ \\
+\midrule
+\textsc{none}            &  9 & 14 & $-0.26$ & $+1.17$ \\
+\textsc{irrelevant}      &  9 &  9 & $\mathbf{0.00}$ & $+1.29$ \\
+\textsc{conclusion\_only}& 80 &  0 & $+3.52$ & $+0.81$ \\
+\textsc{proof\_prefix}   & 71 &  0 & $+3.20$ & $+0.97$ \\
+\textsc{full}            & 95 &  0 & $+4.72$ & $+0.20$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Validity versus surface overlap}
 
@@ -547,26 +522,36 @@ resamples rather than its numerator alone. \Cref{fig:arms} and \cref{tab:arms}
 give the full arm set. \Cref{sec:replication} shows this share is specific to
 this checkpoint and does not generalise.
 
-\begin{table*}[t]
+\begin{table*}[tb]
 \centering\small
-\caption{Experiment 2, all ten arms. Five arms return identical results,
-including \textsc{same\_entity\_irrelevant}, which names the query entity four
-times.}
+\caption{Experiment 2: ten matched arms scored on three checkpoints, entailed
+subset (correct of 96, with signed $d'$). Only the solver record differs between
+arms. The share rows give the validity component as a fraction of the total state
+effect, against the \textsc{irrelevant} control and against the unaided
+\textsc{none} arm; the two coincide wherever unaided competence is zero.}
 \label{tab:arms}
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
-Arm & All /192 & Entailed /96 & $d'$ \\
+& \multicolumn{2}{c}{Qwen2.5-3B 4-bit} & \multicolumn{2}{c}{Qwen2.5-3B bf16}
+& \multicolumn{2}{c}{Gemma-3-4B} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Arm & /96 & $d'$ & /96 & $d'$ & /96 & $d'$ \\
 \midrule
-\textsc{none}                    &  96 &  0 & $0.000$ \\
-\textsc{irrelevant}              &  96 &  0 & $0.000$ \\
-\textsc{same\_entity\_irrelevant}&  96 &  0 & $0.000$ \\
-\textsc{truncate\_3}             &  96 &  0 & $0.000$ \\
-\textsc{truncate\_2}             &  96 &  0 & $0.000$ \\
-\textsc{truncate\_1}             & 155 & 59 & $2.853$ \\
-\textsc{broken\_chain}           &  97 &  1 & $0.407$ \\
-\textsc{shuffled}                & 110 & 14 & $1.527$ \\
-\textsc{misleading}              &   3 &  0 & $-4.363$ \\
-\textsc{full}                    & 192 & 96 & $5.131$ \\
+\textsc{none}                    &  0 & $0.00$ &  0 & $0.00$ & \textbf{22} & $1.83$ \\
+\textsc{irrelevant}              &  0 & $0.00$ &  0 & $0.00$ &  2 & $0.62$ \\
+\textsc{same\_entity\_irrelevant}&  0 & $0.00$ &  0 & $0.00$ &  3 & $0.77$ \\
+\textsc{truncate\_3}             &  0 & $0.00$ &  0 & $0.00$ &  4 & $0.88$ \\
+\textsc{truncate\_2}             &  0 & $0.00$ &  0 & $0.00$ &  4 & $0.88$ \\
+\textsc{truncate\_1}             & 59 & $2.85$ & 72 & $3.23$ & 96 & $5.13$ \\
+\textsc{broken\_chain}           &  1 & $0.41$ &  1 & $0.41$ & \textbf{58} & $2.83$ \\
+\textsc{shuffled}                & 14 & $1.53$ & 12 & $1.43$ & \textbf{86} & $3.80$ \\
+\textsc{misleading}              &  0 & $-4.36$ &  0 & $-4.06$ &  0 & $-5.13$ \\
+\textsc{full}                    & 96 & $5.13$ & 96 & $5.13$ & 96 & $5.13$ \\
+\midrule
+Validity share vs \textsc{irrelevant} & \multicolumn{2}{c}{$98.3\%$}
+ & \multicolumn{2}{c}{$98.6\%$} & \multicolumn{2}{c}{$\mathbf{40.4\%}$} \\
+Validity share vs \textsc{none}       & \multicolumn{2}{c}{$98.3\%$}
+ & \multicolumn{2}{c}{$98.6\%$} & \multicolumn{2}{c}{$\mathbf{51.4\%}$} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -592,24 +577,37 @@ blind to it.
 
 The decomposition of \cref{sec:broken} was run on two further checkpoints: the
 same model at bfloat16 rather than 4-bit, which isolates quantisation from model
-identity, and a different family. \Cref{tab:replication} and \cref{fig:replication} report all three.
+identity, and a different family. \Cref{tab:arms} carries all three; \cref{fig:replication} plots the split.
 
-Quantisation is the smaller effect. bfloat16 raises \textsc{truncate\_1} from 59
-to 72 of 96 but leaves the share essentially unchanged ($98.6\%$ against
-$98.3\%$), so precision moves the magnitude of the state effect without moving
-its composition.
+Quantisation is the smaller effect: bfloat16 raises \textsc{truncate\_1} from 59
+to 72 of 96 but leaves the share essentially unchanged, so precision moves the
+magnitude of the state effect without moving its composition. Model identity does
+not behave that way. Gemma-3-4B answers \textsc{broken\_chain} correctly on
+\textbf{58 of 96} items where the other two manage 1, so the same control that
+isolates inference on one checkpoint exposes substantial surface exploitation on
+another.
 
-Model identity does not behave that way. Gemma-3-4B answers \textsc{broken\_chain}
-correctly on \textbf{58 of 96} items where the other two checkpoints manage 1, so
-its surface component is $+58.3$pp and its validity share $40.4\%$. The same
-control that isolates inference on one checkpoint reveals substantial
-surface exploitation on another.
+\textbf{Which baseline.} The share divides by the effect measured against
+\textsc{irrelevant}. On the Qwen checkpoints that arm and \textsc{none} both
+score $0/96$, so the choice is invisible; Gemma-3-4B answers $22$ of $96$
+entailed items with no certificate at all, and $20$ of those $22$ are also
+correct under \textsc{broken\_chain}. Against \textsc{none} --- what the
+certificate added over the model working unaided --- its share is $51.4\%$, not
+$40.4\%$. We report both and make no claim that most of Gemma-3-4B's effect is
+surface overlap: on the more conservative denominator the split is close to even.
+The baselines diverge exactly when the substrate has unaided competence, and that
+divergence is the finding rather than either number.
+
+Order-sensitivity fails to replicate alongside the share: \textsc{shuffled}
+scores $14$ and $12$ of $96$ on the Qwen checkpoints and $86$ on Gemma-3-4B.
+Reading a certificate as a bag of statements is a checkpoint-level property too.
 
 \textbf{We therefore do not claim that solver-supplied state is used as inference
 in general.} On the checkpoint of \cref{sec:broken} it overwhelmingly is; on the
-strongest substrate in our sweep, most of the effect is surface overlap. What
-generalises is the \emph{method} --- the control separates the two wherever it is
-applied --- not the value it returns.
+strongest substrate in our sweep, between half and three-fifths of the effect
+survives the control, depending on the baseline. What generalises is the
+\emph{method} --- the control separates the two wherever it is applied --- not the
+value it returns.
 
 One result does replicate without exception, and it is the negative one. The
 \textsc{misleading} arm scores $3$, $6$ and $0$ of $192$ across the three
@@ -621,16 +619,24 @@ surface overlap most is also the one most completely misled.
 
 The \textsc{misleading} arm supplies a chain identical to \textsc{full} except
 that its final rule, which is fabricated and absent from the theory, flips
-polarity. The ground-truth answer is unchanged. The model scores $3$ of $192$,
-with $d' = -4.363$: $\textsc{misleading} - \textsc{full} = -100.0$pp
-($p = 2.5\times10^{-29}$).
+polarity. The ground-truth answer is unchanged. The model scores $3$ of $192$
+against \textsc{full}'s $192$, a paired difference of $-98.4$pp on all items
+($p = 2.5\times10^{-29}$), with $d' = -4.363$.
+
+The class split is the sharper evidence. This model's standing prior is
+\texttt{No} --- $88\%$ of items under \textsc{none}, at $c = 2.565$. Under
+\textsc{misleading} it answers \texttt{Yes} on \textbf{93 of the 96 contradicted
+items}, inverting a near-total prior because a fabricated rule told it to.
+Corrupted solver output does not merely fail to help; it overrides the model's
+own strong default.
 
 The model therefore follows a valid-looking certificate that points the wrong
 way on 189 of 192 items. Read against the $98.3\%$ validity share, the two
-results are not in tension but jointly informative: the model demonstrably
-tracks whether a supplied derivation connects, and that tracking provides no
-defence whatever when the derivation connects to the wrong conclusion. Validity
-tracking is not verification.
+results are jointly informative: whatever the model is doing with a supplied
+derivation is sensitive to whether that derivation reaches the query, and it
+supplies no defence whatever when the derivation reaches the wrong conclusion.
+\Cref{sec:detection} shows that sensitivity is completion rather than
+verification --- so the certificate is followed, not checked.
 
 \subsection{The model does not detect invalidity}
 \label{sec:detection}
@@ -643,38 +649,51 @@ broken certificate \emph{is} the model's default label: ``detected the break'' a
 We separated them. The \textsc{broken\_chain} items, whose displayed lines are
 certified undetermined, were rescored with three candidates rather than two ---
 theories, certificates and queries byte-identical, only the instruction line and
-candidate set changed. A validity tracker should answer \texttt{Unknown}; a
-pattern completer should answer its default. \Cref{tab:detection} and \cref{fig:detection}
-report the outcome.
+candidate set changed. A validity tracker should answer \texttt{Unknown} more
+often when the chain is broken; a pattern completer should fall back to its
+default. \textsc{irrelevant} fixes that default under three candidates. All three
+checkpoints of \cref{sec:replication} were rescored; \cref{tab:detection} and
+\cref{fig:detection} report them.
 
-\begin{table*}[t]
+\begin{table*}[tb]
 \centering\small
-\caption{Three-candidate rescoring of the same items. Supplying a broken chain
-\emph{lowers} the abstention rate.}
+\caption{Three-candidate rescoring, all three checkpoints: \texttt{Unknown}
+responses out of 192 per arm. Detection predicts a \emph{rise} from the
+\textsc{irrelevant} baseline under \textsc{broken\_chain}; every checkpoint falls.}
 \label{tab:detection}
 \begin{tabular}{lrrrr}
 \toprule
-Arm & \texttt{Yes} & \texttt{No} & \texttt{Unknown} & Unknown rate \\
+Checkpoint & \textsc{irrelevant} & \textsc{broken\_chain} & $\Delta$ & \textsc{truncate\_1} \\
 \midrule
-\textsc{irrelevant} (baseline) &  0 &  48 & 144 & $75.0\%$ \\
-\textsc{broken\_chain}         &  1 & 110 &  81 & $42.2\%$ \\
-\textsc{truncate\_1}           & 61 & 110 &  21 & $10.9\%$ \\
+Qwen2.5-3B 4-bit & 144 ($75.0\%$) & 81 ($42.2\%$)        & $-32.8$pp & 21 ($10.9\%$) \\
+Qwen2.5-3B bf16  & 108 ($56.2\%$) & 34 ($17.7\%$)        & $-38.5$pp & 12 ($6.2\%$) \\
+Gemma-3-4B       &  15 ($7.8\%$)  & \textbf{0} ($0.0\%$) & $-7.8$pp  &  0 ($0.0\%$) \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-The abstention rate under \textsc{broken\_chain} is $42.2\%$ against a $75.0\%$
-baseline --- $-32.8$pp, the opposite of the direction detection predicts. And
-\texttt{No} is $110$ of $192$ under \textbf{both} \textsc{broken\_chain} and
-\textsc{truncate\_1}; the arms differ only in \texttt{Yes} ($1$ against $61$).
+The abstention rate falls on every checkpoint: $-32.8$pp on the 4-bit
+checkpoint, $-38.5$pp at bfloat16, and $-7.8$pp on Gemma-3-4B. The last figure
+understates the effect, because Gemma-3-4B abstains rarely to begin with: it
+answers \texttt{Unknown} on $15$ of $192$ items given an irrelevant record and on
+\textbf{$0$ of $192$} given a broken certificate, while answering \texttt{Yes} ---
+completing a chain that does not connect --- on $76$. Detection predicts the
+opposite movement in each case.
 
-\textbf{Detection is refuted, not merely unsupported.} What the data support is
-narrower: the model completes a final inference when both premises are present
-and adjacent, and does not when they are not. Its failure on
-\textsc{broken\_chain} is a failure to complete, not a detection of invalidity.
-This is consistent with \cref{sec:corruption}: a model that verified validity
-would reject a certificate whose final rule is fabricated and absent from the
-theory, and it does not.
+The response counts show why. On the 4-bit checkpoint \texttt{No} is $110$ of
+$192$ under \textbf{both} \textsc{broken\_chain} and \textsc{truncate\_1}; the
+arms differ only in \texttt{Yes} ($1$ against $61$). The model is not sorting
+certificates into valid and invalid. It is completing the ones it can complete,
+and falling back otherwise --- and the fallback itself shifts as soon as any
+query-relevant record is present, which is why the broken arm abstains less than
+the irrelevant one rather than more.
+
+\textbf{Detection is refuted, not merely unsupported}, and unlike the validity
+share it is refuted on every checkpoint, including the one exploiting surface
+overlap most. Its failure on \textsc{broken\_chain} is a failure to complete, not
+a detection of invalidity --- consistent with \cref{sec:corruption}, since a
+model that verified validity would reject a certificate whose final rule is
+fabricated and absent from the theory, and it does not.
 
 \subsection{Which models can serve as the interface}
 
@@ -691,7 +710,7 @@ We replace it \textbf{post hoc} with a floor on every class: minimum per-class
 recall at least $0.50$. Both verdicts are retained in the released results.
 \Cref{tab:models} reports all five arms for all ten models.
 
-\begin{table*}[t]
+\begin{table*}[tb]
 \centering\small
 \caption{All five arms, all ten models. Balanced accuracy (\%), chance $=33.3$.
 Viability is reported per arm, because it is not a property of the model.}
@@ -715,87 +734,80 @@ Qwen2.5-7B   & 7.6 & 33.3 & 33.3 & \textbf{97.9} & 67.2 & 71.4 & \textbf{concl o
 \end{table*}
 
 \textbf{Viability is a property of (model $\times$ arm), not of a model.} The
-decisive row is Qwen2.5-7B. Under \textsc{full} it has minimum per-class recall
-$0.141$ and emits \texttt{Unknown} on $62.0\%$ of items. Under
-\textsc{conclusion\_only} the same model reaches $97.9\%$ balanced accuracy with
-minimum per-class recall $0.938$ --- it clears the floor comfortably and is the
-second-best model in the sweep. Its contradicted-class recall falls from $0.938$
-to $0.141$ \emph{when the proof state is supplied}.
-
-So Qwen2.5-7B is not an interface that cannot express three outcomes. It is an
-interface that the proof state breaks. \textbf{Supplying proof state degrades
-three of ten models} --- Gemma-3-4B, Qwen2.5-3B and Qwen2.5-7B --- measured as the
-drop in minimum per-class recall from \textsc{conclusion\_only} to \textsc{full},
-and two of those three are otherwise among the strongest substrates.
+decisive row is Qwen2.5-7B: under \textsc{full} its minimum per-class recall is
+$0.141$ and it emits \texttt{Unknown} on $62.0\%$ of items, while under
+\textsc{conclusion\_only} the same model reaches $97.9\%$ balanced accuracy at
+minimum per-class recall $0.938$, second best in the sweep. Its
+contradicted-class recall collapses \emph{when the proof state is supplied}. It
+is not an interface that cannot express three outcomes; it is an interface the
+proof state breaks. \textbf{Supplying proof state degrades three of ten models}
+--- Gemma-3-4B, Qwen2.5-3B and Qwen2.5-7B --- by the drop in minimum per-class
+recall from \textsc{conclusion\_only} to \textsc{full}, and two of the three are
+otherwise among the strongest substrates.
 
 This bounds a claim we would otherwise have made. There is a floor near 3B
-\emph{for tolerating full certificates}: below 1.7B no arm clears it. But that is
-not a floor for serving as an interface, and the effect is not monotonic in
-scale. Model is not a randomised factor here, so these comparisons are
-descriptive and we make no significance claim about scale.
+\emph{for tolerating full certificates} --- below 1.7B no arm clears it --- but
+that is not a floor for serving as an interface, and the effect is not monotonic
+in scale. Model is not a randomised factor, so these comparisons are descriptive.
 
 \subsection{The same \texorpdfstring{$2\times2$}{2x2} across ten models}
 \label{sec:tenmodel}
 
 Experiment 3's five arms are the $2\times2$ of \cref{sec:decomposition} plus a
-baseline, on ten models. Computing it costs nothing further and turns a
-single-checkpoint decomposition into a ten-model one (\cref{sec:tenmodel} is
-computed from the same receipts as \cref{tab:models}).
-
-The mean state main effect is $+8.7$pp and the mean answer main effect $+21.6$pp,
-with a mean interaction of $-15.9$pp. \textsc{conclusion\_only} exceeds
+baseline, on ten models, from receipts already collected. The mean state main
+effect is $+8.7$pp against a mean answer main effect of $+21.6$pp, with a mean
+interaction of $-15.9$pp; \textsc{conclusion\_only} exceeds
 \textsc{proof\_prefix} in \textbf{8 of 10} models and equals or exceeds
-\textsc{full} in $6$ of $10$.
+\textsc{full} in $6$ of $10$. The answer channel dominates the state channel
+across the model set --- a more general form of the pattern \cref{tab:edges}
+shows on one model --- and Experiment 1's state main effect of $+22.4$pp is not
+typical of it.
 
-Two things follow, both visible in \cref{tab:models} and \cref{fig:size}. The answer channel
-dominates the state channel across the model set, which is a more general form of the pattern
-\cref{tab:edges} shows on one model. And Experiment 1's state main effect of
-$+22.4$pp is not typical: the ten-model mean is less than half of it. A
-single-model estimate of how much the state channel contributes should not be
-read as characteristic, ours included.
+That mean averages over four responders whose minimum per-class recall is $0.000$
+in every arm, three with negative state effects; excluding them it is $+14.7$pp
+against $+28.5$pp for the answer channel. So the cross-model state effect is not
+less than half the single-model estimate and we do not claim it is. What survives
+either subset is the ordering: the answer channel exceeds the state channel among
+the non-degenerate models as a group, and in $8$ of $10$ individually.
 
 \section{Limitations}
 
 \subsection{Scope of the mechanism claim}
 
-The inference we measure is \emph{exactly one step deep}. \textsc{truncate\_2}
-scores identically to supplying no certificate, so ``validity tracking'' should
-be read narrowly: the model completes a final inference when both premises are
-present and adjacent, and does not when they are not. It cannot chain two steps.
-It also does not \emph{detect} invalidity --- \cref{sec:detection} tests that
-directly and refutes it. That is a hard bound on how this result may be
-described, and \cref{sec:replication} bounds it further: the share attributable
-to inference ranges from $40.4\%$ to $98.6\%$ across three checkpoints.
+The inference is \emph{exactly one step deep}: \textsc{truncate\_2} scores
+identically to supplying no certificate, so the model completes a final inference
+when both premises are present and adjacent and does not otherwise, and cannot
+chain two steps. Nor does it \emph{detect} invalidity, which
+\cref{sec:detection} tests directly and refutes. \Cref{sec:replication} bounds
+the claim further: the share attributable to inference ranges from $40.4\%$ to
+$98.6\%$.
 
-The full theory is visible in every arm, so the query remains derivable from the
-theory regardless of what the certificate says. Breaking a certificate is
-diagnostic only because the model scores $0/96$ working from the theory alone. A
-model that used a broken certificate as a pointer back into the theory would be
-performing inference of a different kind; our design does not exclude that
-reading, and we record it as an interpretation caveat rather than a controlled
-alternative.
-
-\textsc{truncate\_2} and \textsc{truncate\_3} necessarily drop the query
-predicate out of the certificate, since it lives in the final rule. The depth
-ladder therefore confounds depth with predicate presence and must be read
-against \textsc{same\_entity\_irrelevant}, which holds entity repetition high
-while removing the predicate.
+The full theory is visible in every arm, so the query stays derivable whatever
+the certificate says, and breaking a certificate is diagnostic only where the
+model scores $0/96$ from the theory alone --- true of both Qwen checkpoints and
+\emph{not} of Gemma-3-4B ($22/96$, $d' = 1.83$). A model using a broken
+certificate as a pointer back into the theory would be doing inference of a
+different kind; on Gemma-3-4B that is a live alternative rather than a
+hypothetical one, since $20$ of its $22$ unaided successes recur under
+\textsc{broken\_chain}. We record it as an interpretation caveat, not a
+controlled alternative. Separately, \textsc{truncate\_2} and
+\textsc{truncate\_3} necessarily drop the query predicate, which lives in the
+final rule, so the depth ladder confounds depth with predicate presence and must
+be read against \textsc{same\_entity\_irrelevant}.
 
 \subsection{Post hoc analyses and superseded criteria}
 
-Two analyses in this paper are post hoc and are labelled where they are used.
-The $2\times2$ reading of Experiment 1 is a different analysis of sealed data,
-not a re-run. The viability criterion of Experiment 3 replaced a prespecified
-threshold that the data showed to be invalid; the original is retained in the
-released results.
+Two analyses are post hoc and labelled where used: the $2\times2$ reading of
+Experiment 1 is a different analysis of sealed data, not a re-run, and
+Experiment 3's viability criterion replaced a prespecified threshold the data
+showed to be invalid (the original is retained in the released results).
 
-Experiment 1 also carries design errors we report rather than repair. It
+Experiment 1 also carries three design errors we report rather than repair. It
 prespecified a $15$pp primary effect while its comparison arm reached $91.7\%$,
-leaving $8.3$pp of headroom, so the target was arithmetically unreachable. It
-recorded no proof depth and so cannot stratify its failures. And its task
-identifiers encoded the semantic class, so its answer authority was
-reconstructible from the public panel --- convenient for our reanalysis, but not
-a sealed authority. Experiments 2 and 3 fix all three.
+leaving $8.3$pp of headroom, so the target was arithmetically unreachable; it
+recorded no proof depth, so cannot stratify its failures; and its task
+identifiers encoded the semantic class, making its answer authority
+reconstructible from the public panel. Experiments 2--4 fix all three.
 
 \subsection{Generalisation}
 
@@ -803,84 +815,92 @@ This is one task family, small models only, and synthetic panels. Nonce
 vocabularies establish item novelty, not independence from all relevant
 pretraining patterns \citep{golchin2023time,deng2024investigating}.
 
-\textbf{Quantisation.} Experiments 1 and 2 use a 4-bit checkpoint and
-Experiment 3 bfloat16, so the mechanism result and the substrate sweep describe
-different artefacts of the same model. 4-bit quantisation moves next-token
-margins and criterion placement, which is precisely what we measure.
-\Cref{sec:replication} quantifies it: bfloat16 raises \textsc{truncate\_1} from
-59 to 72 of 96 while leaving the validity share essentially unchanged, so
-precision affects magnitude more than composition. We nonetheless do not treat
-the two as one artefact.
+\textbf{Prompt format.} Experiment 4 changes only the instruction line and the
+candidate set, on byte-identical theories and certificates, and the response
+distribution moves substantially --- a format-sensitivity result as much as a
+detection one, consistent with the effects this literature documents
+\citep{zhao2021calibrate,zheng2023large}. Arms are compared against a baseline
+scored under the same instruction, so the contrast is internally valid, but the
+absolute rates are not format-independent.
+
+\textbf{Single permutation.} \textsc{shuffled} uses one seeded permutation per
+item. The order effect is checkpoint-dependent --- $+46.9$pp on the 4-bit Qwen
+checkpoint, against gemma-3-4b's $86/96$ --- so several permutations would
+estimate it better than one, and we did not run them.
+
+\textbf{Quantisation.} Experiments 1 and 2 use a 4-bit checkpoint and Experiment
+3 bfloat16, so they describe different artefacts of the same model, and 4-bit
+quantisation moves exactly what we measure --- next-token margins and criterion
+placement. \Cref{sec:replication} bounds it: bfloat16 raises
+\textsc{truncate\_1} from 59 to 72 of 96 while leaving the share essentially
+unchanged, so precision affects magnitude more than composition. We nonetheless
+do not treat the two as one artefact.
 
 \textbf{Prior report.} Experiment 1's per-arm counts and prespecified primary
 contrast appeared in an earlier unpublished report by the same authors, cited
 here anonymously; the $2\times2$ reading, the response-bias finding and all of
-Experiments 2, 3 and 4 are new. That report concluded the 3B checkpoint failed an
-open-world unknown gate, whereas Experiment 3 finds the same family viable on the
-three-class panel. Panels, candidate sets and quantisation all differ, which
-plausibly accounts for the discrepancy, but we flag it rather than leave it to a
-reader who finds both.
+Experiments 2--4 are new. That report concluded the 3B checkpoint failed an
+open-world unknown gate, whereas Experiment 3 finds the same family viable;
+panels, candidate sets and quantisation all differ, which plausibly explains the
+discrepancy, but we flag it rather than leave it to a reader who finds both.
 
-An undetermined \textsc{proof\_prefix} cannot contain the query predicate ---
-the solver has nothing to say about it --- whereas entailed and contradicted
-prefixes can. Undetermined items therefore offer fewer surface cues, and a
+An undetermined \textsc{proof\_prefix} cannot contain the query predicate, since
+the solver has nothing to say about it, whereas entailed and contradicted
+prefixes can. Undetermined items therefore offer fewer surface cues and a
 surface-matching model will look worse on them for reasons unrelated to
 abstention; per-arm entity-mention counts are recorded so this is analysable.
 
-Finally, every theory here arrives \emph{already formalised}. Nothing here tests
+Finally, every theory here arrives \emph{already formalised}. Nothing tests
 whether a model can turn a framework described in prose into the solver's input,
-the step on which any claim of working in an unfamiliar framework depends.
-\Cref{sec:closure} and the corruption result make that gap consequential rather
-than merely open: a formalisation error would not be caught downstream, but
-followed.
+the step on which any claim of working in an unfamiliar framework depends --- and
+the corruption result makes that gap consequential rather than merely open: a
+formalisation error would not be caught downstream, but followed.
 
 \section{Conclusion}
 
 Solver assistance improves a small model's accuracy on rule-chaining queries, and
 end-to-end accuracy cannot say why. The decomposition we propose can: arrange the
-arms so that each contrast moves one factor, and hold every surface property
-fixed while destroying validity alone. It needs no new data collection, only that
-the arms be laid out correctly.
+arms so each contrast moves one factor, and hold every surface property fixed
+while destroying validity alone. It needs no new data collection.
 
 What it returns is model-specific. On one checkpoint $98.3\%$ of the state effect
 survives the surface-matched control; on the strongest substrate in our sweep,
-$40.4\%$ does. Across ten models the answer channel dominates the state channel
-in $8$ of $10$, and the mean state main effect is less than half the single-model
-estimate. We therefore offer the method as the contribution and decline to
-generalise its value --- including our own.
+$40.4\%$ does, or $51.4\%$ against the unaided baseline. Across ten models the
+answer channel dominates the state channel in $8$ of $10$. We therefore offer the
+method as the contribution and decline to generalise its value --- including our
+own.
 
-Two findings do hold on every checkpoint. The inference is one step deep, and it
-is not detection: rescoring the broken-chain items with a third candidate
-\emph{lowers} the abstention rate, so the model completes when it can and falls
-back when it cannot. And the architecture has no defence against a wrong
-apparatus --- given a valid-looking certificate whose fabricated final rule
-establishes the negation, the three checkpoints answer incorrectly on $189$,
+Two findings hold on every checkpoint, and both are negative. The inference is
+one step deep and is not detection: a broken chain \emph{lowers} abstention, so
+the model completes when it can and falls back when it cannot. And nothing
+defends against a wrong apparatus --- given a certificate whose fabricated final
+rule establishes the negation, the three checkpoints answer incorrectly on $189$,
 $186$ and $192$ of $192$ items, the surface-exploiting model most completely of
 all. Where reasoning is externalised to a verified component and the model is the
-interface, that is the operationally important result: the interface inherits the
-apparatus's errors in full, and more proof state degrades three of the ten
-interfaces we measured rather than helping them.
+interface, the interface inherits the apparatus's errors in full --- and more
+proof state degrades three of the ten interfaces rather than helping them.
 
-Two prespecified criteria failed on us. An arm at $50.0\%$ accuracy with
-$d' = 0.00$ was a degenerate responder, not a chance-level one, and a viability
-threshold declared in advance was maximised by a model answering \texttt{Unknown}
-to everything. Reporting sensitivity alongside accuracy caught both; we report
-them rather than repair them, and recommend the practice --- and the
-decomposition --- to anyone whose tool-augmented system returns a large headline
+Two prespecified criteria failed on us --- an arm at $50.0\%$ accuracy with
+$d' = 0.00$ was a degenerate responder, and a viability threshold was maximised
+by a model answering \texttt{Unknown} to everything --- and only reporting
+sensitivity alongside accuracy caught either. We recommend that practice, and the
+decomposition, to anyone whose tool-augmented system returns a large headline
 number.
 
 \section*{Reproducibility Statement}
 
 \textbf{Code and data.} The supplementary material accompanying this submission
-is self-contained: sealed panels and answer authorities, all $12{,}480$
+is self-contained: sealed panels and answer authorities, all $18{,}264$
 per-response receipts, the generators, runners, audits and analysis scripts, and
 the forward-closure certifier with its validation against the public corpus.
 Every number in this paper can be re-derived from a fresh unpack with no network
 access, no model weights and no external packages --- the audits use the Python
 standard library only, so verification does not depend on resolving an
 environment. Panels are hash-stamped and the runners refuse a modified panel;
-each receipt carries a SHA-256 of its own contents, and all $12{,}480$ verified
-with zero failures. Model weights are not redistributed, but each run records the
+each receipt carries a SHA-256 of its own contents, and all $18{,}264$
+verified with zero failures. The count is not typed into the manuscript: it is
+produced by \texttt{scripts/census\_receipts\_v1.py} from the released receipts
+and substituted at compose time. Model weights are not redistributed, but each run records the
 pinned revision and a hash of the weight files before those files are deleted. A
 permanent archive with a DOI will accompany the camera-ready version.
 
@@ -901,9 +921,9 @@ re-derive them independently.
 \appendix
 \section{Supporting Tables and Figures}
 
-\begin{table*}[t]
+\begin{table*}[tb]
 \centering\small
-\caption{Datasets. The three sealed panels are nonce-generated and disjoint; the
+\caption{Datasets. The four sealed panels are nonce-generated and disjoint; the
 public corpus validates the certifier only.}
 \label{tab:panels}
 \begin{tabular}{llrl}
@@ -918,52 +938,38 @@ ProofWriter OWA \citep{tafjord2020proofwriter} & three-way & 23{,}240 & certifie
 \end{tabular}
 \end{table*}
 
-\begin{table*}[t]
+\begin{table*}[tb]
 \centering\small
-\caption{Signal detection for Experiment 1. Apparent chance and zero
-sensitivity are not the same thing.}
-\label{tab:sdt}
-\begin{tabular}{lrrrr}
+\caption{The four one-factor edges of the $2\times2$, and the prespecified
+diagonal. Post hoc reanalysis of sealed data.}
+\label{tab:edges}
+\begin{tabular}{lrrl}
 \toprule
-Arm & Hits /96 & False alarms /96 & $d'$ & Criterion $c$ \\
+Contrast & Effect & Exact McNemar $p$ & Reported originally \\
 \midrule
-\textsc{none}            &  9 & 14 & $-0.26$ & $+1.17$ \\
-\textsc{irrelevant}      &  9 &  9 & $\mathbf{0.00}$ & $+1.29$ \\
-\textsc{conclusion\_only}& 80 &  0 & $+3.52$ & $+0.81$ \\
-\textsc{proof\_prefix}   & 71 &  0 & $+3.20$ & $+0.97$ \\
-\textsc{full}            & 95 &  0 & $+4.72$ & $+0.20$ \\
+Add answer, no state present   & $+41.67$pp & $1.7\times10^{-24}$ & no \\
+Add state, no answer present   & $+36.98$pp & $1.5\times10^{-19}$ & secondary \\
+Add answer, state present      & $+12.50$pp & $1.2\times10^{-7}$  & no \\
+Add state, answer present      & $+7.81$pp  & $6.1\times10^{-5}$  & secondary \\
+\midrule
+\emph{Diagonal (prespecified primary)} & $-4.69$pp & $0.078$ & primary \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\begin{table*}[t]
-\centering\small
-\caption{The same ten-arm decomposition on three checkpoints, entailed subset
-($n = 96$). The validity share ranges from $40.4\%$ to $98.6\%$.}
-\label{tab:replication}
-\begin{tabular}{lrrrrrr}
-\toprule
-Checkpoint & \textsc{brk} & \textsc{tr\_1} & Total & Surface & Validity & Share \\
-\midrule
-Qwen2.5-3B 4-bit &  1 & 59 & $+61.5$ & $+1.0$  & $+60.4$ & $98.3\%$ \\
-Qwen2.5-3B bf16  &  1 & 72 & $+75.0$ & $+1.0$  & $+74.0$ & $98.6\%$ \\
-Gemma-3-4B       & \textbf{58} & 96 & $+97.9$ & $\mathbf{+58.3}$ & $+39.6$ & $\mathbf{40.4\%}$ \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
-\begin{figure*}[t]
+\begin{figure*}[tb]
 \centering
 \includegraphics[width=0.86\textwidth]{figures/arm_decomposition.png}
 \caption{Ten matched arms on one item set, differing only in the solver record.
 Left: correct on the entailed subset (of 96). Right: sensitivity $d'$, signed.
-Destroying validity alone removes almost the whole effect. The
+Destroying validity alone removes almost the whole effect \emph{on this
+checkpoint}; on gemma-3-4b it does not, see \cref{sec:replication}. The
 \textsc{misleading} arm, whose fabricated final rule points the wrong way, is
 followed to the wrong answer on 189 of 192 items.}
 \label{fig:arms}
 \end{figure*}
 
-\begin{figure}[t]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth]{figures/validity_share_replication.png}
 \caption{The surface and validity components on three checkpoints. Gemma-3-4B's
@@ -972,16 +978,16 @@ its validity share is $40.4\%$ against $98.3\%$ and $98.6\%$.}
 \label{fig:replication}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth]{figures/detection_response_distribution.png}
-\caption{Three-candidate response distribution. Supplying a broken chain lowers
-the abstention rate from the $75.0\%$ baseline to $42.2\%$ --- the opposite of the
-direction validity detection predicts.}
+\caption{Three-candidate response distribution. On all three checkpoints a broken
+chain lowers the abstention rate relative to the \textsc{irrelevant} baseline ---
+the opposite of the direction validity detection predicts.}
 \label{fig:detection}
 \end{figure}
 
-\begin{figure*}[t]
+\begin{figure*}[tb]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/substrate_size_curve.png}
 \caption{All five arms for all ten models, ordered by parameter count. Chance is
