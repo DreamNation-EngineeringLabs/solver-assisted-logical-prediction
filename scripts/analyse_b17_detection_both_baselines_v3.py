@@ -53,9 +53,17 @@ def main() -> None:
             "vs_none_pp": None,
         }
         if "none" in arms:
-            rec["vs_none_pp"] = (brk - arms["none"]["unknown_rate"]) * 100
+            floor = arms["none"]["unknown_rate"]
+            rec["vs_none_pp"] = (brk - floor) * 100
             rec["irrelevant_minus_none_pp"] = (
-                arms["irrelevant"]["unknown_rate"] - arms["none"]["unknown_rate"]) * 100
+                arms["irrelevant"]["unknown_rate"] - floor) * 100
+            # Power is a gradient, not a switch: a checkpoint can only fall as far
+            # as its own floor allows. Reporting the fall as a fraction of what
+            # was available keeps a small delta on a low floor from reading as a
+            # weak result when it is in fact an untestable one.
+            rec["available_fall_pp"] = floor * 100
+            rec["fraction_of_available_fall"] = (
+                (floor - brk) / floor if floor > 0 else None)
         # detection predicts a RISE against either reference
         rec["detection_supported"] = any(
             v is not None and v > 0 for v in (rec["vs_irrelevant_pp"], rec["vs_none_pp"]))

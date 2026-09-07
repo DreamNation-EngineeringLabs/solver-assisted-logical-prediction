@@ -688,22 +688,25 @@ Gemma-3-4B       &   1 ($0.5\%$)  &  15 ($7.8\%$)  & \textbf{0} ($0.0\%$) & $-0.
 
 Abstention falls on every checkpoint against \emph{both} references, so the
 direction does not turn on the baseline. The magnitude does: the references
-coincide on the 4-bit checkpoint ($79.7\%$ against $75.0\%$) and diverge at
-bfloat16, where a same-shape irrelevant record raises abstention by $34.9$pp over
-supplying nothing, so a $\Delta$ against \textsc{irrelevant} is not comparable
-across checkpoints.
+coincide on the 4-bit checkpoint and diverge at bfloat16, where an irrelevant
+record raises abstention by $34.9$pp over supplying nothing, so a $\Delta$
+against \textsc{irrelevant} is not comparable across checkpoints.
 
 \textbf{On Gemma-3-4B the delta carries no weight, and we do not rest the claim
 on it.} It answers \texttt{Unknown} on $1$ of $192$ items given no record at all,
-so there is no room to fall and its $-0.5$pp is a no-power null. What it does
-instead is the sharper evidence, and no baseline can move it: given a broken
-certificate it abstains \textbf{$0$ times in $192$} and \emph{completes} $76$
-chains that do not connect. A model detecting invalidity does not do that.
+so its $-0.5$pp is a no-power null. What it does instead is the sharper evidence,
+and no baseline can move it: given a broken certificate it abstains \textbf{$0$
+times in $192$} and \emph{completes} $76$ chains that do not connect. A model
+detecting invalidity does not do that.
 
 The 4-bit checkpoint shows the same behaviour in its counts. \texttt{No} is $110$
 of $192$ under \textbf{both} \textsc{broken\_chain} and \textsc{truncate\_1}, the
-arms differing only in \texttt{Yes}, $1$ against $61$. Where the deltas do have
-power they run against detection: $-37.5$ and $-3.6$pp versus \textsc{none}.
+arms differing only in \texttt{Yes}, $1$ against $61$.
+
+Power is a gradient, not a switch: a checkpoint can fall only as far as its floor
+allows. The 4-bit checkpoint had $79.7$pp available and used $47\%$; bfloat16 had
+$21.4$pp and used $17\%$; Gemma-3-4B had $0.5$pp --- which is why its delta is
+uninformative and its \texttt{Yes} count is not.
 
 \textbf{Detection is refuted, not merely unsupported}, and unlike the validity
 share it is refuted on every checkpoint, including the one exploiting surface
@@ -723,6 +726,8 @@ that, emitting \texttt{Unknown} on $62$--$96\%$ of items with three never emitti
 \texttt{No} --- the failure of \cref{tab:sdt} mirrored onto a different label. We
 replace it \textbf{post hoc} with a floor on every class, minimum per-class
 recall $\geq 0.50$, retaining both verdicts in the released results.
+\Cref{tab:models} reports all five arms for all ten models, with the per-arm
+verdict; \cref{fig:size} plots the same data ordered by parameter count.
 
 \begin{table*}[tb]
 \centering\small
@@ -748,24 +753,22 @@ Qwen2.5-7B   & 7.6 & 33.3 & 33.3 & \textbf{97.9} & 67.2 & 71.4 & \textbf{concl o
 \end{table*}
 
 \textbf{Viability is a property of (model $\times$ arm), not of a model.} The
-decisive row is Qwen2.5-7B: under \textsc{full} its minimum per-class recall is
-$0.141$ and it emits \texttt{Unknown} on $62.0\%$ of items, while under
-\textsc{conclusion\_only} the same model reaches $97.9\%$ balanced accuracy at
-minimum per-class recall $0.938$, second best in the sweep. Its
-contradicted-class recall collapses \emph{when the proof state is supplied}. It
-is not an interface that cannot express three outcomes; it is an interface the
-proof state breaks. \textbf{Supplying proof state degrades three of ten models}
---- Gemma-3-4B, Qwen2.5-3B and Qwen2.5-7B --- by the drop in minimum per-class
-recall from \textsc{conclusion\_only} to \textsc{full}, and two of the three are
-otherwise among the strongest substrates.
+decisive row is Qwen2.5-7B: minimum per-class recall $0.141$ under
+\textsc{full}, against $0.938$ and $97.9\%$ balanced accuracy under
+\textsc{conclusion\_only} --- second best in the sweep. Its contradicted-class
+recall collapses \emph{when the proof state is supplied}. It is not an interface
+that cannot express three outcomes; it is an interface the proof state breaks.
+\textbf{Supplying proof state degrades three of ten models} --- Gemma-3-4B,
+Qwen2.5-3B and Qwen2.5-7B --- two of them otherwise among the strongest
+substrates.
 
 This bounds a claim we would otherwise have made. There is a floor near 3B
-\emph{for tolerating full certificates} --- below 1.7B no arm clears it --- but
-that is not a floor for serving as an interface, and the effect is not monotonic
-in scale. Model is not a randomised factor, so these comparisons are descriptive.
+\emph{for tolerating full certificates}, since below 1.7B no arm clears it, but
+that is not a floor for serving as an interface and the effect is not monotonic
+in scale. Model is not a randomised factor, so these comparisons are
+descriptive.
 
 \subsection{The same \texorpdfstring{$2\times2$}{2x2} across ten models}
-\label{sec:tenmodel}
 
 Experiment 3's five arms are the $2\times2$ of \cref{sec:decomposition} plus a
 baseline, on ten models, from receipts already collected. The mean state main
@@ -780,9 +783,9 @@ typical of it.
 That mean averages over four responders whose minimum per-class recall is $0.000$
 in every arm, three with negative state effects; excluding them it is $+14.7$pp
 against $+28.5$pp for the answer channel. So the cross-model state effect is not
-less than half the single-model estimate and we do not claim it is. What survives
-either subset is the ordering: the answer channel exceeds the state channel among
-the non-degenerate models as a group, and in $8$ of $10$ individually.
+less than half the single-model estimate, and we do not claim it is. The ordering
+survives either subset --- answer above state, and in $8$ of $10$ models
+individually.
 
 \section{Limitations}
 
@@ -874,25 +877,30 @@ formalisation error would not be caught downstream, but followed.
 \section{Conclusion}
 
 Solver assistance improves a small model's accuracy on rule-chaining queries, and
-end-to-end accuracy cannot say why. The decomposition we propose can: arrange the
-arms so each contrast moves one factor, and hold every surface property fixed
-while destroying validity alone. It needs no new data collection.
+end-to-end accuracy cannot say why. The decomposition can: arrange the arms so
+each contrast moves one factor, and hold every surface property fixed while
+destroying validity alone. It needs no new data collection.
 
 What it returns is model-specific: $98.3\%$ of the state effect survives the
 control on one checkpoint, and $40.4$--$51.4\%$ on the strongest substrate in our
-sweep, depending on the denominator. Across ten models the answer channel
-dominates the state channel in $8$ of $10$. We offer the method as the
-contribution and decline to generalise its value, ours included.
+sweep, depending on the denominator. We offer the method as the contribution and
+decline to generalise its value, ours included.
 
 \looseness=-1
-Two findings hold on every checkpoint, and both are negative. The inference is
-one step deep and is not detection: the strongest substrate abstains on $0$ of
+\looseness=-1
+Three findings hold on every checkpoint, and all are negative. The inference is
+one step deep. It is not detection: the strongest substrate abstains on $0$ of
 $192$ broken certificates and completes $76$. And nothing defends
 against a wrong apparatus: given a certificate whose fabricated final rule
 establishes the negation, the three checkpoints answer incorrectly on $189$, $186$
-and $192$ of $192$. The interface inherits the apparatus's errors in full,
-and more proof state degrades three of ten interfaces rather than helping them. Two prespecified criteria of our own failed here, caught only by
-reporting sensitivity alongside accuracy. We recommend it, and the
+and $192$ of $192$. The interface inherits the apparatus's errors in full, and
+more proof state degrades three of ten interfaces.
+
+\looseness=-1
+Two criteria we had prespecified failed here: an arm at $50.0\%$ accuracy with
+$d' = 0.00$ was degenerate rather than chance-level, and a viability threshold
+was maximised by answering \texttt{Unknown} to everything. Only reporting
+sensitivity alongside accuracy caught either; we recommend it, with the
 decomposition, as standard.
 
 \section*{Reproducibility Statement}
@@ -983,9 +991,10 @@ followed to the wrong answer on 189 of 192 items.}
 \centering
 \includegraphics[width=\columnwidth]{figures/validity_share_replication.png}
 \caption{The surface and validity components on three checkpoints. Gemma-3-4B's
-surface component is $+58.3$pp against $+1.0$pp for the two Qwen checkpoints. Its
-share is $40.4\%$ against the same-shape control and $51.4\%$ against what it
-manages unaided; the two denominators coincide on the Qwen checkpoints, which
+surface component is $+58.3$pp against $+1.0$pp for the two Qwen checkpoints.
+Bars give the decomposition against the \textsc{irrelevant} control; the share
+annotation gives both denominators, $40.4\%$ against that control and $51.4\%$
+against what the model manages unaided. the two denominators coincide on the Qwen checkpoints, which
 score $0/96$ with no certificate, and diverge only where a substrate has
 competence of its own.}
 \label{fig:replication}

@@ -31,7 +31,9 @@
      "unknown_rate": 0.0
     }
    },
+   "available_fall_pp": 0.5208333333333333,
    "detection_supported": false,
+   "fraction_of_available_fall": 1.0,
    "irrelevant_minus_none_pp": 7.291666666666667,
    "vs_irrelevant_pp": -7.8125,
    "vs_none_pp": -0.5208333333333333
@@ -67,7 +69,9 @@
      "unknown_rate": 0.109375
     }
    },
+   "available_fall_pp": 79.6875,
    "detection_supported": false,
+   "fraction_of_available_fall": 0.47058823529411764,
    "irrelevant_minus_none_pp": -4.6875,
    "vs_irrelevant_pp": -32.8125,
    "vs_none_pp": -37.5
@@ -103,7 +107,9 @@
      "unknown_rate": 0.0625
     }
    },
+   "available_fall_pp": 21.354166666666664,
    "detection_supported": false,
+   "fraction_of_available_fall": 0.1707317073170731,
    "irrelevant_minus_none_pp": 34.895833333333336,
    "vs_irrelevant_pp": -38.541666666666664,
    "vs_none_pp": -3.6458333333333313
