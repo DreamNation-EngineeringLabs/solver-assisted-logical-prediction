@@ -75,37 +75,35 @@ Breaking validity alone removes almost the whole state effect on one checkpoint
 --- a validity share of $98.3\%$ --- and $40.4\%$ on another, which answers $58$
 of $96$ broken certificates correctly where the first manages $1$. We offer the
 decomposition and decline to generalise the value it returns, ours included.
-Three results do hold everywhere: the inference is one step deep and requires the
-final rule to \emph{follow} the premise it fires on; it is \emph{not} detection,
+Three results do hold everywhere: the inference is one step deep and is degraded
+when the final rule precedes the premise it fires on; it is \emph{not} detection,
 since a broken certificate \emph{lowers} abstention; and none of the three
 checkpoints resists a corrupted apparatus, answering incorrectly on $189$, $186$
 and $192$ of $192$ items given a certificate whose fabricated final rule
 establishes the negation.
 
 Two measurement points shape how this may be reported. Accuracy alone is not
-interpretable: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$, so
-sensitivity and criterion accompany it throughout
-\citep{macmillan1991detection,stanislaw1999calculation}, with the exact McNemar
-test \citep{mcnemar1947note} and BCa intervals \citep{efron1987better}. And the
-claim boundary is strict: on the Qwen checkpoints every arm without a
-near-complete chain returns $d' = 0$, so those models do not reason unaided and
-high accuracy with full solver material describes a faithful transcriber.
-Gemma-3-4b is not in that position ($22/96$ unaided), which is why its share is
-reported against two baselines. System-level effects are never upgraded into
-claims about the model's own reasoning.
+interpretable --- one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$ ---
+so sensitivity and criterion accompany it throughout
+\citep{macmillan1991detection,stanislaw1999calculation}. And the claim boundary
+is strict: on the Qwen checkpoints every arm without a near-complete chain
+returns $d' = 0$, so those models do not reason unaided and high accuracy with
+full solver material describes a faithful transcriber. Gemma-3-4b is not in that
+position ($22/96$ unaided), which is why its share is reported against two
+baselines. System-level effects are never upgraded into claims about the model's
+own reasoning.
 
 The contributions are: (i) an \emph{answer-evidence decomposition} separating
-solver-supplied answers from solver-supplied reasoning state, reusable for any
-tool-augmented system; (ii) a \emph{surface-matched invalidity control} isolating
-validity from every co-occurring surface cue, certified per item; (iii) a
-\emph{forward-closure certifier} for underdetermined items, validated at
-$23{,}240/23{,}240$ against an independently labelled corpus
-\citep{tafjord2020proofwriter} and nine adversarial classes; (iv) evidence that
-apparent use of proof state can be surface exploitation, that the behaviour is
-completion rather than detection, and that no checkpoint resists a corrupted
-certificate; and (v) a sweep over eleven models
+solver-supplied answers from solver-supplied reasoning state; (ii) a
+\emph{surface-matched invalidity control} isolating validity from every
+co-occurring surface cue, certified per item; (iii) a \emph{forward-closure
+certifier} for underdetermined items, validated at $23{,}240/23{,}240$ against an
+independently labelled corpus \citep{tafjord2020proofwriter} and nine adversarial
+classes; (iv) evidence that apparent use of proof state can be surface
+exploitation, that the behaviour is completion rather than detection, and that no
+checkpoint resists a corrupted certificate; and (v) a sweep over eleven models
 \citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}
-showing viability to be a property of (model $\times$ arm $\times$ runtime) ---
+showing viability to be a property of (model $\times$ arm $\times$ runtime),
 including one model whose verdict changes with the inference stack alone.
 
 \section{Related Work}
@@ -182,13 +180,11 @@ Prompted classification is biased rather than merely noisy.
 Few-shot accuracy swings from near chance to near state of the art with format
 and example order, because the model carries a prior toward particular answer
 strings \citep{zhao2021calibrate}; option order alone moves multiple-choice
-accuracy substantially \citep{pezeshkpour2023large}, tracing to a token-level
-prior over option identifiers rather than option content \citep{zheng2023large};
-and likelihood scoring adds a confound, since strings compete for probability
-mass independently of correctness \citep{holtzman2021surface}. On abstention,
-models can partially assess whether their own answers are right
-\citep{kadavath2022language} and be evaluated on recognising questions that admit
-no answer \citep{yin2023large}.
+accuracy \citep{pezeshkpour2023large,zheng2023large}; and likelihood scoring adds
+a confound, since strings compete for probability mass independently of
+correctness \citep{holtzman2021surface}. On abstention, models can partially
+assess their own answers \citep{kadavath2022language} and be evaluated on
+recognising unanswerable questions \citep{yin2023large}.
 
 Evaluation practice in solver-augmented reasoning has not absorbed this: bare
 accuracy remains the reported quantity. On a balanced panel a degenerate

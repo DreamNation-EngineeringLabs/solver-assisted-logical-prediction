@@ -120,37 +120,35 @@ Breaking validity alone removes almost the whole state effect on one checkpoint
 --- a validity share of $98.3\%$ --- and $40.4\%$ on another, which answers $58$
 of $96$ broken certificates correctly where the first manages $1$. We offer the
 decomposition and decline to generalise the value it returns, ours included.
-Three results do hold everywhere: the inference is one step deep and requires the
-final rule to \emph{follow} the premise it fires on; it is \emph{not} detection,
+Three results do hold everywhere: the inference is one step deep and is degraded
+when the final rule precedes the premise it fires on; it is \emph{not} detection,
 since a broken certificate \emph{lowers} abstention; and none of the three
 checkpoints resists a corrupted apparatus, answering incorrectly on $189$, $186$
 and $192$ of $192$ items given a certificate whose fabricated final rule
 establishes the negation.
 
 Two measurement points shape how this may be reported. Accuracy alone is not
-interpretable: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$, so
-sensitivity and criterion accompany it throughout
-\citep{macmillan1991detection,stanislaw1999calculation}, with the exact McNemar
-test \citep{mcnemar1947note} and BCa intervals \citep{efron1987better}. And the
-claim boundary is strict: on the Qwen checkpoints every arm without a
-near-complete chain returns $d' = 0$, so those models do not reason unaided and
-high accuracy with full solver material describes a faithful transcriber.
-Gemma-3-4b is not in that position ($22/96$ unaided), which is why its share is
-reported against two baselines. System-level effects are never upgraded into
-claims about the model's own reasoning.
+interpretable --- one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$ ---
+so sensitivity and criterion accompany it throughout
+\citep{macmillan1991detection,stanislaw1999calculation}. And the claim boundary
+is strict: on the Qwen checkpoints every arm without a near-complete chain
+returns $d' = 0$, so those models do not reason unaided and high accuracy with
+full solver material describes a faithful transcriber. Gemma-3-4b is not in that
+position ($22/96$ unaided), which is why its share is reported against two
+baselines. System-level effects are never upgraded into claims about the model's
+own reasoning.
 
 The contributions are: (i) an \emph{answer-evidence decomposition} separating
-solver-supplied answers from solver-supplied reasoning state, reusable for any
-tool-augmented system; (ii) a \emph{surface-matched invalidity control} isolating
-validity from every co-occurring surface cue, certified per item; (iii) a
-\emph{forward-closure certifier} for underdetermined items, validated at
-$23{,}240/23{,}240$ against an independently labelled corpus
-\citep{tafjord2020proofwriter} and nine adversarial classes; (iv) evidence that
-apparent use of proof state can be surface exploitation, that the behaviour is
-completion rather than detection, and that no checkpoint resists a corrupted
-certificate; and (v) a sweep over eleven models
+solver-supplied answers from solver-supplied reasoning state; (ii) a
+\emph{surface-matched invalidity control} isolating validity from every
+co-occurring surface cue, certified per item; (iii) a \emph{forward-closure
+certifier} for underdetermined items, validated at $23{,}240/23{,}240$ against an
+independently labelled corpus \citep{tafjord2020proofwriter} and nine adversarial
+classes; (iv) evidence that apparent use of proof state can be surface
+exploitation, that the behaviour is completion rather than detection, and that no
+checkpoint resists a corrupted certificate; and (v) a sweep over eleven models
 \citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}
-showing viability to be a property of (model $\times$ arm $\times$ runtime) ---
+showing viability to be a property of (model $\times$ arm $\times$ runtime),
 including one model whose verdict changes with the inference stack alone.
 
 \section{Related Work}
@@ -227,13 +225,11 @@ Prompted classification is biased rather than merely noisy.
 Few-shot accuracy swings from near chance to near state of the art with format
 and example order, because the model carries a prior toward particular answer
 strings \citep{zhao2021calibrate}; option order alone moves multiple-choice
-accuracy substantially \citep{pezeshkpour2023large}, tracing to a token-level
-prior over option identifiers rather than option content \citep{zheng2023large};
-and likelihood scoring adds a confound, since strings compete for probability
-mass independently of correctness \citep{holtzman2021surface}. On abstention,
-models can partially assess whether their own answers are right
-\citep{kadavath2022language} and be evaluated on recognising questions that admit
-no answer \citep{yin2023large}.
+accuracy \citep{pezeshkpour2023large,zheng2023large}; and likelihood scoring adds
+a confound, since strings compete for probability mass independently of
+correctness \citep{holtzman2021surface}. On abstention, models can partially
+assess their own answers \citep{kadavath2022language} and be evaluated on
+recognising unanswerable questions \citep{yin2023large}.
 
 Evaluation practice in solver-augmented reasoning has not absorbed this: bare
 accuracy remains the reported quantity. On a balanced panel a degenerate
@@ -300,16 +296,15 @@ lines. The decomposition follows:
 \end{align}
 
 Four companion arms separate the remaining confounds.
-\textsc{same\_entity\_irrelevant} supplies a valid derivation about the
-\emph{query} entity toward an unrelated predicate: it names the query subject
-four times where \textsc{irrelevant} names it zero times, and neither contains
-the query predicate, so the pair isolates entity repetition alone.
-\textsc{shuffled} presents \textsc{truncate\_1}'s lines in seeded random order,
-separating a chain from a bag of statements. \textsc{truncate\_2} and
-\textsc{truncate\_3} withhold two and three steps, giving a depth ladder.
+\textsc{same\_entity\_irrelevant} gives a valid derivation about the \emph{query}
+entity toward an unrelated predicate --- naming the query subject four times
+where \textsc{irrelevant} names it zero, neither containing the query predicate
+--- so the pair isolates entity repetition. \textsc{shuffled} presents
+\textsc{truncate\_1}'s lines in seeded random order; \textsc{truncate\_2} and
+\textsc{truncate\_3} withhold two and three steps, giving a depth ladder; and
 \textsc{misleading} supplies a valid-looking chain whose single fabricated final
-rule establishes the query's negation; the ground-truth answer is unchanged, so
-a model that follows the supplied state answers incorrectly.
+rule establishes the query's negation, leaving the ground-truth answer unchanged
+so that following the supplied state means answering incorrectly.
 
 \subsection{Certifying underdetermination}
 \label{sec:closure}
@@ -489,6 +484,40 @@ bootstrapping the whole ratio rather than its numerator. \Cref{tab:arms} and
 \cref{fig:arms} give the full arm set, and \cref{sec:replication} shows the
 share is specific to this checkpoint.
 
+\begin{table*}[tb]
+\centering\small
+\caption{Experiment 2: ten matched arms scored on three checkpoints, entailed
+subset (correct of 96, with signed $d'$). Only the solver record differs between
+arms. The share rows give the validity component as a fraction of the total state
+effect, against the \textsc{irrelevant} control and against the unaided
+\textsc{none} arm; the two coincide wherever unaided competence is zero.}
+\label{tab:arms}
+\begin{tabular}{lrrrrrr}
+\toprule
+& \multicolumn{2}{c}{Qwen2.5-3B 4-bit} & \multicolumn{2}{c}{Qwen2.5-3B bf16}
+& \multicolumn{2}{c}{Gemma-3-4B} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Arm & /96 & $d'$ & /96 & $d'$ & /96 & $d'$ \\
+\midrule
+\textsc{none}                    &  0 & $0.00$ &  0 & $0.00$ & \textbf{22} & $1.83$ \\
+\textsc{irrelevant}              &  0 & $0.00$ &  0 & $0.00$ &  2 & $0.62$ \\
+\textsc{same\_entity\_irrelevant}&  0 & $0.00$ &  0 & $0.00$ &  3 & $0.77$ \\
+\textsc{truncate\_3}             &  0 & $0.00$ &  0 & $0.00$ &  4 & $0.88$ \\
+\textsc{truncate\_2}             &  0 & $0.00$ &  0 & $0.00$ &  4 & $0.88$ \\
+\textsc{truncate\_1}             & 59 & $2.85$ & 72 & $3.23$ & 96 & $5.13$ \\
+\textsc{broken\_chain}           &  1 & $0.41$ &  1 & $0.41$ & \textbf{58} & $2.83$ \\
+\textsc{shuffled}                & 14 & $1.53$ & 12 & $1.43$ & \textbf{86} & $3.80$ \\
+\textsc{misleading}              &  0 & $-4.36$ &  0 & $-4.06$ &  0 & $-5.13$ \\
+\textsc{full}                    & 96 & $5.13$ & 96 & $5.13$ & 96 & $5.13$ \\
+\midrule
+Validity share vs \textsc{irrelevant} & \multicolumn{2}{c}{$98.3\%$}
+ & \multicolumn{2}{c}{$98.6\%$} & \multicolumn{2}{c}{$\mathbf{40.4\%}$} \\
+Validity share vs \textsc{none}       & \multicolumn{2}{c}{$98.3\%$}
+ & \multicolumn{2}{c}{$98.6\%$} & \multicolumn{2}{c}{$\mathbf{51.4\%}$} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
 Three supporting contrasts sharpen the reading. Entity repetition explains
 nothing: $\textsc{same\_entity\_irrelevant} - \textsc{irrelevant} = +0.0$pp
 ($p = 1$), despite the former naming the query subject four times and the latter
@@ -518,13 +547,14 @@ permutations each on all three checkpoints, recording where those two lines
 landed. An identity arm reproduces \textsc{truncate\_1}'s bytes and returns its
 receipts $192/192$ throughout. Over eight permutations the effect spans
 $[+41.7, +50.0]$pp on the 4-bit checkpoint, $[+60.4, +63.5]$ at bfloat16 and
-$[+6.2, +13.5]$ on Gemma-3-4B; the published single draws, $+46.9$ and $+10.4$pp,
-fall inside their own ranges.
+$[+6.2, +13.5]$ on Gemma-3-4B; the published single draws --- $+46.9$, $+62.5$
+and $+10.4$pp --- fall inside their own ranges.
 
 \textbf{Direction separates the arms; distance does not.} Accuracy does not
 decline with the gap: on the 4-bit checkpoint it is $18.1\%$ at gap $1$ and
 $24.0\%$ at gap $7$, though that last cell is $6$ of $25$ and we draw no trend
-from it --- only that separating the two lines does not visibly hurt. Reversing
+from it --- only that separating the two lines does not visibly hurt
+(\cref{fig:order}). Reversing
 them does. Rule \emph{after} its premise gives $26.8\%$, $22.4\%$ and $94.9\%$
 across the three checkpoints against $5.8\%$, $4.8\%$ and $84.9\%$ for rule
 \emph{before}; paired within item on the 4-bit checkpoint, $45$ items favour
@@ -611,31 +641,12 @@ The binary design cannot support that reading, because the correct answer under 
 broken certificate \emph{is} the model's default label: ``detected the break'' and
 ``found no pattern to complete'' predict the same response.
 
-We separated them. The \textsc{broken\_chain} items, certified undetermined under
-their displayed lines, were rescored with three candidates rather than two ---
-byte-identical but for the instruction line and candidate set. A validity tracker
-abstains \emph{more} when the chain is broken; a pattern completer falls back to
-its default, which \textsc{irrelevant} and \textsc{none} fix from either side.
+We separated them by rescoring the \textsc{broken\_chain} items with three
+candidates rather than two. A validity tracker abstains \emph{more} when the
+chain is broken; a pattern completer falls back to its default, which
+\textsc{irrelevant} and \textsc{none} fix from either side.
 \Cref{tab:detection} and \cref{fig:detection} give all three checkpoints on all
 four arms.
-
-\begin{table*}[tb]
-\centering\small
-\caption{Three-candidate rescoring, all three checkpoints: \texttt{Unknown}
-responses out of 192 per arm, against both abstention baselines. Detection
-predicts a \emph{rise} under \textsc{broken\_chain}; no checkpoint rises against
-either reference.}
-\label{tab:detection}
-\begin{tabular}{lrrrrrr}
-\toprule
-Checkpoint & \textsc{none} & \textsc{irrel.} & \textsc{broken} & $\Delta_{\textsc{none}}$ & $\Delta_{\textsc{irrel.}}$ & \textsc{trunc\_1} \\
-\midrule
-Qwen2.5-3B 4-bit & 153 ($79.7\%$) & 144 ($75.0\%$) & 81 ($42.2\%$) & $-37.5$ & $-32.8$ & 21 \\
-Qwen2.5-3B bf16  &  41 ($21.4\%$) & 108 ($56.2\%$) & 34 ($17.7\%$) & $-3.6$  & $-38.5$ & 12 \\
-Gemma-3-4B       &   1 ($0.5\%$)  &  15 ($7.8\%$)  & \textbf{0} ($0.0\%$) & $-0.5$ & $-7.8$ & 0 \\
-\bottomrule
-\end{tabular}
-\end{table*}
 
 Abstention falls on every checkpoint against \emph{both} references, so the
 direction does not turn on the baseline. The magnitude does: an irrelevant record
@@ -663,15 +674,14 @@ fabricated and absent from the theory, and it does not.
 
 \subsection{Which models can serve as the interface}
 
-Experiment 3 scores ten models on the three-class panel in all five arms. We
-declared in advance that a model relays non-determination at $\geq 80\%$ recall
-on undetermined items with full solver material. \textbf{Eight of ten passed, and
+Experiment 3 scores ten models on the three-class panel in all five arms. We had
+declared that a model relays non-determination at $\geq 80\%$ recall on
+undetermined items with full solver material. \textbf{Eight of ten passed, and
 the criterion was invalid}: single-class recall is maximised by answering
-\texttt{Unknown} to everything, and four models do close to that, emitting it on
-$62$--$96\%$ of items with three never emitting \texttt{No} --- \cref{tab:sdt}'s
-failure on a different label. We replace it \textbf{post hoc} with a floor on
-every class, minimum per-class recall $\geq 0.50$, retaining both verdicts in the
-released results.
+\texttt{Unknown} to everything, which four models approach --- emitting it on
+$62$--$96\%$ of items, three never emitting \texttt{No}. We replace it
+\textbf{post hoc} with a floor on every class, minimum per-class recall
+$\geq 0.50$, retaining both verdicts in the released results.
 \Cref{tab:models} reports all five arms for all ten models, with the per-arm
 verdict; \cref{fig:size} plots the same data ordered by parameter count.
 
@@ -716,28 +726,6 @@ in scale. Extending the Qwen2.5 ladder to $14.7$B --- family, tokenizer and
 recipe fixed, the whole ladder on one runtime --- \cref{tab:scale} shows the harm
 peaking in a mid-range band and \emph{absent} at the top, so proof state is not
 more dangerous for larger interfaces.
-
-\begin{table}[tb]
-\centering\small
-\caption{The scale extension, all on the second runtime so the ladder is
-internally comparable. Minimum per-class recall by arm, and the harm proof state
-does (\textsc{full} minus \textsc{conclusion\_only}). Only Qwen2.5-3B and -7B
-clear the $0.50$ floor in any arm; neither addition does.}
-\label{tab:scale}
-\begin{tabular}{lrrrr}
-\toprule
-Model & B & \textsc{concl} & \textsc{full} & harm \\
-\midrule
-Qwen2.5-0.5B  &  0.5 & $0.000$ & $0.000$ & $+0.000$ \\
-Qwen2.5-1.5B  &  1.5 & $0.000$ & $0.000$ & $+0.000$ \\
-Qwen2.5-3B    &  3.0 & $0.969$ & $0.750$ & $-0.219$ \\
-Qwen2.5-7B    &  7.6 & $0.781$ & $0.094$ & $\mathbf{-0.688}$ \\
-Qwen2.5-14B   & 14.7 & $0.422$ & $0.484$ & $\mathbf{+0.062}$ \\
-\midrule
-Llama-3.1-8B  &  8.0 & $0.000$ & $0.000$ & $+0.000$ \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 Neither new model clears the floor, and both are informative for it.
 Llama-3.1-8B is \textbf{degenerate in every arm} (minimum per-class recall
@@ -840,13 +828,12 @@ This is one task family, small models only, and synthetic panels. Nonce
 vocabularies establish item novelty, not independence from all relevant
 pretraining patterns \citep{golchin2023time,deng2024investigating}.
 
-\textbf{Prompt format.} Experiment 4 changes only the instruction line and the
-candidate set, on byte-identical theories and certificates, and the response
-distribution moves substantially --- a format-sensitivity result as much as a
-detection one, consistent with the effects this literature documents
-\citep{zhao2021calibrate,zheng2023large}. Arms are compared against a baseline
-scored under the same instruction, so the contrast is internally valid, but the
-absolute rates are not format-independent.
+\textbf{Prompt format.} Experiment 4 changes only the instruction line and
+candidate set on byte-identical inputs, and the response distribution moves
+substantially --- a format-sensitivity result as much as a detection one
+\citep{zhao2021calibrate,zheng2023large}. Arms share a baseline scored under the
+same instruction, so the contrast is internally valid, but the absolute rates are
+not format-independent.
 
 \textbf{Permutation sampling.} Eight orderings per item is a sample of $8!$, and
 the gap-versus-direction split of \cref{sec:order} is read off permutations that
@@ -869,16 +856,14 @@ sets and quantisation all differ, which plausibly explains it, but we flag the
 discrepancy rather than leave it to a reader who finds both.
 
 An undetermined \textsc{proof\_prefix} cannot contain the query predicate, since
-the solver has nothing to say about it. Undetermined items therefore offer fewer
-surface cues, and a surface-matching model will look worse on them for reasons
-unrelated to abstention; per-arm entity-mention counts are recorded so this is
-analysable.
+the solver has nothing to say about it, so undetermined items offer fewer surface
+cues and a surface-matching model looks worse on them for reasons unrelated to
+abstention; per-arm entity-mention counts are recorded so this is analysable.
 
 Finally, every theory here arrives \emph{already formalised}. Nothing tests
-whether a model can turn a framework described in prose into the solver's input,
-the step any claim of working in an unfamiliar framework depends on --- and the
-corruption result makes that gap consequential rather than merely open: a
-formalisation error would not be caught downstream, but followed.
+whether a model can turn a framework described in prose into the solver's input
+--- and the corruption result makes that gap consequential rather than merely
+open, since a formalisation error would not be caught downstream but followed.
 
 \section{Conclusion}
 
@@ -893,7 +878,7 @@ as the contribution and decline to generalise its value, ours included.
 
 \looseness=-1
 Three findings hold on every checkpoint, and all are negative. The inference is
-one step deep, and requires the rule to follow its premise. It is not detection:
+one step deep, and is degraded when the final rule precedes its premise. It is not detection:
 the strongest substrate abstains on $0$ of $192$ broken certificates and completes
 $76$. And nothing defends against a wrong apparatus --- given a certificate whose
 fabricated final rule establishes the negation, the three checkpoints answer
@@ -1009,36 +994,42 @@ Arm & Hits & FA & $d'$ & $c$ \\
 \end{tabular}
 \end{table}
 
+\begin{table}[tb]
+\centering\small
+\caption{The scale extension, all on the second runtime so the ladder is
+internally comparable. Minimum per-class recall by arm, and the harm proof state
+does (\textsc{full} minus \textsc{conclusion\_only}). Only Qwen2.5-3B and -7B
+clear the $0.50$ floor in any arm; neither addition does.}
+\label{tab:scale}
+\begin{tabular}{lrrrr}
+\toprule
+Model & B & \textsc{concl} & \textsc{full} & harm \\
+\midrule
+Qwen2.5-0.5B  &  0.5 & $0.000$ & $0.000$ & $+0.000$ \\
+Qwen2.5-1.5B  &  1.5 & $0.000$ & $0.000$ & $+0.000$ \\
+Qwen2.5-3B    &  3.0 & $0.969$ & $0.750$ & $-0.219$ \\
+Qwen2.5-7B    &  7.6 & $0.781$ & $0.094$ & $\mathbf{-0.688}$ \\
+Qwen2.5-14B   & 14.7 & $0.422$ & $0.484$ & $\mathbf{+0.062}$ \\
+\midrule
+Llama-3.1-8B  &  8.0 & $0.000$ & $0.000$ & $+0.000$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{table*}[tb]
 \centering\small
-\caption{Experiment 2: ten matched arms scored on three checkpoints, entailed
-subset (correct of 96, with signed $d'$). Only the solver record differs between
-arms. The share rows give the validity component as a fraction of the total state
-effect, against the \textsc{irrelevant} control and against the unaided
-\textsc{none} arm; the two coincide wherever unaided competence is zero.}
-\label{tab:arms}
+\caption{Three-candidate rescoring, all three checkpoints: \texttt{Unknown}
+responses out of 192 per arm, against both abstention baselines. Detection
+predicts a \emph{rise} under \textsc{broken\_chain}; no checkpoint rises against
+either reference.}
+\label{tab:detection}
 \begin{tabular}{lrrrrrr}
 \toprule
-& \multicolumn{2}{c}{Qwen2.5-3B 4-bit} & \multicolumn{2}{c}{Qwen2.5-3B bf16}
-& \multicolumn{2}{c}{Gemma-3-4B} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-Arm & /96 & $d'$ & /96 & $d'$ & /96 & $d'$ \\
+Checkpoint & \textsc{none} & \textsc{irrel.} & \textsc{broken} & $\Delta_{\textsc{none}}$ & $\Delta_{\textsc{irrel.}}$ & \textsc{trunc\_1} \\
 \midrule
-\textsc{none}                    &  0 & $0.00$ &  0 & $0.00$ & \textbf{22} & $1.83$ \\
-\textsc{irrelevant}              &  0 & $0.00$ &  0 & $0.00$ &  2 & $0.62$ \\
-\textsc{same\_entity\_irrelevant}&  0 & $0.00$ &  0 & $0.00$ &  3 & $0.77$ \\
-\textsc{truncate\_3}             &  0 & $0.00$ &  0 & $0.00$ &  4 & $0.88$ \\
-\textsc{truncate\_2}             &  0 & $0.00$ &  0 & $0.00$ &  4 & $0.88$ \\
-\textsc{truncate\_1}             & 59 & $2.85$ & 72 & $3.23$ & 96 & $5.13$ \\
-\textsc{broken\_chain}           &  1 & $0.41$ &  1 & $0.41$ & \textbf{58} & $2.83$ \\
-\textsc{shuffled}                & 14 & $1.53$ & 12 & $1.43$ & \textbf{86} & $3.80$ \\
-\textsc{misleading}              &  0 & $-4.36$ &  0 & $-4.06$ &  0 & $-5.13$ \\
-\textsc{full}                    & 96 & $5.13$ & 96 & $5.13$ & 96 & $5.13$ \\
-\midrule
-Validity share vs \textsc{irrelevant} & \multicolumn{2}{c}{$98.3\%$}
- & \multicolumn{2}{c}{$98.6\%$} & \multicolumn{2}{c}{$\mathbf{40.4\%}$} \\
-Validity share vs \textsc{none}       & \multicolumn{2}{c}{$98.3\%$}
- & \multicolumn{2}{c}{$98.6\%$} & \multicolumn{2}{c}{$\mathbf{51.4\%}$} \\
+Qwen2.5-3B 4-bit & 153 ($79.7\%$) & 144 ($75.0\%$) & 81 ($42.2\%$) & $-37.5$ & $-32.8$ & 21 \\
+Qwen2.5-3B bf16  &  41 ($21.4\%$) & 108 ($56.2\%$) & 34 ($17.7\%$) & $-3.6$  & $-38.5$ & 12 \\
+Gemma-3-4B       &   1 ($0.5\%$)  &  15 ($7.8\%$)  & \textbf{0} ($0.0\%$) & $-0.5$ & $-7.8$ & 0 \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -1077,6 +1068,18 @@ baselines, which coincide on the 4-bit checkpoint and diverge at bfloat16. A
 broken chain lowers abstention against \emph{both} references on every
 checkpoint --- the opposite of the direction validity detection predicts.}
 \label{fig:detection}
+\end{figure}
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{figures/order_profile.png}
+\caption{Accuracy against the gap between the final rule and the premise it fires
+on --- all seven gaps, all three checkpoints, each checkpoint's canonical-order
+score dashed. Distance is flat. Direction is not: rule-after scores $26.8$,
+$22.4$ and $94.9\%$ against $5.8$, $4.8$ and $84.9\%$ for rule-before. Gemma-3-4B
+still answers $84.9\%$ of rule-before items correctly, so reversal degrades
+rather than prevents.}
+\label{fig:order}
 \end{figure}
 
 \begin{figure*}[tb]

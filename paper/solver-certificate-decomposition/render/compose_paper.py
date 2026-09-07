@@ -141,13 +141,14 @@ def apply_layout(src: str) -> str:
     # tab:sdt joins them. Round 3 asked for it in the body and it was there for
     # two revisions; the body has since gained the ordering result and the
     # runtime check, and its five rows are quoted in the prose that cites it.
-    # tab:arms joins them. It is the largest float in the body at ten rows
-    # spanning both columns, every value it carries is quoted in the prose that
-    # cites it, and fig:arms plots the same data. The body keeps the floats the
-    # round-1 and round-3 reviews asked for.
+    # tab:scale goes out rather than tab:arms. The scale extension reads fine
+    # from the inline numbers in §5.6; the decomposition grid does not -- it is
+    # where §5.2 gets its primary contrast and where §5.4's whole "which
+    # baseline" argument is legible. The first trade ran backwards.
     APPENDIX = (("tab:panels", "table"), ("tab:edges", "table"), ("tab:sdt", "table"),
-                ("tab:arms", "table"), ("fig:arms", "figure"),
-                ("fig:replication", "figure"), ("fig:detection", "figure"),
+                ("tab:scale", "table"), ("tab:detection", "table"),
+                ("fig:arms", "figure"), ("fig:replication", "figure"),
+                ("fig:detection", "figure"), ("fig:order", "figure"),
                 ("fig:size", "figure"))
     moved = []
     for label, env in APPENDIX:
@@ -248,16 +249,15 @@ lines. The decomposition follows:
 \end{align}
 
 Four companion arms separate the remaining confounds.
-\textsc{same\_entity\_irrelevant} supplies a valid derivation about the
-\emph{query} entity toward an unrelated predicate: it names the query subject
-four times where \textsc{irrelevant} names it zero times, and neither contains
-the query predicate, so the pair isolates entity repetition alone.
-\textsc{shuffled} presents \textsc{truncate\_1}'s lines in seeded random order,
-separating a chain from a bag of statements. \textsc{truncate\_2} and
-\textsc{truncate\_3} withhold two and three steps, giving a depth ladder.
+\textsc{same\_entity\_irrelevant} gives a valid derivation about the \emph{query}
+entity toward an unrelated predicate --- naming the query subject four times
+where \textsc{irrelevant} names it zero, neither containing the query predicate
+--- so the pair isolates entity repetition. \textsc{shuffled} presents
+\textsc{truncate\_1}'s lines in seeded random order; \textsc{truncate\_2} and
+\textsc{truncate\_3} withhold two and three steps, giving a depth ladder; and
 \textsc{misleading} supplies a valid-looking chain whose single fabricated final
-rule establishes the query's negation; the ground-truth answer is unchanged, so
-a model that follows the supplied state answers incorrectly.
+rule establishes the query's negation, leaving the ground-truth answer unchanged
+so that following the supplied state means answering incorrectly.
 
 \subsection{Certifying underdetermination}
 \label{sec:closure}
@@ -571,13 +571,26 @@ permutations each on all three checkpoints, recording where those two lines
 landed. An identity arm reproduces \textsc{truncate\_1}'s bytes and returns its
 receipts $192/192$ throughout. Over eight permutations the effect spans
 $[+41.7, +50.0]$pp on the 4-bit checkpoint, $[+60.4, +63.5]$ at bfloat16 and
-$[+6.2, +13.5]$ on Gemma-3-4B; the published single draws, $+46.9$ and $+10.4$pp,
-fall inside their own ranges.
+$[+6.2, +13.5]$ on Gemma-3-4B; the published single draws --- $+46.9$, $+62.5$
+and $+10.4$pp --- fall inside their own ranges.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{figures/order_profile.png}
+\caption{Accuracy against the gap between the final rule and the premise it fires
+on --- all seven gaps, all three checkpoints, each checkpoint's canonical-order
+score dashed. Distance is flat. Direction is not: rule-after scores $26.8$,
+$22.4$ and $94.9\%$ against $5.8$, $4.8$ and $84.9\%$ for rule-before. Gemma-3-4B
+still answers $84.9\%$ of rule-before items correctly, so reversal degrades
+rather than prevents.}
+\label{fig:order}
+\end{figure}
 
 \textbf{Direction separates the arms; distance does not.} Accuracy does not
 decline with the gap: on the 4-bit checkpoint it is $18.1\%$ at gap $1$ and
 $24.0\%$ at gap $7$, though that last cell is $6$ of $25$ and we draw no trend
-from it --- only that separating the two lines does not visibly hurt. Reversing
+from it --- only that separating the two lines does not visibly hurt
+(\cref{fig:order}). Reversing
 them does. Rule \emph{after} its premise gives $26.8\%$, $22.4\%$ and $94.9\%$
 across the three checkpoints against $5.8\%$, $4.8\%$ and $84.9\%$ for rule
 \emph{before}; paired within item on the 4-bit checkpoint, $45$ items favour
@@ -677,11 +690,10 @@ The binary design cannot support that reading, because the correct answer under 
 broken certificate \emph{is} the model's default label: ``detected the break'' and
 ``found no pattern to complete'' predict the same response.
 
-We separated them. The \textsc{broken\_chain} items, certified undetermined under
-their displayed lines, were rescored with three candidates rather than two ---
-byte-identical but for the instruction line and candidate set. A validity tracker
-abstains \emph{more} when the chain is broken; a pattern completer falls back to
-its default, which \textsc{irrelevant} and \textsc{none} fix from either side.
+We separated them by rescoring the \textsc{broken\_chain} items with three
+candidates rather than two. A validity tracker abstains \emph{more} when the
+chain is broken; a pattern completer falls back to its default, which
+\textsc{irrelevant} and \textsc{none} fix from either side.
 \Cref{tab:detection} and \cref{fig:detection} give all three checkpoints on all
 four arms.
 
@@ -740,15 +752,14 @@ fabricated and absent from the theory, and it does not.
 
 \subsection{Which models can serve as the interface}
 
-Experiment 3 scores ten models on the three-class panel in all five arms. We
-declared in advance that a model relays non-determination at $\geq 80\%$ recall
-on undetermined items with full solver material. \textbf{Eight of ten passed, and
+Experiment 3 scores ten models on the three-class panel in all five arms. We had
+declared that a model relays non-determination at $\geq 80\%$ recall on
+undetermined items with full solver material. \textbf{Eight of ten passed, and
 the criterion was invalid}: single-class recall is maximised by answering
-\texttt{Unknown} to everything, and four models do close to that, emitting it on
-$62$--$96\%$ of items with three never emitting \texttt{No} --- \cref{tab:sdt}'s
-failure on a different label. We replace it \textbf{post hoc} with a floor on
-every class, minimum per-class recall $\geq 0.50$, retaining both verdicts in the
-released results.
+\texttt{Unknown} to everything, which four models approach --- emitting it on
+$62$--$96\%$ of items, three never emitting \texttt{No}. We replace it
+\textbf{post hoc} with a floor on every class, minimum per-class recall
+$\geq 0.50$, retaining both verdicts in the released results.
 \Cref{tab:models} reports all five arms for all ten models, with the per-arm
 verdict; \cref{fig:size} plots the same data ordered by parameter count.
 
@@ -927,13 +938,12 @@ This is one task family, small models only, and synthetic panels. Nonce
 vocabularies establish item novelty, not independence from all relevant
 pretraining patterns \citep{golchin2023time,deng2024investigating}.
 
-\textbf{Prompt format.} Experiment 4 changes only the instruction line and the
-candidate set, on byte-identical theories and certificates, and the response
-distribution moves substantially --- a format-sensitivity result as much as a
-detection one, consistent with the effects this literature documents
-\citep{zhao2021calibrate,zheng2023large}. Arms are compared against a baseline
-scored under the same instruction, so the contrast is internally valid, but the
-absolute rates are not format-independent.
+\textbf{Prompt format.} Experiment 4 changes only the instruction line and
+candidate set on byte-identical inputs, and the response distribution moves
+substantially --- a format-sensitivity result as much as a detection one
+\citep{zhao2021calibrate,zheng2023large}. Arms share a baseline scored under the
+same instruction, so the contrast is internally valid, but the absolute rates are
+not format-independent.
 
 \textbf{Permutation sampling.} Eight orderings per item is a sample of $8!$, and
 the gap-versus-direction split of \cref{sec:order} is read off permutations that
@@ -956,16 +966,14 @@ sets and quantisation all differ, which plausibly explains it, but we flag the
 discrepancy rather than leave it to a reader who finds both.
 
 An undetermined \textsc{proof\_prefix} cannot contain the query predicate, since
-the solver has nothing to say about it. Undetermined items therefore offer fewer
-surface cues, and a surface-matching model will look worse on them for reasons
-unrelated to abstention; per-arm entity-mention counts are recorded so this is
-analysable.
+the solver has nothing to say about it, so undetermined items offer fewer surface
+cues and a surface-matching model looks worse on them for reasons unrelated to
+abstention; per-arm entity-mention counts are recorded so this is analysable.
 
 Finally, every theory here arrives \emph{already formalised}. Nothing tests
-whether a model can turn a framework described in prose into the solver's input,
-the step any claim of working in an unfamiliar framework depends on --- and the
-corruption result makes that gap consequential rather than merely open: a
-formalisation error would not be caught downstream, but followed.
+whether a model can turn a framework described in prose into the solver's input
+--- and the corruption result makes that gap consequential rather than merely
+open, since a formalisation error would not be caught downstream but followed.
 
 \section{Conclusion}
 
@@ -980,7 +988,7 @@ as the contribution and decline to generalise its value, ours included.
 
 \looseness=-1
 Three findings hold on every checkpoint, and all are negative. The inference is
-one step deep, and requires the rule to follow its premise. It is not detection:
+one step deep, and is degraded when the final rule precedes its premise. It is not detection:
 the strongest substrate abstains on $0$ of $192$ broken certificates and completes
 $76$. And nothing defends against a wrong apparatus --- given a certificate whose
 fabricated final rule establishes the negation, the three checkpoints answer

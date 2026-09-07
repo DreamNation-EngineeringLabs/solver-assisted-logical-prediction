@@ -290,6 +290,42 @@ def fig_b15_replication():
 
 
 # ---------------------------------------------------------------- figure 5
+def fig_b18_order():
+    """The gap profile the text cannot carry: 21 cells, of which the paper prints 2.
+
+    Sized for a single column (3.3in) so the labels render at their set size --
+    a wide figure scaled down to \\columnwidth would set 7pt type at 3pt. The
+    direction contrast stays in the prose and the caption, where it reads fine as
+    six numbers; the profile does not.
+    """
+    r = json.loads((RES / "b18_permutations_v1.json").read_text())
+    nice = {"qwen2p5_3b_4bit": "Qwen2.5-3B 4-bit", "qwen2p5_3b_bf16": "Qwen2.5-3B bf16",
+            "gemma3_4b_b15": "Gemma-3-4B"}
+    keys = [k for k in ("qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15")
+            if k in r["checkpoints"]]
+    cols = dict(zip(keys, (BLUE, VERM, GREEN)))
+
+    fig, ax = plt.subplots(figsize=(3.3, 2.35))
+    for k in keys:
+        c = r["checkpoints"][k]
+        gaps = sorted(int(g) for g in c["accuracy_by_abs_gap"])
+        acc = [c["accuracy_by_abs_gap"][str(g)]["acc"] * 100 for g in gaps]
+        ax.plot(gaps, acc, "-o", color=cols[k], lw=1.5, ms=3.4, zorder=3, label=nice[k])
+        ident = c["identity_correct_entailed"] / r["n_entailed"] * 100
+        ax.axhline(ident, color=cols[k], lw=.8, linestyle=(0, (2, 3)), zorder=1)
+    ax.set_xlabel("|gap| between the final rule and its premise", fontsize=7.4)
+    ax.set_ylabel("correct of 96 (%)", fontsize=7.4)
+    ax.set_xticks(range(1, 8)); ax.set_ylim(0, 108); ax.set_xlim(.7, 7.3)
+    ax.tick_params(labelsize=7)
+    _clean(ax)
+    ax.legend(frameon=False, fontsize=6.6, loc="lower left", handlelength=1.2,
+              borderpad=.2, labelspacing=.3, bbox_to_anchor=(.02, .29))
+    ax.text(7.25, 30, "n falls 216 to 25", ha="right", va="bottom",
+            fontsize=6.2, color=MUTED)
+    fig.savefig(OUT / "b18/figures/order_profile.png")
+    plt.close(fig)
+
+
 def fig_b17_detection():
     """Three-class response distribution on all three checkpoints.
 
@@ -347,9 +383,9 @@ def fig_b17_detection():
 
 
 if __name__ == "__main__":
-    for d in ("b14", "b15", "b16", "b17"):
+    for d in ("b14", "b15", "b16", "b17", "b18"):
         (OUT / d / "figures").mkdir(parents=True, exist_ok=True)
     fig_b14_factorial(); fig_b15_arms(); fig_b16_size()
-    fig_b15_replication(); fig_b17_detection()
+    fig_b15_replication(); fig_b17_detection(); fig_b18_order()
     for f in sorted(OUT.glob("*/figures/*.png")):
         print(f"  {f.relative_to(OUT)}  {f.stat().st_size/1024:.0f} KB")
