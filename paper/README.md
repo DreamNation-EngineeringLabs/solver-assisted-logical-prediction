@@ -3,9 +3,13 @@
 Decomposing what a language model does with a solver certificate.
 **Target: ICLR 2027** (abstract 18 Sept 2026, paper 25 Sept 2026).
 
-Deliverable: [`final/paper.pdf`](final/paper.pdf) — 16 pages: 9 of main text at
+Deliverable: [`final/paper.pdf`](final/paper.pdf) — 15 pages: 9 of main text at
 the venue's own geometry, references from p10, appendix from p12. 39 verified
 citations, 6 figures, 6 tables.
+
+Structured to be read, not queried: one subsection per claim (six in the whole
+paper), Results ordered as an argument rather than by experiment number, and the
+2×2 that is the contribution set as a pull figure on page 1.
 
 ## Findings
 
@@ -52,9 +56,9 @@ rebuilds `drafts/paper.tex` from `intro_relwork.tex` on every run.
 ## Open
 
 Nine rounds of review are done, plus a six-reviewer audit whose 52 findings are
-addressed bar one: three primary results sit in the appendix rather than the
-body, because bringing any back needs about a page of body space that nine pages
-does not have.
+addressed bar one, and a readability pass against Karpathy's paper-writing
+notes. Two primary results still sit in the appendix rather than the body
+(`fig:order`, `tab:detection`): measured, either one pushes the body to p10.
 
 Two things outside the paper: the sealed-authority release decision, which is
 irreversible once public, and `iclr2027_conference.sty`, which is unpublished and

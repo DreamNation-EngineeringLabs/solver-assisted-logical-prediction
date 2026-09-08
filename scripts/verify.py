@@ -209,15 +209,15 @@ def model_table(root: Path):
 
 
 CLAIMS = {
-    "validity-share": ("§5.2 validity share, Qwen2.5-3B 4-bit", validity_share),
-    "gemma-share":    ("§5.3 Gemma share, both baselines", gemma_share),
-    "corruption":     ("§5.4 items answered incorrectly under `misleading`", corruption),
-    "detection":      ("§5.6 abstention direction, three references", detection),
+    "validity-share": ("§5.1 validity share, Qwen2.5-3B 4-bit", validity_share),
+    "gemma-share":    ("§5.2 Gemma share, both baselines", gemma_share),
+    "corruption":     ("§5.3 items answered incorrectly under `misleading`", corruption),
+    "detection":      ("§5.3 abstention direction, three references", detection),
     "state-effect":   ("§5.1 state main effect of the 2x2", state_effect),
-    "cross-model":    ("§5.7 mean state effect across ten models", cross_model),
-    "census":         ("§4.3 total scored responses", census),
-    "digests":        ("§4.3 every receipt digest recomputed", receipt_digests),
-    "model-table":    ("§5.7 every cell of tab:models", model_table),
+    "cross-model":    ("§5.2 mean state effect across ten models", cross_model),
+    "census":         ("§4 total scored responses", census),
+    "digests":        ("§4 every receipt digest recomputed", receipt_digests),
+    "model-table":    ("§5.2 every cell of tab:models", model_table),
 }
 
 

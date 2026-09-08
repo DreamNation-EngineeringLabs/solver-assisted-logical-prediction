@@ -37,6 +37,19 @@ ABSTRACT
 
 \section{Introduction}
 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/answer_state_factorial.png}
+\caption{\textbf{The instrument.} A solver certificate carries an answer and
+the state it follows from, and accuracy adds the two together. Arranging the
+arms as a $2\times2$, across by whether the record carries the answer and down
+by whether it carries the state, makes every arrow a one-factor edge that
+attributes. Cells give correct items of 192 for Experiment~1. The dashed
+diagonal moves both factors at once, which is why its null attributed to
+neither.}
+\label{fig:factorial}
+\end{figure}
+
 Pairing a language model with an external solver, tool or retrieval index
 reliably raises accuracy on tasks the model cannot do alone. Systems that translate a problem into a formal representation, dispatch it to a
 symbolic engine and return the verdict through the model report large end-to-end
@@ -57,10 +70,11 @@ the response token is withheld: a prefix stopping one step short still names the
 query's subject and predicate in adjacent lines, so a model that only checks
 surface co-occurrence reproduces every number a reasoning model would.
 
+
 Separating the two requires a control that holds surface form fixed and destroys
 validity alone. This paper builds one and applies it across four sealed experiments on frozen
 small models, scoring by direct next-token likelihood over verified single-token
-candidates so that no free text is parsed, with two robustness studies
+candidates so that no free text is parsed, with two robustness checks
 on line order and on the inference runtime.
 
 \textbf{The method is the contribution; what it returns is model-specific.}
@@ -92,8 +106,6 @@ items. We apply it to twelve models
 
 \section{Related Work}
 
-\subsection{Faithfulness, and the solver-augmented pipeline}
-
 Chain-of-thought made intermediate steps part of the output
 \citep{wei2022chainofthought}, and a literature then asked whether the answer
 rests on them: explanations omit the biasing features that demonstrably drive the
@@ -102,8 +114,8 @@ into it reveals wide variation in conditioning, with injected mistakes often
 ignored \citep{lanham2023measuring,arcuschin2025chainofthought}; models trained
 for long traces verbalise answer-determining hints only a minority of the time
 \citep{chen2025reasoning}; and one response is architectural, making the trace a
-program a solver executes \citep{lyu2023faithful}. Neurosymbolic pipelines put
-the formal step outside the model altogether: translating into a symbolic language and repairing from solver errors \citep{pan2023logiclm}, parsing into
+program a solver executes \citep{lyu2023faithful}. Neurosymbolic work puts the formal step
+outside the model altogether: translating into a symbolic language and repairing from solver errors \citep{pan2023logiclm}, parsing into
 first-order logic for a prover \citep{olausson2023linc}, dispatching a
 declarative specification \citep{ye2023satlm}, emitting a program for an interpreter
 \citep{gao2022pal}. The pattern extends to self-supervised API
@@ -119,8 +131,6 @@ end-to-end accuracy, which cannot separate the solver's \emph{answer} from its
 neutral to context \citep{shi2023large,xie2023adaptive}. We decompose the two
 channels and add a surface-matched invalid certificate and a valid-looking one
 that points the wrong way.
-
-\subsection{Benchmarks, and the limits of accuracy}
 
 The task family descends from rule-based deductive datasets in natural language:
 RuleTaker \citep{clark2020transformers}, ProofWriter, which added open-world
