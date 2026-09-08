@@ -141,12 +141,12 @@ def apply_layout(src: str) -> str:
     # tab:sdt joins them. Round 3 asked for it in the body and it was there for
     # two revisions; the body has since gained the ordering result and the
     # runtime check, and its five rows are quoted in the prose that cites it.
-    # tab:scale goes out rather than tab:arms. The scale extension reads fine
-    # from the inline numbers in §5.6; the decomposition grid does not -- it is
-    # where §5.2 gets its primary contrast and where §5.4's whole "which
-    # baseline" argument is legible. The first trade ran backwards.
+    # tab:models now lists every model, including the two scored on the second
+    # runtime, so a separate scale table would repeat it; the harm ladder reads
+    # fine as five numbers in §5.6. tab:arms stays in the body -- it is where
+    # §5.2 gets its primary contrast and §5.4's "which baseline" argument.
     APPENDIX = (("tab:panels", "table"), ("tab:edges", "table"), ("tab:sdt", "table"),
-                ("tab:scale", "table"), ("tab:detection", "table"),
+                ("tab:detection", "table"),
                 ("fig:arms", "figure"), ("fig:replication", "figure"),
                 ("fig:detection", "figure"), ("fig:order", "figure"),
                 ("fig:size", "figure"))
@@ -308,8 +308,8 @@ $100{,}000$-resample paired bias-corrected accelerated bootstrap interval
 
 \subsection{Task, panels and scoring}
 
-All four experiments use rule-chaining queries over small theories of facts and
-universally quantified rules. \Cref{tab:panels} lists the panels. The sealed
+Every experiment and study here uses rule-chaining queries over small theories of
+facts and universally quantified rules. \Cref{tab:panels} lists the panels. The sealed
 panels are procedurally generated after model release with per-item nonce
 vocabularies, are mutually disjoint, and fix derivation depth at four by
 construction, recorded per item. The public corpus is used \emph{only} to
@@ -738,7 +738,9 @@ fabricated and absent from the theory, and it does not.
 
 \subsection{Which models can serve as the interface}
 
-Experiment 3 scores ten models on the three-class panel in all five arms. We had
+Experiment 3 scores ten models on the three-class panel in all five arms, and
+\cref{sec:runtime} adds two more on a second runtime, for eleven scored in all
+(one of the ten does not load there). We had
 declared that a model relays non-determination at $\geq 80\%$ recall on
 undetermined items with full solver material. \textbf{Eight of ten passed, and
 the criterion was invalid}: single-class recall is maximised by answering
@@ -746,13 +748,15 @@ the criterion was invalid}: single-class recall is maximised by answering
 $62$--$96\%$ of items, three never emitting \texttt{No}. We replace it
 \textbf{post hoc} with a floor on every class, minimum per-class recall
 $\geq 0.50$, retaining both verdicts in the released results.
-\Cref{tab:models} reports all five arms for all ten models, with the per-arm
-verdict; \cref{fig:size} plots the same data ordered by parameter count.
+\Cref{tab:models} reports all five arms for every model, with the per-arm
+verdict; \cref{fig:size} plots the ten ordered by parameter count.
 
 \begin{table}[t]
 \centering
-\caption{All five arms, all ten models. Balanced accuracy (\%), chance $=33.3$.
-Viability is reported per arm, because it is not a property of the model.}
+\caption{All five arms. Ten models on the first runtime, then the two-model scale
+extension on the second. Balanced accuracy (\%), chance $=33.3$. Viability is
+reported per arm because it is a property of (model $\times$ arm $\times$
+runtime), not of a model.}
 \label{tab:models}
 \begin{tabular}{lrrrrrrl}
 \toprule
@@ -767,13 +771,17 @@ Qwen2.5-3B   & 3.0 & 41.1 & 39.1 & \textbf{96.4} & 74.0 & 90.6 & concl, prefix, 
 Llama-3.2-3B & 3.2 & 45.8 & 43.2 & 67.2 & 55.2 & 80.7 & --- \\
 Phi-4-mini   & 3.8 & 44.8 & 39.6 & 68.2 & 71.9 & 90.6 & full \\
 Gemma-3-4B   & 4.3 & 63.5 & 51.0 & \textbf{100.0} & 84.4 & 96.4 & concl, prefix, full \\
-Qwen2.5-7B   & 7.6 & 33.3 & 33.3 & \textbf{97.9} & 67.2 & 71.4 & \textbf{concl only} \\
+Qwen2.5-7B          & 7.6 & 33.3 & 33.3 & \textbf{97.9} & 67.2 & 71.4 & \textbf{concl only} \\
+\midrule
+\multicolumn{8}{l}{\emph{scale extension, second runtime (\cref{sec:runtime}); not directly comparable to the rows above}} \\
+Llama-3.1-8B        & 8.0 & 38.5 & 34.4 & 65.6 & 64.6 & 66.7 & --- \\
+Qwen2.5-14B         & 14.7 & 57.3 & 35.4 & 80.7 & 70.3 & 82.8 & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Viability is a property of (model $\times$ arm) --- and, by
-\cref{sec:runtime}, of the runtime too.} The
+\textbf{Viability is a property of (model $\times$ arm $\times$ runtime), not of
+a model} --- the third factor is \cref{sec:runtime}'s. The
 decisive row is Qwen2.5-7B: minimum per-class recall $0.141$ under \textsc{full}
 against $0.938$ under \textsc{conclusion\_only}, where it is second best in the
 sweep at $97.9\%$. Its contradicted-class recall collapses \emph{when the proof
@@ -785,39 +793,17 @@ re-scoring the same measure gives two of eleven, which is the runtime factor of
 This bounds a claim we would otherwise have made. There is a floor near 3B
 \emph{for tolerating full certificates}, since below 1.7B no arm clears it, but
 that is not a floor for serving as an interface, and the effect is not monotonic
-in scale. Extending the Qwen2.5 ladder to $14.7$B, with family, tokenizer and recipe fixed and the whole ladder on one runtime, \cref{tab:scale} shows the harm
-peaking in a mid-range band and \emph{absent} at the top, so proof state is not
-more dangerous for larger interfaces.
+in scale. Extending the Qwen2.5 ladder to $14.7$B, with family, tokenizer and recipe fixed and the whole ladder on one runtime, the
+harm runs $0.000$, $0.000$, $-0.219$, $-0.688$, $+0.062$: it peaks in a mid-range
+band and is \emph{absent} at the top, so proof state is not more dangerous for
+larger interfaces.
 
-\begin{table}[tb]
-\centering\small
-\caption{The scale extension, all on the second runtime so the ladder is
-internally comparable. Minimum per-class recall by arm, and the harm proof state
-does (\textsc{full} minus \textsc{conclusion\_only}). Only Qwen2.5-3B and -7B
-clear the $0.50$ floor in any arm; neither addition does.}
-\label{tab:scale}
-\begin{tabular}{lrrrr}
-\toprule
-Model & B & \textsc{concl} & \textsc{full} & harm \\
-\midrule
-Qwen2.5-0.5B  &  0.5 & $0.000$ & $0.000$ & $+0.000$ \\
-Qwen2.5-1.5B  &  1.5 & $0.000$ & $0.000$ & $+0.000$ \\
-Qwen2.5-3B    &  3.0 & $0.969$ & $0.750$ & $-0.219$ \\
-Qwen2.5-7B    &  7.6 & $0.781$ & $0.094$ & $\mathbf{-0.688}$ \\
-Qwen2.5-14B   & 14.7 & $0.422$ & $0.484$ & $\mathbf{+0.062}$ \\
-\midrule
-Llama-3.1-8B  &  8.0 & $0.000$ & $0.000$ & $+0.000$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Neither new model clears the floor, and both are informative for it.
-Llama-3.1-8B is \textbf{degenerate in every arm} (minimum per-class recall
-$0.000$ throughout, at $66.7\%$ balanced accuracy under \textsc{full}) --- the
-strongest single datum against a size floor. Qwen2.5-14B clears no arm either
-($0.422$ and $0.484$) despite $82.8\%$, so ``absent at the top'' must not be read
-as ``14B works''. Model is not a randomised factor, so these comparisons are
-descriptive.
+Neither new model clears the floor. Llama-3.1-8B is \textbf{degenerate in every
+arm} (minimum per-class recall $0.000$ throughout) despite the balanced accuracy
+\cref{tab:models} reports for it, which is the strongest single datum against a
+size floor; Qwen2.5-14B clears no arm either ($0.422$ and $0.484$), so ``absent
+at the top'' must not be read as ``14B works''. Model is not a randomised factor,
+so these comparisons are descriptive.
 
 \begin{figure*}[t]
 \centering
@@ -825,7 +811,7 @@ descriptive.
 \caption{All five arms for all ten models, ordered by parameter count. Chance is
 $33.3\%$. Bar colour gives the per-arm viability verdict. Qwen2.5-7B is viable
 under \textsc{conclusion\_only} and not under \textsc{full}: viability is a
-property of (model $\times$ arm).}
+property of (model $\times$ arm $\times$ runtime), not of a model.}
 \label{fig:size}
 \end{figure*}
 
@@ -834,9 +820,9 @@ property of (model $\times$ arm).}
 
 Everything above is scored through \texttt{mlx-lm}. Re-scoring the same sealed
 panel, same weights and same prompt bytes through \texttt{transformers} on CUDA
-covers nine of the ten models --- \textsc{gemma-3-4b}'s weight mirror is an MLX
-conversion that the second stack cannot load at all, which is itself a limit on
-how far any table can be moved between backends.
+covers nine of the ten: \textsc{gemma-3-4b}'s weight mirror is an MLX conversion
+the second stack cannot load, which is itself a limit on how far a table can be
+moved between backends.
 
 Eight of the nine agree on $95.5$--$99.7\%$ of individual responses with no
 verdict moving. \textbf{Phi-4-mini does not.} It agrees on $87.9\%$ ($116$ flips of $960$), and its \textsc{full} arm is viable under one stack and not
@@ -959,26 +945,23 @@ open, since a formalisation error would not be caught downstream but followed.
 
 \section{Conclusion}
 
+\looseness=-1
 Solver assistance improves a small model's accuracy on rule-chaining queries, and
-end-to-end accuracy cannot say why. The decomposition can: arrange the arms so
-each contrast moves one factor, and hold every surface property fixed while
-breaking validity alone.
-
-What it returns is model-specific: $98.3\%$ of the state effect survives the
-control on one checkpoint and $40.4$--$51.4\%$ on another, so we offer the method
-as the contribution and decline to generalise its value, ours included.
+end-to-end accuracy cannot say why. The decomposition can: arrange the arms so each
+contrast moves one factor, and break validity while holding surface form fixed.
+What it returns is model-specific --- $98.3\%$ of the state effect survives on one
+checkpoint and $40.4$--$51.4\%$ on another --- so we offer the method as the
+contribution and decline to generalise its value, ours included.
 
 \looseness=-1
-Three findings hold on every checkpoint, and all are negative. The inference is
-one step deep, and is degraded when the final rule precedes its premise. It is not detection:
-the strongest substrate abstains on $0$ of $192$ broken certificates and completes
-$76$. And nothing defends against a wrong apparatus --- given a certificate whose
-fabricated final rule establishes the negation, the three checkpoints answer
-incorrectly on $189$, $186$ and $192$ of $192$. The interface inherits the
-apparatus's errors in full.
-
-Two criteria we had prespecified failed here. An arm at $50.0\%$ accuracy was degenerate rather than chance-level, and a viability threshold was maximised by answering \texttt{Unknown} to everything; only reporting sensitivity alongside accuracy caught either. We recommend it, with the decomposition, as
-standard.
+Three findings hold on every checkpoint, all negative. The inference is one step
+deep, and degrades when the final rule precedes its premise. It is not detection:
+the strongest substrate abstains on $0$ of $192$ broken certificates, completing
+$76$. And nothing defends against a wrong apparatus: given a certificate whose
+fabricated final rule establishes the negation, the three answer incorrectly on
+$189$, $186$ and $192$ of $192$, inheriting its errors. Two prespecified criteria
+failed here, caught only by reporting sensitivity alongside accuracy, which we
+recommend as standard.
 
 \section*{Reproducibility Statement}
 
