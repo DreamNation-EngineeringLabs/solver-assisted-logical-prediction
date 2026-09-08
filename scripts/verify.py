@@ -14,7 +14,7 @@ Standard library only. No network, no model weights, no third-party packages.
 """
 from __future__ import annotations
 
-import argparse, json, sys
+import argparse, hashlib, json, sys
 from pathlib import Path
 
 B15D = Path("data/cognitive_core/binary_certificate_factorial_b15")
@@ -71,19 +71,31 @@ def corruption(root):
 
 
 def detection(root):
+    """The abstention direction, against all three references (audit finding #2).
+
+    The manuscript used to say abstention falls against both baselines and read
+    that as refuting detection. It does fall against `none` and `irrelevant` --
+    but both differ from `broken_chain` in content as well as validity, and
+    against the surface-matched `truncate_1` it RISES. Section 5.6 now reports
+    the reference-dependence, so that is what this checks.
+    """
     lines, ok = [], True
     for key in ("qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15"):
         rate = {}
-        for arm, base in (("irrelevant", B17R), ("broken_chain", B17R), ("none", B17BR)):
+        for arm, base in (("irrelevant", B17R), ("broken_chain", B17R),
+                          ("truncate_1", B17R), ("none", B17BR)):
             f = root / base / key / f"receipts/prospective-{arm}.jsonl"
             rows = _rows(f)
             rate[arm] = sum(r["candidate"] == "Unknown" for r in rows) / len(rows)
-        fell = rate["broken_chain"] < rate["irrelevant"] and rate["broken_chain"] < rate["none"]
-        ok &= fell
-        lines.append(f"{key}: none {rate['none']*100:.1f}% irrel {rate['irrelevant']*100:.1f}% "
-                     f"broken {rate['broken_chain']*100:.1f}% -> {'falls' if fell else 'RISES'}")
-    return "falls against both baselines, all three", \
-        ("falls against both baselines, all three" if ok else "DOES NOT HOLD"), "; ".join(lines)
+        d_none = (rate["broken_chain"] - rate["none"]) * 100
+        d_irr = (rate["broken_chain"] - rate["irrelevant"]) * 100
+        d_t1 = (rate["broken_chain"] - rate["truncate_1"]) * 100
+        # the direction is supposed to disagree between reference families
+        ok &= d_none <= 0 and d_irr <= 0 and d_t1 >= 0
+        lines.append(f"{key}: vs none {d_none:+.1f} vs irrel {d_irr:+.1f} "
+                     f"vs trunc_1 {d_t1:+.1f}")
+    return "sign depends on the reference", \
+        ("sign depends on the reference" if ok else "DOES NOT HOLD"), "; ".join(lines)
 
 
 def census(root):
@@ -137,14 +149,75 @@ def cross_model(root):
         f"{len(st)} models, {len(st)-len(live)} degenerate in every arm"
 
 
+
+def receipt_digests(root: Path):
+    """#37: the paper says every receipt digest verifies. Check all of them.
+
+    Shipped coverage used to be 12,480 of 34,584 -- three analysis scripts,
+    each over its own run. This walks every receipt file there is.
+    """
+    ok = bad = 0
+    files = sorted(root.rglob("runs/**/receipts/*.jsonl"))
+    if (root / B14).exists():                      # b14 shipped as a flat export
+        files.append(root / B14)
+    for f in files:
+        for line in f.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            claimed = r.get("receipt_id")
+            if claimed is None:
+                bad += 1
+                continue
+            body = {k: v for k, v in r.items() if k != "receipt_id"}
+            got = hashlib.sha256(json.dumps(body, ensure_ascii=True, sort_keys=True,
+                                            separators=(",", ":")).encode()).hexdigest()
+            ok, bad = (ok + 1, bad) if got == claimed else (ok, bad + 1)
+    return "0 failures", f"{bad} failures", f"{ok:,} receipts recomputed"
+
+
+
+def model_table(root: Path):
+    """#38: tab:models carries 120 hand-typed values that nothing verified.
+
+    Recomputes balanced accuracy and minimum per-class recall for every
+    model x arm from the released per-class recalls, and reports the count
+    that reproduce the manuscript's cells.
+    """
+    arms = ["none", "irrelevant", "conclusion_only", "proof_prefix", "full"]
+    paper = {}
+    for line in (root / "paper_tab_models.tsv").read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        key, *cells = line.split("\t")
+        paper[key] = cells
+    got, n = 0, 0
+    for src, keys in ((root / "results/b16_analysis_v1.json", None),
+                      (root / "results/b19_scale_extension_v1.json", ("llama3p1_8b", "qwen2p5_14b"))):
+        models = json.loads(src.read_text(encoding="utf-8"))["models"]
+        for k, md in models.items():
+            if keys is not None and k not in keys:
+                continue
+            if k not in paper:
+                continue
+            for i, arm in enumerate(arms):
+                e = md["arms"][arm]
+                cell = f"{e['balanced_accuracy']*100:.1f}/{min(e['per_class_recall'].values()):.2f}"
+                n += 1
+                got += cell == paper[k][i]
+    return f"{n} cells", f"{got} cells", f"balanced accuracy / min per-class recall, {n} cells of tab:models"
+
+
 CLAIMS = {
     "validity-share": ("§5.2 validity share, Qwen2.5-3B 4-bit", validity_share),
     "gemma-share":    ("§5.3 Gemma share, both baselines", gemma_share),
     "corruption":     ("§5.4 items answered incorrectly under `misleading`", corruption),
-    "detection":      ("§5.5 abstention falls, three checkpoints x two baselines", detection),
+    "detection":      ("§5.6 abstention direction, three references", detection),
     "state-effect":   ("§5.1 state main effect of the 2x2", state_effect),
     "cross-model":    ("§5.7 mean state effect across ten models", cross_model),
     "census":         ("§4.3 total scored responses", census),
+    "digests":        ("§4.3 every receipt digest recomputed", receipt_digests),
+    "model-table":    ("§5.7 every cell of tab:models", model_table),
 }
 
 
@@ -164,12 +237,15 @@ def main() -> int:
         return 0
 
     todo = sorted(CLAIMS) if a.all else [a.claim]
-    bad = 0
+    bad = skipped = 0
     for k in todo:
         desc, fn = CLAIMS[k]
         try:
             paper, got, how = fn(root)
-        except Exception as exc:                      # a missing run is not a mismatch
+        except Exception as exc:
+            # A skip is NOT a pass. An earlier version returned 0 here, so a
+            # truncated unpack reported success and verified nothing.
+            skipped += 1
             print(f"SKIP  {k:15s} {desc}\n      {type(exc).__name__}: {exc}")
             continue
         match = paper.replace(",", "") == got.replace(",", "")
@@ -178,7 +254,9 @@ def main() -> int:
         print(f"      {desc}\n      {how}")
     if bad:
         print(f"\n{bad} value(s) differ from the manuscript.")
-    return 1 if bad else 0
+    if skipped:
+        print(f"{skipped} claim(s) could not be checked -- the data they need is missing.")
+    return 1 if (bad or skipped) else 0
 
 
 if __name__ == "__main__":

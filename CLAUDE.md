@@ -124,15 +124,15 @@ mechanism question open, which caps the venue; b15 answers it.
 
 **The prespecified threshold was invalid.** ">=80% undetermined recall = relays"
 passed 8/10 — but it is single-class recall, and four models answer `Unknown` to
-62–96% of everything (three never emit `No`). b14's `No`-bias trap, mirrored.
+54–97% of everything, averaged over arms, and never emit `No` at all. b14's `No`-bias trap, mirrored.
 Replaced **post hoc** by **min per-class recall >= 0.50**, which collapse cannot game.
 
 | Finding | |
 | --- | --- |
 | **Architecture works, above a floor** | Balanced accuracy `none`→`full`: qwen2p5_3b 41.1→**90.6**, phi4_mini 44.8→**90.6**, gemma3_4b 63.5→**96.4**. Chance = 33.3% |
-| **Viable substrates: 3 of 10** | qwen2p5_3b, phi4_mini, gemma3_4b |
+| **Viable substrates: 3 of 10 under `full`** | qwen2p5_3b, phi4_mini, gemma3_4b. Superseded: the paper reports viability per arm, as a property of (model x arm x runtime); four models are viable in *some* arm |
 | **v9 does not generalise** | v9's 0/12 on unknown was model-specific, not architecture-level. gemma3_4b reaches 89.1%, phi4_mini 100% |
-| **Minimum viable interface size ~3B** | Below 1.7B models collapse to one label whatever the solver supplies. Bounds the "few parameters" bet |
+| **A floor near 3B for *tolerating full certificates*** | Not a floor for serving as an interface: Llama-3.1-8B is degenerate in all five arms. Nothing below 3B clears the floor in any arm |
 | **Not monotonic in scale** | qwen2p5_7b collapses (62% `Unknown`, min recall 14.1%) while qwen2p5_3b is viable |
 
 ### b15 results (2026-09-03) — validity vs surface overlap: **RESOLVED**
@@ -148,7 +148,6 @@ p = 6.9e-18**, BCa [+49.0, +68.8], d' drop +2.446 (same-sign requirement met).
 | surface component | **+1.0pp** (p = 1) |
 | **validity component** | **+60.4pp** |
 | **validity share** | **98.3%** |
-
 | Finding | |
 | --- | --- |
 | **b14's state effect is inference, not word matching** | 98.3% survives holding surface form fixed and breaking only the logic |
@@ -177,9 +176,11 @@ successor exists for a stated reason.
 | b12 | Same design; execution split into 8× 24-item shards with exclusive start/complete/completion records | Interrupted again |
 | b13 | Same design; one-forward-batch execution transport | Interrupted again |
 | **b14** | Same design; **single persistent local supervisor process** with stdout/stderr saved under the run dir | **Completed.** Qualification 36/36 direct + 33/36 reordered, 33/36 agreement → authorized one 192-item prospective run. All five receipt files written before the answer authority was opened |
-
-| **b15** | **Panel sealed 2026-09-03, not yet run.** Mechanism decomposition, **ten arms**: `none`, `irrelevant`, `same_entity_irrelevant`, `truncate_3/2/1`, `broken_chain`, `misleading`, `shuffled`, `full`. 192 items (96/96), depth 4. Design doc: [`binary_certificate_factorial_b15.md`](docs/cognitive-core/binary_certificate_factorial_b15.md) | Splits b14's +37pp state effect into **surface-overlap** and **validity-tracking** components. Blocked on two open decisions (see the doc) |
-| **b16** | **Panel sealed and sweep running 2026-09-03.** Merged multi-model three-class survey: 192 items (64 entailed / 64 contradicted / 64 undetermined) x 5 arms x 10 models. Design doc: [`multimodel_three_class_survey_b16.md`](docs/cognitive-core/multimodel_three_class_survey_b16.md) | Answers substrate viability **and** faithful non-determination in one panel; class stratification separates them |
+| **b15** | **Complete and sealed.** Ran on three checkpoints (4-bit, bf16, Gemma-3-4B), 5,976 responses. Mechanism decomposition, **ten arms**: `none`, `irrelevant`, `same_entity_irrelevant`, `truncate_3/2/1`, `broken_chain`, `misleading`, `shuffled`, `full`. 192 items (96/96), depth 4. Design doc: [`binary_certificate_factorial_b15.md`](docs/cognitive-core/binary_certificate_factorial_b15.md) | Splits b14's +37pp state effect into **surface-overlap** and **validity-tracking** components. Both open decisions were settled in the design doc's log on 2026-09-03 |
+| **b16** | **Complete and sealed.** 10 models, 9,600 responses. Merged multi-model three-class survey: 192 items (64 entailed / 64 contradicted / 64 undetermined) x 5 arms x 10 models. Design doc: [`multimodel_three_class_survey_b16.md`](docs/cognitive-core/multimodel_three_class_survey_b16.md) | Answers substrate viability **and** faithful non-determination in one panel; class stratification separates them |
+| **b17 / b17b** | Three-class rescoring of b15's `broken_chain` items with an `Unknown` candidate, plus a `none` abstention baseline. 1,728 + 576 responses | Experiment 4. Abstention direction is **reference-dependent**: it falls against `none`/`irrelevant`, rises against the surface-matched `truncate_1` |
+| **b18** | b15's items re-scored under eight line permutations each, 9 arms, 5,184 responses | Robustness study. Direction, not adjacency: reversing a rule and its premise costs accuracy on every checkpoint |
+| **b19** | b16's panel re-scored through `transformers` on CUDA, plus Llama-3.1-8B and Qwen2.5-14B, 11 models, 10,560 responses | Robustness study. The inference runtime is a factor: phi-4-mini's verdict flips between stacks on identical weights |
 
 b11→b14 differ **only in execution transport**. The task, arms, sample size,
 primary contrast, and analysis plan are identical; each successor uses a newly
@@ -265,7 +266,10 @@ the b15 design doc; program-level goal statement to be written by the author.
 
 **Blocker — only the author can clear this.**
 
-0. Locate **`solver_assisted_reasoning_release_v6.zip`** (panels, prompts,
+0. ~~Locate **`solver_assisted_reasoning_release_v6.zip`**~~ **CLEARED** — the
+   panels, authorities and receipts are now in-repo under `data/`, `runs/` and
+   `results/`, and every Track A item completed without the zip. Original text:
+   locate the archive (panels, prompts,
    certificates, answer authorities, 960 likelihood receipts). Not present in
    `~/Downloads` or `~/Desktop` as of 2026-09-02. Every Track A item is blocked
    on it and the b14 audit cannot run without it.
@@ -295,7 +299,7 @@ hashes and pinned commit shas recorded before deletion; 43 GB of weights cycled
 through a cache that never held more than one model, and disk fully recovered.
 Model list and pins: `models.toml`.
 
-**b16 panel sealed and sweep running (2026-09-03).**
+**b16 panel sealed; sweep complete (2026-09-03).**
 `prepare_cognitive_multimodel_three_class_b16.py` ->
 `data/cognitive_core/multimodel_three_class_b16/` (seal_id `0887ed11...`).
 192 items, 64/64/64, depth 4, per-item nonce vocabulary, **every item certified by
@@ -309,7 +313,7 @@ panel hash against the seal, and never reads the authority. Measured 0.140 s per
 prompt on the 0.5B; full sweep ~2 h.
 
 **Track B — b15, the mechanism experiment.** Panel sealed 2026-09-03
-(`prepare_cognitive_binary_certificate_factorial_b15.py`, seal_id `e9ac59d2...`),
+(`prepare_cognitive_binary_certificate_factorial_b15.py`, seal_id `e2bcbc4a...`),
 **ten arms** after three design corrections: the depth ladder (b14 had no dynamic
 range), `same_entity_irrelevant` (b14 confounded relevance with entity
 repetition), and `full` (added before data collection as a ceiling and
@@ -323,7 +327,9 @@ must be settled before scoring.
    following the b14 lineage pattern. ~1,536 forward passes across seven arms.
    The `broken_chain` source audit is the substantive new code.
 
-**Track C — b16, competence screen and transport.** Not designed.
+**Track C — b16.** Complete; it is Experiment 3 of the paper. The 65-75% unaided
+screen below was never adopted: the substrate criterion is minimum per-class
+recall >= 0.50.
 
 8. Screen candidate models for **65-75% unaided baseline** on the binary task.
    Only then is the scaffolding/"repair" hypothesis testable at all. Shape

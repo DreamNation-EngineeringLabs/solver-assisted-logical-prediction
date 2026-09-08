@@ -1,23 +1,23 @@
 {
   "bootstrap": {
-    "method": "paired item bootstrap of the ratio",
+    "method": "paired item bootstrap of the ratio, percentile interval",
     "resamples": 100000,
     "seed": 2026090315
   },
-  "holm": "NOT computed here. The version string previously said 'and-holm', which was misleading. Holm-adjusted p-values already existed in b14_posthoc_2x2_reanalysis_v1.json (holm_adjusted_edge_family) and b15_analysis_v1.json (holm_secondary); the paper prints those.",
+  "holm": "NOT computed here. Holm adjustment for the contrasts the paper prints is in analyse_cognitive_binary_certificate_factorial_b15.py, over the declared secondary family.",
   "n_entailed": 96,
-  "note": "v1 bootstrapped the numerator only. Resampling items and recomputing the whole ratio is the correct interval for a share.",
+  "note": "v1 bootstrapped the numerator only. Resampling items and recomputing the whole ratio is the correct interval for a share. The interval is a percentile interval, not BCa: the statistic is a ratio of paired differences, for which the acceleration term is not defined here.",
   "point": {
     "share": 0.983050847457627,
     "surface": 0.010416666666666666,
     "total": 0.6145833333333334,
     "validity": 0.6041666666666666
   },
-  "surface_component_bca95": [
+  "surface_component_percentile95": [
     0.0,
     0.03125
   ],
-  "validity_share_bca95": [
+  "validity_share_percentile95": [
     0.9444444444444444,
     1.0
   ],

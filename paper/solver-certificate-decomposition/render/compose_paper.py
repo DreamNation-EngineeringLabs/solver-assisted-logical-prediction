@@ -70,6 +70,15 @@ def apply_layout(src: str) -> str:
                       "\\setcounter{totalnumber}{4}", 1)
     src = src.replace("\\usepackage{xcolor}",
                       "\\usepackage{xcolor}\n\\usepackage{colortbl}\n\\usepackage{microtype}\n"
+                      # OPEN, audit #46: xdvipdfmx emits fi/fl as the precomposed
+                      # U+FB01/FB02, so a reviewer searching the PDF for
+                      # "certificate" gets zero hits (53 word-forms affected).
+                      # Tried and rejected: \\XeTeXgenerateactualtext (not honoured
+                      # by this pipeline), microtype \\DisableLigatures (refuses
+                      # under XeTeX), fontspec + TeX Gyre Termes (font absent from
+                      # the tectonic bundle). Fix needs a full TeX Live with the
+                      # OTF, or a pdflatex build.
+
                       "\\usepackage{nicefrac}\n\\usepackage{url}\n\\usepackage{cleveref}", 1)
     # tables compact
     src = src.replace("\\begin{table}[t]\n\\centering\n\\caption",

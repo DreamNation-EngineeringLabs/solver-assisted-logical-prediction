@@ -1,4 +1,4 @@
-# Reading Is Not Reasoning, and Reasoning Is Not Robustness
+# What a Language Model Does with a Solver Certificate
 
 Decomposing what a language model does with a solver certificate.
 **Target: ICLR 2027** (abstract 18 Sept 2026, paper 25 Sept 2026).
@@ -25,9 +25,9 @@ confirms it. Figures are rendered from those same files by `render/`.
 ## Rebuilding
 
 ```bash
-uv run python papers/solver-certificate-decomposition/render/render_figures.py
-uv run python papers/solver-certificate-decomposition/render/compose_paper.py
-cd papers/solver-certificate-decomposition/final && tectonic -X compile paper.tex --outdir .
+uv run python solver-assisted-logical-prediction/paper/solver-certificate-decomposition/render/render_figures.py
+uv run python solver-assisted-logical-prediction/paper/solver-certificate-decomposition/render/compose_paper.py
+cd solver-assisted-logical-prediction/paper/solver-certificate-decomposition/final && tectonic -X compile paper.tex --outdir .
 ```
 
 ## Open
