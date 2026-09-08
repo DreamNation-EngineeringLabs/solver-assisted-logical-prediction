@@ -98,7 +98,7 @@ certifier} for underdetermined items, validated at $23{,}240/23{,}240$ against a
 independently labelled corpus \citep{tafjord2020proofwriter} and nine adversarial
 classes; (iv) evidence that apparent use of proof state can be surface
 exploitation, that the behaviour is completion rather than detection, and that no
-checkpoint resists a corrupted certificate; and (v) a sweep over eleven models
+checkpoint resists a corrupted certificate; and (v) a sweep over twelve models
 \citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}
 showing viability to be a property of (model $\times$ arm $\times$ runtime),
 including one model whose verdict changes with the inference stack alone.
@@ -164,11 +164,10 @@ and predate the models evaluated on them, so contamination cannot be excluded
 \citep{deng2024investigating,golchin2023time,wu2023reasoning}.
 
 They supply items and proofs but not the matched adversarial certificate variants
-an attribution question needs. We generate items after model release with
-per-item nonce vocabularies and construct the matched invalid, misleading,
-order-scrambled and depth-truncated certificates the public sets do not provide.
-A public open-world corpus is used only to check the forward-closure certifier;
-no item from it is scored by any model here.
+an attribution question needs, so we generate items after model release with
+per-item nonce vocabularies and build the matched invalid, misleading,
+order-scrambled and depth-truncated certificates ourselves. A public open-world
+corpus checks the forward-closure certifier only; no item from it is scored.
 
 \subsection{Response bias and the limits of accuracy}
 
@@ -191,13 +190,11 @@ theory separates exactly these
 therefore reports $d'$ and criterion $c$ alongside accuracy for every arm, with
 paired significance from the exact McNemar test \citep{mcnemar1947note} and
 interval estimates from the bias-corrected accelerated bootstrap
-\citep{efron1987better}. Two concrete cases motivate the practice rather than
-illustrate it: a baseline arm scoring $50.0\%$ on a balanced panel turns out to
-have $d' = 0.00$, and a prespecified qualification criterion based on a single
-class recall was passed by models that answer one label almost everywhere. Both
-were caught only because sensitivity was reported separately from accuracy; one
-of the two is a criterion of this paper's own, replaced post hoc and labelled as
-such.
+\citep{efron1987better}. Two concrete cases here motivate the practice rather than
+illustrate it: an arm scoring $50.0\%$ on a balanced panel has $d' = 0.00$, and a
+prespecified criterion on a single class's recall was passed by models answering
+one label almost everywhere. One is a criterion of our own, replaced post hoc and
+labelled as such.
 
 \section{Method}
 \section{Experiments}
