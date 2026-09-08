@@ -207,15 +207,12 @@ evidence by proof state, with a no-material baseline outside the square.
 Let \textsc{irrelevant} supply a valid derivation for a different entity (no
 answer, no relevant state), \textsc{conclusion\_only} the derived terminal
 literal alone (answer, no state), \textsc{proof\_prefix} the chain with that
-literal withheld (state, no answer), and \textsc{full} both. A contrast along an
-\emph{edge} of this square moves one factor; a contrast along the
-\emph{diagonal} moves two, and a null on it attributes to neither. This is a problem of identification, not of statistics: the prespecified primary
-contrast of the experiment we reanalyse, \textsc{proof\_prefix} minus
-\textsc{conclusion\_only}, is exactly that diagonal.
-
-Reading the four edges instead gives a state main effect, the mean of the two
-edges along which state is added, and an answer main effect defined
-symmetrically.
+literal withheld (state, no answer), and \textsc{full} both. An \emph{edge} of this square moves one factor; the \emph{diagonal} moves two, so
+a null on it attributes to neither. This is identification, not statistics: the
+prespecified primary contrast of the experiment we reanalyse,
+\textsc{proof\_prefix} minus \textsc{conclusion\_only}, is that diagonal. The four
+edges instead give a state main effect --- the mean of the two edges adding
+state --- and an answer main effect defined symmetrically.
 
 \subsection{Surface-matched invalidity}
 \label{sec:broken}
@@ -283,15 +280,14 @@ without a certification record.
 \subsection{Measurement: sensitivity, not accuracy}
 \label{sec:measurement}
 
-Accuracy on a balanced panel is uninterpretable when the responder is biased.
-One arm below scores $50.0\%$, apparent chance, with an identical
-$9/96$ ``Yes'' rate in \emph{both} classes, that is $d' = 0.00$: no
-discriminative signal whatever, at or below the trivial always-one-label
-strategy. We therefore report sensitivity $d'$ and criterion $c$ alongside
+Accuracy on a balanced panel is uninterpretable when the responder is biased. One
+arm below scores $50.0\%$ with an identical $9/96$ ``Yes'' rate in \emph{both}
+classes --- $d' = 0.00$, no discriminative signal at all, at or below the trivial
+always-one-label strategy. We therefore report sensitivity $d'$ and criterion $c$ alongside
 accuracy for every arm \citep{macmillan1991detection,stanislaw1999calculation},
-using the loglinear correction for extreme rates. For the three-class panel the
-headline scalar is balanced accuracy, the mean of per-class recalls, under which
-chance is $33.3\%$ and a single-label responder scores exactly chance.
+using the loglinear correction for extreme rates. For the three-class panel the headline scalar is balanced accuracy, the mean of
+per-class recalls: chance is $33.3\%$, and a single-label responder scores exactly
+chance.
 
 Paired contrasts report the complete $2\times2$ table, the exact two-sided
 McNemar test \citep{mcnemar1947note} as the decision criterion, and a seeded $20{,}000$-resample paired bootstrap interval --- bias-corrected and
@@ -310,7 +306,12 @@ vocabularies, are mutually disjoint, and fix derivation depth at four by
 construction, recorded per item. The public corpus is used \emph{only} to
 validate the certifier; no item from it is scored by any model here.
 
-Experiment 4 generates no panel: it rescores Experiment 2's items with a third candidate available. Theories, certificates and queries are
+Experiment 4 generates no panel: it rescores Experiment 2's items with a third
+candidate available. One construction detail of Experiment 3's panel is worth
+stating: on its $64$ undetermined items there is no terminal literal to supply,
+so \textsc{conclusion\_only} carries a statement that the query is not derivable
+and \textsc{proof\_prefix} a chain truncated at a random point, and those two
+cells instantiate the $2\times2$ less exactly than on the other two thirds. Theories, certificates and queries are
 byte-identical; only the instruction line and candidate set change, and the
 change is recorded in the seal. Its \textsc{none} arm withholds the record under that same instruction, fixing
 the abstention floor.
@@ -357,8 +358,9 @@ Experiment 3 makes a deliberate protocol change: \emph{no gate blocks the run}.
 Where earlier practice excluded a model that failed a delivery screen, delivery
 is itself the capability under test here, so a model that cannot emit a verdict
 reliably is a finding about substrate viability rather than a reason to drop it.
-Tooling failures (a model that will not load, or whose tokeniser cannot represent the candidates) remain exclusions and are not findings; the screen
-found none.
+Tooling failures (a model that will not load, or whose tokeniser cannot represent
+the candidates) remain exclusions and are not findings; the screen found none.
+
 
 \section{Results}
 
@@ -505,9 +507,9 @@ The decomposition of \cref{sec:broken} was run on two further checkpoints: the
 same model at bfloat16 rather than 4-bit, which isolates quantisation from model
 identity, and a different family. \Cref{tab:arms} carries all three; \cref{fig:replication} plots the split.
 
-Quantisation is the smaller effect: on this model bfloat16 raises
-\textsc{truncate\_1} from 59 to 72 of 96 while leaving the share essentially
-unchanged. One pair supports no general claim about precision. Model identity does
+Quantisation is the smaller effect: bfloat16 raises \textsc{truncate\_1} from 59
+to 72 of 96 while leaving the share essentially unchanged. One pair supports no
+general claim about precision. Model identity does
 not behave that way. Gemma-3-4B answers \textsc{broken\_chain} correctly on
 \textbf{58 of 96} items where the other two manage 1, so the same control that
 isolates inference on one checkpoint exposes substantial surface exploitation on
@@ -539,9 +541,9 @@ One result does replicate without exception, and it is the negative one
 \subsection{Following a corrupted apparatus}
 \label{sec:corruption}
 
-The \textsc{misleading} arm supplies a chain identical to \textsc{full} except
-that its final rule, which is fabricated and absent from the theory, flips
-polarity. The ground-truth answer is unchanged. The model scores $3$ of $192$ against \textsc{full}'s $192$, a paired difference
+The \textsc{misleading} arm supplies a chain identical to \textsc{full} except in
+its last two sentences: a fabricated final rule, absent from the theory, and the
+terminal literal it licenses, both inverted. The ground-truth answer is unchanged. The model scores $3$ of $192$ against \textsc{full}'s $192$, a paired difference
 of $-98.4$pp on all items and $-100$pp on the entailed subset, where the exact
 test gives $p = 2.5\times10^{-29}$, with $d' = -4.363$. It replicates without exception: the arm scores $3$, $6$ and
 $0$ of $192$ across the three checkpoints, at $d'$ of $-4.36$, $-4.06$ and
@@ -599,8 +601,8 @@ broken certificate: it abstains \textbf{$0$ times in $192$} and answers
 \textbf{We find no positive evidence that any checkpoint verifies validity}, but
 we no longer claim this test refutes detection. The direct evidence is
 \cref{sec:corruption}, where all three follow a fabricated final rule to the wrong
-answer, which a model checking validity would not. \Cref{sec:mechanism} notes the design limit behind this: the theory stays visible,
-so detecting the break and reading the theory look alike here.
+answer, which a model checking validity would not. \Cref{sec:mechanism} notes the design limit: the theory stays visible, so
+detecting the break and reading the theory look alike here.
 
 \subsection{Which models can serve as the interface}
 
@@ -659,9 +661,8 @@ a model} --- the third factor is \cref{sec:runtime}'s. The decisive row is Qwen2
 $0.938$ under \textsc{conclusion\_only}, where it is second best in the sweep, to
 $0.141$ under \textsc{full}. Its contradicted-class recall collapses \emph{when the proof
 state is supplied}: it can express three outcomes, and the proof state is what breaks it. \textbf{Supplying proof state degrades three of ten
-models} here, two of them otherwise among the strongest substrates. On the CUDA
-re-scoring the same measure gives two of eleven, which is the runtime factor of
-\cref{sec:runtime} again rather than a different finding.
+models} here, two of them otherwise among the strongest substrates. On the CUDA re-scoring the same measure gives two of eleven, which is
+\cref{sec:runtime}'s runtime factor again.
 
 This bounds a claim we would otherwise have made. There is a floor near 3B \emph{for tolerating full certificates}, since nothing
 below $3$B clears it in any arm, but
@@ -748,23 +749,26 @@ viability criterion replaced a prespecified threshold the data showed to be
 invalid (the original is retained in the released results); and \cref{sec:order}'s gap-versus-direction split is read off eight orderings per
 item that happened to land in each cell, not a design that fixed them.
 
-Experiment 1 also carries three design errors we report rather than repair: the
-unreachable $15$pp target noted above, no recorded proof depth (so its failures
-cannot be stratified), and task identifiers encoding the semantic class, which
-makes its answer authority reconstructible from the public panel. Experiments
-2--4 fix all three.
+Experiment 1 also carries five defects we report rather than repair: the
+unreachable $15$pp target noted above; no recorded proof depth, so its failures
+cannot be stratified; task identifiers encoding the semantic class; a release as
+a flat receipt export with no sealed panel, so its answer key is reconstructed
+from those identifiers rather than read from an authority; and a screen for
+response tokens leaking into a certificate that was a malformed regular
+expression and never fired --- the released certificates contain none, checked
+after the fact. Experiments 2--4 fix all five.
 
 \subsection{Generalisation}
 
-This is one task family, small models only, and synthetic panels. Nonce vocabularies establish item novelty, not independence from all relevant
-pretraining patterns \citep{golchin2023time,deng2024investigating}. Model is not a
-randomised factor, so cross-model comparisons are descriptive.
+One task family, small models, synthetic panels. Nonce vocabularies establish
+item novelty, not independence from every relevant pretraining pattern
+\citep{golchin2023time,deng2024investigating}, and model is not a randomised
+factor, so cross-model comparisons are descriptive.
 
-\textbf{Prompt format.} Experiment 4 changes only the instruction line and
-candidate set on byte-identical inputs, and the response distribution moves
-substantially \citep{zhao2021calibrate,zheng2023large}. Arms share a baseline
-scored under the same instruction, so the contrast is internally valid, but the
-absolute rates are not.
+\textbf{Prompt format.} Experiment 4 changes only the instruction and candidate
+set on byte-identical inputs, and the response distribution moves substantially
+\citep{zhao2021calibrate,zheng2023large}. Its arms share a baseline under the
+same instruction, so the contrast holds but the absolute rates do not.
 
 
 
@@ -773,36 +777,30 @@ absolute rates are not.
 moves exactly what we measure. \Cref{sec:replication} bounds it, and we do not treat the two as one artefact.
 
 \textbf{Prior report.} Experiment 1's per-arm counts and prespecified primary
-contrast appeared in an earlier unpublished report by the present authors; the
-$2\times2$ reading, the response-bias finding and Experiments 2--4 are new. That report concluded the 3B checkpoint failed an open-world unknown gate whereas
-Experiment 3 finds the same family viable; panels, candidate sets and quantisation
-all differ, which plausibly explains it, but we flag it rather than leave it to a
-reader who finds both.
+contrast appeared in an earlier unpublished report by the present authors;
+everything else here is new. That report concluded the 3B checkpoint failed an
+open-world unknown gate whereas Experiment 3 finds the same family viable. Panels,
+candidate sets and quantisation all differ, which plausibly explains it, but we
+flag the discrepancy rather than leave it to a reader who finds both.
 
 An undetermined \textsc{proof\_prefix} cannot contain the query predicate, so
 undetermined items offer fewer surface cues and a surface-matching model looks
-worse on them for reasons unrelated to abstention; per-arm entity-mention counts
-are recorded, so this is analysable.
+worse on them for reasons unrelated to abstention.
 
-\textbf{Scoring regime.} Every response here is a forced choice among verified
-single-token candidates. That removes parsing error, but no deployed
-solver-augmented pipeline works this way, so the corruption and abstention
-results describe a scoring regime whose transfer to a generative pipeline is
-untested.
+\textbf{Scoring regime.} Every response is a forced choice among verified
+single-token candidates. No deployed solver-augmented pipeline works this way, so
+transfer of these results to a generative one is untested.
 
 \textbf{Checkpoint selection.} Experiment 2's three checkpoints were chosen
-\emph{after} Experiment 3 identified viable substrates, and cover two families;
-the third viable substrate, Phi-4-mini, was never run on those arms.
+\emph{after} Experiment 3 identified viable substrates and cover two families;
+Phi-4-mini, the third viable substrate, was never run on those arms.
 
-\textbf{$d'$ ceiling.} Under the loglinear correction at $n = 96$, $d'$ is
-censored at $\pm 5.13$, and eight cells of \cref{tab:arms} sit on it. Reported
-$d'$ \emph{differences} involving a saturated arm --- including the $2.446$ drop
-of \cref{sec:broken} --- are bounds, not estimates.
-
-Finally, every theory here arrives \emph{already formalised}. Nothing tests
-whether a model can turn a framework described in prose into the solver's input,
-and the corruption result makes that gap consequential: a formalisation error
-would not be caught downstream but followed.
+\textbf{$d'$ ceiling.} At $n = 96$ the loglinear correction censors $d'$ at
+$\pm 5.13$, and eight cells of \cref{tab:arms} sit on it, so $d'$
+\emph{differences} involving a saturated arm --- \cref{sec:broken}'s $2.446$
+included --- are bounds. Finally, every theory here arrives \emph{already
+formalised}: nothing tests whether a model can turn a prose framework into solver
+input, which \cref{sec:corruption} makes consequential.
 
 \section{Conclusion}
 
@@ -821,11 +819,11 @@ precedes its premise. Detection we cannot establish either way: the abstention
 delta changes sign with the reference arm, though the strongest substrate abstains
 on $0$ of $192$ broken certificates. And nothing defends against a wrong apparatus: given a certificate whose
 fabricated final rule establishes the negation, the three answer incorrectly on
-$189$, $186$ and $192$ of $192$, inheriting its errors. Two criteria we had prespecified failed here: a floor on one class's recall,
-passed by models answering that class almost everywhere, and a $15$pp target an
-arm at $91.7\%$ could not reach. Both were caught only by reporting sensitivity
-and headroom beside accuracy --- as was a baseline arm at $50.0\%$ with
-$d' = 0.00$, discriminating nothing. We recommend that practice as standard.
+$189$, $186$ and $192$ of $192$, inheriting its errors. Two criteria we had prespecified failed here: a recall floor on one class, gamed
+by models answering that class almost everywhere, and a $15$pp target an arm at
+$91.7\%$ could not reach. Both were caught only by reporting sensitivity and
+headroom beside accuracy --- as was a baseline arm at $50.0\%$ with $d' = 0.00$.
+We recommend that practice as standard.
 
 \section*{Reproducibility Statement}
 
