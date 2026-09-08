@@ -150,6 +150,45 @@ def cross_model(root):
 
 
 
+def stimulus(root: Path):
+    """The worked example in tab:stimulus, against the sealed panel.
+
+    The paper displays one real item verbatim -- the FULL record and what each
+    other arm does to it -- so a reader can see the design instead of imagining
+    it. A displayed stimulus that has drifted from the panel would be worse than
+    no example at all, so check the lines rather than trust them.
+    """
+    import re
+    tid = "b15-4ef53c71988aec0e"
+    rows = {r["task_id"]: r for r in _rows(root / B15D / "public/panel.jsonl")}
+    auth = {r["task_id"]: r["answer"] for r in _rows(root / B15D / "sealed/authority.jsonl")}
+    r = rows[tid]
+    def rec(arm):
+        body = re.search(r"Solver record: (.*?)\nQuery:", r["prompts"][arm], re.S).group(1)
+        return [x.strip().rstrip(".") + "." for x in body.split(". ") if x.strip().rstrip(".")]
+    full, t1, bc, mis = rec("full"), rec("truncate_1"), rec("broken_chain"), rec("misleading")
+    checks = {
+        "query is Bimol is vrinpek, true": r["query"] == "Bimol is vrinpek." and auth[tid] == "Yes",
+        "theory has 18 lines":             r["theory"].count(".") == 18,
+        "full is 9 lines":                 len(full) == 9,
+        "line 6 as printed":               full[5] == "All kuthbror people are gasplaek.",
+        "line 8 names the query predicate": full[7] == "All gasplaek people are vrinpek.",
+        "truncate_1 = full less line 9":   t1 == full[:8],
+        "broken_chain changes 6 and 7":    bc[5] == "All foskdem people are zuftbas."
+                                           and bc[6] == "Bimol is zuftbas." and bc[:5] == full[:5],
+        "broken_chain keeps line 8":       bc[7] == full[7] and len(bc) == 8,
+        "misleading negates 8 and 9":      mis[7] == "All gasplaek people are not vrinpek."
+                                           and mis[8] == "Bimol is not vrinpek.",
+        "surface held fixed vs truncate_1": (r["entity_mentions"]["broken_chain"]
+                                             == r["entity_mentions"]["truncate_1"] == 4
+                                             and r["line_counts"]["broken_chain"]
+                                             == r["line_counts"]["truncate_1"] == 8),
+    }
+    bad = [k for k, v in checks.items() if not v]
+    return "as displayed", ("as displayed" if not bad else "MISMATCH: " + "; ".join(bad)), \
+        f"{tid}: {len(checks)} properties of the displayed example, from the sealed panel"
+
+
 def receipt_digests(root: Path):
     """#37: the paper says every receipt digest verifies. Check all of them.
 
@@ -217,6 +256,7 @@ CLAIMS = {
     "cross-model":    ("§5.2 mean state effect across ten models", cross_model),
     "census":         ("§4 total scored responses", census),
     "digests":        ("§4 every receipt digest recomputed", receipt_digests),
+    "stimulus":       ("\u00a73.2 the worked example in tab:stimulus", stimulus),
     "model-table":    ("§5.2 every cell of tab:models", model_table),
 }
 

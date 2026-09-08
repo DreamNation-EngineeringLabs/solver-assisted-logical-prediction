@@ -38,6 +38,8 @@
 \setcounter{topnumber}{4}
 \setcounter{dbltopnumber}{4}
 \setcounter{totalnumber}{6}
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.7}
 
 \title{What a Language Model Does with a Solver Certificate:\\
 An Answer-Evidence Decomposition Across Twelve Models}
@@ -188,7 +190,7 @@ answering one label almost everywhere.
 A solver certificate carries two things: the \emph{answer} to the query, and the
 \emph{state} that answer follows from. End-to-end accuracy conflates them. We
 separate them with a $2\times2$ of answer evidence by proof state
-(\cref{fig:factorial}), a no-material baseline outside the square:
+(\cref{fig:factorial}), with a no-material baseline outside it.
 \textsc{irrelevant} supplies a valid derivation for a different entity,
 \textsc{conclusion\_only} the derived terminal literal alone,
 \textsc{proof\_prefix} the chain with that literal withheld, and \textsc{full}
@@ -207,14 +209,70 @@ co-occur where a derivation is heading, reproduces every number a model
 completing it would. The square localises the gain to state; it cannot show the
 state was used as inference.
 
-\subsection{Surface-matched invalidity}
+\subsection{Surface-matched invalidity: the word-matching test}
 \label{sec:broken}
 
-To isolate validity we cut one intermediate link, so the displayed lines no
-longer reach the query, while holding the surface fixed against the matched
-\textsc{truncate\_1} arm: the same query-entity occurrence count (audited per
-item), the same query predicate in the final rule, the same line count and the
-same fact/rule/literal sequence. Every rule displayed is a real rule of the
+\begin{table*}[tb]
+\centering\footnotesize
+\caption{\textbf{What the model sees}, from sealed item \texttt{b15-4ef53c71}.
+Every prompt is the same 18-line theory in invented vocabulary, then one solver
+record, then the query. Only the record changes between arms. Left: the
+\textsc{full} record, a complete four-step derivation. Right: what each other
+arm does to it. \textsc{broken\_chain} is the word-matching test --- it replaces
+line 6 with a different \emph{real} rule of the theory, one that does not fire,
+so the chain stops reaching the query, while line 8 still names the query's
+predicate and the entity still appears four times, exactly as in
+\textsc{truncate\_1}. \textsc{misleading} instead invents a rule the theory does
+not contain.}
+\label{tab:stimulus}
+\begin{minipage}[t]{0.42\textwidth}
+\vspace{0pt}
+\ttfamily\scriptsize
+\textrm{\textbf{Query:}} Bimol is vrinpek. \textrm{(true)}\\[3pt]
+\textrm{\textbf{\textsc{full} record}}\\
+1\ \ Bimol is vrasler.\\
+2\ \ All vrasler people are deinmal.\\
+3\ \ Bimol is deinmal.\\
+4\ \ All deinmal people are kuthbror.\\
+5\ \ Bimol is kuthbror.\\
+6\ \ All kuthbror people are gasplaek.\\
+7\ \ Bimol is gasplaek.\\
+8\ \ All gasplaek people are vrinpek.\\
+9\ \ Bimol is vrinpek.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.55\textwidth}
+\vspace{0pt}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Arm & Record supplied \\
+\midrule
+\textsc{none}        & no record at all \\
+\textsc{irrelevant}  & same shape, a different entity throughout \\
+\textsc{same\_entity\_irrel.} & same entity, an unrelated predicate \\
+\textsc{truncate\_1} & lines 1--8: the answer line withheld \\
+\textsc{truncate\_2} & lines 1--6: two steps withheld \\
+\textsc{truncate\_3} & lines 1--4: three steps withheld \\
+\textsc{shuffled}    & lines 1--8 in seeded random order \\
+\textsc{broken\_chain} & lines 1--8, but 6 becomes \texttt{All foskdem} \\
+                     & \texttt{people are zuftbas.} and 7 becomes \\
+                     & \texttt{Bimol is zuftbas.} Line 8 unchanged \\
+\textsc{misleading}  & lines 1--9, but 8 becomes \texttt{All gasplaek} \\
+                     & \texttt{people are not vrinpek.} and 9 becomes \\
+                     & \texttt{Bimol is not vrinpek.} \\
+\textsc{full}        & lines 1--9 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\end{table*}
+
+\Cref{tab:stimulus} shows one sealed item and every record we supply for it.
+Call the prefix that stops one step short \textsc{truncate\_1}: it is the
+strongest arm that withholds the answer, and the one a surface-matching model
+can still exploit. \textsc{broken\_chain} is built to strip that exploit. We cut
+one intermediate link, so the displayed lines no longer reach the query, while
+holding fixed against \textsc{truncate\_1} the query-entity occurrence count
+(audited per item), the query predicate in the final rule, the line count and
+the fact/rule/literal sequence. Every rule displayed is a real rule of the
 theory; exactly one derived literal is false. All $192$ items are certified to
 leave the query undecided under the displayed lines. That gives
 \begin{align}
@@ -222,14 +280,15 @@ leave the query undecided under the displayed lines. That gives
 \text{surface} &= \textsc{broken\_chain} - \textsc{irrelevant},\\
 \text{validity} &= \textsc{truncate\_1} - \textsc{broken\_chain}.
 \end{align}
-Four companion arms separate the rest, and \cref{tab:arms} lists them:
+Five companion arms separate the rest.
 \textsc{same\_entity\_irrelevant} isolates entity repetition, naming the query
-subject four times where \textsc{irrelevant} names it none;
-\textsc{shuffled} reorders \textsc{truncate\_1}'s lines;
-\textsc{truncate\_2} and \textsc{truncate\_3} withhold more steps; and
-\textsc{misleading} supplies a valid-looking chain whose single fabricated final
-rule establishes the query's negation, leaving the true answer unchanged so that
-following the supplied state means answering incorrectly.
+subject four times where \textsc{irrelevant} names it none.
+\textsc{shuffled} keeps \textsc{truncate\_1}'s eight lines in seeded random
+order. \textsc{truncate\_2} and \textsc{truncate\_3} withhold two and three
+steps, giving a depth ladder. And \textsc{misleading} is the corrupted-solver
+arm: one fabricated final rule, absent from the theory, establishes the query's
+negation, so following the supplied record means answering incorrectly while the
+true answer is unchanged.
 
 \subsection{Certifying that nothing decides a query}
 \label{sec:closure}
@@ -246,30 +305,31 @@ enters a sealed panel without a certification record.
 
 \section{Experimental Setup}
 
-Four experiments and two robustness checks, all on rule-chaining queries over
-small theories of facts and universally quantified rules. \Cref{tab:panels}
-names them and lists their panels. The sealed
-panels are generated after model release with per-item invented vocabularies,
-are mutually disjoint, and fix derivation depth at four. The public corpus
-validates the certifier only: no item from it is scored by any model here.
+Every experiment asks a rule-chaining query over a small theory of facts and
+universally quantified rules. \Cref{tab:panels} names the six and says what each
+one does.
 
 \begin{table*}[tb]
 \centering\small
-\caption{Datasets. The sealed panels are nonce-generated and disjoint; the
-public corpus validates the certifier only. The abstention rescoring reuses the validity control's
-items rather than generating new ones.}
+\caption{\textbf{The four experiments and two robustness checks.} Sealed panels
+use per-item invented vocabularies, are mutually disjoint, and fix derivation
+depth at four. The public corpus validates the certifier only: no item from it
+is scored by any model here.}
 \label{tab:panels}
-\begin{tabular}{llrl}
+\footnotesize
+\begin{tabular}{@{}llll@{}}
 \toprule
-Panel & Classes & Items & Used by \\
+Panel & Items & Experiment & What it does \\
 \midrule
-\texttt{b14} & entailed / contradicted & 192 & the reanalysis \\
-\texttt{b15} & entailed / contradicted & 192 & the validity control \\
-\texttt{b16} & entailed / contradicted / undetermined & 192 & the model sweep \\
-\texttt{b17}, \texttt{b17b} & \texttt{b15} items, three candidates & 192 & the abstention rescoring \\
-\texttt{b18} & \texttt{b15} items, 8 line orders each & 192 & line-order check \\
-\texttt{b16} on a second stack & as \texttt{b16} & 192 & runtime check \\
-ProofWriter OWA \citep{tafjord2020proofwriter} & three-way & 23{,}240 & certifier validation \\
+\texttt{b14} & 192 binary & the reanalysis & re-reads a published five-arm factorial as the $2\times2$ of \cref{fig:factorial} \\
+\texttt{b15} & 192 binary & the validity control & ten matched arms (\cref{tab:stimulus}) on three checkpoints \\
+\texttt{b16} & 192 three-class & the model sweep & ten models $\times$ five arms, with an \texttt{Unknown} class \\
+\texttt{b17}, \texttt{b17b} & \texttt{b15} items & the abstention rescoring & re-scores the broken certificates with \texttt{Unknown} allowed \\
+\midrule
+\texttt{b18} & \texttt{b15} items & line-order check & eight permutations of each record \\
+\texttt{b16} on CUDA & as \texttt{b16} & runtime check & \texttt{transformers} rather than \texttt{mlx-lm}, plus two larger models \\
+\midrule
+ProofWriter OWA & 23{,}240 & \multicolumn{2}{l}{certifier validation only \citep{tafjord2020proofwriter}} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -296,8 +356,9 @@ everywhere after it.
 
 \textbf{Models.} The reanalysis and the validity control use one frozen 3B instruction-tuned
 checkpoint at 4-bit precision \citep{team2024qwen}, pinned to byte-identical
-weights. The sweep scores ten instruction-tuned models from $0.5$B to $7.6$B
-\citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}
+weights. The sweep scores ten instruction-tuned models from $0.5$B to $7.6$B across six
+families, Qwen2.5, Llama-3.2, Gemma-3, Phi-4-mini, OLMo-2 and SmolLM2
+\citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm},
 through \texttt{mlx-lm} from pinned mirrors; the runner did not record a dtype,
 so we claim no uniform precision across the ten. No gate blocks that run:
 delivery is itself the capability under test, so a model that cannot emit a
@@ -318,10 +379,11 @@ multiple comparisons within declared families.
 
 \subsection{The state effect is real, and it is validity}
 
-The reanalysis inherits a null on its prespecified primary contrast,
+The reanalysis begins from a null. Its prespecified primary contrast,
 $\textsc{proof\_prefix} - \textsc{conclusion\_only} = -4.7$pp (exact McNemar
-$p = 0.078$). Read through the square, that contrast is the diagonal: it moves
-both factors at once, so its null attributes to neither.
+$p = 0.078$), was reported as no effect. Read through the square, that contrast
+is the diagonal: it moves both factors at once, so the null attributes to
+neither.
 
 \textbf{Both channels carry real effect, and they are not additive.} The state
 main effect is $+22.4$pp, the answer main effect $+27.1$pp, and the interaction

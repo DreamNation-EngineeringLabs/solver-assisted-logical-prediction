@@ -3,9 +3,17 @@
 Decomposing what a language model does with a solver certificate.
 **Target: ICLR 2027** (abstract 18 Sept 2026, paper 25 Sept 2026).
 
-Deliverable: [`final/paper.pdf`](final/paper.pdf) — 10 pages: 8 of main text at
+Deliverable: [`final/paper.pdf`](final/paper.pdf) — 11 pages: 8 of main text at
 the venue's own geometry (cap is 9), references from p9, **no appendix**. 39
-verified citations, 4 figures, 5 tables, every one of them in the main text.
+verified citations, 4 figures, 6 tables, every one of them in the main text.
+
+Two tables exist to answer a first-time reader's questions before the argument
+starts. **Table 1** shows a real sealed item verbatim: the theory, the query, the
+`full` derivation numbered line by line, and what each of the ten arms does to
+it — so `truncate_1`, the word-matching test and the corrupted arm are visible
+rather than described. `verify.py stimulus` checks those printed lines against
+the sealed panel. **Table 2** names the four experiments and the two robustness
+checks and says in one line what each does.
 
 Written to be read, not queried. The body is 3,466 words, down from 5,749: the
 prose states the findings and the floats carry the detail, instead of narrating
