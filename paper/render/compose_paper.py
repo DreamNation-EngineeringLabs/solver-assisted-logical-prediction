@@ -3,12 +3,12 @@
 
 Preamble, Introduction and Related Work are preserved verbatim from Step 3.
 Every numeric value below traces to inputs/experimental_log.md. LaTeX patterns
-follow papers/solver-certificate-decomposition/tex_profile.json (cleveref, nicefrac, microtype, T1 all True).
+follow paper/tex_profile.json (cleveref, nicefrac, microtype, T1 all True).
 """
 import json, pathlib, re
 
 PAPER = pathlib.Path(__file__).resolve().parents[1]
-PROJECT = PAPER.parents[1]
+PROJECT = PAPER.parent
 
 # Round-2 review: the manuscript quoted three different response totals and none
 # matched the receipts. The counts are now read from the census rather than

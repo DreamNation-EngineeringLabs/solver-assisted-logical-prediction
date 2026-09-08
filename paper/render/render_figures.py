@@ -2,7 +2,7 @@
 """Render the paper's figures from the sealed results JSONs.
 
 Every value is read from results/*.json — nothing is retyped. Output goes to
-papers/solver-certificate-decomposition/inputs/experiments/<slug>/figures/ so the figure-provenance gate can
+paper/inputs/experiments/<slug>/figures/ so the figure-provenance gate can
 trace each displayed figure back to a real render.
 
 Palette: Wong colourblind-safe hues, validated (lightness band, chroma floor,
@@ -23,7 +23,7 @@ from matplotlib.patches import Rectangle
 BLUE, VERM, GREEN = "#0072B2", "#D55E00", "#009E73"
 GREY, INK, MUTED, RULE = "#8A8F98", "#1A1D21", "#5B6169", "#D8DBE0"
 PAPER = Path(__file__).resolve().parents[1]        # render/ -> <paper>/
-PROJECT = PAPER.parents[1]                         # <paper>/ -> paper/ -> <project>/
+PROJECT = PAPER.parent                             # paper/ -> <project>/
 RES = PROJECT / "results"
 OUT = PAPER / "inputs/experiments"
 

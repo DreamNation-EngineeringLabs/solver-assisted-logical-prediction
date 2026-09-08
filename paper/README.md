@@ -1,49 +1,63 @@
-# Papers
+# What a Language Model Does with a Solver Certificate
 
-Papers for this project. One directory per paper. Each is a self-contained paper-orchestra workspace, so
-several can be in flight without colliding — the pipeline's own default is a
-single top-level `workspace/`, which does not survive a second paper.
+Decomposing what a language model does with a solver certificate.
+**Target: ICLR 2027** (abstract 18 Sept 2026, paper 25 Sept 2026).
+
+Deliverable: [`final/paper.pdf`](final/paper.pdf) — 16 pages: 9 of main text at
+the venue's own geometry, references from p10, appendix from p12. 39 verified
+citations, 6 figures, 6 tables.
+
+## Findings
+
+| | |
+| --- | --- |
+| **The method is the contribution; what it returns is not** | Breaking validity alone removes **98.3%** of the state effect on one checkpoint and **40.4–51.4%** on another. We decline to generalise the value, ours included |
+| No resistance to a corrupted apparatus | Given a fabricated final rule pointing the wrong way, all three checkpoints answer incorrectly on **189, 186 and 192 of 192**. This holds on every checkpoint |
+| Reversing a rule and its premise costs accuracy | Holds on every checkpoint. Distance between them does not matter; direction does |
+| Depth is one step — on the Qwen checkpoints | `truncate_2` scores identically to no certificate there, but 4/96 against 22/96 unaided on Gemma-3-4B. Checkpoint-specific |
+| Abstention does not settle detection | The delta changes sign with the reference arm: it falls against `none`/`irrelevant`, rises against the surface-matched `truncate_1`. We draw no conclusion from it |
+| Viability is a property of (model × arm × runtime) | Not of a model, and not a size floor: Llama-3.1-8B is degenerate in all five arms, and one model's verdict flips with the inference stack alone |
+| Two prespecified criteria of our own failed | A single-class recall floor gamed by label collapse, and a 15pp target an arm at 91.7% could not reach |
+
+## Sources
+
+Experiments live in the `solver-assisted-logical-prediction` submodule. Every
+number in the paper traces to `results/*.json` there, and the claim-evidence gate
+confirms it. Figures are rendered from those same files by `render/`.
+
+## Rebuilding
+
+```bash
+uv run python solver-assisted-logical-prediction/paper/render/render_figures.py
+uv run python solver-assisted-logical-prediction/paper/render/compose_paper.py
+cd solver-assisted-logical-prediction/paper/final && tectonic -X compile paper.tex --outdir .
+```
+
+## Layout
 
 ```
-<project>/paper/<slug>/
-├── inputs/          idea.md · experimental_log.md · template.tex ·
-│                    conference_guidelines.md · experiments/<exp>/{results.json,code/,figures/}
-├── outline.json     outline_reconciled.json · reconciliation_summary.md
-├── figures/         the selected renders + captions.json
-├── drafts/          intro_relwork.tex · paper.tex
-├── final/           paper.tex · paper.pdf · refs.bib · figures/   ← the deliverable
-├── render/          figure rendering and paper composition scripts
-├── refs.bib         citation_pool.json · cross_verification_report.json
-├── research_brief.md
-└── provenance.json  input and output hashes
+inputs/     idea.md · experimental_log.md · template.tex · conference_guidelines.md
+drafts/     intro_relwork.tex · paper.tex      ← hand edits go here, not in final/
+render/     compose_paper.py · render_figures.py
+figures/    the selected renders + captions.json
+final/      paper.tex · paper.pdf · refs.bib · figures/   ← the deliverable
 ```
 
-`final/` is flat and self-contained by design: `paper.tex` refers to
-`figures/...` and `\bibliography{refs}` with no parent traversal, so it compiles
-both here and in a sandboxed LaTeX editor.
+`final/` is flat and self-contained: `paper.tex` refers to `figures/...` and
+`\bibliography{refs}` with no parent traversal, so it compiles here and in a
+sandboxed LaTeX editor. It is a **build output** — re-derive it with `render/`
+rather than hand-editing, and put layout changes in `compose_paper.py`, which
+rebuilds `drafts/paper.tex` from `intro_relwork.tex` on every run.
 
-## Conventions
+## Open
 
-- **Slug names the subject, not the venue.** Venues change; a resubmission
-  should not need a new directory. The target venue lives in the paper's README
-  and in `inputs/conference_guidelines.md`.
-- **Figures are rendered from sealed results**, never drawn by a model. The
-  figure-provenance gate strips anything it cannot trace to a real render, so
-  `render/` scripts read `results/*.json` and retype no value.
-- **`final/` is a build output.** Re-derive it by re-running the pipeline rather
-  than hand-editing it; hand-edits belong in `drafts/` or the inputs.
+Nine rounds of review are done, plus a six-reviewer audit whose 52 findings are
+addressed bar one: three primary results sit in the appendix rather than the
+body, because bringing any back needs about a page of body space that nine pages
+does not have.
 
-## Index
+Two things outside the paper: the sealed-authority release decision, which is
+irreversible once public, and `iclr2027_conference.sty`, which is unpublished and
+will reflow every page when it lands.
 
-| Paper | Target | Status |
-| --- | --- | --- |
-| [`solver-certificate-decomposition/`](solver-certificate-decomposition/) | ICLR 2027 | Body ends p9 at the template's own geometry; 16pp total. Nine review rounds; the round-9 audit's 52 findings are addressed bar one. `verify.py --all` 9/9. |
-
-
-## Two rules the pipeline does not enforce
-
-- **Scripts anchor on the paper directory**, never a fixed depth from the repo
-  root — a paper that moves otherwise silently writes into the wrong tree.
-- **Layout lives in `render/compose_paper.py`**, not in `drafts/paper.tex`. The
-  composer rebuilds from `intro_relwork.tex`, so a hand-edited column switch or
-  page trim is discarded on the next run.
+At exactly 9 pages of body, anything added needs something removed.
