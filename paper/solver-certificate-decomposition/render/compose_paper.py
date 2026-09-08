@@ -64,10 +64,16 @@ def apply_layout(src: str) -> str:
     # columnsep keeps the class default rather than a widened value.
     src = src.replace("\\setlength{\\parskip}{2pt}",
                       "\\setlength{\\parskip}{2pt}\n\\sloppy\n\\emergencystretch=2em\n"
-                      "\\usepackage{stfloats}\n"
                       "\\setcounter{topnumber}{3}\n"
                       "\\setcounter{dbltopnumber}{3}\n"
                       "\\setcounter{totalnumber}{4}", 1)
+    # Audit #46: the type1 Times from \\usepackage{times} emits fi/fl as
+    # U+FB01/FB02 with no ToUnicode map, so a reviewer searching the PDF for
+    # "certificate" got zero hits (53 word-forms affected). newtxtext is the
+    # same Times design with a proper map. Rejected alternatives: Times New
+    # Roman via fontspec fixes extraction but has no small-caps face, and the
+    # paper sets every arm name in \\textsc; STIX Two Text loses them as well.
+    src = src.replace("\\usepackage{times}", "\\usepackage{newtxtext}", 1)
     src = src.replace("\\usepackage{xcolor}",
                       "\\usepackage{xcolor}\n\\usepackage{colortbl}\n\\usepackage{microtype}\n"
                       # OPEN, audit #46: xdvipdfmx emits fi/fl as the precomposed
@@ -98,7 +104,11 @@ def apply_layout(src: str) -> str:
                                                    "\\centering\\footnotesize", 1) + src[end:]
     SPANNING = tuple((lab, "table") for lab in (
         "tab:panels", "tab:edges", "tab:arms",
-        "tab:detection", "tab:models")) + (("fig:arms", "figure"),)
+        "tab:detection", "tab:models")) + tuple(
+        # #52: both were authored ~6in and placed at \columnwidth, a 44-54%
+        # shrink that set 8.5pt type at 3-5pt. They are appendix floats, so
+        # full width costs no body space.
+        (lab, "figure") for lab in ("fig:arms", "fig:replication", "fig:detection"))
     for label, env in SPANNING:
         span = float_block(src, label, env)
         if span is None:
@@ -113,7 +123,11 @@ def apply_layout(src: str) -> str:
     src = src.replace("width=\\textwidth]{figures/arm_decomposition",
                       "width=0.86\\textwidth]{figures/arm_decomposition")
     src = src.replace("width=0.8\\textwidth]{figures/substrate_size_curve",
-                      "width=\\columnwidth]{figures/substrate_size_curve")
+                      "width=0.92\\textwidth]{figures/substrate_size_curve")
+    src = src.replace("width=\\columnwidth]{figures/validity_share_replication",
+                      "width=0.92\\textwidth]{figures/validity_share_replication")
+    src = src.replace("width=\\columnwidth]{figures/detection_response_distribution",
+                      "width=0.92\\textwidth]{figures/detection_response_distribution")
     # --- supporting floats to an appendix -----------------------------------
     # The venue caps main text at 9 pages; references and appendix are exempt.
     # These six are supporting: four figures whose numbers already appear in a

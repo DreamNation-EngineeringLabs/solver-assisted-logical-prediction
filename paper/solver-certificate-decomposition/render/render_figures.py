@@ -48,7 +48,7 @@ def _clean(ax, keep=("left", "bottom")):
 def fig_b14_factorial():
     r = json.loads((RES / "b14_posthoc_2x2_reanalysis_v1.json").read_text())
     c, e = r["factorial_2x2"]["cells"], r["factorial_2x2"]["edges"]
-    fig, ax = plt.subplots(figsize=(6.1, 3.7))
+    fig, ax = plt.subplots(figsize=(3.2, 2.6))   # placed at \columnwidth = 3.21in
     ax.set_xlim(0, 12.4); ax.set_ylim(0, 9.0); ax.axis("off")
 
     W, H = 3.0, 2.3
@@ -126,7 +126,7 @@ def fig_b15_arms():
     cols = [kind.get(a, GREY) for a in order]
     y = range(len(order))
 
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.9, 3.4), sharey=True,
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(5.6, 2.9), sharey=True,   # 0.86\textwidth
                                  gridspec_kw={"width_ratios": [1.45, 1], "wspace": .08})
     a1.barh(y, acc, color=cols, height=.62)
     a1.set_xlim(0, n * 1.13); a1.set_xlabel(f"correct, entailed items (of {n})")
@@ -173,7 +173,7 @@ def fig_b16_size():
     chance = r["chance_balanced_accuracy"] * 100
     y = list(range(len(arms)))
 
-    fig, axes = plt.subplots(2, 5, figsize=(7.3, 3.7), sharex=True, sharey=True,
+    fig, axes = plt.subplots(2, 5, figsize=(6.0, 3.2), sharex=True, sharey=True,   # 0.92\textwidth
                              gridspec_kw={"wspace": .16, "hspace": .45})
     for ax, m in zip(axes.ravel(), ms):
         cell = r["models"][m]["arms"]
@@ -247,7 +247,7 @@ def fig_b15_replication():
     H, G = .32, .19
     XMAX = 136
 
-    fig, ax = plt.subplots(figsize=(6.0, 2.8))
+    fig, ax = plt.subplots(figsize=(6.0, 2.6))   # promoted to figure*, 0.92\textwidth
     ax.barh([i - G for i in y], val, height=H, color=BLUE, zorder=2)
     ax.barh([i + G for i in y], sur, height=H, color=VERM, zorder=2)
     for i, (v, u) in enumerate(zip(val, sur)):
@@ -304,13 +304,18 @@ def fig_b18_order():
     keys = [k for k in ("qwen2p5_3b_4bit", "qwen2p5_3b_bf16", "gemma3_4b_b15")
             if k in r["checkpoints"]]
     cols = dict(zip(keys, (BLUE, VERM, GREEN)))
+    # #52: colour alone did not separate these three. Marker and dash pattern
+    # now carry the identity too, so the figure survives greyscale and CVD.
+    mks = dict(zip(keys, ("o", "s", "^")))
+    dsh = dict(zip(keys, ((0, ()), (0, (4, 1.6)), (0, (1, 1.4)))))
 
     fig, ax = plt.subplots(figsize=(3.3, 2.35))
     for k in keys:
         c = r["checkpoints"][k]
         gaps = sorted(int(g) for g in c["accuracy_by_abs_gap"])
         acc = [c["accuracy_by_abs_gap"][str(g)]["acc"] * 100 for g in gaps]
-        ax.plot(gaps, acc, "-o", color=cols[k], lw=1.5, ms=3.4, zorder=3, label=nice[k])
+        ax.plot(gaps, acc, marker=mks[k], linestyle=dsh[k], color=cols[k], lw=1.5,
+                ms=3.6, zorder=3, label=nice[k])
         ident = c["identity_correct_entailed"] / r["n_entailed"] * 100
         ax.axhline(ident, color=cols[k], lw=.8, linestyle=(0, (2, 3)), zorder=1)
     ax.set_xlabel("|gap| between the final rule and its premise", fontsize=7.4)
@@ -343,7 +348,7 @@ def fig_b17_detection():
     labels = [("Unknown", BLUE), ("No", VERM), ("Yes", GREEN)]
     H, G = .22, .25
 
-    fig, axes = plt.subplots(1, len(keys), figsize=(7.3, 2.9), sharey=True,
+    fig, axes = plt.subplots(1, len(keys), figsize=(6.0, 2.6), sharey=True,   # 0.92\textwidth
                              gridspec_kw={"wspace": .12})
     for ax, key in zip(np.atleast_1d(axes), keys):
         ck = r["checkpoints"][key]

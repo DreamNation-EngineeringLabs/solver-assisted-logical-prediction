@@ -10,7 +10,7 @@
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{times}
+\usepackage{newtxtext}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
@@ -30,7 +30,6 @@
 \setlength{\parskip}{2pt}
 \sloppy
 \emergencystretch=2em
-\usepackage{stfloats}
 \setcounter{topnumber}{3}
 \setcounter{dbltopnumber}{3}
 \setcounter{totalnumber}{4}
@@ -962,9 +961,9 @@ followed to the wrong answer on 189 of 192 items.}
 \label{fig:arms}
 \end{figure*}
 
-\begin{figure}[tb]
+\begin{figure*}[tb]
 \centering
-\includegraphics[width=\columnwidth]{figures/validity_share_replication.png}
+\includegraphics[width=0.92\textwidth]{figures/validity_share_replication.png}
 \caption{The surface and validity components on three checkpoints. Gemma-3-4B's
 surface component is $+58.3$pp against $+1.0$pp for the two Qwen checkpoints.
 Bars give the decomposition against the \textsc{irrelevant} control; the share
@@ -973,18 +972,18 @@ against what the model manages unaided. The two coincide on the Qwen checkpoints
 which score $0/96$ with no certificate, and diverge only where a substrate has
 competence of its own.}
 \label{fig:replication}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[tb]
+\begin{figure*}[tb]
 \centering
-\includegraphics[width=\columnwidth]{figures/detection_response_distribution.png}
+\includegraphics[width=0.92\textwidth]{figures/detection_response_distribution.png}
 \caption{Three-candidate response distribution, three checkpoints, four arms.
 Dotted and dashed lines mark the \textsc{none} and \textsc{irrelevant} abstention
 baselines, $4.7$pp apart at 4-bit and $34.9$pp at bfloat16. A
 broken chain lowers abstention against \emph{both} references on every
 checkpoint --- the opposite of the direction validity detection predicts.}
 \label{fig:detection}
-\end{figure}
+\end{figure*}
 
 \begin{figure}[tb]
 \centering
