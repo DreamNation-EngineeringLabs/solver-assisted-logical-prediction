@@ -59,33 +59,12 @@ def apply_layout(src: str) -> str:
     """
     src = src.replace("\\documentclass[10pt]{article}",
                       "\\documentclass[10pt,twocolumn]{article}", 1)
-    src = src.replace("\\usepackage[letterpaper,margin=1in]{geometry}",
-                      "\\usepackage[letterpaper,margin=0.9in,columnsep=0.28in]{geometry}", 1)
+    # The venue forbids altering margins, font sizes or line spacing. The
+    # template's geometry line is therefore left exactly as supplied, and
+    # columnsep keeps the class default rather than a widened value.
     src = src.replace("\\setlength{\\parskip}{2pt}",
                       "\\setlength{\\parskip}{2pt}\n\\sloppy\n\\emergencystretch=2em\n"
-                      # twelve floats at the class defaults cost roughly half a
-                      # page of white band around captions and float boundaries.
-                      "\\setlength{\\abovecaptionskip}{4pt}\n"
-                      "\\setlength{\\belowcaptionskip}{0pt}\n"
-                      "\\setlength{\\textfloatsep}{10pt plus 2pt minus 2pt}\n"
-                      "\\setlength{\\dbltextfloatsep}{10pt plus 2pt minus 2pt}\n"
-                      "\\setlength{\\floatsep}{8pt plus 2pt minus 2pt}\n"
-                      "\\setlength{\\dblfloatsep}{8pt plus 2pt minus 2pt}\n"
-                      "\\setlength{\\intextsep}{8pt plus 2pt minus 2pt}\n"
-                      # Six body floats, all [t]-only, queue and drift pages
-                      # past the text discussing them -- tab:models was landing
-                      # two pages after its section and pushing the Limitations
-                      # off page 9. The class defaults reserve 20% of every page
-                      # for text and cap spanning floats at 70% of a page top;
-                      # relaxing those lets a float sit on the page it belongs
-                      # to. stfloats additionally permits [b] for table*/figure*.
                       "\\usepackage{stfloats}\n"
-                      "\\renewcommand{\\topfraction}{0.92}\n"
-                      "\\renewcommand{\\dbltopfraction}{0.92}\n"
-                      "\\renewcommand{\\bottomfraction}{0.75}\n"
-                      "\\renewcommand{\\textfraction}{0.07}\n"
-                      "\\renewcommand{\\floatpagefraction}{0.80}\n"
-                      "\\renewcommand{\\dblfloatpagefraction}{0.80}\n"
                       "\\setcounter{topnumber}{3}\n"
                       "\\setcounter{dbltopnumber}{3}\n"
                       "\\setcounter{totalnumber}{4}", 1)
@@ -178,25 +157,25 @@ TITLE = ("What a Language Model Does with a Solver Certificate:\\\\\n"
 ABSTRACT = r"""
 Solver-, tool- and retrieval-augmented systems report large accuracy gains,
 routinely read as evidence that the model used the supplied material. Two
-mechanisms give the same number: reading a supplied answer, and reasoning over
-supplied state. The standard control, a same-shape irrelevant record, separates
-neither. We build one that does, holding every surface property fixed while destroying validity alone, and apply it across four sealed experiments and two
-robustness studies, $NSCOREDRESPONSES$ scored responses re-derivable from
+mechanisms give the same number --- reading a supplied answer, and reasoning over
+supplied state --- and the standard control, a same-shape irrelevant record,
+separates neither. We build one that does, holding every surface property fixed
+while destroying validity alone, across four sealed experiments and two
+robustness studies: $NSCOREDRESPONSES$ scored responses, re-derivable from
 released receipts.
 
 The decomposition is the contribution; what it returns is not. The validity
-share is $98.3\%$ on one checkpoint and $40.4$--$51.4\%$ on another depending on
-the denominator, so a single-model mechanism result should not be generalised,
-ours included. Two negative results replicate everywhere: given a valid-looking
-certificate whose fabricated final rule establishes the negation, models follow
-it on $189$, $186$ and $192$ of $192$ items; and a three-candidate test refutes
-the reading that they detect invalidity at all, the strongest substrate
-abstaining on $0$ of $192$ broken certificates while completing $76$.
+share is $98.3\%$ on one checkpoint and $40.4$--$51.4\%$ on another, so a
+single-model mechanism result should not be generalised, ours included. Two
+negative results replicate everywhere: given a certificate whose fabricated final
+rule establishes the negation, models follow it on $189$, $186$ and $192$ of
+$192$; and a three-candidate test refutes the reading that they detect
+invalidity, the strongest substrate abstaining on $0$ of $192$ broken
+certificates while completing $76$.
 
-We also report what the design cannot support: the $2\times2$ is
-ceiling-limited, viability is a property of (model $\times$ arm $\times$
-runtime) rather than of a model, and two prespecified criteria of our own were
-invalidated by our own data.
+We report the design's limits too: the $2\times2$ is ceiling-limited, viability
+is a property of (model $\times$ arm $\times$ runtime) not of a model, and two
+prespecified criteria of our own were invalidated by our own data.
 """.strip()
 
 BODY = r"""
@@ -241,9 +220,9 @@ literal is false. All 192 items are certified by forward-closure saturation
 (\cref{sec:closure}) to leave the query \emph{undetermined} under the displayed
 lines. The decomposition follows:
 \begin{align}
-\text{total state effect} &= \textsc{truncate\_1} - \textsc{irrelevant},\\
-\text{surface component} &= \textsc{broken\_chain} - \textsc{irrelevant},\\
-\text{validity component} &= \textsc{truncate\_1} - \textsc{broken\_chain}.
+\text{total state} &= \textsc{truncate\_1} - \textsc{irrelevant},\\
+\text{surface} &= \textsc{broken\_chain} - \textsc{irrelevant},\\
+\text{validity} &= \textsc{truncate\_1} - \textsc{broken\_chain}.
 \end{align}
 
 Four companion arms separate the remaining confounds.
@@ -738,10 +717,9 @@ fabricated and absent from the theory, and it does not.
 
 \subsection{Which models can serve as the interface}
 
-Experiment 3 scores ten models on the three-class panel in all five arms, and
-\cref{sec:runtime} adds two more on a second runtime: twelve models in all, ten
-on the first runtime, eleven on the second, nine in common (one of the ten does
-not load there). We had
+Experiment 3 scores ten models on the three-class panel in all five arms;
+\cref{sec:runtime} adds two more on a second runtime, twelve in all, nine common
+to both (one of the ten does not load there). We had
 declared that a model relays non-determination at $\geq 80\%$ recall on
 undetermined items with full solver material. \textbf{Eight of ten passed, and
 the criterion was invalid}: single-class recall is maximised by answering
@@ -750,7 +728,7 @@ $62$--$96\%$ of items, three never emitting \texttt{No}. We replace it
 \textbf{post hoc} with a floor on every class, minimum per-class recall
 $\geq 0.50$, retaining both verdicts in the released results.
 \Cref{tab:models} reports all five arms for every model, with the per-arm
-verdict; \cref{fig:size} plots the ten ordered by parameter count.
+verdict; \cref{fig:size} plots the ten by parameter count.
 
 \begin{table}[t]
 \centering
@@ -784,10 +762,9 @@ Qwen2.5-7B   &  7.6 & 33.3/0.00 & 33.3/0.00 & \textbf{97.9/0.94} & 67.2/0.02 & 7
 \end{table}
 
 \textbf{Viability is a property of (model $\times$ arm $\times$ runtime), not of
-a model} --- the third factor is \cref{sec:runtime}'s. The
-decisive row is Qwen2.5-7B, whose minimum per-class recall falls to $0.141$
-under \textsc{full} from $0.938$ under \textsc{conclusion\_only}, where it is
-second best in the sweep at $97.9\%$. Its contradicted-class recall collapses \emph{when the proof
+a model} --- the third factor is \cref{sec:runtime}'s. The decisive row is Qwen2.5-7B, whose minimum per-class recall falls from
+$0.938$ under \textsc{conclusion\_only}, where it is second best in the sweep, to
+$0.141$ under \textsc{full}. Its contradicted-class recall collapses \emph{when the proof
 state is supplied}: it can express three outcomes, and the proof state is what breaks it. \textbf{Supplying proof state degrades three of ten
 models} here, two of them otherwise among the strongest substrates. On the CUDA
 re-scoring the same measure gives two of eleven, which is the runtime factor of
@@ -801,9 +778,8 @@ harm runs $0.000$, $0.000$, $-0.219$, $-0.688$, $+0.062$: it peaks in a mid-rang
 band and is \emph{absent} at the top, so proof state is not more dangerous for
 larger interfaces.
 
-Neither new model clears the floor. Llama-3.1-8B is \textbf{degenerate in every
-arm}, minimum per-class recall $0.000$ in all five despite balanced accuracies up
-to $66.7\%$, which is the strongest single datum against a size floor. Qwen2.5-14B clears no arm either, peaking at $0.484$, so ``absent at the
+Neither new model clears the floor. Llama-3.1-8B is \textbf{degenerate in every arm} despite balanced accuracies up
+to $66.7\%$, the strongest single datum against a size floor. Qwen2.5-14B clears no arm either, peaking at $0.484$, so ``absent at the
 top'' must not be read as ``14B works''. Model is not a randomised factor,
 so these comparisons are descriptive.
 
@@ -846,16 +822,12 @@ baseline, on ten models, from receipts already collected. The mean state main
 effect is $+8.7$pp against a mean answer main effect of $+21.6$pp, with a mean
 interaction of $-15.9$pp; \textsc{conclusion\_only} exceeds
 \textsc{proof\_prefix} in \textbf{8 of 10} models and equals or exceeds
-\textsc{full} in $6$ of $10$. The answer channel dominates the state channel
-across the model set, a more general form of the pattern \cref{tab:edges} shows on one model, and Experiment 1's state main effect of $+22.4$pp is not
-typical of it.
-
-That mean averages over four responders whose minimum per-class recall is $0.000$
-in every arm, three with negative state effects; excluding them it is $+14.7$pp
-against $+28.5$pp for the answer channel. So the cross-model state effect is not
-less than half the single-model estimate, and we do not claim it is. The ordering
-survives either subset --- answer above state, and in $8$ of $10$ models
-individually.
+\textsc{full} in $6$ of $10$. The answer channel dominates the state channel across the model set, and
+Experiment 1's state main effect of $+22.4$pp is not typical of it. That mean
+averages over four responders degenerate in every arm, three with negative state
+effects; excluding them gives $+14.7$pp against $+28.5$pp, so the cross-model
+state effect is not less than half the single-model estimate and we do not claim
+it is. The ordering survives either subset.
 
 \section{Limitations}
 
@@ -915,14 +887,12 @@ substantially --- a format-sensitivity result as much as a detection one
 same instruction, so the contrast is internally valid, but the absolute rates are
 not format-independent.
 
-\textbf{Permutation sampling.} Eight orderings per item is a sample of $8!$, and
-the gap-versus-direction split of \cref{sec:order} is read off permutations that
-happened to land in each cell rather than a design that fixed them.
+\textbf{Permutation sampling.} Eight orderings per item is a sample of $8!$; the
+split it supports is post hoc, as noted above.
 
 \textbf{Quantisation.} Experiments 1 and 2 use a 4-bit checkpoint and Experiment
-3 bfloat16, so they describe different artefacts of the same model, and 4-bit
-quantisation moves exactly what we measure --- next-token margins and criterion
-placement. \Cref{sec:replication} bounds it: bfloat16 raises
+3 bfloat16, so they describe different artefacts of the same model, and 4-bit quantisation
+moves exactly what we measure. \Cref{sec:replication} bounds it: bfloat16 raises
 \textsc{truncate\_1} from 59 to 72 of 96 while leaving the share essentially
 unchanged, so precision affects magnitude more than composition. We nonetheless
 do not treat the two as one artefact.

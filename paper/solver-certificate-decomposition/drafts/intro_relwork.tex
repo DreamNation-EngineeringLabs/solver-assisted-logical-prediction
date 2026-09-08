@@ -38,12 +38,9 @@ ABSTRACT
 \section{Introduction}
 
 Pairing a language model with an external solver, tool or retrieval index
-reliably raises accuracy on tasks the model cannot do alone. Systems that
-translate a problem into a formal representation, dispatch it to a symbolic
-engine and return the verdict through the model report large end-to-end gains
-across logical reasoning, program execution, API use, theorem proving and
-retrieval-supported generation
-\citep{pan2023logiclm,olausson2023linc,ye2023satlm,gao2022pal,schick2023toolformer,yang2023leandojo,lewis2020retrievalaugmented}.
+reliably raises accuracy on tasks the model cannot do alone. Systems that translate a problem into a formal representation, dispatch it to a
+symbolic engine and return the verdict through the model report large end-to-end
+gains \citep{pan2023logiclm,olausson2023linc,ye2023satlm,gao2022pal,schick2023toolformer,yang2023leandojo,lewis2020retrievalaugmented}.
 Those gains are routinely read as evidence that the model \emph{used} the
 supplied material.
 
@@ -61,14 +58,10 @@ query's subject and predicate in adjacent lines, so a model that only checks
 surface co-occurrence reproduces every number a reasoning model would.
 
 Separating the two requires a control that holds surface form fixed and destroys
-validity alone. This paper builds one and applies it across four sealed
-experiments on frozen small models, scoring by direct next-token likelihood over
-verified single-token candidates so that no free text is parsed: a five-arm
-factorial read as a $2\times2$ of \emph{answer evidence} $\times$ \emph{proof
-state}; ten arms that hold every surface property fixed while breaking only the
-logic; a three-class panel, certified by forward-closure saturation, across ten
-models; and a rescoring of the broken-chain items with a third candidate. Two
-robustness studies follow, on line order and on the inference runtime.
+validity alone. This paper builds one and applies it across four sealed experiments on frozen
+small models --- scoring by direct next-token likelihood over verified
+single-token candidates, so no free text is parsed --- with two robustness studies
+on line order and on the inference runtime.
 
 \textbf{The method is the contribution; what it returns is model-specific.}
 Breaking validity alone removes almost the whole state effect on one checkpoint, a validity share of $98.3\%$, and $40.4\%$ on another, which answers $58$
@@ -100,101 +93,82 @@ classes; (iv) evidence that apparent use of proof state can be surface
 exploitation, that the behaviour is completion rather than detection, and that no
 checkpoint resists a corrupted certificate; and (v) a sweep over twelve models
 \citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}
-showing viability to be a property of (model $\times$ arm $\times$ runtime),
-including one model whose verdict changes with the inference stack alone.
+showing viability to be a property of (model $\times$ arm $\times$ runtime), one
+model's verdict changing with the inference stack alone.
 
 \section{Related Work}
 
-\subsection{Faithfulness of displayed reasoning}
+\subsection{Faithfulness, and the solver-augmented pipeline}
 
-Chain-of-thought prompting made intermediate steps part of the output
-\citep{wei2022chainofthought}, and a body of work then asked whether the answer
-rests on them. \citet{turpin2023language} show explanations systematically omit
-biasing features that demonstrably drive the prediction.
-\citet{lanham2023measuring} intervene on the trace, truncating it and injecting mistakes, and read the change in the answer as a measure of
-conditioning; they find wide variation and that mistakes are often ignored. The
-same manipulations have been applied to naturally worded prompts
-\citep{arcuschin2025chainofthought} and to models trained for long traces, where
-answer-determining hints are verbalised only a minority of the time
-\citep{chen2025reasoning}; \citet{lyu2023faithful} respond architecturally,
-making the trace a program executed by a solver.
+Chain-of-thought made intermediate steps part of the output
+\citep{wei2022chainofthought}, and a literature then asked whether the answer
+rests on them: explanations omit the biasing features that demonstrably drive the
+prediction \citep{turpin2023language}; truncating a trace and injecting mistakes
+into it reveals wide variation in conditioning, with injected mistakes often
+ignored \citep{lanham2023measuring,arcuschin2025chainofthought}; models trained
+for long traces verbalise answer-determining hints only a minority of the time
+\citep{chen2025reasoning}; and one response is architectural, making the trace a
+program a solver executes \citep{lyu2023faithful}. Neurosymbolic pipelines put
+the formal step outside the model altogether --- translating into a symbolic
+language and repairing from solver errors \citep{pan2023logiclm}, parsing into
+first-order logic for a prover \citep{olausson2023linc}, dispatching a
+declarative specification \citep{ye2023satlm}, emitting a program for an
+interpreter \citep{gao2022pal} --- and the pattern extends to self-supervised API
+use \citep{schick2023toolformer}, premise selection \citep{yang2023leandojo} and
+retrieval \citep{lewis2020retrievalaugmented}.
 
-The limitation is one of object rather than method. This literature intervenes on
-\emph{model-generated} traces, asking whether the model's own account is honest.
-It does not address \emph{externally supplied, formally verified} state, where
-the question inverts: does the model track a derivation it did not produce? We
-adapt truncation and mistake injection to solver certificates and add a control
-this literature does not use --- an invalid certificate matched to a valid one on
-every surface property, certified per item not to settle the query. That also
-changes what a null means: ignoring an injected mistake in one's own trace is
-unfaithful, whereas following a corrupted external certificate is unsafe.
+Both lines leave our question open. The first intervenes on \emph{model-generated}
+traces, asking whether the model's own account is honest; ours is
+\emph{externally supplied, formally verified} state, where the question inverts to
+whether the model tracks a derivation it did not produce, and where a null means
+something different --- ignoring a mistake in one's own trace is unfaithful,
+whereas following a corrupted external certificate is unsafe. The second reports
+end-to-end accuracy, which cannot separate the solver's \emph{answer} from its
+\emph{state}, and assumes the solver correct, so behaviour under
+wrong-but-well-formed output is unmeasured --- though the model side is
+demonstrably not neutral to context, with irrelevant material degrading accuracy
+\citep{shi2023large} and coherent evidence overriding parametric knowledge
+\citep{xie2023adaptive}. We decompose the two channels, and add both a
+surface-matched invalid certificate and one that is valid-looking but points the
+wrong way.
 
-\subsection{Solver-augmented and tool-augmented reasoning}
-
-Neurosymbolic pipelines put the formal step outside the model: translating into
-a symbolic language and repairing from solver errors \citep{pan2023logiclm},
-parsing into first-order logic for a prover \citep{olausson2023linc},
-dispatching a declarative specification \citep{ye2023satlm}, or emitting a
-program for an interpreter \citep{gao2022pal}. The pattern extends to
-self-supervised API use \citep{schick2023toolformer}, premise selection in
-interactive theorem proving \citep{yang2023leandojo}, and retrieval as general
-external evidence \citep{lewis2020retrievalaugmented}.
-
-All report end-to-end accuracy and attribute the gain to the pipeline, leaving
-two things open. The \emph{reasoning state}'s contribution is not separated from
-the \emph{answer}'s, since the solver's output contains both. And the solver is
-assumed correct, so behaviour under wrong-but-well-formed output is unmeasured
---- though the model side is demonstrably not neutral to context, with irrelevant
-material degrading accuracy \citep{shi2023large} and coherent evidence
-overriding parametric knowledge \citep{xie2023adaptive}. We decompose the
-solver's contribution into an answer channel and a state channel, and add an arm
-whose certificate is valid-looking but points the wrong way.
-
-\subsection{Synthetic deductive reasoning benchmarks}
+\subsection{Benchmarks, and the limits of accuracy}
 
 The task family descends from rule-based deductive datasets in natural language:
-RuleTaker \citep{clark2020transformers}, ProofWriter, which added generated
-proofs and open-world semantics with an explicit unknown class
-\citep{tafjord2020proofwriter}, PrOntoQA, whose chains parse into symbolic proofs
-and whose individual steps are usually correct while proof planning is not
-\citep{saparov2022language}, and FOLIO's human-written premises with verified
-annotations \citep{han2022folio}. Two properties matter here: order effects are
-large in deductive prompting \citep{chen2024premise}, and these sets are public
-and predate the models evaluated on them, so contamination cannot be excluded
-\citep{deng2024investigating,golchin2023time,wu2023reasoning}.
+RuleTaker \citep{clark2020transformers}, ProofWriter, which added generated proofs
+and open-world semantics with an explicit unknown class
+\citep{tafjord2020proofwriter}, PrOntoQA, whose individual steps are usually
+correct while proof planning is not \citep{saparov2022language}, and FOLIO's
+human-written premises \citep{han2022folio}. Order effects are large in deductive
+prompting \citep{chen2024premise}, and these sets are public and predate the
+models evaluated on them, so contamination cannot be excluded
+\citep{deng2024investigating,golchin2023time}; counterfactual variants of familiar
+tasks show how much apparent competence rests on familiarity
+\citep{wu2023reasoning}. They supply items and proofs but not the matched
+adversarial certificate variants an attribution question needs, so we generate
+items after model release with per-item nonce vocabularies and build the matched
+invalid, misleading, order-scrambled and depth-truncated certificates ourselves.
 
-They supply items and proofs but not the matched adversarial certificate variants
-an attribution question needs, so we generate items after model release with
-per-item nonce vocabularies and build the matched invalid, misleading,
-order-scrambled and depth-truncated certificates ourselves. A public open-world
-corpus checks the forward-closure certifier only; no item from it is scored.
-
-\subsection{Response bias and the limits of accuracy}
-
-Prompted classification is biased rather than merely noisy.
-Few-shot accuracy swings from near chance to near state of the art with format
-and example order, because the model carries a prior toward particular answer
-strings \citep{zhao2021calibrate}; option order alone moves multiple-choice
-accuracy \citep{pezeshkpour2023large,zheng2023large}; and likelihood scoring adds
-a confound, since strings compete for probability mass independently of
-correctness \citep{holtzman2021surface}. On abstention, models can partially
-assess their own answers \citep{kadavath2022language} and be evaluated on
-recognising unanswerable questions \citep{yin2023large}.
-
-Evaluation practice in solver-augmented reasoning has not absorbed this: bare
-accuracy remains the reported quantity. On a balanced panel a degenerate
-single-label responder is indistinguishable from a chance-level competent one,
-and both from a partial discriminator with a shifted criterion. Signal detection
-theory separates exactly these
-\citep{macmillan1991detection,stanislaw1999calculation}, and this paper
-therefore reports $d'$ and criterion $c$ alongside accuracy for every arm, with
-paired significance from the exact McNemar test \citep{mcnemar1947note} and
-interval estimates from the bias-corrected accelerated bootstrap
-\citep{efron1987better}. Two concrete cases here motivate the practice rather than
-illustrate it: an arm scoring $50.0\%$ on a balanced panel has $d' = 0.00$, and a
-prespecified criterion on a single class's recall was passed by models answering
-one label almost everywhere. One is a criterion of our own, replaced post hoc and
-labelled as such.
+Prompted classification is biased rather than merely noisy: few-shot accuracy
+swings from near chance to near state of the art with format and example order,
+because the model carries a prior toward particular answer strings
+\citep{zhao2021calibrate}; option order alone moves multiple-choice accuracy
+\citep{pezeshkpour2023large,zheng2023large}; likelihood scoring adds a confound,
+since strings compete for probability mass independently of correctness
+\citep{holtzman2021surface}; and abstention is its own capability
+\citep{kadavath2022language,yin2023large}. Evaluation in solver-augmented
+reasoning has not absorbed this, and bare accuracy remains the reported quantity:
+on a balanced panel a degenerate single-label responder is indistinguishable from
+a chance-level competent one, and both from a partial discriminator with a
+shifted criterion. Signal detection theory separates exactly these
+\citep{macmillan1991detection,stanislaw1999calculation}, so we report $d'$ and
+criterion $c$ alongside accuracy for every arm, with paired significance from the
+exact McNemar test \citep{mcnemar1947note} and interval estimates from the
+bootstrap \citep{efron1987better}. Two concrete cases here motivate the practice
+rather than illustrate it: an arm scoring $50.0\%$ on a balanced panel has
+$d' = 0.00$, and a prespecified criterion on a single class's recall was passed by
+models answering one label almost everywhere. One is a criterion of our own,
+replaced post hoc and labelled as such.
 
 \section{Method}
 \section{Experiments}
