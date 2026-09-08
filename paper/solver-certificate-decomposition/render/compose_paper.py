@@ -74,6 +74,17 @@ def apply_layout(src: str) -> str:
     # Roman via fontspec fixes extraction but has no small-caps face, and the
     # paper sets every arm name in \\textsc; STIX Two Text loses them as well.
     src = src.replace("\\usepackage{times}", "\\usepackage{newtxtext}", 1)
+    # A heading must not be the last thing on a page. The appendix heading was
+    # stranded at the foot of the references page with every one of its floats
+    # overleaf; \clearpage starts it on its own page. The two penalties stop the
+    # same thing happening to a section or subsection heading in the body: TeX
+    # will not break within four lines of one, and the -3000 makes breaking just
+    # after a heading effectively forbidden.
+    src = src.replace("\\setlength{\\parskip}{2pt}",
+                      "\\setlength{\\parskip}{2pt}\n"
+                      "\\clubpenalty=10000\n\\widowpenalty=10000\n"
+                      "\\displaywidowpenalty=10000\n"
+                      "\\makeatletter\\@secpenalty=-3000\\makeatother\n", 1)
     src = src.replace("\\usepackage{xcolor}",
                       "\\usepackage{xcolor}\n\\usepackage{colortbl}\n\\usepackage{microtype}\n"
                       # OPEN, audit #46: xdvipdfmx emits fi/fl as the precomposed
@@ -104,7 +115,7 @@ def apply_layout(src: str) -> str:
                                                    "\\centering\\footnotesize", 1) + src[end:]
     SPANNING = tuple((lab, "table") for lab in (
         "tab:panels", "tab:edges", "tab:arms",
-        "tab:detection", "tab:models")) + tuple(
+        "tab:models")) + tuple(
         # #52: both were authored ~6in and placed at \columnwidth, a 44-54%
         # shrink that set 8.5pt type at 3-5pt. They are appendix floats, so
         # full width costs no body space.
@@ -150,6 +161,9 @@ def apply_layout(src: str) -> str:
     # #48: tab:sdt is the one appendix float the body can still take -- measured,
     # it lands on p5 beside the section that cites it and the body still ends p9.
     # The other eight each push the body to p10.
+    # tab:detection is slimmed to the three deltas but stays here: measured, a
+    # fourth body float pushes the body to p10 and no amount of prose cutting
+    # brings it back -- the cost is float placement, not words.
     APPENDIX = (("tab:panels", "table"), ("tab:edges", "table"),
                 ("tab:detection", "table"),
                 ("fig:arms", "figure"), ("fig:replication", "figure"),
@@ -162,7 +176,21 @@ def apply_layout(src: str) -> str:
         start, end = span
         moved.append(src[start:end])
         src = src[:start].rstrip("\n") + "\n\n" + src[end:].lstrip("\n")
+    # The heading was stranded at the foot of the references page with every one
+    # of its floats overleaf, because a heading cannot share a page with floats
+    # and nothing else. The orienting paragraph gives it company, which fixes
+    # the placement without a \clearpage -- measured, that costs a page more
+    # for the same result.
     tail = ("\n\\appendix\n\\section{Supporting Tables and Figures}\n\n"
+            "Supporting material for the results in the body. \\Cref{tab:panels} "
+            "inventories the sealed panels; \\cref{tab:edges} gives the four edges "
+            "of the $2\\times2$ with their adjusted $p$ values; \\cref{tab:detection} "
+            "the abstention deltas of \\cref{sec:detection}. The four figures plot "
+            "results whose values are already tabulated above: the ten arms "
+            "(\\cref{fig:arms}), the validity share across checkpoints "
+            "(\\cref{fig:replication}), the three-class response distribution "
+            "(\\cref{fig:detection}), the order profile (\\cref{fig:order}) and the "
+            "substrate ladder (\\cref{fig:size}).\n\n"
             + "\n\n".join(moved) + "\n\n")
     src = src.replace("\\end{document}", tail + "\\end{document}", 1)
 
@@ -195,8 +223,8 @@ The decomposition is the contribution; what it returns is not. The validity
 share is $98.3\%$ on one checkpoint and $40.4$--$51.4\%$ on another, so a
 single-model mechanism result should not be generalised, ours included. Two
 negative results hold on every checkpoint: reversing a rule and the premise it
-fires on costs accuracy, and given a certificate whose fabricated final rule
-establishes the negation, models follow it on $189$, $186$ and $192$ of $192$. We
+fires on costs accuracy, and all three follow a fabricated final rule to the wrong answer on $189$, $186$
+and $192$ of $192$ items. We
 find no positive evidence that any checkpoint verifies validity --- the strongest
 abstains on $0$ of $192$ broken certificates --- but report that the abstention
 test's direction depends on which reference arm it uses.
@@ -641,8 +669,7 @@ scores $14$ and $12$ of $96$ on the Qwen checkpoints and $86$ on Gemma-3-4B.
 Reading a certificate as a bag of statements is a checkpoint-level property too.
 
 \textbf{We therefore do not claim that solver-supplied state is used as inference
-in general.} On the checkpoint of \cref{sec:broken} it overwhelmingly is; on the
-strongest substrate in our sweep, between two-fifths and half of the effect survives the control, depending on the baseline. What generalises is the \emph{method}, not the value it returns.
+in general.} On the checkpoint of \cref{sec:broken} it overwhelmingly is; on the strongest substrate in our sweep, between two-fifths and half survives. What generalises is the \emph{method}, not the value it returns.
 
 One result does replicate without exception, and it is the negative one
 (\cref{sec:corruption}).
@@ -667,10 +694,9 @@ Corrupted solver output does not merely fail to help; it overrides the model's
 own strong default.
 
 The model therefore follows a valid-looking certificate that points the wrong
-way on 189 of 192 items. Read against the $98.3\%$ validity share, the two
-results are jointly informative: whatever the model is doing with a supplied
-derivation is sensitive to whether that derivation reaches the query, and it
-supplies no defence whatever when the derivation reaches the wrong conclusion.
+way on 189 of 192 items. Against the $98.3\%$ share the two are jointly informative: what the model does
+with a supplied derivation is sensitive to whether it reaches the query, and
+offers no defence when it reaches the wrong conclusion.
 \Cref{sec:detection} shows that sensitivity is completion rather than
 verification --- so the certificate is followed, not checked.
 
@@ -690,22 +716,20 @@ chain is broken; a pattern completer falls back to its default, which
 four arms.
 
 \begin{table}[t]
-\centering
-\caption{Three-candidate rescoring, all three checkpoints: \texttt{Unknown}
-responses out of 192 per arm, against three references. Detection predicts a
-\emph{rise} under \textsc{broken\_chain}. No checkpoint rises against the two
-records carrying no query-relevant material (\textsc{none}, \textsc{irrel.});
-both checkpoints with abstention headroom rise against the surface-matched
-\textsc{trunc\_1}. The sign is a function of the reference, which is why we rest
-no conclusion on it.}
+\centering\small
+\caption{Three-candidate rescoring: the change in \texttt{Unknown} rate under
+\textsc{broken\_chain}, in points of 192, against each of three references.
+Detection predicts a \emph{rise}. It falls against the two records carrying no
+query-relevant material and rises against the surface-matched \textsc{trunc\_1},
+so the sign is a function of the reference. Per-arm rates are in \cref{sec:detection}.}
 \label{tab:detection}
-\begin{tabular}{lrrrrrrr}
+\begin{tabular}{lrrr}
 \toprule
-Checkpoint & \textsc{none} & \textsc{irrel.} & \textsc{trunc\_1} & \textsc{broken} & $\Delta_{\textsc{none}}$ & $\Delta_{\textsc{irrel.}}$ & $\Delta_{\textsc{trunc\_1}}$ \\
+Checkpoint & $\Delta_{\textsc{none}}$ & $\Delta_{\textsc{irrel.}}$ & $\Delta_{\textsc{trunc\_1}}$ \\
 \midrule
-Qwen2.5-3B 4-bit & 153 ($79.7\%$) & 144 ($75.0\%$) & 21 ($10.9\%$) & 81 ($42.2\%$) & $-37.5$ & $-32.8$ & $\mathbf{+31.2}$ \\
-Qwen2.5-3B bf16  &  41 ($21.4\%$) & 108 ($56.2\%$) & 12 ($6.2\%$)  & 34 ($17.7\%$) & $-3.6$  & $-38.5$ & $\mathbf{+11.5}$ \\
-Gemma-3-4B       &   1 ($0.5\%$)  &  15 ($7.8\%$)  &  0 ($0.0\%$)  & \textbf{0} ($0.0\%$) & $-0.5$ & $-7.8$ & $0.0$ \\
+Qwen2.5-3B 4-bit & $-37.5$ & $-32.8$ & $\mathbf{+31.2}$ \\
+Qwen2.5-3B bf16  & $-3.6$  & $-38.5$ & $\mathbf{+11.5}$ \\
+Gemma-3-4B       & $-0.5$  & $-7.8$  & $0.0$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -742,8 +766,7 @@ broken certificate: it abstains \textbf{$0$ times in $192$} and answers
 \textbf{We find no positive evidence that any checkpoint verifies validity}, but
 we no longer claim this test refutes detection. The direct evidence is
 \cref{sec:corruption}, where all three follow a fabricated final rule to the wrong
-answer, which a model checking validity would not. \Cref{sec:mechanism} notes the design limit: the theory stays visible, so
-detecting the break and reading the theory look alike here.
+answer, which a model checking validity would not. \Cref{sec:mechanism} notes the design limit behind this.
 
 \subsection{Which models can serve as the interface}
 
@@ -877,13 +900,13 @@ tests the ordering directly: reversing the final rule and its premise costs
 accuracy on every checkpoint, while separating them does not, which rules out
 the adjacency reading we first gave this. Nor does it \emph{detect} invalidity, which
 \cref{sec:detection} tests directly and cannot establish, in either direction. \Cref{sec:replication} bounds
-the claim further: against the \textsc{irrelevant} control the share of the state effect that survives destroying validity ranges from $40.4\%$ to $98.6\%$, and from $51.4\%$ to
-$98.6\%$ against the unaided baseline.
+the claim further: against the \textsc{irrelevant} control the share of the state effect that survives destroying validity spans
+$40.4$--$98.6\%$ against \textsc{irrelevant}, $51.4$--$98.6\%$ against unaided.
 
 The full theory is visible in every arm, so the query stays derivable whatever
 the certificate says, and breaking a certificate is diagnostic only where the
 model scores $0/96$ from the theory alone --- true of both Qwen checkpoints and
-\emph{not} of Gemma-3-4B ($22/96$, $d' = 1.83$). A model using a broken
+not of Gemma-3-4B. A model using a broken
 certificate as a pointer back into the theory would be doing inference of a
 different kind; on Gemma-3-4B that is a live alternative rather than a
 hypothetical one, since $20$ of its $22$ unaided successes recur under
@@ -966,10 +989,8 @@ contribution and decline to generalise its value, ours included.
 \looseness=-1
 Three findings hold on every checkpoint, all negative. The inference is one step
 deep on the Qwen checkpoints, and degrades everywhere when the final rule
-precedes its premise. Detection we cannot establish either way: the abstention
-delta changes sign with the reference arm, though the strongest substrate abstains
-on $0$ of $192$ broken certificates. And nothing defends against a wrong apparatus: given a certificate whose
-fabricated final rule establishes the negation, the three answer incorrectly on
+precedes its premise. Detection we cannot establish either way: the abstention delta changes sign with
+the reference arm. And nothing defends against a wrong apparatus: the three answer incorrectly on
 $189$, $186$ and $192$ of $192$, inheriting its errors. Two criteria we had prespecified failed here: a recall floor on one class, gamed
 by models answering that class almost everywhere, and a $15$pp target an arm at
 $91.7\%$ could not reach. Both were caught only by reporting sensitivity and
