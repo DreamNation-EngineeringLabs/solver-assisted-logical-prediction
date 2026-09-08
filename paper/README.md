@@ -3,13 +3,16 @@
 Decomposing what a language model does with a solver certificate.
 **Target: ICLR 2027** (abstract 18 Sept 2026, paper 25 Sept 2026).
 
-Deliverable: [`final/paper.pdf`](final/paper.pdf) — 15 pages: 9 of main text at
-the venue's own geometry, references from p10, appendix from p12. 39 verified
-citations, 6 figures, 6 tables.
+Deliverable: [`final/paper.pdf`](final/paper.pdf) — 10 pages: 8 of main text at
+the venue's own geometry (cap is 9), references from p9, **no appendix**. 39
+verified citations, 4 figures, 5 tables, every one of them in the main text.
 
-Structured to be read, not queried: one subsection per claim (six in the whole
-paper), Results ordered as an argument rather than by experiment number, and the
-2×2 that is the contribution set as a pull figure on page 1.
+Written to be read, not queried. The body is 3,466 words, down from 5,749: the
+prose states the findings and the floats carry the detail, instead of narrating
+every result and then tabulating it again. Six subsections in the whole paper,
+down from 21. Results is three sections ordered as an argument — the instrument
+works / almost nothing it returns transfers / what does not vary — and the 2×2
+that is the contribution is a pull figure on page 1.
 
 ## Findings
 
@@ -56,9 +59,13 @@ rebuilds `drafts/paper.tex` from `intro_relwork.tex` on every run.
 ## Open
 
 Nine rounds of review are done, plus a six-reviewer audit whose 52 findings are
-addressed bar one, and a readability pass against Karpathy's paper-writing
-notes. Two primary results still sit in the appendix rather than the body
-(`fig:order`, `tab:detection`): measured, either one pushes the body to p10.
+all addressed, and a readability rewrite against Karpathy's paper-writing notes.
+Nothing is in an appendix any more.
+
+Three floats were dropped as strict duplicates of another: `fig:arms` (ten arms
+on one checkpoint — `tab:arms` has all three), `fig:size` (ten models —
+`tab:models` has twelve, with verdicts) and `tab:detection` (three deltas —
+`fig:detection` carries the distribution). `render_figures.py` still builds them.
 
 Two things outside the paper: the sealed-authority release decision, which is
 irreversible once public, and `iclr2027_conference.sty`, which is unpublished and
