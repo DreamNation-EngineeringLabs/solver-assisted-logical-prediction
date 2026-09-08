@@ -84,18 +84,11 @@ position ($22/96$ unaided), which is why its share is reported against two
 baselines. System-level effects are never upgraded into claims about the model's
 own reasoning.
 
-The contributions are: (i) an \emph{answer-evidence decomposition} separating
-solver-supplied answers from solver-supplied reasoning state; (ii) a
-\emph{surface-matched invalidity control} isolating validity from every
-co-occurring surface cue, certified per item; (iii) a \emph{forward-closure
-certifier} for underdetermined items, validated in three layers: $23{,}240/23{,}240$ against a public corpus whose
-labels share our inference fragment \citep{tafjord2020proofwriter}, nine
-adversarial theories, and a differential test against an independent engine; (iv) evidence that apparent use of proof state can be surface
-exploitation, that no checkpoint resists a corrupted certificate, and that the
-standard abstention test cannot decide whether invalidity is detected; and (v) a sweep over twelve models
-\citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}
-showing viability to be a property of (model $\times$ arm $\times$ runtime), one
-model's verdict changing with the inference stack alone.
+What is new is the instrument: an answer-evidence decomposition that separates
+solver-supplied answers from solver-supplied state, a surface-matched invalidity
+control certified per item, and a forward-closure certifier for underdetermined
+items. We apply it to twelve models
+\citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}.
 
 \section{Related Work}
 

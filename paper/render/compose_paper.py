@@ -169,7 +169,12 @@ def apply_layout(src: str) -> str:
     # the order the body cites them (it is cited in 5.3 but was numbered 5), and
     # placing the two single-column floats where they can share a page saves a
     # page: 17pp -> 16pp, measured.
-    APPENDIX = (("tab:panels", "table"), ("tab:edges", "table"),
+    # tab:edges is Experiment 1's reanalysis headline and now sits beside the
+    # section that reads it. fig:order was tested too and both together push the
+    # body to p10, so it stays here. What remains is the dataset inventory, the
+    # detection deltas (whose direction is reference-dependent anyway) and four
+    # figures whose values are already tabulated in a body table.
+    APPENDIX = (("tab:panels", "table"),
                 ("tab:detection", "table"),
                 ("fig:arms", "figure"), ("fig:order", "figure"),
                 ("fig:replication", "figure"), ("fig:detection", "figure"),
@@ -300,10 +305,9 @@ negative literal is derivable only if something derives it, never by failure to
 prove the positive. Antecedents are ordinary literals, with no negation as
 failure, which makes naive forward chaining sound and complete here.
 
-Two safeguards matter for generated theories: the loop carries a round cap and a
+Two safeguards matter for generated theories: a round cap with a
 \texttt{saturated} flag, so a malformed theory fails loudly rather than spinning,
-and any theory deriving both an atom and its negation is marked inconsistent and
-its items rejected. An
+and rejection of any theory deriving both an atom and its negation. An
 item is \emph{undetermined} when neither the query nor its negation appears in
 the closure.
 
@@ -311,13 +315,11 @@ Validation has three layers, because one would not be worth much. Against the
 open-world splits of a public corpus \citep{tafjord2020proofwriter} at depths
 $0$--$3$ and $5$, $23{,}240$ of $23{,}240$ questions agree, including $10{,}440$ undetermined. But those labels also come from forward chaining over the same
 fragment, so this largely measures one chainer against another and covers none of
-the nonce theories. Nine adversarial theories therefore probe cycles, chains past
-the round cap, derived negation, absent symbols and entity-specific rules, two of
-which must \emph{fail} rather than answer; all nine pass and the cases are
-released. And a \emph{differential} test against an independently written reference (naive
-fixpoint over the exhaustive Herbrand base) agrees on $192/192$ items. It encodes
-the same intended semantics, so it catches implementation error, not a
-misconception about the semantics. No item enters a sealed panel
+the nonce theories. Nine adversarial theories therefore probe cycles, chains past the round cap,
+derived negation, absent symbols and entity-specific rules; all nine pass and the
+cases are released. A \emph{differential} test against an independently written
+reference agrees on $192/192$ items, which catches implementation error but not a
+misconception about the semantics, since it encodes the same ones. No item enters a sealed panel
 without a certification record.
 
 \subsection{Measurement: sensitivity, not accuracy}
@@ -349,11 +351,10 @@ construction, recorded per item. The public corpus is used \emph{only} to
 validate the certifier; no item from it is scored by any model here.
 
 Experiment 4 generates no panel: it rescores Experiment 2's items with a third
-candidate available. One construction detail of Experiment 3's panel is worth
-stating: on its $64$ undetermined items there is no terminal literal to supply,
-so \textsc{conclusion\_only} carries a statement that the query is not derivable
-and \textsc{proof\_prefix} a chain truncated at a random point, and those two
-cells instantiate the $2\times2$ less exactly than on the other two thirds. Theories, certificates and queries are
+candidate available. On Experiment 3's $64$ undetermined items there is no terminal literal to supply,
+so \textsc{conclusion\_only} states that the query is not derivable and
+\textsc{proof\_prefix} is truncated at a random point; those two cells instantiate
+the $2\times2$ less exactly than the other thirds. Theories, certificates and queries are
 byte-identical; only the instruction line and candidate set change, and the
 change is recorded in the seal. Its \textsc{none} arm withholds the record under that same instruction, fixing
 the abstention floor.
@@ -361,8 +362,8 @@ the abstention floor.
 Two robustness studies reuse these panels. \Cref{sec:order} re-scores Experiment 2's items under eight permutations of the
 certificate's lines each, recording where the final rule and its premise land.
 \Cref{sec:runtime} re-scores Experiment 3's panel through a second inference
-stack (\texttt{transformers} on an A100 rather than \texttt{mlx-lm}) and on that
-stack extends the sweep with Llama-3.1-8B and Qwen2.5-14B.
+stack, \texttt{transformers} on CUDA rather than \texttt{mlx-lm}, and there extends
+the sweep with Llama-3.1-8B and Qwen2.5-14B.
 
 \begin{table}[t]
 \centering
@@ -745,11 +746,11 @@ direction validity detection predicts.}
 carrying no query-relevant material, \textsc{none} and \textsc{irrelevant},
 abstention falls on every checkpoint. Against \textsc{truncate\_1}, the surface-matched
 \emph{valid} partner of \cref{sec:broken}, it \emph{rises}, by
-$31.2$ and $11.5$pp on the two checkpoints with any abstention headroom. Neither
-comparison is clean: the unmatched references differ from \textsc{broken\_chain} in
-content as well as validity, and are themselves $4.7$pp apart at 4-bit against
-$34.9$pp at bfloat16, while \textsc{truncate\_1} is an arm the model can complete,
-so its low abstention reflects success rather than a neutral baseline.
+$31.2$ and $11.5$pp on the two checkpoints with any abstention headroom. Neither comparison is clean. The unmatched references differ from
+\textsc{broken\_chain} in content as well as validity, and are themselves $4.7$pp
+apart at 4-bit against $34.9$pp at bfloat16; \textsc{truncate\_1} is matched but is
+an arm the model can complete, so its low abstention reflects success, not a
+neutral baseline.
 \textbf{We therefore draw no conclusion from the abstention delta, and withdraw
 the claim that it refutes detection.}
 
@@ -782,8 +783,7 @@ $+46.9$, $+37.5$ and $+20.3$pp; the other five reach $\leq +9.4$pp and none
 survives adjustment). Two of those five are rejected by the replacement criterion,
 at $0.375$ and $0.422$ minimum per-class recall: the same
 gameability by a different route.
-\Cref{tab:models} reports all five arms for every model, with the per-arm
-verdict; \cref{fig:size} plots the ten by parameter count.
+\Cref{tab:models} gives all five arms for every model with its per-arm verdict.
 
 \begin{table}[t]
 \centering
@@ -816,26 +816,21 @@ Qwen2.5-7B   &  7.6 & 33.3/0.00 & 33.3/0.00 & \textbf{97.9/0.94} & 67.2/0.02 & 7
 \end{tabular}
 \end{table}
 
-\textbf{Viability is a property of (model $\times$ arm $\times$ runtime), not of a model}. The third factor is \cref{sec:runtime}'s. The decisive row is Qwen2.5-7B, whose minimum per-class recall falls from
-$0.938$ under \textsc{conclusion\_only}, where it is second best in the sweep, to
-$0.141$ under \textsc{full}. Its contradicted-class recall collapses \emph{when the proof
-state is supplied}: it can express three outcomes, and the proof state is what breaks it. \textbf{Supplying proof state degrades three of ten
+\textbf{Viability is a property of (model $\times$ arm $\times$ runtime), not of a model}. The third factor is \cref{sec:runtime}'s. The decisive row is Qwen2.5-7B: minimum per-class recall falls from $0.938$ under
+\textsc{conclusion\_only}, where it is second best in the sweep, to $0.141$ under
+\textsc{full}. Its contradicted-class recall collapses \emph{when the proof state is supplied}: it can express three
+outcomes, and the state is what breaks it. \textbf{Supplying proof state degrades three of ten
 models} here, two of them otherwise among the strongest substrates. On the CUDA re-scoring the same measure gives two of eleven, which is
 \cref{sec:runtime}'s runtime factor again.
 
-This bounds a claim we would otherwise have made. There is a floor near 3B \emph{for tolerating full certificates}, since nothing
-below $3$B clears it in any arm, but
-that is not a floor for serving as an interface, and the effect is not monotonic
-in scale. Extending the Qwen2.5 ladder to $14.7$B, with family, tokenizer and recipe fixed
-and the whole ladder on the second runtime (so
-these five values are not the \cref{tab:models} rows above, which are the first),
-the harm runs $0.000$, $0.000$, $-0.219$, $-0.688$, $+0.062$: it peaks in a mid-range
-band and is \emph{absent} at the top, so proof state is not more dangerous for
-larger interfaces.
-
-Neither new model clears the floor. Llama-3.1-8B is \textbf{degenerate in every arm} despite balanced accuracies up
-to $66.7\%$, the strongest single datum against a size floor. Qwen2.5-14B clears no arm either, peaking at $0.484$, so ``absent at the
-top'' must not be read as ``14B works''. 
+This bounds a claim we would otherwise have made. Nothing below $3$B clears the
+floor in any arm, but that is a floor for \emph{tolerating full certificates},
+not for serving as an interface, and the effect is not monotonic. On the Qwen2.5
+ladder to $14.7$B, family and recipe fixed and the whole ladder on the second
+runtime, the harm runs $0.000$, $0.000$, $-0.219$, $-0.688$, $+0.062$: it peaks in
+a mid-range band and is \emph{absent} at the top. Neither new model clears the
+floor, though. Llama-3.1-8B is \textbf{degenerate in every arm} despite balanced accuracies up to $66.7\%$, the strongest
+single datum against a size floor. Qwen2.5-14B peaks at $0.484$, so ``absent at the top'' is not ``14B works''. 
 
 \begin{figure*}[t]
 \centering
@@ -931,30 +926,30 @@ response tokens leaking into a certificate that was a malformed regular expressi
 
 One task family, small models, synthetic panels. Nonce vocabularies establish
 item novelty, not independence from every relevant pretraining pattern
-\citep{golchin2023time,deng2024investigating}, and model is not a randomised
-factor, so cross-model comparisons are descriptive.
+\citep{golchin2023time,deng2024investigating}, and model is not randomised, so
+cross-model comparisons are descriptive.
 
 \textbf{Prompt format.} Experiment 4 changes only the instruction and candidate
 set on byte-identical inputs, and the response distribution moves substantially
-\citep{zhao2021calibrate,zheng2023large}. Its arms share a baseline under the
-same instruction, so the contrast holds but the absolute rates do not.
+\citep{zhao2021calibrate,zheng2023large}. Its arms share a baseline under that
+instruction, so the contrast holds but the absolute rates do not.
 
 
 
 \textbf{Quantisation.} Experiments 1 and 2 use a 4-bit checkpoint and Experiment
-3 bfloat16, so they describe different artefacts of the same model, and 4-bit quantisation
-moves exactly what we measure. \Cref{sec:replication} bounds it, and we do not treat the two as one artefact.
+3 bfloat16, so they describe different artefacts of the same model.
+\Cref{sec:replication} bounds the difference; we do not treat the two as one.
 
 \textbf{Prior report.} Experiment 1's per-arm counts and prespecified primary
 contrast appeared in an earlier unpublished report by the present authors;
-everything else here is new. That report concluded the 3B checkpoint failed an
-open-world unknown gate whereas Experiment 3 finds the same family viable. Panels,
-candidate sets and quantisation all differ, which plausibly explains it, but we
-flag the discrepancy rather than leave it to a reader who finds both.
+everything else is new. That report concluded the 3B checkpoint failed an
+open-world unknown gate, whereas Experiment 3 finds the same family viable.
+Panels, candidate sets and quantisation all differ, which plausibly explains it,
+but we flag it rather than leave it to a reader who finds both.
 
-An undetermined \textsc{proof\_prefix} cannot contain the query predicate, so
-undetermined items offer fewer surface cues and a surface-matching model looks
-worse on them for reasons unrelated to abstention.
+An undetermined \textsc{proof\_prefix} cannot contain the query predicate, so such
+items offer fewer surface cues and a surface-matching model looks worse on them
+for reasons unrelated to abstention.
 
 \textbf{Scoring regime.} Every response is a forced choice among verified
 single-token candidates. No deployed solver-augmented pipeline works this way, so
