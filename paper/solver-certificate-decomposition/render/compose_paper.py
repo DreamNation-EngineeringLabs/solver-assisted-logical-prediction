@@ -147,7 +147,10 @@ def apply_layout(src: str) -> str:
     # runtime, so a separate scale table would repeat it; the harm ladder reads
     # fine as five numbers in §5.6. tab:arms stays in the body -- it is where
     # §5.2 gets its primary contrast and §5.4's "which baseline" argument.
-    APPENDIX = (("tab:panels", "table"), ("tab:edges", "table"), ("tab:sdt", "table"),
+    # #48: tab:sdt is the one appendix float the body can still take -- measured,
+    # it lands on p5 beside the section that cites it and the body still ends p9.
+    # The other eight each push the body to p10.
+    APPENDIX = (("tab:panels", "table"), ("tab:edges", "table"),
                 ("tab:detection", "table"),
                 ("fig:arms", "figure"), ("fig:replication", "figure"),
                 ("fig:detection", "figure"), ("fig:order", "figure"),
