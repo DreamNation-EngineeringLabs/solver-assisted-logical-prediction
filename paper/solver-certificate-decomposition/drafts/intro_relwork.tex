@@ -59,8 +59,8 @@ surface co-occurrence reproduces every number a reasoning model would.
 
 Separating the two requires a control that holds surface form fixed and destroys
 validity alone. This paper builds one and applies it across four sealed experiments on frozen
-small models --- scoring by direct next-token likelihood over verified
-single-token candidates, so no free text is parsed --- with two robustness studies
+small models, scoring by direct next-token likelihood over verified single-token
+candidates so that no free text is parsed, with two robustness studies
 on line order and on the inference runtime.
 
 \textbf{The method is the contribution; what it returns is model-specific.}
@@ -88,7 +88,7 @@ The contributions are: (i) an \emph{answer-evidence decomposition} separating
 solver-supplied answers from solver-supplied reasoning state; (ii) a
 \emph{surface-matched invalidity control} isolating validity from every
 co-occurring surface cue, certified per item; (iii) a \emph{forward-closure
-certifier} for underdetermined items, validated in three layers --- $23{,}240/23{,}240$ against a public corpus whose
+certifier} for underdetermined items, validated in three layers: $23{,}240/23{,}240$ against a public corpus whose
 labels share our inference fragment \citep{tafjord2020proofwriter}, nine
 adversarial theories, and a differential test against an independent engine; (iv) evidence that apparent use of proof state can be surface
 exploitation, that no checkpoint resists a corrupted certificate, and that the
@@ -110,18 +110,16 @@ ignored \citep{lanham2023measuring,arcuschin2025chainofthought}; models trained
 for long traces verbalise answer-determining hints only a minority of the time
 \citep{chen2025reasoning}; and one response is architectural, making the trace a
 program a solver executes \citep{lyu2023faithful}. Neurosymbolic pipelines put
-the formal step outside the model altogether --- translating into a symbolic
-language and repairing from solver errors \citep{pan2023logiclm}, parsing into
+the formal step outside the model altogether: translating into a symbolic language and repairing from solver errors \citep{pan2023logiclm}, parsing into
 first-order logic for a prover \citep{olausson2023linc}, dispatching a
-declarative specification \citep{ye2023satlm}, emitting a program for an
-interpreter \citep{gao2022pal} --- and the pattern extends to self-supervised API
+declarative specification \citep{ye2023satlm}, emitting a program for an interpreter
+\citep{gao2022pal}. The pattern extends to self-supervised API
 use \citep{schick2023toolformer}, premise selection \citep{yang2023leandojo} and
 retrieval \citep{lewis2020retrievalaugmented}.
 
 Both leave our question open. The first intervenes on \emph{model-generated}
 traces, asking whether the model's own account is honest; ours is
-\emph{externally supplied, formally verified} state, where the question inverts
---- and where ignoring a mistake in one's own trace is unfaithful, whereas
+\emph{externally supplied, formally verified} state, where the question inverts, and where ignoring a mistake in one's own trace is unfaithful, whereas
 following a corrupted external certificate is unsafe. The second reports
 end-to-end accuracy, which cannot separate the solver's \emph{answer} from its
 \emph{state}, and assumes the solver correct, though the model side is not
