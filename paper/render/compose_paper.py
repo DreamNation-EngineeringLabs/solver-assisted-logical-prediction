@@ -978,11 +978,14 @@ offer the method as the
 contribution and decline to generalise its value, ours included.
 
 \looseness=-1
-Three findings hold on every checkpoint, all negative. The inference is one step
-deep on the Qwen checkpoints, and degrades everywhere when the final rule
-precedes its premise. Detection we cannot establish either way: the abstention delta changes sign with
-the reference arm. And nothing defends against a wrong apparatus: the three answer incorrectly on
-$189$, $186$ and $192$ of $192$, inheriting its errors. Two criteria we had prespecified failed here: a recall floor on one class, gamed
+Two findings hold on every checkpoint, and both are negative. Accuracy degrades
+when the final rule precedes the premise it fires on. And nothing defends against
+a wrong apparatus. Given a certificate whose fabricated final rule
+establishes the negation, the three checkpoints answer incorrectly on $189$, $186$
+and $192$ of $192$, inheriting the apparatus's errors in full. Depth is one step
+on the Qwen checkpoints but not on Gemma, and whether the model detects
+invalidity our abstention test cannot settle: the delta changes sign with the
+reference arm. Two criteria we had prespecified failed here: a recall floor on one class, gamed
 by models answering that class almost everywhere, and a $15$pp target an arm at
 $91.7\%$ could not reach. Both were caught only by reporting sensitivity and headroom beside accuracy, as was a baseline arm at $50.0\%$ with $d' = 0.00$.
 We recommend that practice as standard.
