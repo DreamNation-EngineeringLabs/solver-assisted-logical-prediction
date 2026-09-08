@@ -37,7 +37,7 @@ both here and in a sandboxed LaTeX editor.
 
 | Paper | Target | Status |
 | --- | --- | --- |
-| [`solver-certificate-decomposition/`](solver-certificate-decomposition/) | ICLR 2027 | Draft compiles, 9pp at the limit, all gates pass. Awaiting human review. |
+| [`solver-certificate-decomposition/`](solver-certificate-decomposition/) | ICLR 2027 | Body ends p9 at the template's own geometry; 16pp total. Nine review rounds; the round-9 audit's 52 findings are addressed bar one. `verify.py --all` 9/9. |
 
 
 ## Two rules the pipeline does not enforce

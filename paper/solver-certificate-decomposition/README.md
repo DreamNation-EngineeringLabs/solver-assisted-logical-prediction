@@ -3,8 +3,9 @@
 Decomposing what a language model does with a solver certificate.
 **Target: ICLR 2027** (abstract 18 Sept 2026, paper 25 Sept 2026).
 
-Deliverable: [`final/paper.pdf`](final/paper.pdf) — 9 pages of main text at the
-limit, 11 with references, 39 verified citations, 3 figures.
+Deliverable: [`final/paper.pdf`](final/paper.pdf) — 16 pages: 9 of main text at
+the venue's own geometry, references from p10, appendix from p12. 39 verified
+citations, 6 figures, 6 tables.
 
 ## Findings
 

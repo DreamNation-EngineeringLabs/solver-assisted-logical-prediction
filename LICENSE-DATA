@@ -1,0 +1,43 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 RamanIQ
+
+The research data in this repository is licensed under CC BY 4.0. You are free
+to share and adapt it for any purpose, including commercially, provided you
+give appropriate credit, link to the licence, and indicate if changes were made.
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+Summary:          https://creativecommons.org/licenses/by/4.0/
+
+
+WHAT THIS COVERS
+
+  data/cognitive_core/     sealed panels and answer authorities
+  runs/cognitive_core/     per-response receipts and model manifests
+  results/                 analysis outputs
+
+  These are generated artifacts: the panels are procedurally constructed with
+  per-item nonce vocabularies, and the receipts record this project's own
+  scoring runs. No third-party dataset is redistributed here.
+
+
+WHAT THIS DOES NOT COVER
+
+  Software. Everything under scripts/, render/, tools/ and src/ is MIT
+  licensed. See LICENSE.
+
+  Model weights. Not redistributed. Each run records the pinned revision and a
+  hash of the weight files under runs/.../control/model-manifest.json; the
+  weights themselves remain under their publishers' own licences.
+
+  ProofWriter. scripts/validate_closure_against_proofwriter.py downloads the
+  public ProofWriter corpus at runtime to validate the forward-closure
+  certifier. That corpus is NOT included in this repository and is not
+  covered by this licence; it remains under its own terms. No item from it is
+  scored by any model in the accompanying paper.
+
+
+HOW TO CITE
+
+  Please cite the accompanying paper. A permanent archive with a DOI will
+  accompany the camera-ready version.
