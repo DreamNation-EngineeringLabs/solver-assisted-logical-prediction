@@ -180,8 +180,7 @@ Solver-, tool- and retrieval-augmented systems report large accuracy gains,
 routinely read as evidence that the model used the supplied material. Two
 mechanisms give the same number: reading a supplied answer, and reasoning over
 supplied state. The standard control, a same-shape irrelevant record, separates
-neither. We build one that does --- holding every surface property fixed while
-destroying validity alone --- and apply it across four sealed experiments and two
+neither. We build one that does, holding every surface property fixed while destroying validity alone, and apply it across four sealed experiments and two
 robustness studies, $NSCOREDRESPONSES$ scored responses re-derivable from
 released receipts.
 
@@ -216,8 +215,7 @@ answer, no relevant state), \textsc{conclusion\_only} the derived terminal
 literal alone (answer, no state), \textsc{proof\_prefix} the chain with that
 literal withheld (state, no answer), and \textsc{full} both. A contrast along an
 \emph{edge} of this square moves one factor; a contrast along the
-\emph{diagonal} moves two, and a null on it attributes to neither. This is not a
-statistical subtlety but an identification one: the prespecified primary
+\emph{diagonal} moves two, and a null on it attributes to neither. This is a problem of identification, not of statistics: the prespecified primary
 contrast of the experiment we reanalyse, \textsc{proof\_prefix} minus
 \textsc{conclusion\_only}, is exactly that diagonal.
 
@@ -250,9 +248,7 @@ lines. The decomposition follows:
 
 Four companion arms separate the remaining confounds.
 \textsc{same\_entity\_irrelevant} gives a valid derivation about the \emph{query}
-entity toward an unrelated predicate --- naming the query subject four times
-where \textsc{irrelevant} names it zero, neither containing the query predicate
---- so the pair isolates entity repetition. \textsc{shuffled} presents
+entity toward an unrelated predicate. It names the query subject four times where \textsc{irrelevant} names it zero, and neither contains the query predicate, so the pair isolates entity repetition. \textsc{shuffled} presents
 \textsc{truncate\_1}'s lines in seeded random order; \textsc{truncate\_2} and
 \textsc{truncate\_3} withhold two and three steps, giving a depth ladder; and
 \textsc{misleading} supplies a valid-looking chain whose single fabricated final
@@ -284,8 +280,7 @@ fragment, so this largely measures one chainer against another and covers none o
 the nonce theories. Nine adversarial theories therefore probe cycles, chains past
 the round cap, derived negation, absent symbols and entity-specific rules, two of
 which must \emph{fail} rather than answer; all nine pass and the cases are
-released. And a \emph{differential} test against an independently written
-reference --- naive fixpoint over the exhaustive Herbrand base --- agrees with the
+released. And a \emph{differential} test against an independently written reference (naive fixpoint over the exhaustive Herbrand base) agrees with the
 certifier and the sealed authority on $192/192$ items. That reference encodes the
 same intended semantics, so it catches implementation error rather than a
 misconception about it; we claim the former only. No item enters a sealed panel
@@ -295,7 +290,7 @@ without a certification record.
 \label{sec:measurement}
 
 Accuracy on a balanced panel is uninterpretable when the responder is biased.
-One arm below scores $50.0\%$ --- apparent chance --- with an identical
+One arm below scores $50.0\%$, apparent chance, with an identical
 $9/96$ ``Yes'' rate in \emph{both} classes, that is $d' = 0.00$: no
 discriminative signal whatever, at or below the trivial always-one-label
 strategy. We therefore report sensitivity $d'$ and criterion $c$ alongside
@@ -359,9 +354,7 @@ ProofWriter OWA \citep{tafjord2020proofwriter} & three-way & 23{,}240 & certifie
 Responses are scored by direct next-token likelihood over verified single-token
 candidates: \texttt{Yes}/\texttt{No} for Experiments 1 and 2,
 \texttt{Yes}/\texttt{No}/\texttt{Unknown} for Experiments 3 and 4. The model generates
-no free text, so nothing is parsed and no verdict is inferred from prose. Every
-prompt is four lines --- instruction, theory, solver record, query --- of which
-only the solver record varies across arms; the theory is visible in all arms.
+no free text, so nothing is parsed and no verdict is inferred from prose. Every prompt is four lines (instruction, theory, solver record, query), of which only the solver record varies across arms; the theory is visible in all arms.
 
 \subsection{Models}
 
@@ -391,8 +384,7 @@ Experiment 3 makes a deliberate protocol change: \emph{no gate blocks the run}.
 Where earlier practice excluded a model that failed a delivery screen, delivery
 is itself the capability under test here, so a model that cannot emit a verdict
 reliably is a finding about substrate viability rather than a reason to drop it.
-Tooling failures --- a model that will not load, or whose tokeniser cannot
-represent the candidates --- remain exclusions and are not findings; the screen
+Tooling failures (a model that will not load, or whose tokeniser cannot represent the candidates) remain exclusions and are not findings; the screen
 found none.
 
 \section{Results}
@@ -427,7 +419,7 @@ leaving only $13.0$pp of headroom above \textsc{proof\_prefix}. Both
 ``other factor present'' edges are therefore compressed, and the averaged main
 effects deflated with them.
 
-This bears on one tempting reading. The answer literal appears to retain $30\%$
+The answer literal appears to retain $30\%$
 of its value once state is present ($12.50/41.67$), which would suggest the two
 channels are partly redundant. But with \textsc{full} at ceiling that ratio
 largely measures the headroom left, not the redundancy, so we do not draw the
@@ -556,8 +548,7 @@ $\textsc{truncate\_2} - \textsc{truncate\_1} = -61.5$pp
 scoring identically to supplying no certificate at all. Holm adjustment is within
 the secondary family declared in \cref{sec:measurement}; the four post hoc edges
 of \cref{tab:edges} carry Holm values $6.6\times10^{-24}$, $4.5\times10^{-19}$,
-$2.4\times10^{-7}$ and $6.1\times10^{-5}$. Five arms are indistinguishable ---
-$96/192$, $0/96$ entailed, $d' = 0.000$, $c = 2.565$ --- so behaviour is binary:
+$2.4\times10^{-7}$ and $6.1\times10^{-5}$. Five arms are indistinguishable at $96/192$, $0/96$ entailed, $d' = 0.000$, $c = 2.565$, so behaviour is binary:
 either the supplied chain reaches one step from the answer, or the model is
 blind to it.
 
@@ -571,8 +562,7 @@ permutations each on all three checkpoints, recording where those two lines
 landed. An identity arm reproduces \textsc{truncate\_1}'s bytes and returns its
 receipts $192/192$ throughout. Over eight permutations the effect spans
 $[+41.7, +50.0]$pp on the 4-bit checkpoint, $[+60.4, +63.5]$ at bfloat16 and
-$[+6.2, +13.5]$ on Gemma-3-4B; the published single draws --- $+46.9$, $+62.5$
-and $+10.4$pp --- fall inside their own ranges.
+$[+6.2, +13.5]$ on Gemma-3-4B; the published single draws ($+46.9$, $+62.5$ and $+10.4$pp) fall inside their own ranges.
 
 \begin{figure}[tb]
 \centering
@@ -635,9 +625,7 @@ another.
 
 \textbf{Which baseline.} The share divides by the effect against
 \textsc{irrelevant}, which on the Qwen checkpoints also scores $0/96$, so the
-choice is invisible there. Gemma-3-4B answers $22$ of $96$ entailed items with no
-certificate --- $20$ of them also correct under \textsc{broken\_chain} --- so
-against \textsc{none} its share is $51.4\%$, not $40.4\%$. Both are in
+choice is invisible there. Gemma-3-4B answers $22$ of $96$ entailed items with no certificate, $20$ of them also correct under \textsc{broken\_chain}, so against \textsc{none} its share is $51.4\%$, not $40.4\%$. Both are in
 \cref{tab:arms}, and we make no claim that most of its effect is surface overlap.
 The baselines diverge exactly when a substrate has unaided competence, and that
 divergence is the finding rather than either number.
@@ -649,9 +637,7 @@ Reading a certificate as a bag of statements is a checkpoint-level property too.
 \textbf{We therefore do not claim that solver-supplied state is used as inference
 in general.} On the checkpoint of \cref{sec:broken} it overwhelmingly is; on the
 strongest substrate in our sweep, between half and three-fifths of the effect
-survives the control, depending on the baseline. What generalises is the
-\emph{method} --- the control separates the two wherever it is applied --- not the
-value it returns.
+survives the control, depending on the baseline. What generalises is the \emph{method}: the control separates the two wherever it is applied. What does not is the value it returns.
 
 One result does replicate without exception, and it is the negative one. The
 \textsc{misleading} arm scores $3$, $6$ and $0$ of $192$ across the three
@@ -791,8 +777,7 @@ Qwen2.5-7B   & 7.6 & 33.3 & 33.3 & \textbf{97.9} & 67.2 & 71.4 & \textbf{concl o
 decisive row is Qwen2.5-7B: minimum per-class recall $0.141$ under \textsc{full}
 against $0.938$ under \textsc{conclusion\_only}, where it is second best in the
 sweep at $97.9\%$. Its contradicted-class recall collapses \emph{when the proof
-state is supplied}: not an interface that cannot express three outcomes, but one
-the proof state breaks. \textbf{Supplying proof state degrades three of ten
+state is supplied}: it can express three outcomes, and the proof state is what breaks it. \textbf{Supplying proof state degrades three of ten
 models} here, two of them otherwise among the strongest substrates. On the CUDA
 re-scoring the same measure gives two of eleven, which is the runtime factor of
 \cref{sec:runtime} again rather than a different finding.
@@ -800,8 +785,7 @@ re-scoring the same measure gives two of eleven, which is the runtime factor of
 This bounds a claim we would otherwise have made. There is a floor near 3B
 \emph{for tolerating full certificates}, since below 1.7B no arm clears it, but
 that is not a floor for serving as an interface, and the effect is not monotonic
-in scale. Extending the Qwen2.5 ladder to $14.7$B --- family, tokenizer and
-recipe fixed, the whole ladder on one runtime --- \cref{tab:scale} shows the harm
+in scale. Extending the Qwen2.5 ladder to $14.7$B, with family, tokenizer and recipe fixed and the whole ladder on one runtime, \cref{tab:scale} shows the harm
 peaking in a mid-range band and \emph{absent} at the top, so proof state is not
 more dangerous for larger interfaces.
 
@@ -855,8 +839,7 @@ conversion that the second stack cannot load at all, which is itself a limit on
 how far any table can be moved between backends.
 
 Eight of the nine agree on $95.5$--$99.7\%$ of individual responses with no
-verdict moving. \textbf{Phi-4-mini does not.} It agrees on $87.9\%$ --- $116$
-flips of $960$ --- and its \textsc{full} arm is viable under one stack and not
+verdict moving. \textbf{Phi-4-mini does not.} It agrees on $87.9\%$ ($116$ flips of $960$), and its \textsc{full} arm is viable under one stack and not
 the other: minimum per-class recall $0.719$ against $0.219$, balanced accuracy
 $90.6\%$ against $74.0\%$, on identical weights. The flips reach $3.0$ logits, so
 this is not tie-breaking noise, and it reproduced on two GPUs and two library
@@ -876,8 +859,7 @@ effect is $+8.7$pp against a mean answer main effect of $+21.6$pp, with a mean
 interaction of $-15.9$pp; \textsc{conclusion\_only} exceeds
 \textsc{proof\_prefix} in \textbf{8 of 10} models and equals or exceeds
 \textsc{full} in $6$ of $10$. The answer channel dominates the state channel
-across the model set --- a more general form of the pattern \cref{tab:edges}
-shows on one model --- and Experiment 1's state main effect of $+22.4$pp is not
+across the model set, a more general form of the pattern \cref{tab:edges} shows on one model, and Experiment 1's state main effect of $+22.4$pp is not
 typical of it.
 
 That mean averages over four responders whose minimum per-class recall is $0.000$
@@ -995,10 +977,7 @@ fabricated final rule establishes the negation, the three checkpoints answer
 incorrectly on $189$, $186$ and $192$ of $192$. The interface inherits the
 apparatus's errors in full.
 
-Two criteria we had prespecified failed here --- an arm at $50.0\%$ accuracy was
-degenerate rather than chance-level, and a viability threshold was maximised by
-answering \texttt{Unknown} to everything --- and only reporting sensitivity
-alongside accuracy caught either. We recommend it, with the decomposition, as
+Two criteria we had prespecified failed here. An arm at $50.0\%$ accuracy was degenerate rather than chance-level, and a viability threshold was maximised by answering \texttt{Unknown} to everything; only reporting sensitivity alongside accuracy caught either. We recommend it, with the decomposition, as
 standard.
 
 \section*{Reproducibility Statement}

@@ -71,8 +71,7 @@ models; and a rescoring of the broken-chain items with a third candidate. Two
 robustness studies follow, on line order and on the inference runtime.
 
 \textbf{The method is the contribution; what it returns is model-specific.}
-Breaking validity alone removes almost the whole state effect on one checkpoint
---- a validity share of $98.3\%$ --- and $40.4\%$ on another, which answers $58$
+Breaking validity alone removes almost the whole state effect on one checkpoint, a validity share of $98.3\%$, and $40.4\%$ on another, which answers $58$
 of $96$ broken certificates correctly where the first manages $1$. We offer the
 decomposition and decline to generalise the value it returns, ours included.
 Three results do hold everywhere: the inference is one step deep and is degraded
@@ -82,9 +81,7 @@ checkpoints resists a corrupted apparatus, answering incorrectly on $189$, $186$
 and $192$ of $192$ items given a certificate whose fabricated final rule
 establishes the negation.
 
-Two measurement points shape how this may be reported. Accuracy alone is not
-interpretable --- one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$ ---
-so sensitivity and criterion accompany it throughout
+Two measurement points shape how this may be reported. Accuracy alone is not interpretable: one arm scored $50.0\%$ on a balanced panel at $d' = 0.00$, so sensitivity and criterion accompany it throughout
 \citep{macmillan1991detection,stanislaw1999calculation}. And the claim boundary
 is strict: on the Qwen checkpoints every arm without a near-complete chain
 returns $d' = 0$, so those models do not reason unaided and high accuracy with
@@ -114,8 +111,7 @@ Chain-of-thought prompting made intermediate steps part of the output
 \citep{wei2022chainofthought}, and a body of work then asked whether the answer
 rests on them. \citet{turpin2023language} show explanations systematically omit
 biasing features that demonstrably drive the prediction.
-\citet{lanham2023measuring} intervene on the trace --- truncating it, and
-injecting mistakes --- and read the change in the answer as a measure of
+\citet{lanham2023measuring} intervene on the trace, truncating it and injecting mistakes, and read the change in the answer as a measure of
 conditioning; they find wide variation and that mistakes are often ignored. The
 same manipulations have been applied to naturally worded prompts
 \citep{arcuschin2025chainofthought} and to models trained for long traces, where
