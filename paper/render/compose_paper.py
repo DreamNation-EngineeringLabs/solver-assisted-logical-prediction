@@ -343,7 +343,7 @@ ProofWriter OWA & 23{,}240 & \multicolumn{2}{l}{certifier validation only \citep
 \end{tabular}
 \end{table}
 
-\textbf{The abstention rescoring} generates no panel. It rescores the validity
+The abstention rescoring generates no panel. It rescores the validity
 control's items with a third candidate available, changing only the instruction line and the candidate set on
 byte-identical inputs, and its \textsc{none} arm fixes the abstention floor
 under that same instruction. On the sweep's $64$ undecidable items there is
@@ -394,7 +394,8 @@ $p = 0.078$), was reported as no effect. Read through the square, that contrast
 is the diagonal: it moves both factors at once, so the null attributes to
 neither.
 
-\textbf{Both channels carry real effect, and they are not additive.} The state
+Both channels carry real effect, and they are not
+additive. The state
 main effect is $+22.4$pp, the answer main effect $+27.1$pp, and the interaction
 $-29.2$pp, larger than either; \cref{tab:edges} gives the four edges. This
 reading is post hoc, re-derived from the 960 raw receipts by a script that
@@ -422,7 +423,7 @@ Add state, answer present      & $+7.81$pp  & $6.1\times10^{-5}$  & secondary \\
 \end{tabular}
 \end{table}
 
-\textbf{The baseline description was also wrong.} The model answers \texttt{No}
+The baseline description was also wrong. The model answers \texttt{No}
 to $88\%$ of items, and \textsc{irrelevant} returns an identical $9/96$ ``Yes''
 rate in both classes at $d' = 0.00$ (\cref{tab:sdt}), below a trivial
 always-\texttt{No} strategy's $96/192$.
@@ -446,7 +447,8 @@ Arm & Hits & FA & $d'$ & $c$ \\
 \end{tabular}
 \end{table}
 
-\textbf{Destroying validity alone removes almost all of the state effect.}
+Destroying validity alone removes almost all of the
+state effect.
 $\textsc{truncate\_1} - \textsc{broken\_chain} = +60.4$pp (exact McNemar
 $p = 6.9\times10^{-18}$, BCa $[+49.0, +68.8]$, entailed subset $n = 96$ as
 declared before the run), with $d'$ dropping $2.446$, so this is a change in
@@ -503,7 +505,7 @@ which isolates quantisation from model identity, and a different family.
 
 Quantisation is the smaller effect and leaves the share unchanged. Model
 identity is not like that.
-Gemma-3-4B answers \textsc{broken\_chain} correctly on \textbf{$58$ of $96$}
+Gemma-3-4B answers \textsc{broken\_chain} correctly on $58$ of $96$
 items where the other two manage $1$, so the same control that isolates
 inference on one checkpoint exposes substantial surface exploitation on another.
 Its share is $40.4\%$ against the \textsc{irrelevant} control and $51.4\%$
@@ -526,14 +528,14 @@ competence of its own.}
 \label{fig:replication}
 \end{figure}
 
-\textbf{The square itself is no steadier.} Read across ten models, post hoc from
+The square itself is no steadier. Read across ten models, post hoc from
 receipts already collected, the mean state main effect is $+8.7$pp against a
 mean answer main effect of $+21.6$pp: the answer channel dominates, and
 the reanalysis's $+22.4$pp is not typical of the set. Excluding four responders
 degenerate in every arm gives $+14.7$pp against $+28.5$pp, and the ordering
 survives either subset.
 
-\textbf{Whether a model can serve as the interface at all varies the same way.}
+Whether a model can serve as the interface at all varies the same way.
 We had declared that a model relays non-determination at $\geq 80\%$ recall on
 undecidable items with full solver material. Eight of ten passed and the
 criterion was invalid: single-class recall is maximised by answering
@@ -576,15 +578,15 @@ Qwen2.5-7B   &  7.6 & 33.3/0.00 & 33.3/0.00 & \textbf{97.9/0.94} & 67.2/0.02 & 7
 \end{tabular}
 \end{table}
 
-Read by row, \textbf{viability is a property of (model $\times$ arm $\times$
-runtime), not of a model.} Qwen2.5-7B falls from second best in the sweep under
+Read by row, viability is a property of (model $\times$ arm $\times$
+runtime), not of a model. Qwen2.5-7B falls from second best in the sweep under
 \textsc{conclusion\_only} to $0.141$ minimum per-class recall under
 \textsc{full}: supplying the proof state is what breaks it, and it breaks three
 of ten models here. Nothing below $3$B clears the floor in any arm, but that is a
 floor for \emph{tolerating full certificates} rather than a size law:
 Llama-3.1-8B is degenerate in every arm, and Qwen2.5-14B never clears it.
 
-\textbf{The third factor is the inference stack.} Re-scoring the same sealed
+The third factor is the inference stack. Re-scoring the same sealed
 panel, same weights and same prompt bytes through \texttt{transformers} on CUDA
 covers nine of the ten. Eight agree on $95.5$--$99.7\%$ of individual responses
 with no verdict moving. Phi-4-mini agrees on $87.9\%$, and its \textsc{full} arm
@@ -619,7 +621,7 @@ direction validity detection predicts.}
 \end{figure}
 
 \textbf{Reversing the final rule and the premise it fires on costs accuracy on
-every checkpoint; separating them does not.} The split is post hoc:
+every checkpoint.} Separating them does not. The split is post hoc:
 \textsc{shuffled} is one seeded permutation per item and moves three things at
 once, so we re-scored the same items under eight permutations each on all three
 checkpoints, recording where those two lines landed. An identity arm reproduces
@@ -640,10 +642,10 @@ $-5.13$, so the model exploiting surface overlap most is also the one most
 completely misled. The class split is sharper still. This model's standing prior
 is \texttt{No}: under \textsc{none} it answers \texttt{No} to all $192$ items,
 at $c = 2.565$. Under \textsc{misleading} it answers \texttt{Yes} on
-\textbf{$93$ of the $96$ contradicted items}. A fabricated rule inverts a
+$93$ of the $96$ contradicted items. A fabricated rule inverts a
 near-total prior.
 
-\textbf{Whether any model notices, we cannot say.} Rescoring the
+Whether any model notices, we cannot say. Rescoring the
 \textsc{broken\_chain} items with an \texttt{Unknown} candidate available should
 raise abstention if the model tracks validity. It falls by $37.5$ and $32.8$
 points against \textsc{none} and \textsc{irrelevant} and \emph{rises} by
@@ -651,7 +653,7 @@ $31.2$ against the surface-matched \textsc{truncate\_1}
 (\cref{fig:detection}): the sign is a function of the reference,
 and neither reference is clean. We draw no conclusion from it and withdraw the
 claim that it refutes detection. What needs no reference is that the most capable
-of the three abstains \textbf{$0$ times in $192$} on a broken certificate and
+of the three abstains $0$ times in $192$ on a broken certificate and
 answers \texttt{Yes} on $76$. We find no positive evidence that any checkpoint
 verifies validity, and the direct evidence is the corruption arm above, which a
 model checking validity would not fail.
