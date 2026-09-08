@@ -118,3 +118,13 @@ with no overfull boxes.
 Every one of these runs from a fresh unpack of the supplementary zip with no
 network and no model weights; the snapshot builder refuses to produce the zip
 unless all ten verification scripts pass from the clean copy.
+
+---
+
+## Erratum, added 2026-09-08 by the round-9 audit
+
+**Point 6, "All three are back in the body."** `tab:replication` is in the body;
+`tab:sdt` and `fig:detection` are in the appendix. They were returned as stated
+and moved out again in a later page-budget pass, which this response does not
+record. Round 9 flags the resulting split -- 3 body floats against 9 in the
+appendix -- as a standing item.

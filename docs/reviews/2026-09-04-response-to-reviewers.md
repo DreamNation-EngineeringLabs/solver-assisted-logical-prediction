@@ -361,3 +361,18 @@ reader to guess, and one of them is the load-bearing one:
 | 14 | Built with `article` at 0.9in margins; will overrun 9 pages under the real style file | Accepted: rebuilt under the venue style; the new §5.4–§5.6 material is absorbed by cutting the duplicated Reproducibility text (Minor 12) and moving the per-arm sweep table to the appendix. |
 | 15 | §6.1's alternative reading (broken certificate as a pointer back into the theory) is testable — run `truncate_1` and `broken_chain` with the theory withheld | Accepted as a stated open control, not run for this revision. Major 4's b17 result narrows it: with the theory visible, `No` counts under the two arms are identical (110/192 each), so the pointer reading has to explain a difference that appears only in `Yes`. |
 | 16 | Abstract's "minimum viable interface size near 3B" sits awkwardly with Llama-3.2-3B failing and Qwen2.5-3B passing; size is confounded with family and recipe | Adopted: removed from the abstract as a finding. Major 1 makes it untenable as stated in any case — viability is per (model × arm), and Qwen2.5-7B is viable under `conclusion_only` and not under `full`. |
+
+---
+
+## Errata, added 2026-09-08 by the round-9 audit
+
+Two commitments in this response were not delivered as written. Recorded here
+rather than edited above, since this is a dated record.
+
+- **Minor 14, "rebuilt under the venue style".** The paper remained
+  `\documentclass[10pt]{article}` at 0.9in margins. It was rebuilt at the
+  supplied template's geometry on 2026-09-08 (audit finding #1);
+  `iclr2027_conference.sty` is still unpublished.
+- **Minor 9, the Qwen/Phi mirror-image footnote.** The per-class recalls it
+  promised are now in `tab:models`, but the footnote was never added; the paper
+  contains no `\footnote` at all.
