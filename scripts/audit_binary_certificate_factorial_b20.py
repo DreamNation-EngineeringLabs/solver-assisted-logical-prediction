@@ -12,8 +12,7 @@ from pathlib import Path
 
 DATA = Path("data/cognitive_core/binary_certificate_factorial_b15")
 RUNS = {"qwen3_32b":     "runs/cognitive_core/binary_certificate_factorial_b20_cuda/qwen3_32b",
-        "llama3p3_70b":  "runs/cognitive_core/binary_certificate_factorial_b20_cuda/llama3p3_70b",
-        "edge0_35b_a3b": "runs/cognitive_core/binary_certificate_factorial_b20_edge0/edge0_35b_a3b"}
+        "llama3p3_70b":  "runs/cognitive_core/binary_certificate_factorial_b20_cuda/llama3p3_70b"}
 ANALYSIS = Path("results/b20_analysis_v1.json")
 
 

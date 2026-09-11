@@ -1,7 +1,7 @@
 # b20 — does the corruption failure survive scale?
 
-**Status: complete, 2026-09-11.** Three checkpoints scored on the sealed b15
-panel. Receipts under `runs/cognitive_core/binary_certificate_factorial_b20_{cuda,edge0}/`.
+**Status: complete, 2026-09-11.** Two checkpoints scored on the sealed b15
+panel. Receipts under `runs/cognitive_core/binary_certificate_factorial_b20_cuda/`.
 
 ## Why
 
@@ -25,8 +25,7 @@ wrong. Competence rose; verification did not appear. But three checkpoints under
 so this is a re-scoring in the b19 sense rather than a new experiment. The
 answer authority is never read by any runner.
 
-**Arms.** All ten on CUDA; `full` and `misleading` only on edge0, where
-streaming-MoE inference costs ~18 s per item and ten arms would take 9.6 hours.
+**Arms.** All ten, on both checkpoints.
 
 **Prespecified reading, fixed before the numbers were seen.** The corruption
 contrast is an absolute count and needs no denominator, so it is interpretable
@@ -42,7 +41,6 @@ not interpreted**, on the same grounds Experiment 3 uses.
 | --- | --- | --- |
 | `qwen3_32b` | 32.8B dense | extends the within-family Qwen ladder past 14.7B |
 | `llama3p3_70b` | 70.6B dense | extends the Llama ladder past 8.0B; the scale point |
-| `edge0_35b_a3b` | 35B total, ~3B active | separates active from total parameters, which no dense checkpoint can |
 
 Both CUDA checkpoints are ungated standard-format safetensors rather than
 mlx-community mirrors: b19 recorded that gemma-3-4b's MLX conversion could not
@@ -53,7 +51,6 @@ be loaded by the transformers stack.
 | checkpoint | viable under `full`? | `misleading` correct | d′ |
 | --- | --- | ---: | ---: |
 | `llama3p3_70b` | yes, min recall 1.000 | **0/192** | −5.12 |
-| `edge0_35b_a3b` | yes, min recall 0.635 | 79/192 | −1.28 |
 | `qwen3_32b` | **no**, min recall 0.167 | 70/192 | not interpreted |
 
 **Llama-3.3-70B is the load-bearing result.** It is perfect on `full` and
@@ -82,8 +79,15 @@ The corruption failure therefore does not attenuate with scale. It is total at
   items under `full` while remaining viable under `irrelevant`, `truncate_1` and
   `broken_chain`. That is the same shape as Qwen2.5-7B, but Qwen3 is a hybrid
   thinking model scored here without a chat template, so a format artefact is not
-  excluded. Deciding it needs the unconstrained top-k tokens at the answer
-  position; until then it is recorded, not reported.
+  excluded. A class-stratified diagnostic settled it:
+  `diagnose_qwen3_answer_position_b20.py` shows the argmax at `Answer:` is a real
+  verdict token rather than a thinking marker, but it is the **space-prefixed**
+  ` Yes`/` No`, while every runner scores the bare pair, which sits at median
+  rank 76. Under `full` the bare and spaced pairs disagree on the verdict for
+  **5 of 12** sampled items; under `truncate_1`, where the model is confident,
+  they agree 12/12 and the bare verdicts are perfect. The `full` collapse is
+  therefore substantially a tokenisation artefact for this checkpoint, and it
+  stays unreported. Results in `results/b20_answer_position_qwen3-32b.json`.
 - **One checkpoint at this scale, one task family, one prompt shape.**
 
 ## Decision log
@@ -93,5 +97,8 @@ The corruption failure therefore does not attenuate with scale. It is total at
 - **2026-09-11** — Scored all ten arms on CUDA even though only two are needed
   for the corruption contrast: the model is resident anyway and the marginal
   cost is seconds, so the full arm set is cheaper to collect now than to re-run.
-- **2026-09-11** — edge0 limited to two arms on runtime grounds, recorded above.
-  Its `complete.json` is deliberately absent because the run is partial.
+- **2026-09-11** — An Edge0-35B-A3B checkpoint was scored on two arms and then
+  removed from the experiment entirely. Int4 base, unmerged LoRA, prerouter
+  adapters, a fourth runtime and a preview checkpoint is too many confounds to
+  interpret, and a partial two-arm run alongside two ten-arm ones invites a
+  comparison the data cannot support. Not reported, not retained.

@@ -1,43 +1,5 @@
 {
   "checkpoints": {
-    "edge0_35b_a3b": {
-      "arms": {
-        "full": {
-          "correct": 157,
-          "d_prime": 2.904,
-          "entailed_correct": 96,
-          "false_alarms": 35,
-          "frac_margin_below_0p5": 0.3333,
-          "incorrect": 35,
-          "median_top_two_margin": 4.312,
-          "min_per_class_recall": 0.6354,
-          "recall_contradicted": 0.6354,
-          "recall_entailed": 1.0,
-          "yes_rate": 0.6823
-        },
-        "misleading": {
-          "correct": 79,
-          "d_prime": -1.281,
-          "entailed_correct": 78,
-          "false_alarms": 95,
-          "frac_margin_below_0p5": 0.2552,
-          "incorrect": 113,
-          "median_top_two_margin": 2.219,
-          "min_per_class_recall": 0.0104,
-          "recall_contradicted": 0.0104,
-          "recall_entailed": 0.8125,
-          "yes_rate": 0.901
-        }
-      },
-      "backend": "edge0+mlx",
-      "corruption_interpreted": true,
-      "params_b": 35.0,
-      "params_b_active": 3.0,
-      "repo": "Edge0/Edge0-35B-A3B-preview",
-      "revision": "1ff9f4478890faec0368c5463b621d1036d5b518",
-      "viable_under_full": true,
-      "weights_sha256": "dd4d82c3efddb89bfec942fe1aa76cc147dec055c16fd87685d72b3504f14cc8"
-    },
     "llama3p3_70b": {
       "arms": {
         "broken_chain": {

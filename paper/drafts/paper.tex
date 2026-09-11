@@ -59,7 +59,7 @@ mechanisms give the same number: reading a supplied answer, and reasoning over
 supplied state. The standard control, a same-shape irrelevant record, separates
 neither. We build one that does, holding every surface property we could
 enumerate and audit fixed while destroying validity alone, across four sealed
-experiments and three robustness checks: $38{,}808$ scored responses,
+experiments and three robustness checks: $38{,}424$ scored responses,
 re-derivable from released receipts.
 
 Asked what a model does with a certificate, the instrument returns a different
@@ -740,7 +740,7 @@ consequential.
 End-to-end accuracy cannot say why solver assistance helps. The decomposition
 can: arrange the arms so each contrast moves one factor, and break validity
 while holding surface form fixed. Applied across fourteen models, two inference
-stacks and $38{,}808$ responses, it returns a different answer almost
+stacks and $38{,}424$ responses, it returns a different answer almost
 every time it is asked. The validity share is $98.3\%$ on one checkpoint and
 $40.4$--$51.4\%$ on another; inference depth, order-sensitivity and viability
 itself are properties of a checkpoint, an arm and a runtime. We offer the method
@@ -759,7 +759,7 @@ collapse, and a baseline arm at $50.0\%$ had $d' = 0.00$.
 \section*{Reproducibility Statement}
 
 \textbf{Code and data.} The supplementary material accompanying this submission
-is self-contained: sealed panels and answer authorities, all $38{,}808$
+is self-contained: sealed panels and answer authorities, all $38{,}424$
 per-response receipts, the generators, runners, audits and analysis scripts, and
 the forward-closure certifier with its validation against the public corpus.
 Every number in this paper can be re-derived from a fresh unpack with no network
@@ -772,7 +772,7 @@ the analysis order rather than by a gate in the code. Scoring takes the
 highest-likelihood candidate token; on an exact tie the first candidate in the
 declared order wins, which across the validity control's $5{,}760$ prospective responses
 occurs twice. Each receipt carries a SHA-256 of its own contents,
-and all $38{,}808$ verified with zero failures. The count is not typed into the manuscript: it is
+and all $38{,}424$ verified with zero failures. The count is not typed into the manuscript: it is
 produced by \texttt{scripts/census\_receipts\_v1.py} from the released receipts
 and substituted at compose time.
 
@@ -785,7 +785,7 @@ analysis files, which the listed scripts regenerate:
 \texttt{--all} adds Gemma's two baselines, the corruption counts, the detection
 direction on three checkpoints, the $2\times2$ state main effect, the cross-model
 mean, the response census, a recomputed digest for every one of the
-$38{,}808$ receipts, all sixty cells of \cref{tab:models}, and the ten
+$38{,}424$ receipts, all sixty cells of \cref{tab:models}, and the ten
 printed properties of the worked example in \cref{tab:stimulus}. It uses the
 standard library only, so a reviewer needs no environment beyond Python. Model weights are not redistributed, but each run records the
 pinned revision and a hash of the weight files before those files are deleted. A
