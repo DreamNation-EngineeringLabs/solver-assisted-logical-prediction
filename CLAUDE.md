@@ -336,20 +336,39 @@ recall >= 0.50.
    Only then is the scaffolding/"repair" hypothesis testable at all. Shape
    depends on b15's outcome.
 
-**Track D — program and release hygiene.**
+**Track D — program and release hygiene.** Tracks A, B and C are complete: the
+paper exists, is audited over eleven rounds, and b14–b20 are sealed.
 
-9. Write the Cognitive Core goal statement into the root `CLAUDE.md`. Author to
-   draft; not recorded anywhere in the repo as of 2026-09-02.
+Closed since this list was written on 2026-09-02:
+
+- ~~9. Goal statement~~ — in the root `CLAUDE.md` under "The goal".
+- ~~11. Licence~~ — MIT for software at both roots, CC BY 4.0 for the research
+  data (`LICENSE-DATA`). Copyright RamanIQ.
+- ~~14. `:::study-flow` placeholder~~ — the manuscript that carried it is
+  superseded by `paper/`, which has no placeholders.
+
+Still open, and all of them are the author's:
+
 10. Consider elevating the v9 abstention failure (0/12 on unknown, always `No`)
-    out of a diagnostics footnote — it is a capability gap with direct
-    architectural consequences for any reasoning core.
-11. Choose and add an explicit licence — the bundle asserts none.
+    out of a diagnostics footnote — a capability gap with direct architectural
+    consequences for any reasoning core.
 12. Review ProofWriter source and derivative-data licence terms before any
-    redistribution.
-13. Deposit the release archive in a versioned/archival service with a permanent
-    DOI (pending; the paper says so).
-14. Author block is still "Anonymous author(s)"; `:::study-flow` at
-    `manuscript.md:28` is an unrendered figure placeholder.
+    redistribution. Low risk: no ProofWriter item is scored by any model here,
+    it validates the certifier only.
+13. Deposit the release archive with a permanent DOI. The Reproducibility
+    Statement promises one "with the camera-ready version", so this is due on
+    acceptance, not before.
+14. Author block is "Anonymous authors", which is correct under double-blind
+    review and becomes a camera-ready item.
+15. **The sealed-authority release decision.** Irreversible once public: the
+    repository holds the answer authorities for b15 and b16, and publishing them
+    ends their usefulness as blind panels for anyone who has read the repo. See
+    "Release status" in the root `CLAUDE.md`.
+16. **The instruction-compliance test**, the highest-value experiment left. Every
+    prompt opens `Use only the supplied logical facts, rules, and solver record`,
+    so failing to check the record is entangled with having been told to use it,
+    and a larger model follows instructions better. One changed instruction line
+    on the same panel separates them. Disclosed in the paper's Limitations.
 
 ## Constraints when working in this project
 
