@@ -64,14 +64,21 @@ def _score(key: str, runner: str, extra: list[str]) -> str:
     if r.returncode != 0:
         raise RuntimeError(f"{key}: runner exited {r.returncode}")
 
-    produced = pathlib.Path("/work/runs")
-    if not produced.exists():
-        raise RuntimeError(f"{key}: runner wrote no runs/ directory")
-    for src in produced.rglob("*"):
-        if src.is_file():
-            dst = pathlib.Path("/out") / src.relative_to(produced)
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, dst)
+    # runs/ holds receipts, results/ holds analyses and diagnostics; a runner
+    # may write either, so ship back whichever it produced.
+    wrote = False
+    for top in ("runs", "results"):
+        produced = pathlib.Path("/work") / top
+        if not produced.exists():
+            continue
+        for src in produced.rglob("*"):
+            if src.is_file():
+                dst = pathlib.Path("/out") / top / src.relative_to(produced)
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src, dst)
+                wrote = True
+    if not wrote:
+        raise RuntimeError(f"{key}: runner produced neither runs/ nor results/")
     receipts.commit()
     return f"{key}: receipts committed to the cc-receipts volume"
 
