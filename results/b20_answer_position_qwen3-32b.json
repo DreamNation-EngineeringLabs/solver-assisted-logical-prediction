@@ -1,0 +1,91 @@
+{
+  "arms": {
+    "full": {
+      "argmax_tokens": {
+        " No": 6,
+        " Yes": 6
+      },
+      "bare_and_spaced_agree": "7/12",
+      "bare_verdicts_on_contradicted": [
+        "Yes",
+        "Yes",
+        "No",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "bare_verdicts_on_entailed": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "median_rank_of_bare_Yes": 76
+    },
+    "misleading": {
+      "argmax_tokens": {
+        " No": 6,
+        " Yes": 6
+      },
+      "bare_and_spaced_agree": "7/12",
+      "bare_verdicts_on_contradicted": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "bare_verdicts_on_entailed": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "No"
+      ],
+      "median_rank_of_bare_Yes": 67
+    },
+    "truncate_1": {
+      "argmax_tokens": {
+        " No": 6,
+        " Yes": 6
+      },
+      "bare_and_spaced_agree": "12/12",
+      "bare_verdicts_on_contradicted": [
+        "No",
+        "No",
+        "No",
+        "No",
+        "No",
+        "No"
+      ],
+      "bare_verdicts_on_entailed": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "median_rank_of_bare_Yes": 111
+    }
+  },
+  "candidate_token_ids": {
+    "bare": [
+      9454,
+      2753
+    ],
+    "spaced": [
+      7414,
+      2308
+    ]
+  },
+  "n_contradicted": 6,
+  "n_entailed": 6,
+  "repo": "Qwen/Qwen3-32B",
+  "revision": "9216db5781bf21249d130ec9da846c4624c16137",
+  "topk": 5
+}

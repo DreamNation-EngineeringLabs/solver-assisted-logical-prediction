@@ -667,14 +667,18 @@ $93$ of the $96$ contradicted items. A fabricated rule inverts a
 near-total prior.
 
 \textbf{This does not attenuate with scale.} Re-scoring the same items on
-Llama-3.3-70B, sixteen times the largest checkpoint above, gives $0$ of $192$
+Llama-3.3-70B, sixteen times the largest of the three above, gives $0$ of $192$
 correct under \textsc{misleading} at $d' = -5.12$, with no item within $0.5$
 logits of the decision boundary. That checkpoint is not struggling: it answers
 $192/192$ under \textsc{full} and $191/192$ under \textsc{broken\_chain}, and
 solves $145$ of $192$ with no certificate at all. A single fabricated rule
-inverts every one of them. Qwen3-32B is not interpretable here, failing the
+inverts every one of them. Qwen3-32B is not interpretable here. It fails the
 minimum per-class recall floor under \textsc{full} at $0.167$ while clearing it
-on three other arms, so we record it and draw nothing from it.
+on three other arms, and the reason is measurement rather than the model: its
+candidate logits sit far enough down the distribution that the pair we score
+disagrees with the token it would actually emit on $5$ of $12$ sampled items in
+that arm, against $12/12$ agreement where it is confident. We record it and draw
+nothing from it.
 
 Whether any model notices, we cannot say. Rescoring the
 \textsc{broken\_chain} items with an \texttt{Unknown} candidate available should
@@ -719,6 +723,12 @@ answer key is reconstructed from those identifiers; and a screen for response
 tokens leaking into a certificate that was a malformed regular expression and
 never fired (the released certificates contain none, checked after the fact).
 Every later experiment fixes all five.
+
+\textbf{Candidate tokenisation.} The prompt ends \texttt{Answer:}, which
+invites a space-prefixed continuation, while the scored candidates are the bare
+tokens. Only their relative order matters, and on the checkpoint carrying the
+scale claim the two pairs agree on all $36$ sampled verdicts; they diverge only
+near indifference, which is why Qwen3-32B is not interpreted.
 
 \textbf{The scale check is one checkpoint.} Llama-3.3-70B extends the
 corruption result past the small-model reading, but it is a single model at that

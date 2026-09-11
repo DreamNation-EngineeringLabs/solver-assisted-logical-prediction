@@ -1,0 +1,91 @@
+{
+  "arms": {
+    "full": {
+      "argmax_tokens": {
+        " No": 6,
+        " Yes": 6
+      },
+      "bare_and_spaced_agree": "12/12",
+      "bare_verdicts_on_contradicted": [
+        "No",
+        "No",
+        "No",
+        "No",
+        "No",
+        "No"
+      ],
+      "bare_verdicts_on_entailed": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "median_rank_of_bare_Yes": 36
+    },
+    "misleading": {
+      "argmax_tokens": {
+        " No": 6,
+        " Yes": 6
+      },
+      "bare_and_spaced_agree": "12/12",
+      "bare_verdicts_on_contradicted": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "bare_verdicts_on_entailed": [
+        "No",
+        "No",
+        "No",
+        "No",
+        "No",
+        "No"
+      ],
+      "median_rank_of_bare_Yes": 26
+    },
+    "truncate_1": {
+      "argmax_tokens": {
+        " No": 6,
+        " Yes": 6
+      },
+      "bare_and_spaced_agree": "12/12",
+      "bare_verdicts_on_contradicted": [
+        "No",
+        "No",
+        "No",
+        "No",
+        "No",
+        "No"
+      ],
+      "bare_verdicts_on_entailed": [
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes",
+        "Yes"
+      ],
+      "median_rank_of_bare_Yes": 29
+    }
+  },
+  "candidate_token_ids": {
+    "bare": [
+      9642,
+      2822
+    ],
+    "spaced": [
+      7566,
+      2360
+    ]
+  },
+  "n_contradicted": 6,
+  "n_entailed": 6,
+  "repo": "unsloth/Llama-3.3-70B-Instruct",
+  "revision": "99cd0d2c829e92a67c844f9144c2509632e5c87f",
+  "topk": 5
+}
