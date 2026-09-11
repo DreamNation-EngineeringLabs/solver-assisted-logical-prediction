@@ -1,0 +1,173 @@
+{
+  "backend": "transformers+cuda",
+  "family": "llama3.3",
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "gpu_count": 2,
+  "gpu_memory_total_gib": 158.36,
+  "gpus": [
+    "NVIDIA H100 80GB HBM3",
+    "NVIDIA H100 80GB HBM3"
+  ],
+  "key": "llama3p3_70b",
+  "params_b": 70.6,
+  "repo": "unsloth/Llama-3.3-70B-Instruct",
+  "revision": "99cd0d2c829e92a67c844f9144c2509632e5c87f",
+  "torch": "2.14.0+cu130",
+  "version": "binary-certificate-factorial-b20-cuda",
+  "weights": {
+    "aggregate_sha256": "b38a091f23040f49a1169615ef83c075b005c29a4502bcc4b9639cb72d9eb04b",
+    "files": [
+      {
+        "bytes": 4584408808,
+        "name": "model-00001-of-00030.safetensors",
+        "sha256": "16db48c449e7222c42f21920712dcdd74e645f73361d64e6cf36a082fa9a3e0d"
+      },
+      {
+        "bytes": 4664167376,
+        "name": "model-00002-of-00030.safetensors",
+        "sha256": "fcd250bf27cc5c51c2661eeb98f4d2de5525c6d466a0ee690bc80e29a917bcd4"
+      },
+      {
+        "bytes": 4999711704,
+        "name": "model-00003-of-00030.safetensors",
+        "sha256": "b43b1d955e5fb186784b2a32e9932f3e3ed3d8a66f76631f509882a39e0bb189"
+      },
+      {
+        "bytes": 4966157032,
+        "name": "model-00004-of-00030.safetensors",
+        "sha256": "eca986f7836c97d9ec1bb7061a62ea72183ade641ca1edc69d9280341e85b50b"
+      },
+      {
+        "bytes": 4664134408,
+        "name": "model-00005-of-00030.safetensors",
+        "sha256": "56e1ceef3622bef0a91b554a8dba1074b93f4f0eb1d28c38df112672fd31cb3f"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00006-of-00030.safetensors",
+        "sha256": "7662172fb0dd22f764869236f0a42c6f79fb385e5bced923936292cb8d94bb56"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00007-of-00030.safetensors",
+        "sha256": "c0c90f7ff73f765286f51799f512a8c1cfeb4f0a46c4f2831fc855dd7ee0a8b1"
+      },
+      {
+        "bytes": 4999711728,
+        "name": "model-00008-of-00030.safetensors",
+        "sha256": "2e0c370dc76174e1b06aba9cf64afd0fcc9ea656f0ba1b39a4e6713fa52e9925"
+      },
+      {
+        "bytes": 4966157056,
+        "name": "model-00009-of-00030.safetensors",
+        "sha256": "226c345b2e8865b54697351c95aea8f222834564edbe97ee98b1a4f4bfb204d8"
+      },
+      {
+        "bytes": 4664134408,
+        "name": "model-00010-of-00030.safetensors",
+        "sha256": "12feacb2244360eade29c7f12f96a4be67fc6469a1e4b25e9480ee7ada79dc7d"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00011-of-00030.safetensors",
+        "sha256": "458aeafc39b1c137d7d11df3de45f2d9db3175363230e9290ec08d6531fcdd26"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00012-of-00030.safetensors",
+        "sha256": "962683d58eb1aa7b7efa35451fbf21d605ab8eb718d854766db0cfb6bfca1f5a"
+      },
+      {
+        "bytes": 4999711728,
+        "name": "model-00013-of-00030.safetensors",
+        "sha256": "21af5233ab83c168bf7378792639585ae0ec835ff4c8c63067034b95d93dc57d"
+      },
+      {
+        "bytes": 4966157056,
+        "name": "model-00014-of-00030.safetensors",
+        "sha256": "ca1a1f9815ff050ba0cdc5f00558eb465ed73e9a2ac4c50cc02ae46ccdb7fc22"
+      },
+      {
+        "bytes": 4664134408,
+        "name": "model-00015-of-00030.safetensors",
+        "sha256": "6622c84f6c07c1ca73dabbbc63c7e7842d98ba1a92bbe18d9f485718b12bf757"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00016-of-00030.safetensors",
+        "sha256": "87dd8ffa1c6fbefefac8bfd02e7c3001f1c6b31e2afe9859038e912b6712f884"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00017-of-00030.safetensors",
+        "sha256": "302f92d01ba80999d73b93f4e4d90911b260e7e78c8e61605f43a775a77cadf8"
+      },
+      {
+        "bytes": 4999711728,
+        "name": "model-00018-of-00030.safetensors",
+        "sha256": "1b7e0a8431ed096f104f52d9846f43a2bc1f0f214a9bfd0895fb31790ec7c10d"
+      },
+      {
+        "bytes": 4966157056,
+        "name": "model-00019-of-00030.safetensors",
+        "sha256": "08d25041abea5092ee632f3bb366d81f22d06cb221d73f885e3375430c921ce7"
+      },
+      {
+        "bytes": 4664134408,
+        "name": "model-00020-of-00030.safetensors",
+        "sha256": "dbdd73757aefe1af2834c42a179a428da7933aa8f54bc6e3f43f112162c4436e"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00021-of-00030.safetensors",
+        "sha256": "21097441bb201b3094daf3601a6fc9d98e3b62b9cd76182ff00d39de5c16bf93"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00022-of-00030.safetensors",
+        "sha256": "9f2e5a40d0f563164874ceacb7f785481a908fc8fb46321217f39a6b9d2bad3f"
+      },
+      {
+        "bytes": 4999711728,
+        "name": "model-00023-of-00030.safetensors",
+        "sha256": "ca22357192a3f7e467ce6091b4f0f94f4813ebcb3673c6ca4f5692cdd4d01abd"
+      },
+      {
+        "bytes": 4966157056,
+        "name": "model-00024-of-00030.safetensors",
+        "sha256": "0a2ff389c99b5b33ae5f3c0a5a434bc2fb48419bf23f15879163b0263a14cf57"
+      },
+      {
+        "bytes": 4664134408,
+        "name": "model-00025-of-00030.safetensors",
+        "sha256": "5f29060d57ff98da42faeabc1bc82b298ffd7fbde46ed56fe65cb505b0bf7fc9"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00026-of-00030.safetensors",
+        "sha256": "32497c4d25bb9ce9839e1f774cb4c9a81177eba0636ec1c2aaeebae0e17e139e"
+      },
+      {
+        "bytes": 4664167408,
+        "name": "model-00027-of-00030.safetensors",
+        "sha256": "ddff9ad869a4dd4df1d361cdd0f382937877908ded87da41b8bdf89f17ce64f3"
+      },
+      {
+        "bytes": 4999711728,
+        "name": "model-00028-of-00030.safetensors",
+        "sha256": "ac5526f9491bcd6eee15aa42654bd1d996c81f59613f11f8580f499a6c867df7"
+      },
+      {
+        "bytes": 4966173536,
+        "name": "model-00029-of-00030.safetensors",
+        "sha256": "06808f08abaa5cc898962f8dd0fbdfacb3bc9d3f6721f27cc23cd1fd6d3744ff"
+      },
+      {
+        "bytes": 2101346432,
+        "name": "model-00030-of-00030.safetensors",
+        "sha256": "b0436c98c9b4f78e61f6769e588e0853179b970e2a084ae2886e2daebf1ce13d"
+      }
+    ],
+    "total_bytes": 141107497872
+  }
+}

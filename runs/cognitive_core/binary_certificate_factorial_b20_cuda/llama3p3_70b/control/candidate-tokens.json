@@ -1,0 +1,8 @@
+{
+  "candidate_token_ids": {
+    "No": 2822,
+    "Yes": 9642
+  },
+  "key": "llama3p3_70b",
+  "version": "binary-certificate-factorial-b20-cuda"
+}

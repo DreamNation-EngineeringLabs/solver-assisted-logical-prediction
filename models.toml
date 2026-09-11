@@ -161,3 +161,24 @@ revision = "3b4b6d22265656633ced8bdfa0784ee8c97b3397"
 family = "qwen2.5"
 params_b = 14.7
 role = "b19 scale extension; extends the within-family ladder to 14B"
+
+# --- b20: does the corruption failure survive scale? -------------------------
+# b15's misleading arm is the paper's one invariant finding, and every checkpoint
+# behind it is <= 4.3B. These two extend the Qwen and Llama ladders past 14.7B on
+# the SAME sealed panels, scored by the same next-token-likelihood path.
+# Standard-format safetensors, not MLX mirrors: b19 recorded that gemma-3-4b's
+# MLX conversion could not be loaded by the transformers/CUDA stack.
+[[b20_model]]
+key = "qwen3_32b"
+repo = "Qwen/Qwen3-32B"
+revision = "9216db5781bf21249d130ec9da846c4624c16137"
+family = "qwen3"
+params_b = 32.8
+role = "b20 scale extension; extends the within-family ladder past 14.7B"
+[[b20_model]]
+key = "llama3p3_70b"
+repo = "unsloth/Llama-3.3-70B-Instruct"
+revision = "99cd0d2c829e92a67c844f9144c2509632e5c87f"
+family = "llama3.3"
+params_b = 70.6
+role = "b20 scale extension; ungated mirror of a gated upstream repo"

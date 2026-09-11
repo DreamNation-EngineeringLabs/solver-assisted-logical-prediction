@@ -1,0 +1,36 @@
+{
+  "arm_seconds": {
+    "broken_chain": 11.9,
+    "full": 12.3,
+    "irrelevant": 14.3,
+    "misleading": 12.4,
+    "none": 16.7,
+    "same_entity_irrelevant": 12.3,
+    "shuffled": 11.9,
+    "truncate_1": 11.8,
+    "truncate_2": 11.4,
+    "truncate_3": 13.3
+  },
+  "arms": [
+    "none",
+    "irrelevant",
+    "same_entity_irrelevant",
+    "truncate_3",
+    "truncate_2",
+    "truncate_1",
+    "broken_chain",
+    "misleading",
+    "shuffled",
+    "full"
+  ],
+  "candidate_token_ids": {
+    "No": 2753,
+    "Yes": 9454
+  },
+  "key": "qwen3_32b",
+  "n": 192,
+  "total_seconds": 452.9,
+  "version": "binary-certificate-factorial-b20-cuda",
+  "weights_bytes": 65524328560,
+  "weights_sha256": "304378ae890c6afe401176f32401d93d6ef847d34be65412e3cb9aab20a7701c"
+}

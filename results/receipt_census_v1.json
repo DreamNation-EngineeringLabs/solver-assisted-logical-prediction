@@ -8,6 +8,14 @@
    "responses": 5976,
    "runs": 3
   },
+  "binary_certificate_factorial_b20_cuda": {
+   "responses": 3840,
+   "runs": 2
+  },
+  "binary_certificate_factorial_b20_edge0": {
+   "responses": 384,
+   "runs": 1
+  },
   "multimodel_three_class_b16": {
    "responses": 9600,
    "runs": 10
@@ -34,6 +42,9 @@
   "binary_certificate_factorial_b15/gemma3_4b_b15": 1992,
   "binary_certificate_factorial_b15/qwen2p5_3b_4bit": 1992,
   "binary_certificate_factorial_b15/qwen2p5_3b_bf16": 1992,
+  "binary_certificate_factorial_b20_cuda/llama3p3_70b": 1920,
+  "binary_certificate_factorial_b20_cuda/qwen3_32b": 1920,
+  "binary_certificate_factorial_b20_edge0/edge0_35b_a3b": 384,
   "multimodel_three_class_b16/gemma3_4b": 960,
   "multimodel_three_class_b16/llama3p2_1b": 960,
   "multimodel_three_class_b16/llama3p2_3b": 960,
@@ -65,8 +76,8 @@
   "three_class_none_baseline_b17b/qwen2p5_3b_4bit": 192,
   "three_class_none_baseline_b17b/qwen2p5_3b_bf16": 192
  },
- "model_runs": 34,
+ "model_runs": 37,
  "note": "b14 released its responses as results/b14_raw_model_calls_960.jsonl rather than under runs/*/receipts/; it is counted as one model-run.",
- "total_scored_responses": 34584,
+ "total_scored_responses": 38808,
  "version": "receipt-census-v1"
 }

@@ -7,6 +7,12 @@ Deliverable: [`final/paper.pdf`](final/paper.pdf) — 11 pages: 8 of main text a
 the venue's own geometry (cap is 9), references from p9, **no appendix**. 39
 verified citations, 4 figures, 6 tables, every one of them in the main text.
 
+**b20, the scale check** (11 Sept 2026) takes the corruption result past the
+small-model reading: Llama-3.3-70B answers `full` 192/192 and solves 145/192
+with no certificate at all, and is wrong on **all 192** misleading items at
+d' = -5.12. Design doc:
+[`docs/cognitive-core/binary_certificate_factorial_b20.md`](../docs/cognitive-core/binary_certificate_factorial_b20.md).
+
 Two tables exist to answer a first-time reader's questions before the argument
 starts. **Table 1** shows a real sealed item verbatim: the theory, the query, the
 `full` derivation numbered line by line, and what each of the ten arms does to

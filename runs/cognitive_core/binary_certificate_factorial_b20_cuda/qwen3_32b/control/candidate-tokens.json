@@ -1,0 +1,8 @@
+{
+  "candidate_token_ids": {
+    "No": 2753,
+    "Yes": 9454
+  },
+  "key": "qwen3_32b",
+  "version": "binary-certificate-factorial-b20-cuda"
+}

@@ -189,6 +189,30 @@ def stimulus(root: Path):
         f"{tid}: {len(checks)} properties of the displayed example, from the sealed panel"
 
 
+def scale_corruption(root: Path):
+    """#b20: the corruption arm at 70B, straight from receipts.
+
+    The paper's one invariant finding rested on three checkpoints of at most
+    4.3B, so the standing objection was that scale removes it. This recomputes
+    the 70B numbers from the receipts and the sealed authority, including the
+    unaided score, because a checkpoint that cannot do the task unaided makes
+    the corruption number far less interesting.
+    """
+    run = root / "runs/cognitive_core/binary_certificate_factorial_b20_cuda/llama3p3_70b/receipts"
+    auth = {r["task_id"]: r["answer"] for r in _rows(root / B15D / "sealed/authority.jsonl")}
+    got = {}
+    for arm in ("none", "full", "misleading"):
+        recs = {r["task_id"]: r["candidate"] for r in _rows(run / f"prospective-{arm}.jsonl")}
+        if set(recs) != set(auth):
+            raise RuntimeError(f"{arm}: receipts do not cover the panel")
+        got[arm] = sum(recs[t] == auth[t] for t in auth)
+    stated = "full 192/192, misleading 0/192, unaided 145/192"
+    derived = (f"full {got['full']}/192, misleading {got['misleading']}/192, "
+               f"unaided {got['none']}/192")
+    return stated, derived, ("Llama-3.3-70B on the sealed b15 panel: perfect with an honest "
+                             "certificate, wrong on every item with a fabricated one")
+
+
 def receipt_digests(root: Path):
     """#37: the paper says every receipt digest verifies. Check all of them.
 
@@ -257,6 +281,7 @@ CLAIMS = {
     "census":         ("§4 total scored responses", census),
     "digests":        ("§4 every receipt digest recomputed", receipt_digests),
     "stimulus":       ("\u00a73.2 the worked example in tab:stimulus", stimulus),
+    "scale-corruption": ("\u00a75.3 the corruption arm at 70B", scale_corruption),
     "model-table":    ("§5.2 every cell of tab:models", model_table),
 }
 

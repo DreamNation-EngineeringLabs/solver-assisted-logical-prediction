@@ -1,0 +1,48 @@
+{
+  "backend": "edge0+mlx",
+  "family": "edge0",
+  "key": "edge0_35b_a3b",
+  "mlx": "0.30.6",
+  "params_b_active": 3.0,
+  "params_b_total": 35.0,
+  "quantisation": "int4 base with unmerged LoRA and prerouter adapters",
+  "repo": "Edge0/Edge0-35B-A3B-preview",
+  "revision": "1ff9f4478890faec0368c5463b621d1036d5b518",
+  "version": "binary-certificate-factorial-b20-edge0",
+  "weights": {
+    "aggregate_sha256": "dd4d82c3efddb89bfec942fe1aa76cc147dec055c16fd87685d72b3504f14cc8",
+    "files": [
+      {
+        "bytes": 42413928,
+        "name": "lora_edge0_35b.safetensors",
+        "sha256": "a407f6d27bb55e39e6461bd4bce1fd90489e70c7582b68a796fb764bdb441ec1"
+      },
+      {
+        "bytes": 4395019264,
+        "name": "model-00001-of-00004.safetensors",
+        "sha256": "f7fff28fecb8221e53787c6339c938b113bcb94c7bbc60d09a8826eba08ef1ab"
+      },
+      {
+        "bytes": 5368472749,
+        "name": "model-00002-of-00004.safetensors",
+        "sha256": "31dcdb1c49eebdb1505bd14e3cb33f9cf900bd2546b638f2464694ae763a033f"
+      },
+      {
+        "bytes": 5368324139,
+        "name": "model-00003-of-00004.safetensors",
+        "sha256": "3e66de06a1f03dade16a612a368cfce4a4c9caa4efd7d28185454384082cec03"
+      },
+      {
+        "bytes": 4377211365,
+        "name": "model-00004-of-00004.safetensors",
+        "sha256": "a5d0cf03519c26f8b506df6b0ba60526e5c08c8cea22d0c21ce92950e58a5422"
+      },
+      {
+        "bytes": 138422000,
+        "name": "prerouter_edge0_35b.safetensors",
+        "sha256": "93d07af08e1f5c8d174e941016740cb4d2c143c6b90f33581237679eca9b006f"
+      }
+    ],
+    "total_bytes": 19689863445
+  }
+}

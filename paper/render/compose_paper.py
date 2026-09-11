@@ -176,7 +176,7 @@ def apply_layout(src: str) -> str:
 src = (PAPER / "drafts/intro_relwork.tex").read_text()
 
 TITLE = ("What a Language Model Does with a Solver Certificate:\\\\\n"
-         "An Answer-Evidence Decomposition Across Twelve Models")
+         "An Answer-Evidence Decomposition Across Fourteen Models")
 
 ABSTRACT = r"""
 Solver-, tool- and retrieval-augmented systems report large accuracy gains,
@@ -185,7 +185,7 @@ mechanisms give the same number: reading a supplied answer, and reasoning over
 supplied state. The standard control, a same-shape irrelevant record, separates
 neither. We build one that does, holding every surface property we could
 enumerate and audit fixed while destroying validity alone, across four sealed
-experiments and two robustness checks: $NSCOREDRESPONSES$ scored responses,
+experiments and three robustness checks: $NSCOREDRESPONSES$ scored responses,
 re-derivable from released receipts.
 
 Asked what a model does with a certificate, the instrument returns a different
@@ -330,12 +330,12 @@ enters a sealed panel without a certification record.
 \section{Experimental Setup}
 
 Every experiment asks a rule-chaining query over a small theory of facts and
-universally quantified rules. \Cref{tab:panels} names the six and says what each
+universally quantified rules. \Cref{tab:panels} names the seven and says what each
 one does.
 
 \begin{table}[t]
 \centering
-\caption{\textbf{The four experiments and two robustness checks.} Sealed panels
+\caption{\textbf{The four experiments and three robustness checks.} Sealed panels
 use per-item invented vocabularies, are mutually disjoint, and fix derivation
 depth at four. The public corpus validates the certifier only: no item from it
 is scored by any model here.}
@@ -352,6 +352,7 @@ Panel & Items & Experiment & What it does \\
 \midrule
 \texttt{b18} & \texttt{b15} items & line-order check & eight permutations of each record \\
 \texttt{b16} on CUDA & as \texttt{b16} & runtime check & \texttt{transformers} rather than \texttt{mlx-lm}, plus two larger models \\
+\texttt{b15} at scale & \texttt{b15} items & scale check & the same arms on a 32.8B and a 70.6B checkpoint \\
 \midrule
 ProofWriter OWA & 23{,}240 & \multicolumn{2}{l}{certifier validation only \citep{tafjord2020proofwriter}} \\
 \bottomrule
@@ -363,11 +364,13 @@ control's items with a third candidate available, changing only the instruction 
 byte-identical inputs, and its \textsc{none} arm fixes the abstention floor
 under that same instruction. On the sweep's $64$ undecidable items there is
 no terminal literal to supply, so those two cells instantiate the $2\times2$
-less exactly than the rest. Two robustness checks reuse these panels: one
-rescores the validity control's items under eight permutations of the certificate's
-lines each, recording where the final rule and its premise land; the other
-rescores the sweep's panel through \texttt{transformers} on CUDA rather than
-\texttt{mlx-lm}, and there adds Llama-3.1-8B and Qwen2.5-14B.
+less exactly than the rest. Three robustness checks reuse these panels. The
+first rescores the validity control's items under eight permutations of the
+certificate's lines each, recording where the final rule and its premise land.
+The second rescores the sweep's panel through \texttt{transformers} on CUDA
+rather than \texttt{mlx-lm}, and there adds Llama-3.1-8B and Qwen2.5-14B. The
+third takes the validity control's own items to a larger scale on that same
+stack, adding Qwen3-32B and Llama-3.3-70B on rented H100s.
 
 Responses are scored by direct next-token likelihood over verified single-token
 candidates: \texttt{Yes}/\texttt{No} for the first two,
@@ -663,6 +666,16 @@ at $c = 2.565$. Under \textsc{misleading} it answers \texttt{Yes} on
 $93$ of the $96$ contradicted items. A fabricated rule inverts a
 near-total prior.
 
+\textbf{This does not attenuate with scale.} Re-scoring the same items on
+Llama-3.3-70B, sixteen times the largest checkpoint above, gives $0$ of $192$
+correct under \textsc{misleading} at $d' = -5.12$, with no item within $0.5$
+logits of the decision boundary. That checkpoint is not struggling: it answers
+$192/192$ under \textsc{full} and $191/192$ under \textsc{broken\_chain}, and
+solves $145$ of $192$ with no certificate at all. A single fabricated rule
+inverts every one of them. Qwen3-32B is not interpretable here, failing the
+minimum per-class recall floor under \textsc{full} at $0.167$ while clearing it
+on three other arms, so we record it and draw nothing from it.
+
 Whether any model notices, we cannot say. Rescoring the
 \textsc{broken\_chain} items with an \texttt{Unknown} candidate available should
 raise abstention if the model tracks validity. It falls by $37.5$ and $32.8$
@@ -707,7 +720,18 @@ tokens leaking into a certificate that was a malformed regular expression and
 never fired (the released certificates contain none, checked after the fact).
 Every later experiment fixes all five.
 
-\textbf{Generalisation.} One task family, small models, synthetic panels.
+\textbf{The scale check is one checkpoint.} Llama-3.3-70B extends the
+corruption result past the small-model reading, but it is a single model at that
+scale, scored through a fourth backend, and its unaided competence leaves the
+validity share undefined: the denominator of \cref{sec:broken} collapses once a
+checkpoint can answer without the record. Its $191/192$ under
+\textsc{broken\_chain} is likewise not evidence of detection, because the theory
+is visible in every arm and a model with that much unaided competence may simply
+be ignoring a useless record. What the arm shows is narrower and harder to
+explain away: a fabricated rule overrides reasoning the model demonstrably has.
+
+\textbf{Generalisation.} One task family, small models plus one 70B scale check,
+synthetic panels.
 Invented vocabularies establish item novelty, not independence from every
 relevant pretraining pattern \citep{golchin2023time,deng2024investigating}, and
 model is not randomised, so cross-model comparisons are descriptive. The
@@ -734,7 +758,7 @@ consequential.
 
 End-to-end accuracy cannot say why solver assistance helps. The decomposition
 can: arrange the arms so each contrast moves one factor, and break validity
-while holding surface form fixed. Applied across twelve models, two inference
+while holding surface form fixed. Applied across fourteen models, two inference
 stacks and $NSCOREDRESPONSES$ responses, it returns a different answer almost
 every time it is asked. The validity share is $98.3\%$ on one checkpoint and
 $40.4$--$51.4\%$ on another; inference depth, order-sensitivity and viability
@@ -744,7 +768,8 @@ and decline to generalise its value, ours included.
 One result does not move. Given a certificate whose fabricated final rule
 establishes the negation, the three checkpoints answer incorrectly on $189$,
 $186$ and $192$ of $192$, inheriting the apparatus's errors in full, and none
-abstains on a broken certificate. Mechanism claims about solver assistance do
+abstains on a broken certificate. Nor is this a small-model artefact: a $70.6$B
+checkpoint that solves $145$ of $192$ unaided is wrong on all $192$. Mechanism claims about solver assistance do
 not transfer between checkpoints; the failure to check the solver does. Report
 both, per checkpoint, and always run a corrupted arm. Report sensitivity beside
 accuracy while doing it: two criteria we had prespecified were gamed by label

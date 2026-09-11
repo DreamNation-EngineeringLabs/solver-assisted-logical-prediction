@@ -73,7 +73,7 @@ co-occurrence has none, and anything built on it inherits the solver's errors in
 silence. No accuracy number separates the two.
 
 Separating them needs a control that holds surface form fixed and destroys
-validity alone. We build one and apply it across four sealed experiments and two
+validity alone. We build one and apply it across four sealed experiments and three
 robustness checks on frozen small models, scoring by direct next-token
 likelihood over verified single-token candidates so that no free text is parsed.
 
@@ -96,7 +96,7 @@ The failure to check the solver does.
 What is new is the instrument: a $2\times2$ separating solver-supplied answers
 from solver-supplied state (\cref{fig:factorial}), a surface-matched invalid
 certificate certified per item, and a closure certifier for queries nothing
-decides. We apply it to twelve models
+decides. We apply it to fourteen models
 \citep{team2024qwen,grattafiori2024llama,team2025gemma,microsoft2025phi,team2024olmo,allal2025smollm}.
 
 \section{Related Work}
