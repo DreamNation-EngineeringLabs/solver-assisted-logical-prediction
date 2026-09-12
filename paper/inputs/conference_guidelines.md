@@ -1,15 +1,37 @@
 # ICLR 2027 — submission guidelines
 
+> **Provenance.** Everything below the Format section was written by this
+> pipeline before the venue published anything. The Length, Format, Abstract and
+> Sections entries were checked against the official author guidelines and style
+> files on 12 September 2026:
+> `https://iclr.cc/Conferences/2027/AuthorGuidelines` and
+> `iclr-2027-style-files.zip`, vendored in `paper/inputs/iclr2027/`. The Format
+> entry said "two-column" for a week and was wrong; the paper was built that way
+> until the style file was read. Check a claim here against the style file before
+> trusting it.
+
 ## Dates
 Abstract 18 September 2026 (AOE) · Full paper 25 September 2026 (AOE)
 
 ## Length
-**9 pages** of main text maximum. References, acknowledgements and appendices are
-unlimited and do not count toward the limit. Figures and tables count.
+**9 pages** of main text maximum at submission, 10 for rebuttal and camera-ready.
+Citations are unlimited and do not count. The Reproducibility Statement, the
+AI-Use Statement and an Ethics Statement are each explicitly excluded from the
+limit, and each should stay under a page. Figures and tables count.
 
 ## Format
-Two-column ICLR style via `iclr2027_conference.sty`. 10pt. Do not alter margins,
-font sizes or line spacing.
+**Single column.** `\documentclass{article}` plus `\usepackage{iclr2027_conference}`,
+which sets the whole geometry itself: text 5.5in wide by 9in tall, 10pt on 11pt
+leading, 0.5in odd/even side margin, no paragraph indent and a half-line
+`\parskip`. It also supplies `\maketitle`, the abstract environment, the
+small-caps section headings and the reviewer line-number rulers in the margins.
+Bibliography style `iclr2027_conference.bst`, citations through `natbib`
+(`\citet` in-sentence, `\citep` otherwise). Times is the preferred typeface.
+
+Do not restate any of the style file's settings in the preamble and do not edit
+the style file --- "tweaking the style files may be grounds for rejection". The
+abstract **must be a single paragraph**. Place one line space before a figure
+caption and after the figure, and around a table title.
 
 ## Anonymity
 **Double-blind.** No author names, affiliations, emails, funding sources or

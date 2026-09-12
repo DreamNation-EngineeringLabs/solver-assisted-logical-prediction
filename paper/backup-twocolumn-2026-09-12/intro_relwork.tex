@@ -1,15 +1,13 @@
-% Submission template — ICLR 2027.
+% Submission template — ICLR-style section skeleton.
 %
-% DOCUMENT CLASS: the official style files were published at
-% https://media.iclr.cc/Conferences/ICLR2027/iclr-2027-style-files.zip and are
-% vendored in paper/inputs/iclr2027/ (copy in final/ so that directory compiles
-% standalone). ICLR 2027 is SINGLE COLUMN: \textwidth 5.5in, \textheight 9in,
-% 10pt on 11pt leading, with reviewer line-number rulers in the margins. The
-% style file owns the geometry, the type sizes, \maketitle, the abstract, the
-% section headings and \parskip — do not restate any of them here.
-\documentclass{article}
+% NOTE ON THE DOCUMENT CLASS: ICLR's official iclr2027_conference.sty is not yet
+% published and is not a CTAN package, so this template uses `article` with
+% settings that approximate the target layout. Swapping in the official style
+% file is a mechanical change once it is released: replace the \documentclass
+% and geometry lines, nothing else.
+\documentclass[10pt]{article}
 
-\usepackage{iclr2027_conference}
+\usepackage[letterpaper,margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{times}
@@ -20,14 +18,13 @@
 \usepackage{multirow}
 \usepackage{caption}
 \usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
 \usepackage{xcolor}
 
-\captionsetup{labelfont=bf}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parskip}{2pt}
 
 \title{TITLE}
-% Anonymous: iclr2027_conference.sty prints the double-blind author block
-% itself while \iclrfinalcopy stays commented out. \author is unused there but
-% kept so \maketitle has something if the final copy switch is ever flipped.
 \author{Anonymous authors\\Paper under double-blind review}
 \date{}
 
@@ -39,22 +36,17 @@ ABSTRACT
 \end{abstract}
 
 \section{Introduction}
-% Single column: a [t] float declared here is legal at the top of page 1, which
-% puts it ABOVE \maketitle --- the two-column build could not do that because
-% the title spans the columns and the column tops start below it. Suppressing
-% top floats on this page only leaves the bottom of page 1 as the first legal
-% slot, so the pull figure stays on page 1 and stays under the title.
-\suppressfloats[t]
 
-\begin{figure}[tb]
+\begin{figure}[!t]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/answer_state_factorial.png}
+\includegraphics[width=\columnwidth]{figures/answer_state_factorial.png}
 \caption{\textbf{The instrument.} A solver certificate carries an answer and
-the state it follows from, and accuracy adds the two together. Across by whether
-the record carries the answer, down by whether it carries the state: every arrow
-is then a one-factor edge that attributes. Cells give correct items of 192 for
-the reanalysed experiment. The dashed diagonal moves both factors at once, which
-is why its null attributed to neither.}
+the state it follows from, and accuracy adds the two together. Arranging the
+arms as a $2\times2$, across by whether the record carries the answer and down
+by whether it carries the state, makes every arrow a one-factor edge that
+attributes. Cells give correct items of 192 for the reanalysed experiment. The dashed
+diagonal moves both factors at once, which is why its null attributed to
+neither.}
 \label{fig:factorial}
 \end{figure}
 
@@ -161,7 +153,7 @@ answering one label almost everywhere.
 
 \section*{AI-Use Statement}
 
-\bibliographystyle{iclr2027_conference}
+\bibliographystyle{plainnat}
 \bibliography{refs}
 
 \end{document}

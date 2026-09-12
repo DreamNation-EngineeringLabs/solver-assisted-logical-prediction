@@ -1,1 +1,5 @@
 .DS_Store
+paper/final/*.log
+paper/final/*.blg
+paper/final/*.aux
+paper/final/*.out

@@ -48,7 +48,7 @@ def _clean(ax, keep=("left", "bottom")):
 def fig_b14_factorial():
     r = json.loads((RES / "b14_posthoc_2x2_reanalysis_v1.json").read_text())
     c, e = r["factorial_2x2"]["cells"], r["factorial_2x2"]["edges"]
-    fig, ax = plt.subplots(figsize=(4.5, 2.7))   # placed at 0.82\textwidth = 4.51in
+    fig, ax = plt.subplots(figsize=(3.2, 2.6))   # placed at \columnwidth = 3.21in
     ax.set_xlim(0, 12.4); ax.set_ylim(0, 9.0); ax.axis("off")
 
     W, H = 3.0, 2.3
@@ -126,7 +126,7 @@ def fig_b15_arms():
     cols = [kind.get(a, GREY) for a in order]
     y = range(len(order))
 
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(5.5, 2.9), sharey=True,   # \textwidth = 5.5in
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(5.6, 2.9), sharey=True,   # 0.86\textwidth
                                  gridspec_kw={"width_ratios": [1.45, 1], "wspace": .08})
     a1.barh(y, acc, color=cols, height=.62)
     a1.set_xlim(0, n * 1.13); a1.set_xlabel(f"correct, entailed items (of {n})")
@@ -173,7 +173,7 @@ def fig_b16_size():
     chance = r["chance_balanced_accuracy"] * 100
     y = list(range(len(arms)))
 
-    fig, axes = plt.subplots(2, 5, figsize=(5.5, 3.1), sharex=True, sharey=True,   # \textwidth = 5.5in
+    fig, axes = plt.subplots(2, 5, figsize=(6.0, 3.2), sharex=True, sharey=True,   # 0.92\textwidth
                              gridspec_kw={"wspace": .16, "hspace": .45})
     for ax, m in zip(axes.ravel(), ms):
         cell = r["models"][m]["arms"]
@@ -247,7 +247,7 @@ def fig_b15_replication():
     H, G = .32, .19
     XMAX = 136
 
-    fig, ax = plt.subplots(figsize=(5.5, 1.85))  # \textwidth = 5.5in
+    fig, ax = plt.subplots(figsize=(6.0, 2.6))   # promoted to figure*, 0.92\textwidth
     ax.barh([i - G for i in y], val, height=H, color=BLUE, zorder=2)
     ax.barh([i + G for i in y], sur, height=H, color=VERM, zorder=2)
     for i, (v, u) in enumerate(zip(val, sur)):
@@ -275,8 +275,16 @@ def fig_b15_replication():
     _clean(ax)
     ax.spines["bottom"].set_bounds(0, 80)
 
-    # The narration that used to sit here duplicated the caption sentence for
-    # sentence. The caption keeps it; the figure keeps the bars.
+    g, q = r["gemma3_4b_b15"], r["qwen2p5_3b_4bit"]
+    gb = b["gemma3_4b_b15"]
+    fig.text(.5, -.055,
+             f"The {q['share']*100:.1f}% share does not generalise: gemma-3-4b's surface "
+             f"component is {g['surface']*100:+.1f}pp against {q['surface']*100:+.1f}pp\n"
+             f"on both qwen checkpoints. Its share is {gb['share_vs_irrelevant']*100:.1f}% against "
+             f"the same-shape control and {gb['share_vs_none']*100:.1f}% against what it manages\n"
+             f"unaided — the two denominators diverge only where a substrate has competence of "
+             f"its own.",
+             ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
     fig.savefig(OUT / "b15/figures/replication.png")
     plt.close(fig)
 
@@ -285,9 +293,8 @@ def fig_b15_replication():
 def fig_b18_order():
     """The gap profile the text cannot carry: 21 cells, of which the paper prints 2.
 
-    Sized at the full \\textwidth so the labels render at their set size and
-    nothing is rescaled at \\includegraphics time. It stays narrower than the
-    measure because seven x-positions do not need 5.5in. The
+    Sized for a single column (3.3in) so the labels render at their set size --
+    a wide figure scaled down to \\columnwidth would set 7pt type at 3pt. The
     direction contrast stays in the prose and the caption, where it reads fine as
     six numbers; the profile does not.
     """
@@ -302,7 +309,7 @@ def fig_b18_order():
     mks = dict(zip(keys, ("o", "s", "^")))
     dsh = dict(zip(keys, ((0, ()), (0, (4, 1.6)), (0, (1, 1.4)))))
 
-    fig, ax = plt.subplots(figsize=(5.5, 1.95))
+    fig, ax = plt.subplots(figsize=(3.3, 2.35))
     for k in keys:
         c = r["checkpoints"][k]
         gaps = sorted(int(g) for g in c["accuracy_by_abs_gap"])
@@ -341,7 +348,7 @@ def fig_b17_detection():
     labels = [("Unknown", BLUE), ("No", VERM), ("Yes", GREEN)]
     H, G = .22, .25
 
-    fig, axes = plt.subplots(1, len(keys), figsize=(5.5, 1.7), sharey=True,   # \textwidth = 5.5in
+    fig, axes = plt.subplots(1, len(keys), figsize=(6.0, 2.6), sharey=True,   # 0.92\textwidth
                              gridspec_kw={"wspace": .12})
     for ax, key in zip(np.atleast_1d(axes), keys):
         ck = r["checkpoints"][key]
@@ -356,67 +363,28 @@ def fig_b17_detection():
                     zorder=2, label=lab if ax is np.atleast_1d(axes)[0] else None)
             for i, v in enumerate(vals):
                 ax.text(v + 3, i + offs, f"{v}", va="center", fontsize=6.2, color=INK)
-        # Two panels wide, the one-line subtitle ran into the next panel's
-        # title. Stacked, each line fits inside its own axes.
         ax.set_title(f"{nice.get(key, key)}\n"
-                     f"{ck['vs_none_pp']:+.1f}pp vs none\n"
-                     f"{ck['vs_irrelevant_pp']:+.1f}pp vs irrelevant",
-                     loc="left", pad=4, fontsize=6.8)
+                     f"{ck['vs_none_pp']:+.1f}pp vs none · {ck['vs_irrelevant_pp']:+.1f}pp vs irrel.",
+                     loc="left", pad=5, fontsize=7.0)
         ax.set_xlim(0, n * 1.16); ax.set_xticks([0, 96, 192])
         ax.set_ylim(3.5, -.62)
         _clean(ax)
     a0 = np.atleast_1d(axes)[0]
     a0.set_yticks(range(len(order)))
     a0.set_yticklabels(order, family="DejaVu Sans Mono", fontsize=7.0)
-    # The panel titles now take three lines, so the axes sit lower and this
-    # legend line has to clear the tick labels rather than the old axis edge.
-    fig.text(.5, -.10,
+    fig.text(.5, -.02,
              "responses (of 192)   ·   dotted = none baseline   ·   dashed = irrelevant baseline",
              ha="center", fontsize=7.4, color=MUTED)
     a0.legend(frameon=False, fontsize=7.2, loc="upper center", ncol=3,
-              bbox_to_anchor=(1.72, 1.46), handlelength=1.1, handletextpad=.5,
+              bbox_to_anchor=(1.72, 1.36), handlelength=1.1, handletextpad=.5,
               columnspacing=1.4)
-    # No narration block: the caption carries the direction, and the 0-of-192
-    # and 76 counts are in the body text.
+    fig.text(.5, -.13,
+             "On every checkpoint, against either reference, a broken chain lowers abstention "
+             "rather than\nraising it. Gemma-3-4B abstains on 0 of 192 broken chains and completes "
+             "76 of them.",
+             ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.5)
     fig.savefig(OUT / "b17/figures/response_distribution.png")
     plt.close(fig)
-
-
-# Which render goes to which name in the manuscript, and whether the manuscript
-# actually includes it. Copying used to be a hand step, and a re-render that was
-# not copied left the PDF showing figures sized for the old measure. Only the
-# four the paper \includegraphics are placed in final/figures/: r11 finding 1
-# was two unused PNGs shipping in the deliverable.
-SELECTED = {
-    "b14/figures/factorial_2x2.png":         ("answer_state_factorial", True),
-    "b15/figures/arms.png":                  ("arm_decomposition", False),
-    "b15/figures/replication.png":           ("validity_share_replication", True),
-    "b16/figures/size_curve.png":            ("substrate_size_curve", False),
-    "b17/figures/response_distribution.png": ("detection_response_distribution", True),
-    "b18/figures/order_profile.png":         ("order_profile", True),
-}
-
-
-def publish() -> None:
-    """Copy the selected renders into paper/figures/ and paper/final/figures/."""
-    import shutil
-    pool, final = PAPER / "figures", PAPER / "final/figures"
-    final.mkdir(parents=True, exist_ok=True)
-    included = {n for n, use in SELECTED.values() if use}
-    for src, (name, use) in SELECTED.items():
-        shutil.copyfile(OUT / src, pool / f"{name}.png")
-        if use:
-            shutil.copyfile(OUT / src, final / f"{name}.png")
-    for stale in final.glob("*.png"):
-        if stale.stem not in included:
-            stale.unlink()
-            print(f"  removed stale {stale.relative_to(PAPER)}")
-    # The manuscript must include exactly the four marked True.
-    tex = (PAPER / "render/compose_paper.py").read_text() + \
-          (PAPER / "drafts/intro_relwork.tex").read_text()
-    for name, use in SELECTED.values():
-        cited = f"figures/{name}.png" in tex
-        assert cited == use, f"{name}: SELECTED says {use}, the manuscript says {cited}"
 
 
 if __name__ == "__main__":
@@ -426,5 +394,3 @@ if __name__ == "__main__":
     fig_b15_replication(); fig_b17_detection(); fig_b18_order()
     for f in sorted(OUT.glob("*/figures/*.png")):
         print(f"  {f.relative_to(OUT)}  {f.stat().st_size/1024:.0f} KB")
-    publish()
-    print("published to paper/figures/ and paper/final/figures/")
