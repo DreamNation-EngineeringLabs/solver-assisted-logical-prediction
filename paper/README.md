@@ -7,7 +7,7 @@ Deliverable: [`final/paper.pdf`](final/paper.pdf) — 12 pages: **9 of main text
 which is the cap exactly, then the Reproducibility and AI-Use statements and the
 references, none of which count. Built against the official
 `iclr2027_conference.sty` (vendored in `inputs/iclr2027/`): **single column**,
-5.5in by 9in, 10pt on 11pt, reviewer rulers in the margins. 39 verified
+5.5in by 9in, 10pt on 11pt, reviewer rulers in the margins. 40 verified
 citations, 4 figures, 5 tables, **no appendix** — every float is in the main
 text.
 
@@ -42,7 +42,7 @@ that is the contribution is a pull figure on page 1.
 | Depth is one step — on the Qwen checkpoints | `truncate_2` scores identically to no certificate there, but 4/96 against 22/96 unaided on Gemma-3-4B. Checkpoint-specific |
 | Abstention does not settle detection | The delta changes sign with the reference arm: it falls against `none`/`irrelevant`, rises against the surface-matched `truncate_1`. We draw no conclusion from it |
 | Viability is a property of (model × arm × runtime) | Not of a model, and not a size floor: Llama-3.1-8B is degenerate in all five arms, and one model's verdict flips with the inference stack alone |
-| Two prespecified criteria of our own failed | A single-class recall floor gamed by label collapse, and a 15pp target an arm at 91.7% could not reach |
+| Three prespecified criteria of our own failed | A single-class recall floor gamed by label collapse; a paired 20pp target gamed the same way by another route; and, in the reanalysis, a 15pp target an arm at 91.7% could not reach. The abstract counts the two that label collapse gamed |
 
 ## Sources
 
@@ -101,7 +101,18 @@ moved into the sentence in §5.1 that used to cite it.
 One thing outside the paper: the sealed-authority release decision, which is
 irreversible once public and is now due at submission rather than camera-ready.
 
+A full numeric and citation audit on 13 Sept re-derived every number from the
+sealed panels and receipts and resolved every DOI live. It found eight factual
+errors and four citation errors, all now fixed:
+[`docs/reviews/2026-09-13-full-numeric-and-citation-audit.md`](../docs/reviews/2026-09-13-full-numeric-and-citation-audit.md).
+`b20_analysis_v2` supersedes v1 for the d' primitive only.
+
 At exactly 9 pages of main text, anything added needs something removed. The
 deficit is measured by recompiling, never estimated: `pdftotext -layout` on the
 built PDF, then check which page the Reproducibility Statement starts on. It
 must be page 10, with nothing above it.
+
+`final/` carries no build intermediates. `paper.aux`, `.bbl` and `.out` used to
+ship and had gone stale --- the committed `.aux` still held labels from floats
+the paper no longer contains --- so they are untracked. Overleaf and tectonic
+regenerate them.

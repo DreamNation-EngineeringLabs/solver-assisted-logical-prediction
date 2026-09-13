@@ -247,7 +247,7 @@ def fig_b15_replication():
     H, G = .32, .19
     XMAX = 136
 
-    fig, ax = plt.subplots(figsize=(5.5, 1.85))  # \textwidth = 5.5in
+    fig, ax = plt.subplots(figsize=(5.5, 1.62))  # \textwidth = 5.5in
     ax.barh([i - G for i in y], val, height=H, color=BLUE, zorder=2)
     ax.barh([i + G for i in y], sur, height=H, color=VERM, zorder=2)
     for i, (v, u) in enumerate(zip(val, sur)):
@@ -302,7 +302,7 @@ def fig_b18_order():
     mks = dict(zip(keys, ("o", "s", "^")))
     dsh = dict(zip(keys, ((0, ()), (0, (4, 1.6)), (0, (1, 1.4)))))
 
-    fig, ax = plt.subplots(figsize=(5.5, 1.95))
+    fig, ax = plt.subplots(figsize=(5.5, 1.80))
     for k in keys:
         c = r["checkpoints"][k]
         gaps = sorted(int(g) for g in c["accuracy_by_abs_gap"])
@@ -341,7 +341,7 @@ def fig_b17_detection():
     labels = [("Unknown", BLUE), ("No", VERM), ("Yes", GREEN)]
     H, G = .22, .25
 
-    fig, axes = plt.subplots(1, len(keys), figsize=(5.5, 1.7), sharey=True,   # \textwidth = 5.5in
+    fig, axes = plt.subplots(1, len(keys), figsize=(5.5, 1.5), sharey=True,   # \textwidth = 5.5in
                              gridspec_kw={"wspace": .12})
     for ax, key in zip(np.atleast_1d(axes), keys):
         ck = r["checkpoints"][key]
@@ -356,12 +356,11 @@ def fig_b17_detection():
                     zorder=2, label=lab if ax is np.atleast_1d(axes)[0] else None)
             for i, v in enumerate(vals):
                 ax.text(v + 3, i + offs, f"{v}", va="center", fontsize=6.2, color=INK)
-        # Two panels wide, the one-line subtitle ran into the next panel's
-        # title. Stacked, each line fits inside its own axes.
-        ax.set_title(f"{nice.get(key, key)}\n"
-                     f"{ck['vs_none_pp']:+.1f}pp vs none\n"
-                     f"{ck['vs_irrelevant_pp']:+.1f}pp vs irrelevant",
-                     loc="left", pad=4, fontsize=6.8)
+        # The two deltas used to sit here as a subtitle. 5.3 states them in
+        # the prose and the caption gives the baselines, so the panel only
+        # needs to say which checkpoint it is --- which also buys back the two
+        # title lines that were colliding with the next panel.
+        ax.set_title(nice.get(key, key), loc="left", pad=4, fontsize=7.0)
         ax.set_xlim(0, n * 1.16); ax.set_xticks([0, 96, 192])
         ax.set_ylim(3.5, -.62)
         _clean(ax)
@@ -374,7 +373,7 @@ def fig_b17_detection():
              "responses (of 192)   ·   dotted = none baseline   ·   dashed = irrelevant baseline",
              ha="center", fontsize=7.4, color=MUTED)
     a0.legend(frameon=False, fontsize=7.2, loc="upper center", ncol=3,
-              bbox_to_anchor=(1.72, 1.46), handlelength=1.1, handletextpad=.5,
+              bbox_to_anchor=(1.72, 1.28), handlelength=1.1, handletextpad=.5,
               columnspacing=1.4)
     # No narration block: the caption carries the direction, and the 0-of-192
     # and 76 counts are in the body text.

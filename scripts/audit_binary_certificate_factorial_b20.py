@@ -9,11 +9,12 @@ as agreement. Exits non-zero on any failure, and on any check it could not run.
 from __future__ import annotations
 import argparse, hashlib, json, sys
 from pathlib import Path
+from statistics import NormalDist
 
 DATA = Path("data/cognitive_core/binary_certificate_factorial_b15")
 RUNS = {"qwen3_32b":     "runs/cognitive_core/binary_certificate_factorial_b20_cuda/qwen3_32b",
         "llama3p3_70b":  "runs/cognitive_core/binary_certificate_factorial_b20_cuda/llama3p3_70b"}
-ANALYSIS = Path("results/b20_analysis_v1.json")
+ANALYSIS = Path("results/b20_analysis_v2.json")
 
 
 def canonical(v) -> bytes:
@@ -22,6 +23,17 @@ def canonical(v) -> bytes:
 
 def rows(p: Path):
     return [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+
+def dprime(hits: int, fa: int, n: int) -> float:
+    """Loglinear d', exact inverse normal CDF.
+
+    v1 of the analysis used a polynomial approximation to erfinv and this audit
+    did not check d' at all, so a 0.007 discrepancy reached the manuscript. It
+    is checked here now, against the same primitive every other analysis uses.
+    """
+    z = NormalDist().inv_cdf
+    return z((hits + 0.5) / (n + 1)) - z((fa + 0.5) / (n + 1))
 
 
 def main() -> int:
@@ -81,6 +93,7 @@ def main() -> int:
             hits = sum(1 for t in ent if by[t]["candidate"] == "Yes")
             fa = sum(1 for t in con if by[t]["candidate"] == "Yes")
             rec_min = min(hits / 96, (96 - fa) / 96)
+            dp = dprime(hits, fa, 96)
             a = pub["arms"][arm]
 
             ok = (bad_digest == 0 and len(ids) == len(set(ids)) == 192
@@ -88,9 +101,10 @@ def main() -> int:
                   and wrong == a["incorrect"] and hits == a["entailed_correct"]
                   and fa == a["false_alarms"]
                   and abs(rec_min - a["min_per_class_recall"]) < 5e-4
+                  and abs(dp - a["d_prime"]) < 5e-4
                   and all(r["raw_generation_used"] is False for r in recs))
             check(ok, f"{key}/{arm}: 192 unique receipts, digests, counts, "
-                      f"min-recall and no-free-text all re-derive")
+                      f"min-recall, d' and no-free-text all re-derive")
 
         # the viability gate must agree with what the analysis published
         if "full" in pub["arms"]:
@@ -109,6 +123,9 @@ def main() -> int:
           "llama3p3_70b answers incorrectly on every misleading item (0/192)")
     check(lla["arms"]["misleading"]["frac_margin_below_0p5"] == 0.0,
           "no misleading item sits near the decision boundary")
+    check(round(lla["arms"]["misleading"]["d_prime"], 2) == -5.13,
+          "the misleading d' the manuscript prints is -5.13, the censored bound "
+          "every other saturated cell in the paper prints")
     check(lla["arms"]["none"]["correct"] > 96,
           f"llama3p3_70b has real unaided competence ({lla['arms']['none']['correct']}/192)")
 

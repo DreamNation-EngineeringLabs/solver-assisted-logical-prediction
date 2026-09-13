@@ -102,3 +102,19 @@ The corruption failure therefore does not attenuate with scale. It is total at
   adapters, a fourth runtime and a preview checkpoint is too many confounds to
   interpret, and a partial two-arm run alongside two ten-arm ones invites a
   comparison the data cannot support. Not reported, not retained.
+- **2026-09-13** — `b20_analysis_v1` computed d′ through a hand-rolled Winitzki
+  `erfinv` polynomial while every other analysis in this repo uses
+  `statistics.NormalDist.inv_cdf`, and its docstring claimed otherwise. On the
+  censored cells that matter — hits = 0, fa = 96, n = 96 — the two disagree in
+  the second decimal, −5.124 against the exact −5.1306, so the manuscript
+  printed **−5.12** for a statistic it prints as **−5.13** everywhere else
+  (`tab:arms`, Gemma-3-4B under `misleading`, same inputs). Receipts and panels
+  are untouched; only the derived d′ changes.
+
+  `analyse_binary_certificate_factorial_b20_v2.py` writes
+  `results/b20_analysis_v2.json` with the exact primitive and **asserts that
+  nothing but d′ differs from v1**. v1 is retained unedited as the record of
+  what was published. The audit now reads v2, recomputes d′ independently for
+  every arm, and checks the printed −5.13 by name; `verify.py scale-corruption`
+  gates it too. Found by the full numeric audit of 13 Sept, and originally
+  raised as item 3 of the r12 review.

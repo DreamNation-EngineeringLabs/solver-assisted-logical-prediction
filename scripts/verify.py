@@ -14,6 +14,7 @@ Standard library only. No network, no model weights, no third-party packages.
 """
 from __future__ import annotations
 
+from statistics import NormalDist
 import argparse, hashlib, json, sys
 from pathlib import Path
 
@@ -200,15 +201,25 @@ def scale_corruption(root: Path):
     """
     run = root / "runs/cognitive_core/binary_certificate_factorial_b20_cuda/llama3p3_70b/receipts"
     auth = {r["task_id"]: r["answer"] for r in _rows(root / B15D / "sealed/authority.jsonl")}
-    got = {}
+    ent = [t for t, v in auth.items() if v == "Yes"]
+    con = [t for t, v in auth.items() if v == "No"]
+    got, dmis = {}, None
     for arm in ("none", "full", "misleading"):
         recs = {r["task_id"]: r["candidate"] for r in _rows(run / f"prospective-{arm}.jsonl")}
         if set(recs) != set(auth):
             raise RuntimeError(f"{arm}: receipts do not cover the panel")
         got[arm] = sum(recs[t] == auth[t] for t in auth)
-    stated = "full 192/192, misleading 0/192, unaided 145/192"
-    derived = (f"full {got['full']}/192, misleading {got['misleading']}/192, "
-               f"unaided {got['none']}/192")
+        if arm == "misleading":
+            # d' is printed in 5.3 and was the one published value no check
+            # covered; it came from a different numerical primitive than every
+            # other d' in the paper and printed -5.12 against -5.13 elsewhere.
+            hits = sum(recs[t] == "Yes" for t in ent)
+            fa = sum(recs[t] == "Yes" for t in con)
+            z = NormalDist().inv_cdf
+            dmis = z((hits + 0.5) / (len(ent) + 1)) - z((fa + 0.5) / (len(con) + 1))
+    stated = "full 192/192, misleading 0/192 at d' = -5.13, unaided 145/192"
+    derived = (f"full {got['full']}/192, misleading {got['misleading']}/192 "
+               f"at d' = {dmis:.2f}, unaided {got['none']}/192")
     return stated, derived, ("Llama-3.3-70B on the sealed b15 panel: perfect with an honest "
                              "certificate, wrong on every item with a fabricated one")
 
