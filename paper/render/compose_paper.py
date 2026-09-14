@@ -191,9 +191,8 @@ enumerate and audit fixed while destroying validity alone, across four sealed
 experiments and three robustness checks: $NSCOREDRESPONSES$ scored responses,
 re-derivable from released receipts. Asked what a model does with a
 certificate, the instrument returns a different answer for almost every
-checkpoint, arm and inference runtime. The share of the state effect that
-survives destroying validity is $98.3\%$ on one checkpoint and $40.4$--$51.4\%$
-on another; inference depth is one step on two checkpoints and not on a third;
+checkpoint, arm and inference runtime. Breaking validity alone removes $98.3\%$
+of the state effect on one checkpoint and $40.4$--$51.4\%$ on another; inference depth is one step on two checkpoints and not on a third;
 one model is a usable interface under one inference stack and below the
 viability floor under another, on identical weights. One result does not move.
 Given a certificate whose fabricated final rule establishes the query's
@@ -417,9 +416,10 @@ design is ceiling-limited, \textsc{full} reaching $191/192$, so both
 ``other factor present'' edges are compressed and the main effects deflated
 with them.
 
-The baseline description was also wrong: \textsc{irrelevant} returns an
+The baseline description was also wrong. \textsc{irrelevant} returns an
 identical $9/96$ ``Yes'' rate in both classes at $d' = 0.00$ (\cref{tab:sdt}),
-below a trivial always-\texttt{No} strategy's $96/192$.
+matching a trivial always-\texttt{No} strategy's $96/192$ exactly; \textsc{none}
+falls below it, at $91/192$ and $d' = -0.25$.
 
 \begin{table}[t]
 \centering

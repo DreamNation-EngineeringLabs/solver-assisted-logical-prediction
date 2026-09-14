@@ -141,3 +141,41 @@ were also trimmed, and `fig:detection`'s panel subtitles, which repeated numbers
 Main text ends on page 9, 12 pages total. 0 overfull, 0 undefined, 40/40
 citations, floats numbered in citation order and none after the bibliography,
 `verify.py --all` 11/11, b20 audit 33/33, `final/` compiles standalone.
+
+---
+
+## Addendum, 15 September — two reporting errors the audit missed
+
+Both raised by the author after the audit shipped. Both real; both verified
+against `b15_analysis_v1.json` and `b14_posthoc_2x2_reanalysis_v1.json`.
+
+**A1 · The abstract reversed the headline finding.** It read *"The share of the
+state effect that survives destroying validity is 98.3%"*. The decomposition is
+total state +61.5pp = surface +1.0pp + validity +60.4pp, and the validity share
+is validity/total = 98.3%. That is the share **destroyed** when validity breaks.
+What survives is the surface component, 1.0 of 61.5pp = **1.7%**. The
+introduction (*"Breaking validity alone removes 98.3%"*), `tab:arms`' caption
+and §5.1 all had it right; only the abstract was reversed, and it had been since
+at least 11 Sept. **Fixed:** the abstract now matches the introduction.
+
+**Why the audit missed it.** Every check I ran compared a printed number against
+a recomputed number. 98.3% agreed with the data, so it passed. Nothing in the
+method tested whether the *sentence carrying* a correct number asserted the
+right direction. A value can be right and its claim inverted, and no
+number-matching gate sees it. That is a hole in the audit procedure, not a
+one-off slip.
+
+**A2 · §5.1 put the wrong arm below the always-`No` baseline.** It read
+*"`irrelevant` returns an identical 9/96 'Yes' rate in both classes at d' = 0.00,
+below a trivial always-`No` strategy's 96/192"*. `irrelevant` scores **96/192 —
+exactly the baseline**, not below it. The arm that falls below is `none`, at
+91/192 and d' = -0.25. **Introduced by this audit's own page-budget pass**: the
+clause used to follow *"The model answers `No` to 88% of items"*, which is the
+`none` arm, and cutting that clause for space left "below" attached to
+`irrelevant`. **Fixed:** `irrelevant` is now said to match the baseline exactly,
+with `none` named as the arm below it — which is the stronger statement anyway,
+an arm that equals the do-nothing strategy while discriminating nothing.
+
+**Lesson for the roster.** A cut that removes a clause can change the subject of
+the clause that follows it. Compression passes need a re-read of every sentence
+adjacent to a deletion, not just a recompile and a page count.
