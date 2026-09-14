@@ -223,8 +223,8 @@ record, then the query. Only the record changes between arms. Left: the
 \textsc{full} record, a complete four-step derivation. Right: what each other
 arm does to it. \textsc{broken\_chain} is the word-matching test: line 6 becomes
 a different \emph{real} rule of the theory, one that does not fire, so the chain
-no longer reaches the query while every surface cue of \textsc{truncate\_1}
-survives. \textsc{misleading} instead invents a rule the theory does not
+no longer reaches the query while every audited surface cue of
+\textsc{truncate\_1} survives. \textsc{misleading} instead invents a rule the theory does not
 contain.}
 \label{tab:stimulus}
 \begin{minipage}[t]{0.40\textwidth}
@@ -443,8 +443,9 @@ Arm & Hits & FA & $d'$ & $c$ \\
 Destroying validity alone removes almost all of the state effect.
 $\textsc{truncate\_1} - \textsc{broken\_chain} = +60.4$pp (exact McNemar
 $p = 6.9\times10^{-18}$, BCa $[+49.0, +68.8]$, entailed subset $n = 96$ as
-declared before the run), with $d'$ dropping $2.446$: a change in discrimination,
-not in criterion. The total state effect of $+61.5$pp is therefore $+1.0$pp of
+declared before the run), with $d'$ dropping $2.446$. Neither arm produces a
+false alarm, so the whole collapse is in the hit rate, $59/96$ to $1/96$; a
+criterion shift would have moved both. The total state effect of $+61.5$pp is therefore $+1.0$pp of
 surface overlap ($p = 1$) and $+60.4$pp of validity --- a \textbf{validity share
 of $98.3\%$}, 95\% percentile $[94.4, 100.0]$ (\cref{tab:arms}).
 
@@ -567,8 +568,8 @@ Qwen2.5-7B   &  7.6 & 33.3/0.00 & 33.3/0.00 & \textbf{97.9/0.94} & 67.2/0.02 & 7
 
 Read by row: Qwen2.5-7B falls from second best in the sweep under
 \textsc{conclusion\_only} to $0.141$ minimum per-class recall under
-\textsc{full}: supplying the proof state is what breaks it, and it breaks three
-of ten models here. Nothing below $3$B clears the floor in any arm, but that is a
+\textsc{full}: supplying the proof state is what breaks it. It lowers per-class
+recall on three of ten models and takes only this one below the floor. Nothing below $3$B clears the floor in any arm, but that is a
 floor for \emph{tolerating full certificates} rather than a size law:
 Llama-3.1-8B is degenerate in every arm, and Qwen2.5-14B never clears it.
 

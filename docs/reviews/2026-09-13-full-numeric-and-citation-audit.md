@@ -179,3 +179,72 @@ an arm that equals the do-nothing strategy while discriminating nothing.
 **Lesson for the roster.** A cut that removes a clause can change the subject of
 the clause that follows it. Compression passes need a re-read of every sentence
 adjacent to a deletion, not just a recompile and a page count.
+
+---
+
+## Second addendum, 15 September — the directional sweep
+
+After A1 and A2, the whole class was swept properly: every directional,
+comparative, superlative and quantifier claim in the manuscript that carries a
+number — **68 sentences** — checked against the sealed data, not for whether the
+number matches but for whether the assertion attached to it points the right
+way. Three more failed, plus two lesser ones.
+
+**A3 · §5.1 "a change in discrimination, not in criterion."** The criterion does
+not hold still: it rises from **+1.14 to +2.36** between `truncate_1` and
+`broken_chain`. Both statistics moved. What is true, and is the stronger
+argument, is that **the false-alarm rate is 0 in both arms**, so the whole
+collapse is in the hit rate, 59/96 to 1/96 — which a bias shift cannot produce,
+because it would move both. **Fixed** to say that.
+
+**A4 · §5.2 "it breaks three of ten models here."** The sentence equivocates on
+"breaks". Its first half defines it as falling below the 0.50 floor
+(Qwen2.5-7B, 0.938 → 0.141), and under that meaning proof state breaks **one**
+of ten. Three is the count under the weaker meaning "lowers minimum per-class
+recall" — and two of those three (Gemma 1.00 → 0.89, Qwen2.5-3B 0.91 → 0.72)
+still clear the floor. **Fixed:** both facts stated, neither conflated.
+
+**A5 · §1 "every arm withholding two steps or more return d′ = 0."**
+`broken_chain` withholds the true steps 6 and 7 and returns d′ = 0.41.
+Counterexample. **This predicate was introduced by the 13 Sept audit**, replacing
+"every arm without a near-complete chain" — one loose predicate swapped for
+another without checking the replacement against the arm table.
+
+The exact predicate was available the whole time. On both Qwen checkpoints the
+set of arms at d′ = 0 is *identical* to the set whose record never displays the
+query's predicate: `none`, `irrelevant`, `same_entity_irrelevant`, `truncate_2`,
+`truncate_3`. The Limitations already said so in passing. **Fixed** to the exact
+predicate, which is both true and sharper.
+
+**A6 · `tab:stimulus` caption "every surface cue of `truncate_1` survives."**
+An unhedged universal. The four properties §3.2 enumerates hold on all 192
+items, but character length is not among them and differs by up to 13 characters,
+identical on only 17 of 192. The abstract hedges correctly ("every surface
+property we could enumerate and audit"); the caption did not. **Fixed:** "every
+audited surface cue".
+
+**A7 · `paper/figures/captions.json`** claimed token length was held fixed, for
+the `arm_decomposition` figure the paper does not include. Not a manuscript
+error; a false claim in a repo file. **Fixed.**
+
+### The replacement claims, verified
+
+| Claim | Check |
+|---|---|
+| neither arm produces a false alarm | `truncate_1` 0, `broken_chain` 0 |
+| the hit rate falls 59/96 → 1/96 | exact |
+| proof state lowers recall on three of ten, takes one below the floor | 3 and 1 |
+| {d′ = 0 on both Qwen} ≡ {never displays the query predicate} | sets identical |
+| every audited surface cue survives | 0 divergences over 192 |
+
+### What the other 63 confirmed
+
+Among them, the ones most exposed to inversion: `irrelevant` = 96/192 equals the
+always-`No` baseline while `none` = 91/192 falls below it; abstention falls 37.5
+and 32.8 against `none` and `irrelevant` and rises 31.2 against `truncate_1`;
+"the strongest" is Gemma, the only one of the three with non-zero unaided
+competence; nothing below 3B clears the floor in **any** of the five arms (best
+is SmolLM2 at 0.375); "on identical weights" holds — same repo, revision and
+aggregate SHA-256 across mlx and CUDA; 70.6/4.3 = 16.4, so "sixteen times";
+all four edges at p < 10⁻⁴; every rule displayed is a real theory rule on all
+192 items.
